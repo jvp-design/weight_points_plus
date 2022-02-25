@@ -1,0 +1,224 @@
+{% load static i18n %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+{% load tailwind_tags %}
+<html lang="{{ LANGUAGE_CODE }}" class="h-full bg-gray-50">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>
+    {% if request.resolver_match.url_name != 'home' %}WPP | {% endif %}
+    {% block title %}Weight Points Plus{% endblock title %}
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A weight tracking app using a found version of weight watchers old Points Plus formula.">
+  <meta name="author" content="Jeffrey Pohlmeyer">
+
+  <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
+
+  {% block css %}
+    <!-- Your stuff: Third-party CSS libraries go here -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+{#    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">#}
+    {% tailwind_css %}
+    <!-- This file stores project-specific CSS -->
+    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
+  {% endblock %}
+  <!-- Le javascript
+  ================================================== -->
+  {# Placed at the top of the document so pages load faster with defer #}
+  {% block javascript %}
+    <!-- Your stuff: Third-party javascript libraries go here -->
+{#    <script src="//unpkg.com/alpinejs" defer></script>#}
+    <!-- place project specific Javascript in this file -->
+    <script defer src="{% static 'js/project.js' %}"></script>
+    <script defer src="{% static 'js/nav.js' %}"></script>
+
+  {% endblock javascript %}
+
+</head>
+
+<body class="h-full">
+<div class="relative overflow-hidden">
+  <header class="relative" >
+    <div class="bg-gray-900 pt-6">
+      <nav class="relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6" aria-label="Global">
+        <div class="flex items-center flex-1">
+          <div class="flex items-center justify-between w-full md:w-auto">
+            <a href="/">
+              <span class="sr-only">Workflow</span>
+              <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="">
+            </a>
+            <div class="-mr-2 flex items-center md:hidden">
+              <button type="button" class="bg-gray-900 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-800 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <!-- Heroicon name: outline/menu -->
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="hidden space-x-8 md:flex md:ml-10">
+            <a href="#" class="text-base font-medium text-white hover:text-gray-300">Product</a>
+
+            <a href="#" class="text-base font-medium text-white hover:text-gray-300">Features</a>
+
+            <a href="#" class="text-base font-medium text-white hover:text-gray-300">Marketplace</a>
+
+            <a href="#" class="text-base font-medium text-white hover:text-gray-300">Company</a>
+          </div>
+        </div>
+        <div class="hidden md:flex md:items-center md:space-x-6">
+          <a href="{% url 'account_login' %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'Sign In' %}</a>
+          <a href="{% url 'account_signup' %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'Register' %}</a>
+        </div>
+      </nav>
+    </div>
+    <div class="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top md:hidden">
+      <div class="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
+        <div class="px-5 pt-4 flex items-center justify-between">
+          <div>
+            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="">
+          </div>
+          <div class="-mr-2">
+            <button type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-600">
+              <span class="sr-only">Close menu</span>
+              <!-- Heroicon name: outline/x -->
+              <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="pt-5 pb-6">
+          <div class="px-2 space-y-1">
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Product</a>
+
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Features</a>
+
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Marketplace</a>
+
+            <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Company</a>
+          </div>
+          <div class="mt-6 px-5">
+            <p class="text-center text-base font-medium text-gray-500"><a href="{% url 'account_signup' %}" class="text-gray-900 hover:underline">{% translate 'Register' %}</a></p>
+          </div>
+          <div class="mt-6 px-5">
+            <p class="text-center text-base font-medium text-gray-500">Existing customer? <a href="{% url 'account_login' %}" class="text-gray-900 hover:underline">{% translate 'Sign In' %}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- More main page content here... -->
+    {% block content %}
+
+    {% endblock content %}
+    <div class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+      <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+        <!-- This element is to trick the browser into centering the modal contents. -->
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+          <div class="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
+            <button type="button" class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+              <span class="sr-only">Close</span>
+              <!-- Heroicon name: outline/x -->
+              <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div class="sm:flex sm:items-start">
+            {% block modal_icon %}{% endblock modal_icon %}
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                {% block modal_title %}{% endblock modal_title %}
+              </h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500">
+                  {% block modal_text %}
+                  {% endblock modal_text %}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+            <button
+              type="button"
+              class="block w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-medium hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 focus:ring-offset-gray-900"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+{#<div class="w-full h-[100vh] bg-gray-500">#}
+{#  <div class="mb-1">#}
+{#    <nav class="navbar navbar-expand-md navbar-light bg-light">#}
+{#      <div class="container-fluid">#}
+{#        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+{#          <span class="navbar-toggler-icon"></span>#}
+{#        </button>#}
+{#        <a class="navbar-brand" href="{% url 'home' %}">Weight Points Plus</a>#}
+{##}
+{#        <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
+{#          <ul class="navbar-nav mr-auto">#}
+{#            <li class="nav-item active">#}
+{#              <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>#}
+{#            </li>#}
+{#            <li class="nav-item">#}
+{#              <a class="nav-link" href="{% url 'about' %}">About</a>#}
+{#            </li>#}
+{#            {% if request.user.is_authenticated %}#}
+{#              <li class="nav-item">#}
+{# URL provided by django-allauth/account/urls.py #}
+{#                <a class="nav-link" href="{% url 'users:detail' request.user.username  %}">{% translate "My Profile" %}</a>#}
+{#              </li>#}
+{#              <li class="nav-item">#}
+{# URL provided by django-allauth/account/urls.py #}
+{#                <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>#}
+{#              </li>#}
+{#            {% else %}#}
+{#              {% if ACCOUNT_ALLOW_REGISTRATION %}#}
+{#                <li class="nav-item">#}
+{# URL provided by django-allauth/account/urls.py #}
+{#                  <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>#}
+{#                </li>#}
+{#              {% endif %}#}
+{#              <li class="nav-item">#}
+{# URL provided by django-allauth/account/urls.py #}
+{#                <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>#}
+{#              </li>#}
+{#            {% endif %}#}
+{#          </ul>#}
+{#        </div>#}
+{#      </div>#}
+{#    </nav>#}
+{##}
+{#  </div>#}
+{#</div>#}
+
+{% block alert %}{% endblock alert %}
+
+{% block inline_javascript %}
+  {% comment %}
+    Script tags with only code, no src (defer by default). To run
+    with a "defer" so that you run inline code:
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {/* Run whatever you want */});
+    </script>
+    {% endcomment %}
+{% endblock inline_javascript %}
+</body>
+</html>

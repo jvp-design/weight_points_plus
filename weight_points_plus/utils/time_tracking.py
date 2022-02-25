@@ -1,0 +1,62 @@
+from datetime import date, timedelta
+
+from weight_points_plus.day.models import Day
+from weight_points_plus.meal.models import Meal
+from weight_points_plus.users.models import User
+from weight_points_plus.utils.points_calculators import calculate_daily_points
+from weight_points_plus.week.models import Week
+
+
+def create_days(start_date: date, user: User, week: Week, num_days: int) -> date:
+    if num_days == 0:
+        return start_date
+    daily_points = calculate_daily_points(user)
+    dates = [start_date + timedelta(days=i) for i in range(num_days)]
+    days = [
+        Day(
+            total_points=daily_points,
+            points_used=0,
+            day_of_week=dt.weekday(),
+            date=dt,
+            week=week,
+            user=user,
+        )
+        for dt in dates
+    ]
+    created_days = Day.objects.bulk_create(days)
+    meals = []
+    for day in created_days:
+        for meal in Meal.MealChoices:
+            meals.append(Meal(name=meal, day=day, user=user))
+    Meal.objects.bulk_create(meals)
+
+    return dates[-1]
+
+
+def create_week(start_date: date, user: User, num_days: int = 7) -> date:
+    week = Week.objects.create(
+        start_date=start_date,
+        weekly_total_points=user.weekly_points,
+        weight=user.weight,
+        user=user,
+    )
+    return create_days(start_date, user, week, num_days)
+
+
+def backfill_weeks(user: User) -> None:
+    latest_day = Day.objects.filter(user=user).order_by("-date").first()
+    if not latest_day:
+        latest_date = date.today() - timedelta(days=7)
+    else:
+        latest_date = latest_day.date
+    count = 0
+    today = date.today()
+    if latest_date < today:
+        latest_date = create_week(
+            latest_date + timedelta(days=1),
+            user,
+            (user.weigh_in_day - latest_date.weekday() - 1) % 7,
+        )
+        while latest_date < today and count < 52:
+            latest_date = create_week(latest_date + timedelta(days=1), user)
+            count += 1

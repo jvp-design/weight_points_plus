@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ view.kwargs.date_val }}{% endblock title %}
+
+{% block content %}
+  {{ day.get_day_of_week_display }}
+  {% for meal in day.meal_set.all %}
+    {{ meal }}
+  {% endfor %}
+{% endblock content %}

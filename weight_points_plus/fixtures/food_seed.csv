@@ -1,0 +1,878 @@
+name,fat,carbs,fiber,protein,serving_size,serving_unit,user_created,conversion_weight_to_volume,conversion_unit_weight,conversion_unit_volume,notes
+"4C Bread Crumbs, Panko",0,26,1,3,30,gm,FALSE,,,,
+A.M. Best Antipasto Salad,13,8,3,14,276,gm,TRUE,,,,
+A.M. Best Baked Citrus Herb Crusted Cod,8,33,1,26,200,gm,TRUE,,,,
+A.M. Best Calabrese Chicken Sandwich,15,34,4,25,201,gm,TRUE,,,,
+A.M. Best Chicken and Strawberry Salad,11,21,3,23,294,gm,TRUE,,,,
+A.M. Best Chopped Chicken Caesar Salad,4.5,24,4,38,414,gm,TRUE,,,,
+A.M. Best Jamaican Barbecued Pork Tenderloin,5,22,3,25,212,gm,TRUE,,,,
+A.M. Best Roast Turkey Breast,8,6,0,21,186,gm,TRUE,,,,
+A.M. Best Rotisserie Style Chicken,19,11,0.5,47,225,gm,TRUE,,,,
+A.M. Best Yogurt Parfait,3,53,4,7,206,gm,TRUE,206,gm,each,206g = 1 parfait
+Alexia Crispy Onion Rings,13,27,2,4,85,gm,FALSE,,,,
+Alexia Smart Classics Crinkle Cut Fries,1.5,21,2,1,3,oz,FALSE,,,,
+Alexia Smart Classics Straight Cut Fries,1.5,20,2,2,84,gm,FALSE,,,,
+Andrea Large Round Cheese Ravioli,4.5,36,3,11,123,gm,FALSE,30.75,gm,each,123g = 4 ravioli
+Annie's Bunny Pasta with Yummy Cheese,4,47,3,10,71,gm,FALSE,,,,
+Annie's Macaroni and Cheese,4,46,2,10,71,gm,FALSE,,,,
+Annie's Organic Double Chocolate Brownie Mix,4,25,1,1,32,gm,FALSE,,,,
+Annie's Shells & Real Aged Cheddar Macaroni and Cheese,4.5,46,2,10,2.5,oz,FALSE,,,,
+Annie's Shells & White Cheddar Macaroni and Cheese,4.5,47,2,10,2.5,oz,FALSE,,,,
+Annie's Spirals with Butter and Parmesan,3.5,50,3,10,74,gm,FALSE,,,,
+Apple Slaw,0.2,18.4,6,1.1,183.4,gm,TRUE,,,,https://www.caloriecount.com/apple-slaw-recipe-r333486
+Apple Tart,6,38,2,0,1,each,TRUE,,,,"8 slices in full 'pie', 1 serving = 1 slice.  https://www.pillsbury.com/recipes/thin-french-apple-tart/f268fdf6-6036-4ad7-a518-c0b5c58a5512"
+Applegate Farms Organic All Beef Hot Dog,9,0,0,7,50,gm,FALSE,50,gm,each,50g = 1 hot dog
+Applegate Farms Uncured All Beef Hot Dog,9,0,0,7,47,gm,FALSE,47,gm,each,47g = 1 hot dog
+Applegate Farms Uncured Bun Length Hot Dogs,11,0,0,8,56,gm,FALSE,56,gm,each,56g = 1 hot dog
+Applegate Farms Uncured Thick Cut Bacon,4.5,0,0,2,12,gm,FALSE,12,gm,each,1 slice = 12 g
+Applegate Naturals Good Morning Bacon,4,0,0,6,2,gm,FALSE,,,,Each serving is one slice
+Arnold Sesame Seeded Sandwich Rolls,2.5,27,1,5,53,gm,FALSE,53,gm,each,1 roll = 53g
+Arnold Whole Grain Sandwich Rolls,2,23,3,7,57,gm,FALSE,57,gm,each,57g = 1 roll
+Aunt Jemima Low Fat Frozen Waffles,3,28,1,3,70,gm,FALSE,35,gm,each,70g = 2 waffles
+Back to Nature Alphabet Macaroni and Cheese,2.5,48,2,10,70,gm,FALSE,,,,2.5 Servings per container
+Back to Nature Crazy Bugs,2.5,49,2,10,70,gm,FALSE,,,,2.5 Servings per container
+Back to Nature Shells and Cheddar,2.5,49,2,10,70,gm,FALSE,,,,2.5 Servings per container
+Bacon,3.3,0.1,0,3,8,gm,FALSE,8,gm,each,8 g = 1 slice
+"Bacon, Egg, and Cheese Bagel",24.06,80.1,3.4,33.04,1,gm,TRUE,,,,
+Bagel,1.5,48,4,10,98,gm,FALSE,98,gm,each,98 g = 1 bagel
+"Bagel, Cinnamon Raisin",1.8,58,2.4,10.3,105,gm,FALSE,105,gm,each,105 g = 1 bagel
+Baked by Melissa Cupcake,6,19,0.5,2,3,gm,FALSE,,,,Each serving is 1 cupcake
+Baked Lays Potato Chips,4,26,2,2,31,gm,FALSE,,,,
+Baked Sweet Potato,0.3,37,6,3.6,180,gm,FALSE,,,,"1 large = 180g, medium = 114g, small = 60g"
+Balsamic Vinaigrette Dressing,8,0.4,0,0,16,gm,FALSE,16,gm,tbsp,16g = 1 tbsp
+Barefoot and Chocolate Hazelnut Spread,13,14,1,2,32,gm,FALSE,,,,
+Barilla Rigatoni,1,42,2,7,56,gm,FALSE,,,,
+Barry's Bakery French Twists,2,11,0,1,15,gm,FALSE,7.5,gm,each,15g = 2 twists
+Bear Naked Triple Berry Granola,2,23,3,3,30,gm,FALSE,,,,
+Beef Meatball,13.16,7.58,0.5,12.41,100,gm,FALSE,,,,
+Beef Tenderloin,21,0,0,20,3,oz,FALSE,,,,
+Beef Tips,14.96,0,0,21.9,1,oz,FALSE,,,,
+Belgioso Grated Parmesan,1,0,0,2,5,gm,FALSE,,,,
+Better than Bouillon Beef Base,0.5,1,0,1,6,gm,FALSE,,,,
+Beyond Meat Beast Burger,16,7,4,23,4,oz,FALSE,,,,
+Biazzo Part Skim Mozzarella,5,1,0,7,1,oz,FALSE,,,,
+Biazzo Part Skim Ricotta,6,2,0,6,62,gm,FALSE,,,,
+Black Bear Virginia Ham,1.5,2,0,10,54,gm,FALSE,18,gm,each,54g = 3 slices
+Blake Shephard's Pie,13,33,3,18,227,gm,FALSE,,,,
+Blake's Lasagna Bake Bolognese,9,30,3,11,227,gm,FALSE,,,,One full meal
+Blue Point Toasted Lager,0,0,0,0,12,gm,FALSE,,,,5.5% ABV (serving is 12 oz)
+Bone Sucking Thicker Sauce,0,9,0,0,28,gm,FALSE,,,,
+"Boneless Skinless Chicken Breast, Cooked",3,0,0,23,4,oz,TRUE,,,,http://www.myfitnesspal.com/food/calories/meat-boneless-skinless-chicken-breast-roasted-broiled-or-baked-no-skin-350936822
+Boneless Skinless Chicken Thigh,12.3,0,0,29.3,4,oz,FALSE,,,,
+"Boneless Skinless Chicken Thigh, Cooked",8,0,0,24,85,gm,TRUE,,,,http://www.myfitnesspal.com/food/calories/kirkland-chicken-thigh-boneless-cooked-skinless-442546644
+Bonne Maman Muscat Grape Jelly,0,13,0,0,20,gm,FALSE,,,,
+"Boston Market Quarter Chicken, White",11,0,0,43,1,gm,FALSE,,,,
+Bottom Round Rump Roast,6,0,0,25,4,oz,FALSE,,,,
+Bratwurst,17,1.3,0,8,66,gm,FALSE,,,,
+"Bread, French",1.8,56,2.4,12,100,gm,FALSE,,,,
+"Bread, Italian",11,150,8,26,300,gm,FALSE,,,,
+"Bread, Whole Wheat",0.9,12,1.9,3.6,28,gm,FALSE,28,gm,each,28 g = 1 slice
+Breaded Chicken Breasts (Cooked),9,20,1,19,129,gm,TRUE,,,,https://www.caloriecount.com/calories-tyson-foods-breaded-chicken-breast-i110525
+Breaded Pork Chop (Raw),6.94,4.2,0.2,13.86,3,oz,TRUE,,,,https://www.fatsecret.com/calories-nutrition/generic/pork-chop-breaded-or-floured-broiled-or-baked
+Breyers Black Raspberry Chocolate Ice Cream,4,25,0.5,1,67,gm,FALSE,,,,
+Breyers Chocolate Fudge Truffle Gelato,7,23,2,3,81,gm,FALSE,,,,
+Breyers Chocolate Hazelnut Gelato,8,23,1,3,76,gm,FALSE,,,,
+Breyer's Cookies and Cream Ice Cream,4.5,23,0,2,64,gm,FALSE,,,,
+"Breyer's Delights, Creamy Chocolate",2.5,22,1,7,90,gm,FALSE,,,,
+"Breyer's Delights, Raspberry Fudge Swirl",2.5,26,0,7,97,gm,FALSE,,,,
+Breyer's Natural Vanilla Ice Cream,7,14,0,2,66,gm,FALSE,,,,
+Breyers Summer Berry Cobbler Ice Cream,3.5,25,0,1,68,gm,FALSE,,,,
+Brie,40,0.6,0,30,144,gm,FALSE,,,,
+Brisket,2.1,0,0,6,1,oz,FALSE,,,,
+"Butter, Salted Whipped (Breakstone)",7,0,0,0,9,gm,FALSE,,,,
+"Butter, Unsalted",91.7,0,0,1,4,oz,FALSE,,,,1 stick equivalent to 4 ounces contains 8 tbsp
+Butterball Farm to Family Ground Turkey (93/7),8,0,0,22,112,gm,FALSE,,,,
+Calandra Italian Rolls,0,21,0,4,2.6,oz,FALSE,2.6,oz,each,2.6 oz. = 1 roll
+Calandra Panella Loaf,0,21,0,4,43,gm,FALSE,,,,
+Calandra's Bastone,0,21,0,4,43,gm,FALSE,,,,
+Califia Farms Hazelnut Almondmilk Creamer,0.5,2,0,0,13,gm,FALSE,13,gm,tbsp,1 tbsp = 13g
+Cannoli,12,27,1,7,93,gm,FALSE,,,,
+Canola Oil,14,0,0,0,1,tbsp,FALSE,1,each,tbsp,1 serving = 1tbsp
+Casaro Grated Parmesan,1,0,0,2,5,gm,FALSE,,,,
+Cascadian Farm Cinnamon Crunch Cereal,3,29,3,2,36,gm,FALSE,,,,
+Cav. Giuseppe Cocco Elicoidali,1,39,2,7,56,gm,FALSE,,,,
+"Cheerios, Chocolate",1.5,22,2,1,27,gm,FALSE,,,,
+"Cheerios, Dark Chocolate Multi-Grain Crunch",1.5,23,2,2,28,gm,FALSE,,,,
+"Cheese, Parmesan",29,4.1,0,38,100,gm,FALSE,100,gm,cup,100g ~ 1 cup
+"Cheeseburger, Double Patty",17,21,0.7,17,100,gm,FALSE,,,,
+"Cheeseburger, Double Patty With Condiments",15,23,1,13,100,gm,FALSE,,,,
+"Cheeseburger, Single Patty",14,30,1,15,100,gm,FALSE,,,,
+"Cheeseburger, Single Patty With Condiments",13,29,1.6,15,100,gm,FALSE,,,,
+Cheesecake Factory Honey Wheat Bread,1,19,2,2,1,gm,FALSE,,,,1 serving = 2 slices
+"Chex, Chocolate",2.5,26,1,2,32,gm,FALSE,,,,
+"Chex, Cinnamon",2.5,24,1,1,30,gm,FALSE,,,,
+Chicken Breast,3.6,0,0,31,100,gm,FALSE,,,,
+Chicken Caesar Wrap,41,55,4,44,13.2,oz,FALSE,13.2,oz,each,13.2 oz = 1 wrap
+"Chicken Leg, Cooked",8.43,0,0,27.03,100,gm,FALSE,,,,
+Chicken Parmesan,1.1,3.4,0,4.3,1,oz,FALSE,,,,
+"Chicken Wing, Baked",6.6,0,0,9.1,1,each,TRUE,,,,1 serving = 1 wing: http://www.myfitnesspal.com/food/calories/homemade-3-whole-chicken-wings-baked-281189810
+Chipotle Barbacoa,7,2,1,24,4,oz,FALSE,,,,
+Chipotle Black Beans,1,22,12,7,4,oz,FALSE,,,,
+Chipotle Brown Rice,6,36,2,4,4,oz,FALSE,,,,
+Chipotle Carnitas,12,0,0,23,4,oz,FALSE,,,,
+Chipotle Cheese,7.5,1,0,6,1,oz,FALSE,,,,
+Chipotle Chicken,7,0,0.5,32,4,oz,FALSE,,,,
+Chipotle Chips,27,73,8,8,4,oz,FALSE,,,,
+Chipotle Chips & fresh tomato salsa,27,74,9,8,7.5,oz,FALSE,,,,
+Chipotle Chips & roasted chili-corn salsa,28.5,89,11,11,7.5,oz,FALSE,,,,
+Chipotle Chips & tomatillo green-chili salsa,27,77,8,8,4,oz,FALSE,,,,
+Chipotle Chips & tomatillo red-chili salsa,27,77,9.5,8,4,oz,FALSE,,,,
+Chipotle Chips and guacamole,49,81,14,10,8,oz,FALSE,,,,
+Chipotle Fajita vegetables,0.5,4,1,1,2.5,oz,FALSE,,,,
+Chipotle Flour Tortilla,9,50,3,8,1,each,FALSE,,,,1 serving = 1 tortilla
+Chipotle Fresh tomato salsa,0,1,1,0,3.5,oz,FALSE,,,,
+Chipotle Guacamole,22,8,6,2,4,oz,FALSE,,,,
+Chipotle Hot Salsa,0,4,1.5,0,2,oz,FALSE,,,,
+Chipotle Patron margarita,0,25,0,0,12,oz,FALSE,,,,
+Chipotle Pinto Beans,1,21,10,6,1,gm,FALSE,,,,
+Chipotle Roasted chili-corn salsa,1.5,16,3,3,3.5,oz,FALSE,,,,
+Chipotle Romaine lettuce,0,1,1,0,1,oz,FALSE,,,,
+Chipotle Sauza margarita,0,25,0,0,12,oz,FALSE,,,,
+Chipotle Sofritas,10,9,3.5,8,4,oz,FALSE,,,,
+Chipotle Sour Cream,9.5,1,0,2,2,oz,FALSE,,,,
+Chipotle Steak,6,1,1,21,4,oz,FALSE,,,,
+Chipotle Tomatillo green-chili salsa,0,4,0,0,2,oz,FALSE,,,,
+Chipotle Tomatillo red-chili salsa,0,4,1.5,0,2,oz,FALSE,,,,
+Chipotle Vinaigrette (salad only),25,18,2,0.5,2,oz,FALSE,,,,
+Chipotle White rice,4,40,1,3.5,4,oz,FALSE,,,,
+Chobani Blueberry Non-Fat Yogurt,0,24,1,19,227,gm,FALSE,,,,
+Chobani Hint of Vanilla and Cinnamon Yogurt,2.5,11,0,12,150,gm,FALSE,,,,
+Chobani Non-Fat Plain Yogurt,0,6,0,15,5.3,oz,FALSE,,,,
+Chobani Peach Non-Fat Yogurt,0,23,0,19,227,gm,FALSE,,,,
+Chobani Strawberry Non-Fat Yogurt,0,27,0,19,227,gm,FALSE,,,,
+Chobani Vanilla Nonfat Blended Yogurt,0,16,0,13,5.3,oz,FALSE,,,,
+Chobani Whole Milk Plain Yogurt,6,6,0,13,5.3,oz,FALSE,,,,
+Chockmeister Dark Chocolatey Hazelnut Spread,11,21,6,3,37,gm,FALSE,,,,
+Chocmeister Dark Chocolatey Hazelnut Spread,11,21,6,3,37,gm,FALSE,,,,
+Chocolate Brownie,8,14,0,1.8,1,oz,FALSE,,,,
+"Chocolate Cake, with Frosting",20,53,2.2,3.5,100,gm,TRUE,,,,https://www.google.com/search?q=chocolate+cake+nutrition&oq=chocolate+cake+nutrition&aqs=chrome..69i57j0l5.3055j0j7&sourceid=chrome&ie=UTF-8
+Chocolate Chip Cookies,4.5,9,0,0.9,16,gm,FALSE,,,,1 2.25in. diameter cookie is 16g
+Chocolate Chip Scone,10,31,1,4,57,gm,TRUE,,,,http://www.breadsmith.com/product/chocolate-chip-scone/
+Chocolate Ice Cream,11,28,1.2,3.8,100,gm,FALSE,,,,
+Chopt California Steakhouse Salad,10,16,6,22,1,each,FALSE,,,,1 serving is 1 salad
+Chopt Chicken Tinga Bowl,28,40,11,36,1,gm,FALSE,,,,
+Chopt Classic Cobb Salad,41,18,9,58,1,gm,FALSE,,,,
+Chopt Kale Caesar Salad,13,24,8,18,1,gm,FALSE,,,,
+Chopt Kale Caesar w/ Chicken Salad,17,24,8,46,1,gm,FALSE,,,,
+Chopt Kebab Cobb w/ Chicken Salad,25,38,8,43,1,gm,FALSE,,,,
+Chopt Kebab Cobb w/ Falafel Salad,29,58,16,20,1,gm,FALSE,,,,
+Chopt Mediterranean Falafel Bowl,16,43,15,12,1,gm,FALSE,,,,
+Chopt Mendocino Market Bowl,19,73,17,22,1,gm,FALSE,,,,
+Chopt Mexicali Vegan Salad,15,49,17,13,1,gm,FALSE,,,,
+Chopt Mexican Caesar Salad,15,21,3,12,1,gm,FALSE,,,,
+Chopt Mexican Caesar w/ Chicken Salad,19,21,3,41,1,gm,FALSE,,,,
+Chopt Palm Beach w/ Chicken Salad,14,20,12,35,1,gm,FALSE,,,,
+Chopt Palm Beach w/ Shrimp Salad,11,20,12,21,1,gm,FALSE,,,,
+Chopt Santa Fe Salad,33,41,12,20,1,gm,FALSE,,,,
+Chopt Smoky Santa Cruz Bowl,12,70,16,17,1,gm,FALSE,,,,
+Chopt Spicy Cashew Soba Noodle Bowl,3.5,44,9,15,1,gm,FALSE,,,,
+Chopt Spicy Santorini Bowl,20,39,6,35,1,gm,FALSE,,,,
+Chopt Texas Po'Boy Salad,45,36,8,37,1,gm,FALSE,,,,
+"Chunk Light Tuna, Chicken of the Sea, In Water",0.5,0,0,11,2,oz,FALSE,,,,One regular-sized can is 7oz (6oz drained)
+"Chunk Light Tuna, Starkist, In Water",0.5,0,0,16,3,oz,FALSE,,,,1 can is 3 oz
+"Chunk White Albacore in Water, Chicken of the Sea",1,0,0,11,2,oz,FALSE,,,,Per 2 oz drained
+Clayton's Organic Ground Beef (85/15),17,0,0,21,4,oz,FALSE,,,,
+Cocoa Krispies Cereal,1,27,0.5,1,31,gm,FALSE,,,,
+Cocoa Puffs,1.5,27,2,2,32,gm,FALSE,,,,
+"Coffee, Black",0,0,0,0.3,237,gm,FALSE,,,,
+"Coffeemate, French Vanilla",1.5,5,0,0,6,gm,FALSE,,,,1 tbsp serving size (approx 2g per tsp)
+Colavita Cavatappi,1,44,2,7,56,gm,FALSE,,,,
+Colavita Farfalle,1,44,2,7,2,oz,FALSE,,,,
+Colavita Penne,1,44,2,7,2,oz,FALSE,,,,
+Colavita Rigatoni,1,44,2,7,2,oz,FALSE,,,,
+Colavita Roman Rigatoni,1,44,2,7,2,oz,FALSE,,,,
+Colavita Wagon Wheels,1,44,2,7,2,oz,FALSE,,,,
+Coleman Natural Ground Extra Lean Turkey Breast (99/1),1,0,0,27,4,oz,FALSE,,,,
+Coleman Organic Free Range Boneless Skinless Thin Sliced Chicken Breast,3,0,0,25,4,oz,FALSE,,,,
+Coleslaw,19,28,3.6,1.8,191,gm,FALSE,191,gm,cup,191g = 1 cup
+Cooked Shrimp,0.3,0.2,0,24,100,gm,FALSE,,,,
+Cook's Reduced Sodium Bone-In Hickory Smoked Ham,6,3,0,12,84,gm,FALSE,,,,
+Coombs Family Farms Organic Maple Syrup,0,53,0,0,60,gm,FALSE,12,gm,tbsp,"1 serving = 4 tbsp, 1 tbsp = 12g"
+Corn,2,59,6,9,284,gm,FALSE,,,,
+"Cornbread, Boston Market",3,31,1,2,65.20390319,gm,FALSE,,,,
+Couscous Prepared,0.3,36.5,2.2,6,5.5,oz,TRUE,5.5,oz,cup,5.5 oz = 1 cup - http://www.calorieking.com/foods/calories-in-couscous-couscous-cooked_f-ZmlkPTY0Njc2.html
+"Cream Cheese, Plain",79,9,0,14,232,gm,FALSE,232,gm,cup,232g = 1 cup
+Crumb Cake,22.928,58.201,1.235,3.527,100,gm,TRUE,,,,https://www.caloriecount.com/calories-entenmanns-ultimate-crumb-cake-i112134
+"Crunch Bar, Fun Size",9,26,1,2,38,gm,FALSE,13,gm,each,38g = 3 bars
+Dannon Oikos Blueberry Greek Non-Fat Yogurt,0,20,0,12,150,gm,FALSE,150,gm,each,150g = 1 container
+DeCecco Cavatappi,1,40,2,8,56,gm,FALSE,,,,
+Dececco Farfalle,1,41,2,7,56,gm,FALSE,,,,
+DeCecco Fettucine,1,40,2,8,56,gm,FALSE,,,,
+DeCecco Linguine,1,40,2,8,2,oz,FALSE,,,,
+DeCecco Penne Rigate,1,40,2,8,56,gm,FALSE,,,,
+DeCecco Rigatoni,1,40,2,8,56,gm,FALSE,,,,
+DeCecco Shells,1,40,2,8,56,gm,FALSE,,,,
+DeCecco Thin Spaghetti,1,40,2,8,56,gm,FALSE,,,,
+Delallo Potato Gnocchi,0.5,54,2,6,140,gm,FALSE,,,,
+Delverde Bucatini,0.5,40,2,7,56,gm,FALSE,,,,
+Delverde Linguine Fini,0.5,40,2,7,56,gm,FALSE,,,,
+Delverde Penne Rigate,1,39,2,7,56,gm,FALSE,,,,
+Delverde Rigatoni,1,39,2,7,57,gm,FALSE,,,,
+Delverde Spaghetti,0.5,40,2,7,56,gm,FALSE,,,,
+Denny Mike's Hot 'N Nasty BBQ Sauce,0,12,0,1,35,gm,FALSE,,,,
+"Doritos, Nacho Cheese",14,28,2,3,49.6,gm,FALSE,,,,
+"Double Chocolate Cupcake, Au Bon Pain",13,49,2,4,90,gm,FALSE,,,,http://aubonpain.com/menu/double-chocolate-cupcake
+Dunkin Donuts Chocolate Frosted Donut,25,42,2,4,1,gm,FALSE,,,,
+Dunkin Donuts Chocolate Glazed Munchkin,3.5,8,0,1,1,each,FALSE,,,,Each serving is one munchkin
+Dunkin Donuts Cinnamon Donut,19,32,1,4,1,gm,FALSE,,,,
+Dunkin Donuts Jelly Donut,14,32,1,3,1,each,FALSE,,,,1 serving is 1 donut
+Dunkin Donuts Jelly Munchkin,4,8,0,1,1,each,FALSE,,,,Each serving is one munchkin
+Dunkin Donuts Medium Iced Coffee with Milk and Sugar,1.5,31,0,2,1,gm,FALSE,,,,
+Earth's Pride Organics Creamy Peanut Butter,16,7,3,8,32,gm,FALSE,,,,
+Egg Yolk,4.5,0.6,0,2.7,1,gm,FALSE,,,,
+"Egg, Extra Large",5,1,0,7,1,gm,FALSE,,,,
+"Egg, Large",5,0.6,0,6,1,gm,FALSE,,,,
+Eggo Homestyle Waffles,6,27,0.5,4,70,gm,FALSE,35,gm,each,70g = 2 waffles
+Eggo Nutrigrain Low Fat Waffles,2.5,27,3,4,70,gm,FALSE,35,gm,each,70g = 2 waffles
+"Entenmann's Donut, Chocolate Frosted",19,30,1,2,60,gm,FALSE,60,gm,each,60g = 1 donut
+"Entenmann's Donut, Crumb Topped",12,36,0,2,60,gm,FALSE,60,gm,each,60g = 1 donut
+"Entenmann's Donut, Glazed",13,34,0,2,60,gm,FALSE,60,gm,each,60g = 1 donut
+"Entenmann's Donut, Plain",13,24,0,2,60,gm,FALSE,60,gm,each,60g = 1 donut
+"Entenmann's Mini Donut, Chocolate Frosted",11,15,0,1,31,gm,FALSE,31,gm,each,31g = 1 donut
+Euro Classic Authentic French Brioche Hamburger Buns,4,26,1,5,50,gm,FALSE,50,gm,each,50g =  1 bun
+Fage Total Nonfat Plain Yogurt,0,7,0,18,6,oz,FALSE,,,,
+Fage Total Plain Yogurt,10,8,0,18,7,oz,FALSE,,,,
+Fiber One Chocolate Fudge Brownie,3,17,5,1,25,gm,FALSE,25,gm,each,25g = 1 brownie
+Fiber One Oats & Chocolate Bar,4,29,9,2,40,gm,FALSE,40,gm,each,40g = 1 bar
+Filet Mignon Steak,17,0,0,26,100,gm,FALSE,,,,
+Filet Mignon Tips,8,0,0,25,3,oz,FALSE,,,,
+Five Guys Cheeseburger,55,40,2,47,1,gm,FALSE,,,,
+Flank Steak,5,0,0,21,100,gm,FALSE,,,,
+"Flank Steak, Cooked",8,0,0,23,85,gm,FALSE,,,,Serving is cooked weight
+Flavia Dove Hot Chocolate,2.4,15,1.4,1.4,1,gm,FALSE,,,,
+Fleming's Wagyu New York Strip,28,0,0,18,4,oz,FALSE,,,,
+Flik American Cheese,9,0,0,6,1,oz,TRUE,,,,
+"Flik Avocado, Diced ",1,0.5,0.5,0,1,tbsp,TRUE,1,each,tbsp,1 serving = 1 tbsp
+Flik Balsamic Glaze ,0,2,0,0,1,tbsp,TRUE,1,each,tbsp,1 serving = 1 tbsp
+Flik Balsamic Grilled Eggplant ,2.5,6,4,1,4,oz,TRUE,,,,
+Flik Balsamic Vegetables ,5,6,3,1,4,oz,TRUE,,,,
+Flik Banana Peppers ,0,0,0,0,1,tbsp,TRUE,1,each,tbsp,1 serving = 1 tbsp
+Flik Blue Cheese,8,0,0,6,1,oz,TRUE,,,,
+Flik Blue Cheese Dressing,7,1,0,0,1,tbsp,TRUE,1,each,tbsp,1 serving = 1 tbsp
+"Flik Buffalo Chicken, Fried ",24,21,1,31,7,oz,TRUE,,,,
+Flik Bulgur Wheat,0.5,26,6,4,1,cup,TRUE,4,each,cup,1 serving = 1/4 cup
+"Flik Carrot Sticks, Fresh ",0,11,3,1,4,oz,TRUE,,,,
+Flik Cheddar Cheese,9,0,0,7,1,oz,TRUE,,,,
+"Flik Cheddar, Reduced Fat Cheese",7,0,0,7,1,oz,TRUE,,,,
+Flik Chicken Salad ,17,1,0,22,3.5,oz,TRUE,,,,
+"Flik Chicken Salad, Light Mayo ",8,2,0,23,3.5,oz,TRUE,,,,
+Flik Ciabatta Bread,5,64,4,11,1,gm,TRUE,,,,1 serving = 1 each
+Flik Creamy Caesar Dressing,4.5,0,0,0,1,tbsp,TRUE,,,,1 serving = 1 tbsp
+Flik Demi-Baguette Bread,5,57,4,10,1,gm,TRUE,,,,1 serving = 1 each
+Flik Egg Salad ,27,2,0,10,3.25,oz,TRUE,,,,
+"Flik Egg Salad, Light Mayo ",13,2,0,9,3.25,oz,TRUE,,,,
+Flik Flik Chips ,45,7,0,1,3,oz,TRUE,,,,
+Flik Franks Original Hot Sauce ,0,0,0,0,1,tbsp,TRUE,,,,1 serving = 1 tbsp
+Flik Genoa Salami ,21,2,0,18,3,oz,TRUE,,,,
+Flik Grilled Chicken Breast ,4,0,0,26,3,oz,TRUE,,,,
+Flik Honey Mustard ,0,9,0,0,1,tbsp,TRUE,,,,1 serving = 1 tbsp
+Flik Hummus ,2,4,1,1,1,tbsp,TRUE,,,,1 serving = 1 tbsp
+Flik Kaiser Bread,3,39,2,7,1,gm,TRUE,,,,1 serving = 1 each
+Flik Lay's Potato Chips ,15.5,23,2,2.5,1.5,oz,TRUE,,,,
+Flik Lemon Pepper Chicken ,4,0,0,26,3,oz,TRUE,,,,
+Flik Mashed Potatoes,4.4,15.7,1.57,1.7,1,cup,TRUE,,,,1 serving = 1/2 cup
+"Flik Mayo, Light ",3.5,1,0,0,1,tbsp,TRUE,,,,1 serving = 1 tbsp
+"Flik Mayo, Regular ",11,0,0,0,1,tbsp,TRUE,,,,1 serving = 1 tbsp
+Flik Mozzarella Cheese,6,0,0,6,1,oz,TRUE,,,,
+Flik Muenster Cheese,9,0,0,7,1,oz,TRUE,,,,
+Flik Multi Grain Bread,1,12,2,4,1,gm,TRUE,,,,
+Flik Panko Breaded Chicken ,10,14,0,24,4,oz,TRUE,,,,
+Flik Pepper Jack Cheese,9,0,0,7,1,oz,TRUE,,,,
+Flik Pesto Sauce ,6,0,0,0,1,tbsp,TRUE,,,,1 serving = 1 tbsp
+Flik Pickle Chips ,0,0,0,0,1,tbsp,TRUE,,,,1 serving = 1 tbsp
+Flik Pickle Spear ,0,1,0,0,1,gm,TRUE,,,,1 serving = 1 each
+Flik Pretzels,1.5,45,2,6,2,oz,TRUE,,,,
+Flik Prosciutto ,4,1,0,7,1,oz,TRUE,,,,
+Flik Provolone Cheese,8,0,0,7,1,oz,TRUE,,,,
+Flik Red Onion Slices ,0,2,0,0,1,oz,TRUE,,,,
+Flik Red Pepper Spread ,0,3,1,1,1,tbsp,TRUE,,,,1 serving = 1 tbsp
+Flik Roast Eye Round of Beef ,10,0,0,28,3.5,oz,TRUE,,,,
+Flik Roasted Red Pepper Strips ,0,0,0,0,1,tbsp,TRUE,,,,1 serving = 1 tbsp
+Flik Romaine Lettuce Leaf ,0,0,0,0,1,gm,TRUE,,,,1 serving = 1 each
+Flik Sandwhich Thin Weight Watchers,1,22,6,5,1,gm,TRUE,,,,1 serving = 1 each
+Flik Seeded Rye Bread,1,20,3.5,2,1,gm,TRUE,,,,1 serving = 1 slice
+Flik Smoked Ham ,5,0,0,21,3.5,oz,TRUE,,,,
+Flik Swiss Cheese,8,1.5,0,8,1,oz,TRUE,,,,
+"Flik Swiss, Reduced Fat Cheese",6,0,0,8,1,oz,TRUE,,,,
+Flik Tomato Slices ,0,0,0,0,1,gm,TRUE,,,,1 serving = 1 each
+Flik Tuna Salad ,15,1,0,17,3.5,oz,TRUE,,,,
+"Flik Tuna Salad, Light Mayo ",5,1,0,20,3.5,oz,TRUE,,,,
+"Flik Turkey Breast, Roasted ",3,1,0,21,3.5,oz,TRUE,,,,
+"Flik Turkey Breast, Smoked ",1,2,0,18,3.5,oz,TRUE,,,,
+Flik Turkey Meatloaf,7.6,14.9,2,13.1,1,gm,TRUE,,,,1 serving = 1 slice
+Flik Tzatziki Sauce ,0,0,0,0,1,tbsp,TRUE,,,,1 serving = 1 tbsp
+Flik White Bread,1,21,1,4,1,gm,TRUE,,,,1 serving = 1 slice
+Flik White Flour Tortilla,7,53,2,8,1,gm,TRUE,,,,1 serving = 1 each
+Flik White Pita Bread,1,44,2,7,1,gm,TRUE,,,,1 serving = 1 each
+Flik Whole Grain Flatbread,6,21,4,4,0.3333333333,gm,TRUE,,,,1 serving = 0.333333333333333 each
+Flik Whole Wheat Bread,1,18,3,5.5,1,gm,TRUE,,,,1 serving = 1 slice
+Flik Whole Wheat Pita Bread,1.5,35,5,6,1,gm,TRUE,,,,1 serving = 1 each
+Flik Whole Wheat Tortilla,7,50,6,9,1,gm,TRUE,,,,1 serving = 1 each
+"Flour, All Purpose",1,76,2.7,10,100,gm,FALSE,125,gm,cup,125g = 1 cup
+Francesco Rinaldi Tomato and Basil Sauce,2.5,12,2,2,124,gm,FALSE,680,gm,each,680g = 1 jar
+Frank's Red Hot,0,0,0,0,1,tsp,FALSE,,,,1 serving = 1 tsp
+French Fries,15,41,3.8,3.4,100,gm,FALSE,,,,
+Fresh Market Chicken Parmesan,19.4,29,3.5,27.4,1,gm,TRUE,,,,"Recipe is for Chicken Santa Fe Taken from https://recipes.sparkpeople.com/recipe-calories.asp?recipe=1526231 - Chicken Santa Fe has Jack cheese and Salsa, so not much different from Parmesan"
+Fresh Market Dark Red Kidney Beans,0,20,8,8,130,gm,FALSE,,,,
+Fresh Market Extra Lean Ground Sirloin (93/7),6.195,0,0,21.239,100,gm,FALSE,,,,https://www.fatsecret.com/calories-nutrition/usda/ground-beef-(95%25-lean---5%25-fat)?portionid=63122&portionamount=100.000
+Fresh Market Frontera Texas Chili Starter,1,13,2,3,125,gm,FALSE,,,,
+Fresh Market Reduced Fat Mexican Cheese Mix,5,1,0,8,28,gm,FALSE,,,,
+Fresh Market Reduced Fat Shredded Mild Cheddar,6,1,0,7,28,gm,FALSE,,,,
+"Frosted Mini Wheats, Maple Brown Sugar",1,46,6,5,55,gm,FALSE,,,,
+Frozen Shrimp,1,0,0,18,3,oz,FALSE,,,,
+Garden of Eatin Organic Blue Corn Taco Shells,7,17,1,2,27,gm,FALSE,13.5,gm,each,27g = 2 shells
+Garden of Eatin Organic Yellow Corn Taco Shells,7,17,1,2,27,gm,FALSE,13.5,gm,each,27g = 2 shells
+Garlic,0,1,0.1,0.2,3,gm,FALSE,3,gm,each,3 g = 1 clove (approximately)
+Garofalo Elicoidale,1,44,2,7,56,gm,FALSE,,,,
+Garofalo Farfalle,1,44,2,7,56,gm,FALSE,,,,
+Garofalo Penne Ziti Rigate,1,44,2,7,56,gm,FALSE,,,,
+Garofalo Rigatoni,1,73,0,14,100,gm,FALSE,,,,
+Graeter's Black Cherry Chocolate Ice Cream,19,29,1,3,106,gm,FALSE,,,,
+Graeter's Black Raspberry Chocolate Ice Cream,19,30,1,3,108,gm,FALSE,,,,
+Graeter's Double Chocolate Chip Ice Cream,21,28,1,4,109,gm,FALSE,,,,
+Grass Fed Filet,18,0,0,20,100,gm,FALSE,,,,
+Grass Fed Ribeye Steak,5,0,0,25,3,oz,TRUE,,,,
+Grass Fed Ribeye Steak V2,10,1,0,24,4,oz,TRUE,,,,
+"Grilled Chicken, Mozzarella, Roasted Peppers Wrap",9.6,21.8,1.6,22.7,2,gm,FALSE,,,,Serving is for half of a wrap
+Grilled Pork Chop Cooked Nutrition,9,0,0,22,85,gm,TRUE,,,,http://nutritiondata.self.com/facts/pork-products/2141/2
+Ground Beef (80/20),22.6,0,0,19.4,4,oz,FALSE,,,,
+Ground Beef (85/15),16.95,0,0,21.01,4,oz,FALSE,,,,
+Ground Beef (90/10),10,0,0,20,100,gm,FALSE,,,,
+Ground Beef (95/5),6,0,0,24,4,oz,FALSE,,,,
+Half and Half,1.7,0.6,0,0.4,15,gm,FALSE,15,gm,tbsp,15g = 1 tbsp
+"Half Chicken, Boston Market",33,2,0,84,340.1942775,gm,FALSE,,,,
+Halo Top Birthday Cake Ice Cream,2,14,3,5,71,gm,FALSE,,,,
+Halo Top Black Cherry Ice Cream,2,12,3,5,65,gm,FALSE,,,,
+Halo Top Sea Salt Caramel Ice Cream,2,15,3,5,70,gm,FALSE,,,,
+Hamantaschen,1,1,1,1,1,gm,TRUE,,,,http://stockpilesrus.servertalk.in/stockpilesrus-ftopic4325.html
+Hanger Steak,8,0,0,24,4,oz,FALSE,,,,
+Harwood 189 Mini Chocolate Croissants,10,17,1,3,45,gm,FALSE,45,gm,each,45g = 1 pastry
+Herr's Original Popcorn,8,17,2,2,1,oz,FALSE,,,,
+Hershey's Chocolate Syrup,0,24,1,0,39,gm,FALSE,,,,
+Hershey's Kisses,12,25,1,3,41,gm,FALSE,4.555555556,gm,each,41g = 9 kisses
+Hoegaarden Original White Ale,0,0,0,0,12,gm,FALSE,,,,4.9% ABV (serving is 12 oz)
+Honey Maid Fresh Stacks Honey Graham Crackers,3,24,1,2,30,gm,FALSE,7.5,gm,each,30g = 4 squares
+Houlihan's French Dip Sandwich Combo,13,34,1,45,1,gm,FALSE,,,,
+Houlihan's Lunch Combo French Fries,7,21,2,2,1,gm,FALSE,,,,
+Houlihan's Lunch Combo French Onion Soup,15,15,1,13,1,gm,FALSE,,,,
+Hummus,10,14,6,8,100,gm,FALSE,,,,
+Jimmy Johns #1 French,30,59,5,30,1,gm,FALSE,,,,
+Jimmy Johns #1 Unwich,28,6,1,19,1,gm,FALSE,,,,
+Jimmy Johns #1 Wheat,37,66,5,36,1,gm,FALSE,,,,
+Jimmy Johns #10 French,35,77,6,55,1,gm,FALSE,,,,
+Jimmy Johns #10 Unwich,32,4,1,40,1,gm,FALSE,,,,
+Jimmy Johns #10 Wheat,41,64,5,57,1,gm,FALSE,,,,
+Jimmy Johns #11 French,31,80,6,48,1,gm,FALSE,,,,
+Jimmy Johns #11 Unwich,28,7,1,33,1,gm,FALSE,,,,
+Jimmy Johns #11 Wheat,37,67,5,50,1,gm,FALSE,,,,
+Jimmy Johns #12 French,41,81,7,46,1,gm,FALSE,,,,
+Jimmy Johns #12 Unwich,38,8,2,31,1,gm,FALSE,,,,
+Jimmy Johns #12 Wheat,47,68,6,48,1,gm,FALSE,,,,
+Jimmy Johns #13 French,58,82,7,47,1,gm,FALSE,,,,
+Jimmy Johns #13 Unwich,56,9,2,32,1,gm,FALSE,,,,
+Jimmy Johns #13 Wheat,65,69,6,49,1,gm,FALSE,,,,
+Jimmy Johns #14 French,23,77,6,45,1,gm,FALSE,,,,
+Jimmy Johns #14 Unwich,21,4,1,30,1,gm,FALSE,,,,
+Jimmy Johns #14 Wheat,30,64,5,47,1,gm,FALSE,,,,
+Jimmy Johns #15 French,53,83,7,59,1,gm,FALSE,,,,
+Jimmy Johns #15 Unwich,50,10,2,44,1,gm,FALSE,,,,
+Jimmy Johns #15 Wheat,59,70,6,61,1,gm,FALSE,,,,
+Jimmy Johns #16 French,32,77,6,41,1,gm,FALSE,,,,
+Jimmy Johns #16 Unwich,30,4,1,26,1,gm,FALSE,,,,
+Jimmy Johns #16 Wheat,39,64,5,43,1,gm,FALSE,,,,
+Jimmy Johns #17 French,33,78,6,38,1,gm,FALSE,,,,
+Jimmy Johns #17 Unwich,31,5,1,23,1,gm,FALSE,,,,
+Jimmy Johns #17 Wheat,40,65,5,40,1,gm,FALSE,,,,
+Jimmy Johns #2 French,22,56,5,27,1,gm,FALSE,,,,
+Jimmy Johns #2 Unwich,20,3,1,16,1,gm,FALSE,,,,
+Jimmy Johns #2 Wheat,29,63,5,33,1,gm,FALSE,,,,
+Jimmy Johns #3 French,34,62,6,39,1,gm,FALSE,,,,
+Jimmy Johns #3 Unwich,32,9,2,28,1,gm,FALSE,,,,
+Jimmy Johns #3 Wheat,41,69,6,45,1,gm,FALSE,,,,
+Jimmy Johns #4 French,20,57,5,25,1,gm,FALSE,,,,
+Jimmy Johns #4 Unwich,18,4,1,14,1,gm,FALSE,,,,
+Jimmy Johns #4 Wheat,27,64,5,31,1,gm,FALSE,,,,
+Jimmy Johns #5 French,31,60,5,33,1,gm,FALSE,,,,
+Jimmy Johns #5 Unwich,29,7,1,22,1,gm,FALSE,,,,
+Jimmy Johns #5 Wheat,38,67,5,39,1,gm,FALSE,,,,
+Jimmy Johns #6 French,40,60,6,28,1,gm,FALSE,,,,
+Jimmy Johns #6 Unwich,38,7,2,17,1,gm,FALSE,,,,
+Jimmy Johns #6 Wheat,47,67,6,34,1,gm,FALSE,,,,
+Jimmy Johns #7 French,32,82,6,46,1,gm,FALSE,,,,
+Jimmy Johns #7 Unwich,30,9,1,31,1,gm,FALSE,,,,
+Jimmy Johns #7 Wheat,39,69,5,48,1,gm,FALSE,,,,
+Jimmy Johns #8 French,33,79,6,50,1,gm,FALSE,,,,
+Jimmy Johns #8 Unwich,31,6,1,35,1,gm,FALSE,,,,
+Jimmy Johns #8 Wheat,40,66,5,52,1,gm,FALSE,,,,
+Jimmy Johns #9 French,50,82,6,48,1,gm,FALSE,,,,
+Jimmy Johns #9 Unwich,48,9,1,33,1,gm,FALSE,,,,
+Jimmy Johns #9 Wheat,57,69,5,50,1,gm,FALSE,,,,
+Jimmy Johns GARG French,54,83,6,78,1,gm,FALSE,,,,
+Jimmy Johns GARG Unwich,51,10,1,63,1,gm,FALSE,,,,
+Jimmy Johns GARG Wheat,60,70,5,80,1,gm,FALSE,,,,
+Jimmy Johns J.J.B.L.T.® French,31,56,5,23,1,gm,FALSE,,,,
+Jimmy Johns J.J.B.L.T.® Unwich,29,3,1,12,1,gm,FALSE,,,,
+Jimmy Johns J.J.B.L.T.® Wheat,38,63,5,29,1,gm,FALSE,,,,
+Jimmy Johns SLIM 1 French,13,76,5,34,1,gm,FALSE,,,,
+Jimmy Johns SLIM 1 Unwich,11,4,0,19,1,gm,FALSE,,,,
+Jimmy Johns SLIM 1 Wheat,20,63,4,36,1,gm,FALSE,,,,
+Jimmy Johns SLIM 2 French,6,73,5,31,1,gm,FALSE,,,,
+Jimmy Johns SLIM 2 Unwich,3,1,0,16,1,gm,FALSE,,,,
+Jimmy Johns SLIM 2 Wheat,12,60,4,33,1,gm,FALSE,,,,
+Jimmy Johns SLIM 3 French,35,78,6,43,1,gm,FALSE,,,,
+Jimmy Johns SLIM 3 Unwich,32,6,1,28,1,gm,FALSE,,,,
+Jimmy Johns SLIM 3 Wheat,41,65,5,45,1,gm,FALSE,,,,
+Jimmy Johns SLIM 4 French,3,74,5,29,1,gm,FALSE,,,,
+Jimmy Johns SLIM 4 Unwich,0.5,2,0,14,1,gm,FALSE,,,,
+Jimmy Johns SLIM 4 Wheat,10,61,4,31,1,gm,FALSE,,,,
+Jimmy Johns SLIM 5 French,23,75,5,37,1,gm,FALSE,,,,
+Jimmy Johns SLIM 5 Unwich,20,3,0,22,1,gm,FALSE,,,,
+Jimmy Johns SLIM 5 Wheat,29,62,4,39,1,gm,FALSE,,,,
+Jimmy Johns SLIM 6 French,21,74,5,31,1,gm,FALSE,,,,
+Jimmy Johns SLIM 6 Unwich,18,2,0,16,1,gm,FALSE,,,,
+Jimmy Johns SLIM 6 Wheat,27,61,4,33,1,gm,FALSE,,,,
+Justin's Hazelnut Butter Blend,14,12,3,4,32,gm,FALSE,,,,
+Kashi Go Lean Chocolate Crunch Cereal,7,32,7,10,52,gm,FALSE,,,,
+"Ketchup, Heinz",0,5,0,0,17,gm,FALSE,,,,
+Kettle Cooked Sea Salt and Vinegar Potato Chips,9,16,1,2,1,oz,FALSE,,,,
+Kikkoman Low Sodium Soy Sauce,0,1,0,1,1,tbsp,FALSE,,,,1 serving = 1 tbsp
+"Kind Bar, Dark Chocolate Nuts & Sea Salt",15,16,7,6,40,gm,FALSE,,,,
+"Kit-Kat, Snack Size",11,27,0.5,3,42,gm,FALSE,14,gm,each,42g = 3 two-piece bars
+"Kodiak Cakes Power Cakes, Buttermilk",2,30,5,14,53,gm,FALSE,,,,
+La Tortilla Factory White Corn Grande Tortilla,2,25,2,9,72,gm,FALSE,,,,One tortilla is 72 g
+Lamb Kebabs,12,25,6,23,1,gm,FALSE,,,,AM Best Cafeteria - 1 serving is 2 kebabs
+Laura's Lean Beef (92/8),9,0,0,21,4,oz,FALSE,,,,
+Laura's Lean Beef (96/4),4.5,0,0,23,4,oz,FALSE,,,,
+Lay's Potato Chips,10,15,1,2,1,each,FALSE,,,,1 serving = 1 small bag
+Lemon Juice,0,21,1,1,244,gm,FALSE,244,gm,cup,244g = 1 cup
+Lemon Risotto,6,12,0,2,2,oz,TRUE,,,,http://www.myfitnesspal.com/food/calories/pa-creamy-lemon-risotto-66169577
+Les Petits Fermieres Shredded Cheddar,9,1,0,7,28,gm,FALSE,,,,
+"Life Cereal, Cinnamon",1.5,25,2,3,32,gm,FALSE,,,,
+"Life Cereal, Original",1.5,25,2,3,32,gm,FALSE,,,,
+"Lite Italian Dressing, Newman's Own",6,1,0,0,30,gm,FALSE,15,gm,tbsp,30g = 2 tablespoons
+"Lundberg Traditional Italian Risotto, Alfredo",1.5,39,1,6,54,gm,FALSE,,,,54 g = 1 serving (3 servings in box)
+"Lundberg Traditional Italian Risotto, Garlic Primavera",1,39,1,5,53,gm,FALSE,,,,
+"Lundberg Traditional Italian Risotto, Parmesan",2,38,1,6,53,gm,FALSE,,,,53g = 1 serving (3 servings per box)
+"M&Ms, Peanut Butter",13,26,1,4,46.2,gm,FALSE,,,,
+"M&Ms, Plain",10,34,1,2,47,gm,FALSE,,,,
+"M&Ms, Pretzel",4.5,24,1,2,32.3,gm,FALSE,,,,
+Maggiano's Chicken Parmesan,72,130,12,100,1,gm,FALSE,,,,
+Maggiano's Four Cheese Ravioli,66,69,3,50,1,gm,FALSE,,,,
+Maggiano's Mom's Lasagna w/Marinara,67,52,6,64,1,gm,FALSE,,,,
+"Magnum Ice Cream, Dark Chocolate Raspberry",24,35,4,5,110,gm,FALSE,,,,
+Mallomars,5,18,0.5,1,1,oz,FALSE,0.5,oz,each,1 oz = 2 cookies
+Manischewitz Wide Yolk Free Pasta,1,41,2,8,55,gm,FALSE,,,,
+Maple Grove Farms Pure Maple Syrup,0,53,0,0,4,gm,FALSE,,,,1 tbsp = 1 serving
+Mario Batali Organic Tomato Basil Sauce,1,5,2,2,125,gm,FALSE,,,,
+Martin's Long Potato Rolls,2.5,24,2,6,53,gm,FALSE,53,gm,each,53g = 1 roll
+Martin's Sandwich Potato Rolls,1.5,24,2,7,53,gm,FALSE,53,gm,each,53g = 1 roll
+Mashed Potatoes,2.8,15,1.3,1.7,100,gm,FALSE,,,,
+"Mashed Potatoes, Boston Market",10,32,3,5,198.4466619,gm,FALSE,,,,
+Master Purveyors Dry Aged Blend Hamburger,34,0,0,29,6,oz,FALSE,,,,
+Master Purveyors Short Rib Blend Burger,22,0,0,19,4,oz,FALSE,,,,
+"Mayonnaise, Hellman's",10,0,0,0,13,gm,FALSE,13,gm,tbsp,13g is approximately 1 Tbsp
+McAlister's Deli Grilled Chicken Spud (Choose 2 Portion),17,66,5,11,1,gm,FALSE,,,,
+McAlister's Deli The Big Nasty (Choose 2 Portion),8,35,1,31,1,gm,FALSE,,,,
+McAlister's French Dip (Choose 2 Portion),10,28,1,23,1,gm,FALSE,,,,
+"McAlister's Traditional Chili, Cup",24,17,5,20,1,gm,FALSE,,,,
+McCormick Low Sodium Taco Seasoning,0,3,0,2,4.5,gm,FALSE,,,,6 servings per packet
+McCormick Mild Chili Seasoning,0.5,6,1,0,9,gm,FALSE,,,,1 bag = 35g
+Meat Lasagna,4.9,15,1.7,7,100,gm,FALSE,,,,
+MetLife Café Cottage Cheese and Fresh Fruit,1,17,1,12,227,gm,FALSE,,,,
+MetLife Café Yogurt Parfait,4,36,4,11,248,gm,FALSE,,,,
+Mexamerica Whole Wheat Tortilla,2.5,20,1,3,43,gm,FALSE,,,,1 Tortilla is 43g
+Mezetta Marinara Sauce,5.5,5,1,1,125,gm,FALSE,,,,
+"Mezetta Parmesa, Asiago, and Romano Sauce",7,6,1,3,125,gm,FALSE,,,,
+Mezetta Tomato and Sweet Basil Tomato Sauce,5,11,3,2,125,gm,FALSE,,,,
+Milano Dark Chocolate Cookies,11,28,2,2,43,gm,FALSE,11,gm,each,43g = 4 cookies
+"Milk, 2%",2.4,12,0,8,244,gm,FALSE,,,,
+"Milk, Skim",0,12,0,8,245,gm,FALSE,245,gm,cup,245 g equivalent to 1 cup
+"Milk, Whole",8,12,0,8,244,gm,FALSE,244,gm,cup,244 g equivalent to 1 cup
+Milkshake,3,18,0,3.9,100,gm,FALSE,28.4,gm,fl oz,28.4 g = 1 fluid ounce
+Mini Babybel Cheese Light,3,0,0,6,21,gm,FALSE,21,gm,each,21g = 1 piece
+Mozzarella in Carrozza,13,21,1,10,90,gm,FALSE,,,,
+"Mozzarella, Fresh",5,0,0,6,28,gm,FALSE,,,,
+Mr Nature Unsalted Trail Mix,18,21,4,9,2,oz,FALSE,,,,
+"Nature's Bakery Fig Bar, Raspberry",2.5,17,2,2,28,gm,FALSE,,,,2 servings per container
+"Nature's Bakery Fig Bar, Strawberry",2.5,17,2,2,28,gm,FALSE,,,,2 servings per container
+Nature's Promise Organic Macaroni and Wisconsin Cheddar Cheese,3.5,47,2,10,71,gm,FALSE,,,,71g = 1 serving (2.5 servings in box)
+Nature's Reserve Grass Fed Ground Beef (93/7),8,0,0,23,4,oz,FALSE,,,,
+Near East Rice Pilaf,0.5,43,1,4,56,gm,FALSE,,,,
+Nestle Mini Morsels,4,9,0.5,0.5,14,gm,FALSE,,,,
+Nestle Semi-Sweet Morsels,4.5,9,0.5,0.5,14,gm,FALSE,,,,
+Nestle Toll House Chocolate Chip Break-and-Bake Cookies,4,11,0,0.5,19,gm,FALSE,19,gm,each,19g = 1 cookie
+No Yolks Enriched Egg White Pasta Broad,1,40,2,8,56,gm,FALSE,37.33333333,gm,cup,56g = 1.5 cup
+No Yolks Enriched Egg White Pasta Extra Broad,1,40,2,8,56,gm,FALSE,,,,
+Nutella,11,22,1,2,37,gm,FALSE,,,,
+"Nutrigrain Bar, Blueberry",3,24,3,2,37,gm,FALSE,37,gm,each,37g = 1 bar
+"Nutrigrain Bar, Raspberry",3,24,1,2,37,gm,FALSE,37,gm,each,37g = 1 bar
+"Oil, Vegetable",14,0,0,0,14,gm,FALSE,14,gm,tbsp,14g = 1 tbsp
+"Olive Oil, Extra Virgin",14,0,0,0,1,tbsp,FALSE,,,,1 serving = 1 tbsp
+Oreo,7,25,1,1,34,gm,FALSE,,,,
+Oreo without Cream,1,8,0,0,1,each,FALSE,,,,1 serving = 1 cookie (2 wafers)
+Ortega Good Grains Taco Shells,5,17,3,2,28,gm,FALSE,,,,28 g = taco shells
+Pacific Organic Beef Broth,0,1,0,3,8,gm,FALSE,,,,Each serving = 1 fl oz
+Pacific Organic Cream of Mushroom,3,10,0,1,132,gm,FALSE,,,,
+Pacific Organic Free Range Low Sodium Chicken Broth,0,1,0,2,1,cup,FALSE,,,,1 serving = 1 cup
+Pacific Organic Turkey Gravy,2,4,0,1,60,gm,FALSE,,,,
+Paesana Sicilian Gravy,6,8,2,2,125,gm,FALSE,,,,6 servings per jar
+Paesana Tomato Basil,4.5,5,1,1,125,gm,FALSE,,,,6 servings per jar
+Paramount Bastogne Italian Bread,0,21,1,4,46,gm,FALSE,,,,
+Pat LaFrieda Original Blend Beef Hamburgers,34.5,0,0,31.5,6,oz,FALSE,6,oz,each,1 patty = 6 oz.
+Penne Vodka,7.1,17.1,1.3,5.9,100,gm,FALSE,,,,
+Penne with Marinara Sauce,7,35,7,5,257,gm,FALSE,,,,
+Pennsylvania Dutch Fine Egg Noodles,3,40,2,8,56,gm,FALSE,,,,
+Philadelphia Lite Cream Cheese,2.3,1,0,1.5,0.6,oz,FALSE,0.6,oz,tbsp,0.6 oz = 1 tablespoon
+Pigs in a Blanket,20,17,1,7,87,gm,FALSE,22,gm,each,87g = 4 pigs
+Pita,1.2,56,2.2,9,100,gm,FALSE,,,,
+"Pizza, Cheese",83,284,20,97,853,gm,FALSE,853,gm,each,853 g is one full 14 inch pizza
+"Pizza, Pepperoni and Sausage",9.821,33.036,1.786,15.179,100,gm,FALSE,,,,
+"Pizza, Sicilian",8.649,26.937,0,9.64,100,gm,FALSE,,,,
+"Pizza, White",10.1,33.6,0.8,11.8,100,gm,FALSE,,,,
+Polly-O Part Skim Ricotta,3.5,2,0,8,63,gm,FALSE,,,,
+Pomi Chopped Tomatoes,0,6,2,1,125,gm,FALSE,750,gm,each,1 box is 750g
+Pomi Finely Chopped Tomatoes,0,6,2,1,125,gm,FALSE,750,gm,each,1 box is 750g
+Popcorn Indiana Sweet and Salty Kettlecorn,5,21,2,1,28,gm,FALSE,,,,
+"Popcorners, Spicy Queso",5,18,0,2,1,oz,FALSE,,,,
+Pork Chops,14,0,0,24,100,gm,FALSE,,,,
+Pork Fried Rice,4.5,30,1,5,113,gm,TRUE,,,,"https://www.eatthismuch.com/food/view/pork-fried-rice,134416/"
+Pork Lo Mein,7.06,16.91,1.5,6.37,100,gm,FALSE,,,,
+Potato Gnocchi,1.77,4.83,0.3,0.67,1,oz,FALSE,,,,
+"Potato, Russet",0.2,38,2.8,4.6,213,gm,FALSE,,,,
+Premio Sweet Italian Sausage Meat,14,2,0,12,2,oz,FALSE,,,,"2 oz pan fried serving, 6 in package"
+Premio Sweet Italian Sausages,14,1,0,12,56,gm,FALSE,56,gm,each,56g = 1 link
+"Pretzels, Rold Gold Tiny Twists",1,23,1,2,1,oz,FALSE,,,,
+"Quaker Oatmeal Squares, Cinnamon",3,44,5,6,56,gm,FALSE,,,,
+"Raisins, Monarch",0,34,2,1,42.5,gm,FALSE,,,,
+Red Bliss Potatoes,0,26,2,3,1,cup,FALSE,,,,1 serving = 1/2 cup
+Red Wine,0,3.8,0,0.1,147,gm,FALSE,,,,
+"Rib Eye Steak, Grilled",22,0,0,24,100,gm,FALSE,,,,
+"Rib Eye Steak, Uncooked",22,0,0,24,100,gm,FALSE,,,,
+Rice Krispie Treat,4,28,0,1,37,gm,FALSE,,,,
+Rice Select Organic Arborio,0,37,0,3,46,gm,FALSE,184,gm,cup,46g = 1/4 cup
+Rienzi Fresh Gnocchi,1,57,4,7,140,gm,FALSE,,,,
+Roast Turkey Breast,0.2,0,0,8.5,1,oz,FALSE,,,,
+Roasted Pork Loin,12,0,0,23,3,oz,FALSE,,,,
+Sauteed Spinach with Garlic,5,6,4,4,1,cup,FALSE,,,,1 serving is 1/2 cup
+Shadybrook Farms 93/7 Lean Ground Turkey,8,0,0,22,4,oz,FALSE,,,,
+Shake Shack Black and White Shake,43,82,1,15,1,gm,FALSE,,,,
+Shake Shack Caremlized Peach Shake,39,107,0,15,1,gm,FALSE,,,,
+Shake Shack Cheese Fries,31,56,5,13,1,gm,FALSE,,,,
+Shake Shack Chocolate Shake,46,75,3,15,1,gm,FALSE,,,,
+Shake Shack Double Cheeseburger,49,26,3,49,1,gm,FALSE,,,,
+Shake Shack Double Hamburger,38,25,3,42,1,gm,FALSE,,,,
+Shake Shack Double ShackBurger,60,27,3,49,1,gm,FALSE,,,,
+Shake Shack Double SmokeShack,27,3,10,0,1,gm,FALSE,,,,
+Shake Shack Fair Shake,33,72,0,14,1,gm,FALSE,,,,
+Shake Shack Peanut Butter Shake,52,81,1,21,1,gm,FALSE,,,,
+Shake Shack Regular Fries,19,56,5,5,1,gm,FALSE,,,,
+Shake Shack Salted Caramel Shake,40,83,0,17,1,gm,FALSE,,,,
+Shake Shack Shack Stack,53,40,7,40,1,gm,FALSE,,,,
+Shake Shack Single Cheeseburger,26,26,3,28,1,gm,FALSE,,,,
+Shake Shack Single Hamburger,21,25,3,24,1,gm,FALSE,,,,
+Shake Shack Single ShackBurger,37,27,3,28,1,gm,FALSE,,,,
+Shake Shack Single SmokeShack,16,3,10,0,1,gm,FALSE,,,,
+Shake Shack Strawberry Shake,33,76,1,14,1,gm,FALSE,,,,
+Shake Shack Vanilla Shake,34,71,0,14,1,gm,FALSE,,,,
+Shake Shack Vitamin Creamsickle Shake,33,76,0,14,1,gm,FALSE,,,,
+Shake Shack 全hroom Burger,30,39,7,18,1,gm,FALSE,,,,
+ShopRite Hot Stuff Italian Bread,0,26,1,5,57,gm,FALSE,,,,
+ShopRite Lean Ground Turkey,8,0,0,22,112,gm,FALSE,,,,
+ShopRite Organic Dark Red Kidney Beans,0,19,6,9,130,gm,FALSE,439,gm,each,1 can is 439g
+ShopRite Part Skim Mozzarella,6,1,0,7,30,gm,FALSE,,,,
+"ShopRite Part Skim Mozzarella Cheese, Shredded",6,1,0,8,28,gm,FALSE,,,,
+ShopRite Part Skim Ricotta,6,3,0,7,62,gm,FALSE,,,,
+ShopRite Pinto Beans,0,20,3,6,127,gm,FALSE,425,gm,each,1 can is 425g
+"ShopRite Shredded Cheddar, Sharp Yellow",9,1,0,7,28,gm,FALSE,,,,
+"ShopRite Shredded Cheddar, Sharp Yellow, Reduced Fat",6,1,0,7,28,gm,FALSE,,,,
+ShopRite Whole Milk Mozzarella,6,1,0,6,1,oz,FALSE,,,,
+Silver Palate Grain Berry Very Fudge Brownies Mix,1,26,2,2,30,gm,FALSE,10,gm,tbsp,30g = 3 tbsp dry - 15 servings in box
+Sirloin Steak,13,0,0,20,100,gm,FALSE,,,,
+Sixteen Handles Cookies and Cream,1,34,0,4,113,gm,FALSE,,,,
+Skinny Cow Chocolate Ice Cream Sandwich,3.5,28,1,4,70,gm,FALSE,70,gm,each,70g = 1 sandwich
+Skinny Cow Vanilla Ice Cream Sandwich,3.5,28,0.5,4,70,gm,FALSE,70,gm,each,70g = 1 sandwich
+"Smartfood Popcorn, White Cheddar",6,8,1,2,17.7,gm,FALSE,,,,
+Smucker's Individual Grape Jelly Pack,0,9,0,0,14,gm,FALSE,14,gm,each,14 g = 1 packet
+Smucker's Natural Concord Grape Fruit Spread,0,11,0,0,19,gm,FALSE,,,,
+Snackwell's Chocolate Crème Sandwich Cookies,6,38,1,2,48,gm,FALSE,12,gm,each,48g = 1 four pack
+Snyder's Fat Free Mini Pretzel Twists,0,25,0,3,30,gm,FALSE,1.5,gm,each,30 g = 20 minis
+Sour Cream,2.4,0.3,0,0.2,12,gm,FALSE,12,gm,tbsp,12g = 1 tbsp
+Spaghetti Squash,0,10,2,1,155,gm,FALSE,155,gm,cup,155g = 1 cup
+"Spiral Ham, Unglazed",12,3,0,12,3,oz,TRUE,,,,http://www.myfitnesspal.com/food/calories/brh-ham-unglazed-572512228
+Spring Tree Maple Syrup,0,53,0,0,60,gm,FALSE,,,,
+Spring Valley Beef Cocktail Franks Wrapped in Puff Pastry,22,11,0,9,85,gm,FALSE,14.16666667,gm,each,85g = 6 Pigs
+Stacy's Simply Naked Pita Chips,5,19,1,3,1,oz,FALSE,,,,
+Starbucks Berry Trio Parfait,2.5,39,3,14,164,gm,FALSE,,,,
+Starbucks Chocolate Croissant,18,38,1,6,80,gm,FALSE,,,,
+Starbucks Dipped Madeleines,15,36,1,3,63,gm,FALSE,21,gm,each,63g = 3 cakes
+Starbucks Via Instant Caffè Mocha,4.5,24,2,6,37,gm,FALSE,37,gm,each,37g = 1 packet
+"Starbucks, Caffe Mocha (Skim, Grande)",2.5,42,4,13,1,gm,FALSE,,,,
+"Starbucks, Caffe Mocha (Skim, Tall)",2,32,3,10,1,gm,FALSE,,,,
+"Starbucks, Caffe Mocha (Skim, Venti)",3.5,54,5,17,1,gm,FALSE,,,,
+Steamed Pork Dumplings,2.64,9.56,0.5,11.5,100,gm,FALSE,,,,
+Stew Beef,5.71,0,0,8.05,1,oz,FALSE,,,,
+Stonyfield Organic Fat Free Plain Yogurt,0,15,0,10,227,gm,FALSE,,,,
+Stonyfield Organic Fat Free Vanilla Yogurt,0,27,0,9,227,gm,FALSE,,,,
+Stop and Shop Part Skim Ricotta,6,3,0,7,62,gm,FALSE,,,,
+Stouffer's Fit Kitchen Bourbon Steak,13,48,4,27,372,gm,FALSE,,,,
+Stouffer's Fit Kitchen Monterey Chicken,12,46,5,26,396,gm,FALSE,,,,
+Stouffer's Fit Kitchen Oven Roasted Chicken,4,30,5,26,375,gm,FALSE,,,,375g = Full Box
+Stouffer's Fit Kitchen Rotisserie Seasoned Turkey,10,37,3,25,404,gm,FALSE,,,,
+Stouffer's Fit Kitchen Steak Fajita,9,48,5,26,375,gm,FALSE,,,,375g = Full Box
+Stouffer's Fit Kitchen Sweet & Smoky BBQ,16,56,9,30,396,gm,FALSE,,,,
+Stouffer's Lasagna Italiano,8,28,3,13,213,gm,FALSE,,,,
+Stouffer's Lasagna with Meat and Sauce,10,29,2,16,213,gm,FALSE,,,,"2602 pre-cook, 2490 post."
+"Stove Top Stuffing, Chicken",1,21,1,4,28,gm,FALSE,,,,
+Strip Steak,5,0,0,25,100,gm,TRUE,,,,http://nutritiondata.self.com/facts/beef-products/3583/2
+Stubbs Original Legendary Bar-B-Q Sauce,0,6,1,0,32,gm,FALSE,,,,
+Stuffing,9,22,3,3,100,gm,FALSE,,,,
+Subway 6 inch Italian BMT,16,46,5,20,1,gm,FALSE,,,,On whole wheat bread
+Subway 6 inch Subway Melt,11,48,5,25,1,gm,FALSE,,,,On whole wheat bread
+Sugar,0,2,0,0,2,gm,FALSE,12.5,gm,tbsp,1 tbsp = 12.5g
+Sugar in the Raw Packet,0,5,0,0,5,gm,FALSE,5,gm,each,5g = 1 packet
+"Sushi, Hawaiian Roll",9,47,3,31,12,gm,FALSE,,,,1 serving = 1 roll
+"Sushi, Salmon Avocado Roll",9,42,6,13,1,each,FALSE,,,,1 roll = 6-8 pieces
+"Sushi, Shrimp Tempura Roll",21,64,4.5,20,1,each,FALSE,,,,1 roll = 6-8 pieces
+"Sushi, Spicy Tuna Roll",11,26,3.5,24,1,each,FALSE,,,,1 roll = 6-8 pieces
+Sweet and Sour Chicken (no sauce),26,17,0,18,5,oz,FALSE,,,,
+Sweet and Sour Sauce,0,13,0,0.1,35,gm,FALSE,,,,
+Sweet Potato Fries,2.4,18.8,3,1.8,93.5,gm,FALSE,,,,
+Talenti Black Raspberry Chocolate Chip,13,25,1,4,104,gm,FALSE,,,,
+"ThinkThin Protein and Fiber Bar, Chocolate Almond Brownie",6,19,5,10,40,gm,FALSE,40,gm,each,40g = 1 bar
+Tilapia,2.3,0,0,23,87,gm,FALSE,,,,
+Tootsie Pop,0,15,0,0,17,gm,FALSE,17,gm,each,17g = 1 pop
+Top Round Roast,8,0,0,22,100,gm,FALSE,,,,
+Trader Joe's Albacore Tuna in Water,1,0,0,13,2,oz,FALSE,,,,
+Trader Joe's Bambino Pizza Formaggio,9,30,1,11,113,gm,FALSE,113,gm,each,1 pizza = 113 g
+Trader Joe's Battered Halibut,12,22,3,9,100,gm,FALSE,,,,
+Trader Joe's Beef Shepherd's Pie,3,21,2,16,229,gm,FALSE,,,,
+Trader Joe's Beer Battered Vidalia Onion Rings,7,16,1,2,85,gm,FALSE,,,,
+Trader Joe's Blended Non-Fat Blueberry Greek Yogurt,0,18,0,12,150,gm,FALSE,,,,
+Trader Joe's Blueberry Waffles,9,33,2,5,78,gm,FALSE,39,gm,each,Two waffles in 78 g
+Trader Joe's Boneless Skinless Chicken Breast,2.5,0,0,25,112,gm,FALSE,,,,
+Trader Joe's Brownie Crisp,3.5,17,2,2,29,gm,FALSE,10,gm,each,29g = 3 pieces
+"Trader Joe's Burrata, Prosciutto, and Arugula Flatbread",12,30,3,13,113,gm,FALSE,113,gm,each,113g = 1 slice
+Trader Joe's Buttermilk Pancake Mix,3,42,1,5,60,gm,FALSE,120,gm,cup,60g = 1/2 cup mix
+Trader Joe's Candy Coated Chocolate Drops,9,28,1,1,40,gm,FALSE,,,,
+Trader Joe's Carolina Gold Barbecue Sauce,0,14,0,0,35,gm,FALSE,,,,
+Trader Joe's Chicken Breast Tenderloins,1.5,0,0,26,4,oz,FALSE,,,,
+Trader Joe's Chicken Burrito Bowl,11,54,10,22,330,gm,FALSE,,,,
+Trader Joe's Chicken Drumellas,9,12,1,15,84,gm,FALSE,21,gm,each,84 g is approximately 4 nuggets
+Trader Joe's Chicken Noodle Soup with Veggies,1,16,1,7,245,gm,FALSE,245,gm,cup,245g = 1 cup (1/2 box)
+Trader Joe's Chile Lime Chicken Burgers,6,3,2,19,4,oz,FALSE,4,oz,each,4oz = 1 patty
+Trader Joe's Chocolate Brooklyn Babka,12,32,2,4,57,gm,FALSE,,,,
+Trader Joe's Chocolate Chip Waffles,7,27,1,4,78,gm,FALSE,39,gm,each,78g = 2 waffles
+Trader Joe's Chocolate Chunk Scones,12,31,1,3,57,gm,FALSE,57,gm,each,57g = 1 scone
+Trader Joe's Chocolate Croissant,18,36,2,5,85,gm,FALSE,85,gm,each,85g = 1 croissant
+Trader Joe's Chocolate Crunch Cereal,1,33,2,3,40,gm,FALSE,,,,
+Trader Joe's Chocolate Mousse Cake Topped with Ganache,19,33,2,4,76,gm,FALSE,,,,
+Trader Joe's Chocolately Coated Chocolate Chip Dunkers,9,25,0,2,38,gm,FALSE,19,gm,each,38g = 2 cookies
+Trader Joe's Chocolatey Cats Cookies for People,1.5,24,1,2,30,gm,FALSE,,,,
+Trader Joe's Cocoa Batons,5,16,0,1,24,gm,FALSE,12,gm,each,24g = 2 pieces
+Trader Joe's Condensed Cream of Portabella Mushroom Soup,4.5,9,0,2,118,gm,FALSE,,,,2.5 Servings per container
+Trader Joe's Creamy Salted Peanut Butter,16,7,3,8,32,gm,FALSE,,,,
+Trader Joe's Crisp Rice,0,26,0,2,30,gm,FALSE,,,,
+Trader Joe's Crunchy Cinnamon Squares,2.5,24,2,2,31,gm,FALSE,,,,
+Trader Joe's Dark Chocolate Covered Marshmallows,3,22,0,1,30,gm,FALSE,10,gm,each,30g = 3 pieces
+Trader Joe's Dark Chocolate Covered Mini Pretzels,10,25,2,2,40,gm,FALSE,5,gm,each,40g = 8 pieces
+Trader Joe's Dark Chocolate Covered Pretzel Slims,6,20,1,1,1,oz,FALSE,,,,
+Trader Joe's Dark Chocolate Ganache Mini Sheet Cake,16,42,1,3,85,gm,FALSE,,,,
+Trader Joe's Dark Chocolate Mini Heart Cookies,6,19,1,2,28,gm,FALSE,5.6,gm,each,28g = 5 cookies
+Trader Joe's Dark Chocolate Peanut Butter Cups,12,22,2,3,37,gm,FALSE,12,gm,each,37g = 3 cups
+Trader Joe's Dark Chocolate Stars,1.75,4.75,0.25,0.25,1,gm,FALSE,7,gm,each,28g = 4 cookies - 1 serving = 1 cookie
+Trader Joe's Demi Baguette,0.5,31,1,5,56,gm,FALSE,,,,
+Trader Joe's Extra Lean Ground Beef (96/4),4,0,0,21,4,oz,FALSE,,,,
+Trader Joe's Family Style Meat Lasagna,15,29,3,25,227,gm,FALSE,,,,841g total cooked weight
+Trader Joe's Fancy Shredded Lite Mexican Blend Cheese,4.5,1,0,9,28,gm,FALSE,,,,
+Trader Joe's Fancy Shredded Mexican Blend Cheese,9,1,0,6,28,gm,FALSE,,,,
+Trader Joe's Farfale,1,44,2,7,2,oz,FALSE,,,,
+Trader Joe's Fig Bites,2.5,22,0,2,32,gm,FALSE,16,gm,each,32g = 2 fig bites
+Trader Joe's For the Love of Chocolate Mousse Cake,20,44,3,4,87,gm,FALSE,,,,
+Trader Joe's Frosted Flakes,0,24,0,2,29,gm,FALSE,,,,
+Trader Joe's Frosted Shredded Bite Size Wheats,1,42,5,5,52,gm,FALSE,1.5,gm,each,3g = 2 pieces
+Trader Joe's Garlic & Butter Mashed Potatoes,1,21,2,2,27,gm,FALSE,,,,
+Trader Joe's Gnocchi alla Sorrentina,3,34,3,6,140,gm,FALSE,,,,
+Trader Joe's Grass Fed Beef Sirloin Roast,11,2,0,18,3,oz,FALSE,,,,
+Trader Joe's Greek Whole Milk Plain Yogurt,22,12,0,8,227,gm,FALSE,,,,
+Trader Joe's Grilled Chicken Strips,1.5,0,0,26,3,oz,FALSE,,,,
+Trader Joe's Half-Baked Idea French Rolls,0,28,0.5,4,57,gm,FALSE,57,gm,each,57g = 1 roll
+Trader Joe's Hamburger Bun,2,29,0.25,5,1,each,FALSE,,,,1 serving = 1 bun
+Trader Joe's Hand Braided Challah,3,33,1,4,2,oz,FALSE,,,,
+Trader Joe's Handsome Cut Potato Fries,5,22,2,3,3,oz,FALSE,,,,
+Trader Joe's Hasselback Potatoeswith Butter and Sea Salt,9,30,3,4,150,gm,FALSE,150,gm,each,150g = 1 potato
+Trader Joe's Hot Cocoa Os,1.5,32,4,4,40,gm,FALSE,,,,
+Trader Joe's Hot Dog Buns,1.5,22,0.5,4,43,gm,FALSE,43,gm,each,43g = 1 bun
+Trader Joe's Italian Macaroni Pasta,1,41,2,7,2,oz,FALSE,,,,
+Trader Joe's Joe's Diner Mac and Cheese,15,42,1,16,198,gm,FALSE,,,,Total weight is 397g
+Trader Joe's Just White Meat Chicken,1,0,0,25,3,oz,FALSE,,,,
+Trader Joe's Lean Beef Stew Meat,4,2,0,23,4,oz,FALSE,,,,
+Trader Joe's Lean Center Cut Pork Chops,9,0,0,33,142,gm,FALSE,,,,
+Trader Joe's Lean Ground Beef (90/10),11,0,0,23,4,oz,FALSE,,,,
+Trader Joe's Lite Shredded Mozzarella Cheese,3,0,0,5,28,gm,FALSE,,,,
+Trader Joe's Low Sodium Soy Sauce,0,2,0,0,1,tbsp,FALSE,,,,1 serving = 1 tbsp
+"Trader Joe's Lowfat Granola Cereal, Mixed Berry",2.5,45,5,4,55,gm,FALSE,,,,
+Trader Joe's Macaroni and Cheese,4,47,2,10,70,gm,FALSE,,,,
+Trader Joe's Maitre Pierre Tarte d'Alsace,7,13,0,6,57,gm,FALSE,,,,228g = 1 full tarte
+Trader Joe's Mandarin Orange Chicken,16,24,1,21,140,gm,FALSE,,,,
+Trader Joe's Maple Agave Syrup Blend,0,43,0,0,60,gm,FALSE,,,,
+Trader Joe's Marinara Sauce,2,8,2,1,113,gm,FALSE,,,,
+Trader Joe's Mild Cheddar Cheese Snack Sticks,7,0,0,5,24,gm,FALSE,24,gm,each,1 stick is 24g
+Trader Joe's Milk Chocolate S'mashing S'mores,7,21,3,2,32,gm,FALSE,16,gm,each,32g = 2 pieces
+Trader Joe's Mini Brie en Croute,13,14,0,5,1,each,FALSE,,,,1 serving = 2 pieces
+Trader Joe's Mini Chicken Tacos,9,19,2,9,79,gm,FALSE,20,gm,each,79g = 4 mini tacos
+Trader Joe's Monterey Jack Cheese Stick,7,0,0,5,24,gm,FALSE,24,gm,each,24g = 1 stick
+Trader Joe's Muenster Cheese,9,1,0,7,1,oz,FALSE,,,,
+Trader Joe's Neopolitan Puffs Cereal,1.5,27,4,6,40,gm,FALSE,,,,
+Trader Joe's Organic 3 Cheese Pizza,9,42,3,16,126,gm,FALSE,378,gm,each,126g = 1/3 pizza
+Trader Joe's Organic Beef Broth,0,1,0,2,8,fl oz,FALSE,,,,Fluid ounces
+Trader Joe's Organic Black Beans,0,19,4,7,135,gm,FALSE,,,,
+Trader Joe's Organic Boneless Skinless Chicken Breast,3,0,0,25,4,oz,FALSE,,,,
+Trader Joe's Organic Concord Grape Jelly,0,12,0,0,20,gm,FALSE,20,gm,tbsp,20g = 1 tablespoon
+Trader Joe's Organic Midnight Moo,0,25,0,1,38,gm,FALSE,,,,
+"Trader Joe's Organic Non-Fat Yogurt, French Vanilla",0,27,0,9,227,gm,FALSE,,,,
+Trader Joe's Organic Raisin Bran Clusters,3,41,9,5,55,gm,FALSE,,,,
+Trader Joe's Organic Shells and White Cheddar,3.5,47,2,10,71,gm,FALSE,,,,2.5 Servings per container
+Trader Joe's Organic Soft White Bread,2,21,0.5,3,40,gm,FALSE,40,gm,each,40g = 1 slice
+Trader Joe's O's,2,20,3,3,28,gm,FALSE,,,,
+Trader Joe's Oven Ready Breaded Cod Fillets,11,31,1,15,149,gm,FALSE,75,gm,each,149g = 2 pieces
+Trader Joe's Panettone French Toast,8,40,2,7,113,gm,FALSE,113,gm,each,113g = 1 slice
+Trader Joe's Part Skim Mozzarella,6,1,0,8,1,oz,FALSE,,,,
+Trader Joe's Part Skim Shredded Mozzarella,6,1,0,8,28,gm,FALSE,,,,
+Trader Joe's Pesto Alla Genovese,26,3,0,3,60,gm,FALSE,,,,
+Trader Joe's Pizza Margherita,12,45,3,15,140,gm,FALSE,420,gm,each,140g = 1/3 pizza
+Trader Joe's Premium Angus Beef Filet Mignon Steak,21,0,0,22,4,oz,FALSE,4,oz,each,1 serving = 4 oz
+Trader Joe's Premium Milk & Dark Chocolate Covered Almonds,15,19,3,4,40,gm,FALSE,4,gm,each,4g = 1 almond
+Trader Joe's Pumpkin Pie,16,62,1,6,128,gm,FALSE,,,,
+Trader Joe's Pure Maple Syrup,0,52,0,0,60,gm,FALSE,,,,
+Trader Joe's Quinoa and Black Bean Infused Tortilla Chips,7,18,2,2,1,oz,FALSE,,,,
+Trader Joe's Raspberry Preserves,0,13,1,0,20,gm,FALSE,20,gm,tbsp,20g = 1 tablespoon
+Trader Joe's Reduced Carb Whole Wheat Flour Tortillas,1.5,10,7,4,28,gm,FALSE,28,gm,each,28g = 1 tortilla
+Trader Joe's Reduced Guilt Baked Ziti,7,55,3,12,241,gm,FALSE,,,,241g = full container
+Trader Joe's Rice and Orzo Pilaf Mix ,1.5,51,2,7,68,gm,FALSE,,,,
+Trader Joe's Shaved Beef Steak,8,0,0,23,4,oz,FALSE,,,,4 oz. uncooked
+Trader Joe's Shredded 3 Cheese Blend,8,0,0,7,28,gm,FALSE,,,,
+Trader Joe's Shredded Sharp Cheddar Cheese,9,0,0,7,28,gm,FALSE,,,,
+Trader Joe's Soft Whole Wheat Bread,2,15,2,4,38,gm,FALSE,38,gm,each,1 slice = 38 g
+Trader Joe's Sriracha and Roasted Garlic Barbecue Sauce,0,12,0,0,34,gm,FALSE,17,gm,tbsp,34g = 2 tbsp
+Trader Joe's Sublime Ice Cream Sandwiches,21,60,2,5,1,each,FALSE,,,,1 serving = 1 sandwich
+Trader Joe's Taco Shells,7,14,1,2,27,gm,FALSE,13,gm,each,27g = 2 shells
+Trader Joe's Tomato Basil Marinara Sauce,2.5,8,2,1,113,gm,FALSE,,,,
+Trader Joe's Trois Chocolats Espresso,2.5,24,2,2,30,gm,FALSE,,,,
+Trader Joe's Trois Chocolats Salted Caramel,2.5,23,2,2,30,gm,FALSE,,,,
+Trader Joe's Trois Chocolats Winter Spice,2.5,24,2,2,30,gm,FALSE,,,,
+Trader Joe's Truffle Brownie Baking Mix,2.5,22,1,1,28,gm,FALSE,,,,
+Trader Joe's Turkey Meatballs,5,5,2,12,71,gm,FALSE,35.5,gm,each,2 Meatballs Per Serving
+Trader Joe's Tuscan Pane,0,25,0.5,5,57,gm,FALSE,,,,
+Trader Joe's Ultra Chocolate Ice Cream,16,24,2,4,105,gm,FALSE,,,,
+Trader Joe's Uncooked Grass Fed Angus Beef Burgers,23,0,0,19,4,oz,FALSE,,,,
+Trader Joe's White Cheddar Corn Puffs,5,20,0,2,28,gm,FALSE,,,,
+Trader Joe's Whole Wheat Hamburger Buns,2,18,2,5,43,gm,FALSE,43,gm,each,43g = 1 bun
+Trader Joe's Whole Wheat Hot Dog Bun,1.5,19,2,5,1,each,FALSE,,,,1 serving = 1 hot dog bun
+Treasure Mills School Safe Chocolate Cupcake,11,39,1,2,75,gm,FALSE,25,gm,each,75g = 3 cakes
+Trickling Springs Chocolate Milk,8,26,1,8,253,gm,FALSE,,,,
+TruRoots Multigrain Roasted Garlic Pilaf,2,54,4,7,2.5,oz,FALSE,,,,
+Tumaro's Low-in-Carb Ancient Grain Wrap,2,13,7,5,40,gm,FALSE,40,gm,each,40g = 1 wrap
+Turkey Apple and Brie Sandwich,12.4,65.3,12.4,31.5,1,gm,FALSE,,,,
+Turkey BLT Wrap,10,38,8,9,1,gm,FALSE,,,,
+Turkey Gravy,5,12,1,6,238,gm,FALSE,,,,
+"Turkey Hill Ice Cream, Raspberry Chocolate Chip",9,18,0,3,70,gm,FALSE,,,,
+Vanilla Ice Cream,7,16,0.5,2.3,66,gm,FALSE,132,gm,cup,66g = 1/2 cup
+Vanilla NonFat Frozen Yogurt,0.41,21.91,0,3.75,100,gm,FALSE,,,,
+Vantia Cherry Tomato Sauce,3.2,6,2,2,120,gm,FALSE,,,,
+Vermont Bread Company Potato Burger Buns,2,27,1,4,60,gm,FALSE,60,gm,each,60g = 1 bun
+Vermont Bread Company Potato Hot Dog Buns,2,25,1,4,57,gm,FALSE,57,gm,each,57g = 1 bun
+Vermont Bread Company Soft White Bread,1,17,0.5,3,34,gm,FALSE,34,gm,each,34g = 1 slice
+Vermont Bread Company Soft Whole Wheat Bread,2,16,2,4,38,gm,FALSE,38,gm,each,38g = 1 slice
+Vermont Bread Company Wheat Cinnamon Raisin Bread,0,17,2,3,31,gm,FALSE,31,gm,each,31g = 1 slice
+Vermont Bread Company Whole Wheat English Muffins,2,30,4,7,57,gm,FALSE,57,gm,each,57g = 1 muffin
+Wegman's 94/6 Ground Turkey,7,1,0,24,4,oz,FALSE,,,,
+Wegman's Angus Beef Chuck Roast,14,0,0,21,3,oz,FALSE,,,,
+Wegman's Basil Pesto Sauce,34,5,3,5,60,gm,FALSE,,,,
+Wegman's Brioche Bun,4.5,39,0,7,74,gm,FALSE,74,gm,each,74g = 1 roll
+Wegman's Burger Bar - American Classic Burger,52,51,0,56,383,gm,FALSE,383,gm,each,383g = 1 burger
+Wegman's Burger Bar - Maple Onion Bacon Burger,79,59,1,60,368,gm,FALSE,368,gm,each,368g = 1 burger
+"Wegman's Burger Bar - Milkshake, Large Chocolate",41,88,4,25,539,gm,FALSE,539,gm,each,539g = 1 shake
+"Wegman's Burger Bar - Milkshake, Large Vanilla",41,88,0,22,539,gm,FALSE,539,gm,each,539g = 1 shake
+"Wegman's Burger Bar - Milkshake, Small Chocolate",18,40,2,12,283,gm,FALSE,283,gm,each,283g = 1 shake
+"Wegman's Burger Bar - Milkshake, Small Vanilla",18,40,0,11,283,gm,FALSE,283,gm,each,283g = 1 shake
+Wegman's Burger Bar - Quarter Pound Cheeseburger,29,29,2,30,227,gm,FALSE,227,gm,each,227g = 1 burger
+Wegman's Burger Bar - Tuscan Fries,19,36,4,4,198,gm,FALSE,198,gm,each,198g = 1 order
+Wegman's Cavatappi,1,41,2,7,56,gm,FALSE,,,,
+Wegman's Cocoa Krispies Cereal,1.5,37,0.5,2,42,gm,FALSE,,,,
+"Wegmans Custard, Dish",12,26,1,6,113,gm,FALSE,,,,"113g = 1 small dish, 176g = regular dish, 227g = large dish"
+Wegman's Extra Lean Ground Turkey (99/1),1,0,0,26,4,oz,FALSE,,,,
+Wegman's Fat Free Vanilla Light Yogurt,0,18,0,7,227,gm,FALSE,,,,
+Wegman's Ground Turkey (94/6),7,1,0,24,112,gm,FALSE,,,,
+"Wegman's Meatloaf Mix (Ground Beef, Pork, Veal)",22,0,0,19,4,oz,FALSE,,,,
+Wegman's Muenster Cheese,6,1,0,5,21,gm,FALSE,,,,
+Wegman's Part Skim Mozzarella Cheese,6,1,0,8,30,gm,FALSE,,,,
+Wegman's Part Skim Ricotta Cheese,7,4,0.5,7,62,gm,FALSE,,,,
+Wegman's Shredded Sharp Cheddar,9,2,0,7,28,gm,FALSE,,,,
+Weight Watchers Coffee Cake,3.5,25,5,2,39,gm,FALSE,,,,
+Weight Watchers Roasted Carrots,2,9,2,1,116,gm,TRUE,116,gm,each,116g = 1 serving - http://www.kitchme.com/recipes/ww-roasted-carrots
+Welch's Concord Grape Jelly,0,13,0,0,20,gm,FALSE,20,gm,tbsp,20g = 1 tablespoon
+Whipped Cream,22,12,0,3.2,100,gm,FALSE,,,,
+Whole Foods 365 Organic Concord Grape Jelly,0,13,0,0,20,gm,FALSE,,,,
+Wholesome Organic Pancake Syrup,0,66,0,0,0.25,cup,FALSE,4,each,cup,1 serving = 1/4 cup
+Wholesome Pantry Creamy Salted Peanut Butter,15,7,3,8,32,gm,FALSE,,,,
+Wholesome Pantry Organic Black Beans,0,21,6,8,125.5478881,gm,FALSE,,,,439g in 1 can
+Wicked Spoon Alpine Vanilla Frozen Yogurt,0,22,0,3,4,oz,FALSE,,,,
+Wicked Spoon Apple Pie Frozen Yogurt,0,21,0,3,4,oz,FALSE,,,,
+Wicked Spoon Cappuccino Frozen Yogurt,0,21,0,4,4,oz,FALSE,,,,
+Wicked Spoon Classic Chocolate Frozen Yogurt,0,24,0,3,4,oz,FALSE,,,,
+Wicked Spoon Georgia Peach Frozen Yogurt,0,23,0,2,4,oz,FALSE,,,,
+Wicked Spoon Pom Raspberry Original Tart Frozen Yogurt,0,20,0,3,4,oz,FALSE,,,,
+Wicked Spoon Very Strawberry Frozen Yogurt,0,21,0,3,4,oz,FALSE,,,,
+Wonka Small Gobstoppers (3 pack),0,14,0,0,1,gm,FALSE,,,,
+Woops Macaron,2,7,0,1,1,each,FALSE,,,,1 serving = 1 cookie
+"Yasso Frozen Greek Yogurt, Black Raspberry Chip",2,16,0,5,62,gm,FALSE,62,gm,each,62g = 1 bar
+Yoplait Blueberry Blended Fat Free Greek Yogurt,0,22,0,11,5.3,oz,FALSE,,,,
+"Zinburger, Zinburger",33,35,0,49,1,gm,FALSE,,,,
+Snyder's of Hanover Mini Pretzels,1,35,1,4,42.5,gm,FALSE,,,,
+ShopRite Meatloaf Mix,22,0,0,19,112,gm,FALSE,,,,
+Maggio Part Skim Mozzarella,5,1,0,7,28,gm,FALSE,,,,
+Maggio Part Skim Ricotta,6,2,0,6,62,gm,FALSE,,,,
+Trader Joe's Cocoa Crunch Cereal,1,33,2,3,40,gm,FALSE,,,,
+Alexia Seasoned Waffle Cut Fries,7,21,2,2,84,gm,FALSE,,,,
+"Newman's Own Salad Dressing, Light Balsamic",4,2,0,0,30,gm,FALSE,,,,
+"Van Leeuwen Ice Cream, Chocolate",16,21,2,4,89,gm,FALSE,,,,
+Salmon,5.5,0,0,31.7,124,gm,TRUE,,,,https://www.verywellfit.com/salmon-nutrition-facts-calories-and-health-benefits-4106641
+Fingerling Potatoes,0,17.5,2.1,2.8,85,gm,TRUE,,,,https://www.fitbit.com/foods/Fingerling+Potatoes/82973
+Garlic Knots,2,14,1,3,1,gm,TRUE,,,,"https://www.eatthismuch.com/food/nutrition/garlic-knots,199272/"
+Wegman's Grated Pecorino Romano,1.5,0,0,1,5,gm,FALSE,,,,
+Chipotle Tortilla Chips,25,73,7,7,4,oz,FALSE,,,,
+A.M. Best Roast Beef & Cheddar on Ciabatta,18,50,3,37,285,gm,TRUE,,,,
+Galbani Part Skim Ricotta Cheese,4,6,0,5,62,gm,FALSE,,,,
+"Cheerios, Blueberry",1.5,21,2,2,27,gm,FALSE,,,,
+Paramount Panella Loaf,0,15,1,3,28,gm,FALSE,,,,
+Boston Market Turkey Breast Medallions & Stuffing,9,48,3,26,383,gm,FALSE,,,,
+Dove Eggs,9,17,2,2,29,gm,FALSE,7.25,gm,each,29g = 4 eggs
+Trader Joe’s Chocolate Covered Wafer Cookie,17,34,2,3,55,gm,FALSE,,,,
+"Puffins Cereal, Cinnamon",1,24,5,3,30,gm,FALSE,,,,
+"Wegman’s Almond Milk, Vanilla Unsweetened",2.5,1,0.5,1,240,gm,FALSE,,,,
+"Kashi Cereal, Organic Blueberry Clusters",2.5,42,3,4,52,gm,FALSE,,,,
+"Kashi Cereal, Warn Cinnamon Organic Oat",2.5,33,5,4,42,gm,FALSE,,,,
+"Wegman’s Almonds, Salted Roasted",15,5,3,6,28,gm,FALSE,,,,
+Trader Joe's Beef Meatball,20,5,1,11,71,gm,FALSE,35.5,gm,each,2 Meatballs Per Serving
+Fage Total 2% Yogurt,3.5,5,0,17,170,gm,FALSE,,,,
+"Cheese Ravioli, Buitoni",12,42,3,14,105,gm,TRUE,,,,https://www.buitoni.com/pasta-products/four-cheese-ravioli-9-oz/
+Trader Joe's Pork Gyoza Potstickers,6,32,2,10,140,gm,FALSE,,,,
+"White Rice, Raw",0.7,80,1.3,7,100,gm,FALSE,,,,
+Garlic Bread,10,25,1.5,4.9,59,gm,FALSE,,,,
+Double 0 Flour,0,21,1,4,30,gm,FALSE,120,gm,cup,30g = 1/4 cup
+"Rao's Homemade Sauce, Marinara",7,6,1,2,125,gm,FALSE,,,,
+Trader Joe's Quiche Lorraine,13,11,0,9,85,gm,FALSE,,,,4 servings per box
+"Basmati Rice, Raw",1.5,33,2,4,45,gm,FALSE,,,,
+Trader Joe's Submarine Sandwich Rolls,3,54,2,7,85,gm,FALSE,85,gm,each,85g = 1 roll
+Trader Joe's Mandarin Style Orange Chicken Bowl,12,84,6,28,369,gm,FALSE,369,gm,each,369g = 1 bowl
+Kaiser Roll,2.5,30,1.3,6,57,gm,FALSE,57,gm,each,57g = 1 kaiser roll
+Trader Joe's Nonfat Plain Greek Yogurt,0,7,0,17,170,gm,FALSE,,,,
+Galbani Part Skim Mozzarella Cheese,6,1,0,6,30,gm,FALSE,,,,
+Bob's Red Mill Egg Replacer,0,8,1,0,10,gm,FALSE,,,,10g = 1 egg (with 2 tbsp water)
+King Arthur Bread Flour,0,22,0.5,4,30,gm,FALSE,,,,
+Trader Joe's Uncooked Ground Buffalo Burgers,30,0,0,25,150,gm,FALSE,,,,
+"Jeni's Ice Cream, Darkest Chocolate",16,37,3,5,130,gm,FALSE,,,,
+Trader Joe's Carnitas,14,1,0,18,85,gm,FALSE,,,,
+Ground Beef (93/7),8,0,0,24,112,gm,FALSE,,,,
+Trader Joe's Flour Tortillas,4,24,1,4,48,gm,FALSE,,,,
+Galbani Whole Milk Mozzarella Cheese,7,0.5,0,6,30,gm,FALSE,,,,

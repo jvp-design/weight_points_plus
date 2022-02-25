@@ -1,0 +1,25 @@
+# Use root/example as user/password credentials
+version: "3.1"
+
+volumes:
+  local_pg_data: {}
+#  local_mongo_data_backups: {}
+
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - local_pg_data:/var/lib/postgresql/data:Z
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=weight_points_plus
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    container_name: mailhog_weight_points_plus
+    ports:
+      - "8025:8025"
+      - "1025:1025"
