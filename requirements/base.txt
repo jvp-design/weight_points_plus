@@ -13,5 +13,7 @@ django-allauth==0.48.0  # https://github.com/pennersr/django-allauth
 django-crispy-forms==1.14.0  # https://github.com/django-crispy-forms/django-crispy-forms
 crispy-bootstrap5==0.6  # https://github.com/django-crispy-forms/crispy-bootstrap5
 django-redis==5.2.0  # https://github.com/jazzband/django-redis
+django-filter==2.4.0  # https://github.com/carltongibson/django-filter
 
 # Misc
+pydantic==1.9.0

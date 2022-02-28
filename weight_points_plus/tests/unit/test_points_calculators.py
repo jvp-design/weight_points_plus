@@ -3,10 +3,8 @@ from dataclasses import dataclass
 
 import pytest
 
-from weight_points_plus.food.models import Food, SERVING_SIZE_CHOICES
-from weight_points_plus.users.models import User
+from weight_points_plus.food.models import Food
 from weight_points_plus.utils.points_calculators import (
-    calculate_daily_points,
     check_valid_serving_unit,
     convert_weight_and_volume,
     get_multiplicative_factor,

@@ -5,6 +5,6 @@
 {% block content %}
   {{ day.get_day_of_week_display }}
   {% for meal in day.meal_set.all %}
-    {{ meal }}
+    {% include 'snippets/meal.html' %}
   {% endfor %}
 {% endblock content %}

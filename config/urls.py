@@ -17,6 +17,10 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     path("day/", include("weight_points_plus.day.urls", namespace="day")),
+    path(
+        "food/", include("weight_points_plus.foods_recipes.food.urls", namespace="food")
+    ),
+    path("meal/", include("weight_points_plus.meal.urls", namespace="meal")),
     path("__reload__/", include("django_browser_reload.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

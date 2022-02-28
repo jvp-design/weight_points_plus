@@ -1,12 +1,10 @@
 import csv
-import os
 import random
 from pathlib import Path
 
-from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 
-from weight_points_plus.food.models import Food
+from weight_points_plus.foods_recipes.models import FoodItem
 from weight_points_plus.utils.points_calculators import calculate_food_points
 
 User = get_user_model()
@@ -14,7 +12,7 @@ User = get_user_model()
 
 def grab_and_parse_foods(
     filename: Path, food_names: list[str], users: list[User]
-) -> tuple[list[Food], list[str]]:
+) -> tuple[list[FoodItem], list[str]]:
     foods = []
     excluded_foods = []
     with open(filename, "r", encoding="utf-8") as f:
@@ -54,6 +52,8 @@ def grab_and_parse_foods(
                         notes=row_item[9],
                     )
 
+                food_dict["food_item_type"] = "food"
+
                 if (
                     food_dict.get("fat") is None
                     or food_dict.get("fiber") is None
@@ -74,7 +74,7 @@ def grab_and_parse_foods(
                         food_dict["conversion_weight_to_volume"]
                     )
                 # try:
-                food_item = Food(**food_dict)
+                food_item = FoodItem(**food_dict)
                 # except ValidationError:
                 #     print(food_dict)
                 #     break
@@ -93,29 +93,28 @@ def grab_and_parse_foods(
     return foods, excluded_foods
 
 
-class Command(BaseCommand):
-    help = "Delete and re-create all foods in the database"
+def seed_foods(
+    path: Path, restaurant_foods: bool = False, delete_foods: bool = False
+) -> None:
+    if delete_foods:
+        qs = FoodItem.objects.filter(food_item_type="food")
+        if not restaurant_foods:
+            qs = qs.filter(restaurant__isnull=True)
+        qs.delete()
+    users = User.objects.all()
+    jeff = users.get(email="jeffvp@pm.me")
+    # food_names = FoodItem.objects.all().values_list("name")
+    food_names = []
+    foods, excluded_foods = grab_and_parse_foods(path, food_names, users)
+    for food in foods:
+        if food.user_created and food.user == jeff:
+            print("user_created")
+            print(food.name)
 
-    def handle(self, *args, **options):
-        Food.objects.all().delete()
-        users = User.objects.all()
-        food_names = Food.objects.all().values_list("name")
-        base = Path(os.path.dirname(os.path.realpath(__file__)))
-        foods, excluded_foods = grab_and_parse_foods(
-            base / "../../../fixtures/food_seed.csv", food_names, users
-        )
-        x, y = grab_and_parse_foods(
-            base / "../../../fixtures/free_foods_seed.csv", food_names, users
-        )
-        xx, yy = grab_and_parse_foods(
-            base / "../../../fixtures/restaurant_foods_cleaned.csv", food_names, users
-        )
-        foods += [*x, *xx]
-        excluded_foods += [*y, *yy]
-        if len(foods) > 0:
-            Food.objects.bulk_create(foods)
-        print()
-        print()
-        print("excluded foods")
-        for food in excluded_foods:
-            print(food)
+    if len(foods) > 0:
+        FoodItem.objects.bulk_create(foods)
+    print()
+    print()
+    print("excluded foods")
+    for food in excluded_foods:
+        print(food)

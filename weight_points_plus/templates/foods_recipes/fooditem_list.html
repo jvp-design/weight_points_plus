@@ -1,0 +1,36 @@
+{# fooditem_list.html #}
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <ul>
+    {% for food in fooditem_list %}
+      <li>
+        <a href="{% url 'food:detail' food.pk %}">{{ food }}</a>
+        {% if food.user == request.user %}->
+          <a href="{% url 'food:update' food.pk %}">Edit</a>
+          <a href="{% url 'food:delete' food.pk %}">Delete</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+        <a href="?page=1{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}">previous</a>
+      {% endif %}
+
+      <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </span>
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}">last &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+{% endblock content %}

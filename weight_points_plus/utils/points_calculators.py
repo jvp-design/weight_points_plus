@@ -1,7 +1,9 @@
 from typing import Optional
 
-from weight_points_plus.food.models import (
-    Food,
+from weight_points_plus.foods_recipes.models import (
+    FoodItem,
+)
+from weight_points_plus.utils.misc import (
     SERVING_SIZE_CHOICES,
     is_weight_serving,
     is_volume_serving,
@@ -93,7 +95,7 @@ def calculate_daily_points(user: User) -> int:
     return daily_points
 
 
-def points_formula(food: Food, multiplier: float = 1.0) -> int:
+def points_formula(food: FoodItem, multiplier: float = 1.0) -> int:
     return max(
         round(
             (
@@ -111,7 +113,7 @@ def points_formula(food: Food, multiplier: float = 1.0) -> int:
     )
 
 
-def check_valid_serving_unit(food: Food, serving_unit: str) -> bool:
+def check_valid_serving_unit(food: FoodItem, serving_unit: str) -> bool:
     if serving_unit == "each":
         if food.serving_unit == "each":
             return True
@@ -162,7 +164,7 @@ def check_valid_serving_unit(food: Food, serving_unit: str) -> bool:
 
 
 def convert_weight_and_volume(
-    food: Food, serving_size: float, serving_unit: str
+    food: FoodItem, serving_size: float, serving_unit: str
 ) -> float:
     if food.conversion_weight_to_volume is None:
         raise ValueError(
@@ -202,7 +204,7 @@ def convert_weight_and_volume(
 
 
 def get_multiplicative_factor(
-    food: Food,
+    food: FoodItem,
     serving_size: Optional[float] = None,
     serving_unit: Optional[str] = None,
 ) -> float:
@@ -335,7 +337,7 @@ def get_multiplicative_factor(
 
 
 def calculate_food_points(
-    food: Food,
+    food: FoodItem,
     serving_size: Optional[float] = None,
     serving_unit: Optional[str] = None,
 ) -> Optional[int]:
