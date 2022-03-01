@@ -3,7 +3,7 @@
 {% block title %}{{ view.kwargs.date_val }}{% endblock title %}
 
 {% block content %}
-  {{ day.get_day_of_week_display }}
+  {{ day.get_day_of_week_display }}: {{ day.date }}. Daily points used: {{ day.points_used }}, remaining: {{ day.points_remaining }}
   {% for meal in day.meal_set.all %}
     {% include 'snippets/meal.html' %}
   {% endfor %}

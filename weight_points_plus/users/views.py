@@ -40,7 +40,7 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         assert (
             self.request.user.is_authenticated
         )  # for mypy to know that the user is authenticated
-        return self.request.user.get_absolute_url()
+        return reverse("users:redirect")
 
     def get_object(self):
         return self.request.user

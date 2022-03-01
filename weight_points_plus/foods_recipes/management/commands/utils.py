@@ -95,26 +95,18 @@ def grab_and_parse_foods(
 
 def seed_foods(
     path: Path, restaurant_foods: bool = False, delete_foods: bool = False
-) -> None:
+) -> tuple[int, list[str]]:
     if delete_foods:
         qs = FoodItem.objects.filter(food_item_type="food")
         if not restaurant_foods:
             qs = qs.filter(restaurant__isnull=True)
         qs.delete()
     users = User.objects.all()
-    jeff = users.get(email="jeffvp@pm.me")
     # food_names = FoodItem.objects.all().values_list("name")
     food_names = []
     foods, excluded_foods = grab_and_parse_foods(path, food_names, users)
-    for food in foods:
-        if food.user_created and food.user == jeff:
-            print("user_created")
-            print(food.name)
 
     if len(foods) > 0:
         FoodItem.objects.bulk_create(foods)
-    print()
-    print()
-    print("excluded foods")
-    for food in excluded_foods:
-        print(food)
+
+    return len(foods), excluded_foods
