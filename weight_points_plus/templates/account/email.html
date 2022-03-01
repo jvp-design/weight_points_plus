@@ -6,9 +6,11 @@
 
 {% block head_title %}{% translate "Account" %}{% endblock %}
 
-{% block inner %}
-<h1>{% translate "E-mail Addresses" %}</h1>
+{% block card_title %}
+{% translate "E-mail Addresses" %}
+{% endblock card_title %}
 
+{% block card_body %}
 {% if user.emailaddress_set.all %}
 <p>{% translate 'The following e-mail addresses are associated with your account:' %}</p>
 
@@ -55,6 +57,11 @@
         {{ form|crispy }}
         <button class="btn btn-primary" name="action_add" type="submit">{% translate "Add E-mail" %}</button>
     </form>
+
+{% endblock card_body %}
+
+{% block inner %}
+<h1></h1>
 
 {% endblock %}
 

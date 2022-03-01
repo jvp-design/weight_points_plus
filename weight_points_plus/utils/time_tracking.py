@@ -52,11 +52,10 @@ def backfill_weeks(user: User) -> None:
     count = 0
     today = date.today()
     if latest_date < today:
-        latest_date = create_week(
-            latest_date + timedelta(days=1),
-            user,
-            (user.weigh_in_day - latest_date.weekday() - 1) % 7,
-        )
+        num_days = (user.weigh_in_day - latest_date.weekday() - 1) % 7
+        if num_days == 0:
+            num_days = 7
+        latest_date = create_week(latest_date + timedelta(days=1), user, num_days)
         while latest_date < today and count < 52:
             latest_date = create_week(latest_date + timedelta(days=1), user)
             count += 1

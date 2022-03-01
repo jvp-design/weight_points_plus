@@ -278,7 +278,9 @@ ACCOUNT_FORMS = {"signup": "weight_points_plus.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "weight_points_plus.users.adapters.SocialAccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/forms.html
 SOCIALACCOUNT_FORMS = {"signup": "weight_points_plus.users.forms.UserSocialSignupForm"}
-
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_USERNAME_REQUIRED = False
 
 # Your stuff...

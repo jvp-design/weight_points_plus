@@ -15,7 +15,6 @@ class DayDetailView(UserHasAllInfoMixin, DetailView):
     def get_object(self) -> Day:
         queryset = self.get_queryset()
         try:
-            blah = queryset.get(date=self.kwargs.get("date_val"))
             return queryset.get(date=self.kwargs.get("date_val"))
         except Day.DoesNotExist:
             backfill_weeks(self.request.user)

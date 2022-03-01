@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-{#    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">#}
+    {#    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">#}
     {% tailwind_css %}
     <!-- This file stores project-specific CSS -->
     <link href="{% static 'css/nav.css' %}" rel="stylesheet">
@@ -30,7 +30,7 @@
   {# Placed at the top of the document so pages load faster with defer #}
   {% block javascript %}
     <!-- Your stuff: Third-party javascript libraries go here -->
-{#    <script src="//unpkg.com/alpinejs" defer></script>#}
+    {#    <script src="//unpkg.com/alpinejs" defer></script>#}
     <!-- place project specific Javascript in this file -->
     <script defer src="{% static 'js/project.js' %}"></script>
     <script defer src="{% static 'js/nav.js' %}"></script>
@@ -71,8 +71,12 @@
           </div>
         </div>
         <div class="hidden md:flex md:items-center md:space-x-6">
-          <a href="{% url 'account_login' %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'Sign In' %}</a>
-          <a href="{% url 'account_signup' %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'Register' %}</a>
+          {% if not user.is_authenticated %}
+            <a href="{% url 'account_login' %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'Sign In' %}</a>
+            <a href="{% url 'account_signup' %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'Register' %}</a>
+          {% else %}
+            <a href="{% url 'account_logout' %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'Log Out' %}</a>
+          {% endif %}
         </div>
       </nav>
     </div>
@@ -102,18 +106,33 @@
 
             <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Company</a>
           </div>
-          <div class="mt-6 px-5">
-            <p class="text-center text-base font-medium text-gray-500"><a href="{% url 'account_signup' %}" class="text-gray-900 hover:underline">{% translate 'Register' %}</a></p>
-          </div>
-          <div class="mt-6 px-5">
-            <p class="text-center text-base font-medium text-gray-500">Existing customer? <a href="{% url 'account_login' %}" class="text-gray-900 hover:underline">{% translate 'Sign In' %}</a></p>
-          </div>
+          {% if not user.is_authenticated %}
+            <div class="mt-6 px-5">
+              <p class="text-center text-base font-medium text-gray-500"><a href="{% url 'account_signup' %}" class="text-gray-900 hover:underline">{% translate 'Register' %}</a></p>
+            </div>
+            <div class="mt-6 px-5">
+              <p class="text-center text-base font-medium text-gray-500">Existing customer? <a href="{% url 'account_login' %}" class="text-gray-900 hover:underline">{% translate 'Sign In' %}</a></p>
+            </div>
+          {% else %}
+            <div class="mt-6 px-5">
+              <p class="text-center text-base font-medium text-gray-500"><a href="{% url 'account_logout' %}" class="text-gray-900 hover:underline">{% translate 'Log Out' %}</a></p>
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>
   </header>
 
   <main>
+    {% block messages %}
+      {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endblock messages %}
     <!-- More main page content here... -->
     {% block content %}
 

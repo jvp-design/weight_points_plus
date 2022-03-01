@@ -1,7 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView
 
@@ -52,7 +54,18 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
-        return reverse("users:detail", kwargs={"username": self.request.user.username})
+        if self.request.user.has_input_all_fields:
+            now = timezone.now().date()
+            return reverse(
+                "day:detail",
+                kwargs={
+                    "date_val": f"{now.year}-{str(now.month).zfill(2)}-{str(now.day).zfill(2)}"
+                },
+            )
+        messages.add_message(
+            self.request, messages.INFO, "Please fill in your preliminary information."
+        )
+        return reverse("users:update")
 
 
 user_redirect_view = UserRedirectView.as_view()
