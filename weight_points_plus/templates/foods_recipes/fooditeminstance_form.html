@@ -6,6 +6,11 @@
   {% csrf_token %}
     <input type="hidden" value="{{ food }}" name="food">
   {{ form.as_p }}
+    {% if object %}
+    <input type="submit" value="Edit Food">
+  {% else %}
     <input type="submit" value="Add Food">
+
+  {% endif %}
   </form>
 {% endblock content %}

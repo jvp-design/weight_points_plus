@@ -7,6 +7,7 @@
   {% for item in meal.fooditeminstance_set.all %}
     <div>
       {{ item.food.name }}, {{ item.serving_size }}{{ item.serving_unit.lower }} -> {{ item.points }}
+      <a href="{% url 'meal:update-food-item' meal.pk item.pk %}">Edit</a>
     </div>
   {% endfor %}
 </div>

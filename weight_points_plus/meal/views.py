@@ -3,13 +3,12 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
 from weight_points_plus.foods_recipes.models import FoodItem, FoodItemInstance
 from weight_points_plus.foods_recipes.utils import FoodItemListView
 from weight_points_plus.meal.models import Meal
 from weight_points_plus.utils.misc import (
-    SERVING_SIZE_CHOICES,
     is_weight_serving,
     is_volume_serving,
 )
@@ -30,60 +29,9 @@ class MealFoodListView(FoodItemListView):
 meal_food_list_view = MealFoodListView.as_view()
 
 
-class MealFoodAddView(CreateView):
+class BaseMealFoodEditView:
     model = FoodItemInstance
     fields = ["serving_size", "serving_unit"]
-    food = None
-    choices = None
-
-    def __init__(self):
-        super().__init__()
-
-    def get_queryset(self):
-        return FoodItem.objects.filter(
-            Q(user_created=False) | Q(user=self.request.user)
-        )
-
-    def get_food(self):
-        return get_object_or_404(self.get_queryset(), pk=self.request.GET.get("food"))
-
-    def post(self, request, pk=None, *args, **kwargs):
-        form = self.get_form()
-        qs = Meal.objects.filter(user=request.user)
-        meal = get_object_or_404(qs, pk=pk)
-        if form.is_valid():
-            food = self.get_food()
-            if len(meal.fooditeminstance_set.filter(food=food)) > 0:
-                messages.add_message(
-                    request,
-                    messages.ERROR,
-                    "That food is already in the meal. Please update it instead of adding it again.",
-                )
-                return HttpResponseRedirect(
-                    reverse("day:detail", kwargs={"date_val": meal.day.date})
-                )
-
-            try:
-                item = FoodItemInstance.objects.get(
-                    food=food,
-                    serving_unit=request.POST.get("serving_unit"),
-                    serving_size=request.POST.get("serving_size"),
-                )
-            except FoodItemInstance.DoesNotExist:
-                item = form.save(commit=False)
-                item.points = calculate_food_points(
-                    food,
-                    item.serving_size,
-                    item.serving_unit,
-                )
-                item.food = food
-                item.save()
-            item.meal.add(meal)
-            return HttpResponseRedirect(
-                reverse("day:detail", kwargs={"date_val": meal.day.date})
-            )
-        else:
-            return self.form_invalid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -123,4 +71,96 @@ class MealFoodAddView(CreateView):
         return form
 
 
+class MealFoodAddView(BaseMealFoodEditView, CreateView):
+    def get_queryset(self):
+        return FoodItem.objects.filter(
+            Q(user_created=False) | Q(user=self.request.user)
+        )
+
+    def get_food(self):
+        return get_object_or_404(self.get_queryset(), pk=self.request.GET.get("food"))
+
+    def post(self, request, meal_pk=None, *args, **kwargs):
+        form = self.get_form()
+        qs = Meal.objects.filter(user=request.user)
+        meal = get_object_or_404(qs, pk=meal_pk)
+        if form.is_valid():
+            food = self.get_food()
+            if len(meal.fooditeminstance_set.filter(food=food)) > 0:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    "That food is already in the meal. Please update it instead of adding it again.",
+                )
+                return HttpResponseRedirect(
+                    reverse("day:detail", kwargs={"date_val": meal.day.date})
+                )
+
+            try:
+                item = FoodItemInstance.objects.get(
+                    food=food,
+                    serving_unit=request.POST.get("serving_unit"),
+                    serving_size=request.POST.get("serving_size"),
+                )
+            except FoodItemInstance.DoesNotExist:
+                item = form.save(commit=False)
+                item.points = calculate_food_points(
+                    food,
+                    item.serving_size,
+                    item.serving_unit,
+                )
+                item.food = food
+                item.save()
+            item.meal.add(meal)
+            return HttpResponseRedirect(
+                reverse("day:detail", kwargs={"date_val": meal.day.date})
+            )
+        else:
+            return self.form_invalid(form)
+
+
 meal_food_add_view = MealFoodAddView.as_view()
+
+
+class MealFoodUpdateView(BaseMealFoodEditView, UpdateView):
+    model = FoodItemInstance
+    fields = ["serving_unit", "serving_size"]
+
+    def get_food(self):
+        food_item = get_object_or_404(self.get_queryset(), pk=self.kwargs.get("pk"))
+        return food_item.food
+
+    def post(self, request, meal_pk=None, *args, **kwargs):
+        form = self.get_form()
+        qs = Meal.objects.filter(user=request.user)
+        meal = get_object_or_404(qs, pk=meal_pk)
+        obj = self.get_object()
+        obj.meal.remove(meal)
+        if form.is_valid():
+            food = obj.food
+            try:
+                item = FoodItemInstance.objects.get(
+                    food=food,
+                    serving_unit=request.POST.get("serving_unit"),
+                    serving_size=request.POST.get("serving_size"),
+                )
+            except FoodItemInstance.DoesNotExist:
+                item = form.save(commit=False)
+                item.points = calculate_food_points(
+                    food,
+                    item.serving_size,
+                    item.serving_unit,
+                )
+                item.food = food
+                item.save()
+            item.meal.add(meal)
+            if len(obj.meal.all()) == 0:
+                obj.delete()
+            return HttpResponseRedirect(
+                reverse("day:detail", kwargs={"date_val": meal.day.date})
+            )
+        else:
+            return self.form_invalid(form)
+
+
+meal_food_update_view = MealFoodUpdateView.as_view()
