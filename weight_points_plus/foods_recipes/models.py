@@ -59,3 +59,6 @@ class FoodItemInstance(models.Model):
 
     food = models.ForeignKey(FoodItem, on_delete=models.CASCADE)
     meal = models.ManyToManyField("meal.Meal", blank=True)
+
+    def __str__(self):
+        return f"{self.food.name}, {self.serving_size}{self.serving_unit}"

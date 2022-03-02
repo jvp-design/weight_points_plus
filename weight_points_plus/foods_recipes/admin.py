@@ -9,10 +9,7 @@ class FoodItemAdmin(admin.ModelAdmin):
 
 @admin.register(FoodItemInstance)
 class FoodItemInstanceAdmin(admin.ModelAdmin):
-    list_display = ["get_food", "get_meal"]
+    list_display = ["food_name", "serving_size", "serving_unit"]
 
-    def get_food(self, obj):
+    def food_name(self, obj):
         return obj.food.name
-
-    def get_meal(self, obj):
-        return obj.meal.name

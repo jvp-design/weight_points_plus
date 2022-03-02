@@ -27,6 +27,12 @@ def grab_and_parse_foods(
                     row_item.append(x)
                 user_created = row[7] == "TRUE"
                 if not is_restaurant:
+                    conversion_unit_weight = row_item[9]
+                    conversion_unit_volume = row_item[10]
+                    if conversion_unit_weight is not None:
+                        conversion_unit_weight = conversion_unit_weight.upper()
+                    if conversion_unit_volume is not None:
+                        conversion_unit_volume = conversion_unit_volume.upper()
                     food_dict = dict(
                         name=row_item[0],
                         fat=float(row_item[1]),
@@ -36,8 +42,8 @@ def grab_and_parse_foods(
                         serving_size=float(row_item[5]),
                         serving_unit=row_item[6].upper(),
                         conversion_weight_to_volume=row_item[8],
-                        conversion_unit_weight=row_item[9],
-                        conversion_unit_volume=row_item[10],
+                        conversion_unit_weight=conversion_unit_weight,
+                        conversion_unit_volume=conversion_unit_volume,
                         notes=row_item[11],
                     )
                 else:

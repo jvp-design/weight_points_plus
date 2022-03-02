@@ -1,5 +1,5 @@
 from django.db.models import QuerySet, Q
-from django.forms import forms
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -34,41 +34,51 @@ class MealFoodAddView(CreateView):
     model = FoodItemInstance
     fields = ["serving_size", "serving_unit"]
     food = None
+    choices = None
+
+    def __init__(self):
+        super().__init__()
+
+    def get_queryset(self):
+        return FoodItem.objects.filter(
+            Q(user_created=False) | Q(user=self.request.user)
+        )
+
+    def get_food(self):
+        return get_object_or_404(self.get_queryset(), pk=self.request.GET.get("food"))
 
     def post(self, request, pk=None, *args, **kwargs):
         form = self.get_form()
         qs = Meal.objects.filter(user=request.user)
         meal = get_object_or_404(qs, pk=pk)
         if form.is_valid():
-            """
+            food = self.get_food()
+            if len(meal.fooditeminstance_set.filter(food=food)) > 0:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    "That food is already in the meal. Please update it instead of adding it again.",
+                )
+                return HttpResponseRedirect(
+                    reverse("day:detail", kwargs={"date_val": meal.day.date})
+                )
 
-            What you'll need to do here is first check if the FoodItemInstance exists in the current meal.
-            If it does you'll need to update the serving size.
-            In order to do that you'll need to check if a FoodItemInstance with this new serving size exists in the current meal.
-            What you'll likely want to do is find all FoodItemInstances with the same serving_unit and meal.
-            Add up all of the serving sizes (including what you're passing here) and see if that exists.
-            If it does just use that. Otherwise you'll need to create it.
-
-            """
             try:
-                self.object = FoodItemInstance.objects.get(
-                    food=self.food,
-                    serving_size=request.POST.get("serving_size"),
+                item = FoodItemInstance.objects.get(
+                    food=food,
                     serving_unit=request.POST.get("serving_unit"),
+                    serving_size=request.POST.get("serving_size"),
                 )
-                if meal in self.object.meal.all():
-                    print("hello")
-                    pass
             except FoodItemInstance.DoesNotExist:
-                self.object = form.save(commit=False)
-                self.object.points = calculate_food_points(
-                    self.food,
-                    self.object.serving_size,
-                    self.object.serving_unit.lower(),
+                item = form.save(commit=False)
+                item.points = calculate_food_points(
+                    food,
+                    item.serving_size,
+                    item.serving_unit,
                 )
-                self.object.food = self.food
-                self.object.save()
-            self.object.meal.add(meal)
+                item.food = food
+                item.save()
+            item.meal.add(meal)
             return HttpResponseRedirect(
                 reverse("day:detail", kwargs={"date_val": meal.day.date})
             )
@@ -77,39 +87,39 @@ class MealFoodAddView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["food"] = self.food
+        context["food"] = self.get_food()
         return context
 
     def get_form_class(self):
-        qs = FoodItem.objects.filter(Q(user_created=False) | Q(user=self.request.user))
-        self.food = get_object_or_404(qs, pk=self.request.GET.get("food"))
         form = super().get_form_class()
-        if self.food.conversion_weight_to_volume is None:
-            if is_weight_serving(self.food.serving_unit):
-                choices = list(
-                    filter(
-                        lambda x: x[0] == "Weight",
-                        form.base_fields["serving_unit"].choices,
+        if self.request.method == "GET":
+            food = self.get_food()
+            if food.conversion_weight_to_volume is None:
+                if is_weight_serving(food.serving_unit):
+                    choices = list(
+                        filter(
+                            lambda x: x[0] == "Weight",
+                            form.base_fields["serving_unit"].choices,
+                        )
                     )
-                )
-            elif is_volume_serving(self.food.serving_unit):
-                choices = list(
-                    filter(
-                        lambda x: x[0] == "Volume",
-                        form.base_fields["serving_unit"].choices,
+                elif is_volume_serving(food.serving_unit):
+                    choices = list(
+                        filter(
+                            lambda x: x[0] == "Volume",
+                            form.base_fields["serving_unit"].choices,
+                        )
                     )
-                )
-            elif self.food.serving_unit == "each":
-                choices = list(
-                    filter(
-                        lambda x: x[0] == "EACH",
-                        form.base_fields["serving_unit"].choices,
+                elif food.serving_unit == "each":
+                    choices = list(
+                        filter(
+                            lambda x: x[0] == "EACH",
+                            form.base_fields["serving_unit"].choices,
+                        )
                     )
-                )
-            else:
-                choices = form.base_fields["serving_unit"].choices
-            form.base_fields["serving_unit"].choices = choices
-        form.base_fields["serving_unit"].initial = self.food.serving_unit
+                else:
+                    choices = form.base_fields["serving_unit"].choices
+                form.base_fields["serving_unit"].choices = choices
+            form.base_fields["serving_unit"].initial = food.serving_unit
         return form
 
 
