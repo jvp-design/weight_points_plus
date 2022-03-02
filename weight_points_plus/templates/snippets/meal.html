@@ -1,10 +1,12 @@
 <div>
   {{ meal.name }} - {{ meal.points }}
-  <form method="get" action="{% url 'meal:items-search' meal.name view.kwargs.date_val %}">
+  <form method="get" action="{% url 'meal:items-search' meal.pk %}">
     <input type="text" name="name">
     <button type="submit">Search</button>
   </form>
   {% for item in meal.fooditeminstance_set.all %}
-  {{ item.food.name }}, {{ item.serving_size }}{{ item.serving_unit.lower }} -> {{ item.points }}
+    <div>
+      {{ item.food.name }}, {{ item.serving_size }}{{ item.serving_unit.lower }} -> {{ item.points }}
+    </div>
   {% endfor %}
 </div>

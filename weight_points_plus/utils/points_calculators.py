@@ -7,22 +7,23 @@ from weight_points_plus.utils.misc import (
     SERVING_SIZE_CHOICES,
     is_weight_serving,
     is_volume_serving,
+    is_each_serving,
 )
 from weight_points_plus.users.models import User
 
 
 unit_dict = {
-    "gm": {"kg": 0.001, "oz": 0.0353, "lb": 0.0022, "gm": 1.0000},
-    "kg": {"gm": 1000.0, "oz": 35.274, "lb": 2.2046, "kg": 1.0000},
-    "oz": {"gm": 28.3495, "kg": 0.0283, "lb": 0.0625, "oz": 1.0000},
-    "lb": {"gm": 453.5924, "kg": 0.4536, "oz": 16.0, "lb": 1.0000},
+    "gm": {"kg": 0.001, "oz": 0.0353, "lb": 0.0022, "gm": 1.0},
+    "kg": {"gm": 1000.0, "oz": 35.274, "lb": 2.2046, "kg": 1.0},
+    "oz": {"gm": 28.3495, "kg": 0.0283, "lb": 0.0625, "oz": 1.0},
+    "lb": {"gm": 453.5924, "kg": 0.4536, "oz": 16.0, "lb": 1.0},
     "tsp": {
         "tbsp": 0.3333,
         "fl oz": 0.1667,
         "cup": 0.0208,
         "ml": 4.9289,
         "l": 0.0049,
-        "tsp": 1.0000,
+        "tsp": 1.0,
     },
     "tbsp": {
         "tsp": 3.0,
@@ -30,7 +31,7 @@ unit_dict = {
         "cup": 0.0625,
         "ml": 14.7868,
         "l": 0.0148,
-        "tbsp": 1.0000,
+        "tbsp": 1.0,
     },
     "fl oz": {
         "tsp": 6.0,
@@ -38,7 +39,7 @@ unit_dict = {
         "cup": 0.125,
         "ml": 29.5735,
         "l": 0.0296,
-        "fl oz": 1.0000,
+        "fl oz": 1.0,
     },
     "cup": {
         "tsp": 48.0,
@@ -46,7 +47,7 @@ unit_dict = {
         "fl oz": 8.0,
         "ml": 236.5882,
         "l": 0.2366,
-        "cup": 1.0000,
+        "cup": 1.0,
     },
     "ml": {
         "tsp": 0.2029,
@@ -54,7 +55,7 @@ unit_dict = {
         "fl oz": 0.0338,
         "cup": 0.0042,
         "l": 0.001,
-        "ml": 1.0000,
+        "ml": 1.0,
     },
     "l": {
         "tsp": 202.8841,
@@ -62,7 +63,59 @@ unit_dict = {
         "fl oz": 33.814,
         "cup": 4.2268,
         "ml": 1000.0,
-        "l": 1.0000,
+        "l": 1.0,
+    },
+    "GM": {"KG": 0.001, "OZ": 0.0353, "LB": 0.0022, "GM": 1.0},
+    "KG": {"GM": 1000.0, "OZ": 35.274, "LB": 2.2046, "KG": 1.0},
+    "OZ": {"GM": 28.3495, "KG": 0.0283, "LB": 0.0625, "OZ": 1.0},
+    "LB": {"GM": 453.5924, "KG": 0.4536, "OZ": 16.0, "LB": 1.0},
+    "TSP": {
+        "TBSP": 0.3333,
+        "FL OZ": 0.1667,
+        "CUP": 0.0208,
+        "ML": 4.9289,
+        "L": 0.0049,
+        "TSP": 1.0,
+    },
+    "TBSP": {
+        "TSP": 3.0,
+        "FL OZ": 0.5,
+        "CUP": 0.0625,
+        "ML": 14.7868,
+        "L": 0.0148,
+        "TBSP": 1.0,
+    },
+    "FL OZ": {
+        "TSP": 6.0,
+        "TBSP": 2.0,
+        "CUP": 0.125,
+        "ML": 29.5735,
+        "L": 0.0296,
+        "FL OZ": 1.0,
+    },
+    "CUP": {
+        "TSP": 48.0,
+        "TBSP": 16.0,
+        "FL OZ": 8.0,
+        "ML": 236.5882,
+        "L": 0.2366,
+        "CUP": 1.0,
+    },
+    "ML": {
+        "TSP": 0.2029,
+        "TBSP": 0.0676,
+        "FL OZ": 0.0338,
+        "CUP": 0.0042,
+        "L": 0.001,
+        "ML": 1.0,
+    },
+    "L": {
+        "TSP": 202.8841,
+        "TBSP": 67.628,
+        "FL OZ": 33.814,
+        "CUP": 4.2268,
+        "ML": 1000.0,
+        "L": 1.0,
     },
 }
 
@@ -114,18 +167,16 @@ def points_formula(food: FoodItem, multiplier: float = 1.0) -> int:
 
 
 def check_valid_serving_unit(food: FoodItem, serving_unit: str) -> bool:
-    if serving_unit == "each":
-        if food.serving_unit == "each":
+    if is_each_serving(serving_unit):
+        if is_each_serving(food.serving_unit):
             return True
         if food.conversion_weight_to_volume is not None:
-            if (
-                is_weight_serving(food.serving_unit)
-                and food.conversion_unit_volume == "each"
+            if is_weight_serving(food.serving_unit) and is_each_serving(
+                food.conversion_unit_volume
             ):
                 return True
-            if (
-                is_volume_serving(food.serving_unit)
-                and food.conversion_unit_weight == "each"
+            if is_volume_serving(food.serving_unit) and is_each_serving(
+                food.conversion_unit_weight
             ):
                 return True
 
@@ -135,13 +186,13 @@ def check_valid_serving_unit(food: FoodItem, serving_unit: str) -> bool:
         if (
             is_volume_serving(food.serving_unit)
             and food.conversion_weight_to_volume is not None
-            and food.conversion_unit_weight != "each"
+            and not is_each_serving(food.conversion_unit_weight)
         ):
             return True
         if (
-            food.serving_unit == "each"
+            is_each_serving(food.serving_unit)
             and food.conversion_weight_to_volume is not None
-            and food.conversion_unit_volume == "each"
+            and is_each_serving(food.conversion_unit_volume)
         ):
             return True
 
@@ -151,13 +202,13 @@ def check_valid_serving_unit(food: FoodItem, serving_unit: str) -> bool:
         if (
             is_weight_serving(food.serving_unit)
             and food.conversion_weight_to_volume is not None
-            and food.conversion_unit_volume != "each"
+            and not is_each_serving(food.conversion_unit_volume)
         ):
             return True
         if (
-            food.serving_unit == "each"
+            is_each_serving(food.serving_unit)
             and food.conversion_weight_to_volume is not None
-            and food.conversion_unit_weight == "each"
+            and is_each_serving(food.conversion_unit_weight)
         ):
             return True
     return False
@@ -170,7 +221,9 @@ def convert_weight_and_volume(
         raise ValueError(
             "Cannot convert weight and volume for a food with no conversion factor."
         )
-    if food.conversion_unit_weight == "each" or food.conversion_unit_volume == "each":
+    if is_each_serving(food.conversion_unit_weight) or is_each_serving(
+        food.conversion_unit_volume
+    ):
         raise ValueError(
             "The serving unit passed in is a different type to the food's serving unit, but one of the conversion "
             "factors is 'each'.  This should not have happened."
@@ -213,9 +266,9 @@ def get_multiplicative_factor(
         return 1
 
     # Check if 'each' is passed in
-    if serving_unit == "each":
+    if is_each_serving(serving_unit):
         # If the serving_unit is also each then this is simple
-        if food.serving_unit == "each":
+        if is_each_serving(food.serving_unit):
             return serving_size / food.serving_size
         # Otherwise, make sure that there is a conversion factor
         if food.conversion_weight_to_volume is None:
@@ -227,7 +280,7 @@ def get_multiplicative_factor(
         # you need to get the weight multiplier because you'll
         # convert from each to weight and then convert to
         # the food's base weight value
-        if food.conversion_unit_volume == "each":
+        if is_each_serving(food.conversion_unit_volume):
             multiplier = unit_dict[food.conversion_unit_weight][food.serving_unit]
             return (
                 multiplier
@@ -236,7 +289,7 @@ def get_multiplicative_factor(
                 / food.serving_size
             )
         # Vice-versa for volume
-        if food.conversion_unit_weight == "each":
+        if is_each_serving(food.conversion_unit_weight):
             multiplier = unit_dict[food.conversion_unit_volume][food.serving_unit]
             return (
                 multiplier
@@ -249,15 +302,14 @@ def get_multiplicative_factor(
         )
 
     # Instead, check if the food's serving unit is each
-    if food.serving_unit == "each":
+    if is_each_serving(food.serving_unit):
         # Again, return an error if there is no conversion factor
         if food.conversion_weight_to_volume is None:
             raise ValueError(
                 "The food's serving unit is set to 'each' but a conversion factor has not been set."
             )
-        if (
-            food.conversion_unit_volume == "each"
-            and food.conversion_unit_weight == "each"
+        if is_each_serving(food.conversion_unit_volume) and is_each_serving(
+            food.conversion_unit_weight
         ):
             raise ValueError(
                 "The volume and weight conversion units cannot both be 'each'."
@@ -265,7 +317,7 @@ def get_multiplicative_factor(
 
         # If the food's conversion_unit_volume is each then
         # you need to convert the passed in values (the weight) to base units
-        if food.conversion_unit_volume == "each":
+        if is_each_serving(food.conversion_unit_volume):
             if is_volume_serving(serving_unit):
                 raise ValueError(
                     "If the volume conversion unit is 'each' you cannot pass in volume as a serving unit"
@@ -277,7 +329,7 @@ def get_multiplicative_factor(
                 * serving_size
                 / food.serving_size
             )
-        if food.conversion_unit_weight == "each":
+        if is_each_serving(food.conversion_unit_weight):
             if is_weight_serving(serving_unit):
                 raise ValueError(
                     "If the weight conversion unit is 'each' you cannot pass in weight as a serving unit"
@@ -321,9 +373,8 @@ def get_multiplicative_factor(
     # to base units of both and use the conversion factor to get back
     # to the needed size
     if food.conversion_weight_to_volume is not None:
-        if (
-            food.conversion_unit_weight == "each"
-            or food.conversion_unit_volume == "each"
+        if is_each_serving(food.conversion_unit_weight) or is_each_serving(
+            food.conversion_unit_volume
         ):
             raise ValueError(
                 "You are trying to make a conversion where one of the conversion values is 'each', "

@@ -34,7 +34,7 @@ def grab_and_parse_foods(
                         fiber=float(row_item[3]),
                         protein=float(row_item[4]),
                         serving_size=float(row_item[5]),
-                        serving_unit=row_item[6],
+                        serving_unit=row_item[6].upper(),
                         conversion_weight_to_volume=row_item[8],
                         conversion_unit_weight=row_item[9],
                         conversion_unit_volume=row_item[10],
@@ -48,7 +48,7 @@ def grab_and_parse_foods(
                         fiber=row_item[5],
                         protein=row_item[6],
                         serving_size=row_item[7],
-                        serving_unit=row_item[8],
+                        serving_unit=row_item[8].upper(),
                         notes=row_item[9],
                     )
 
