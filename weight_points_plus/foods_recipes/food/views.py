@@ -11,7 +11,11 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
 
 from ..models import FoodItem
-from weight_points_plus.utils.mixins import UserIsOwnerMixin, UserCanViewMixin
+from weight_points_plus.utils.mixins import (
+    UserIsOwnerMixin,
+    UserCanViewMixin,
+    UserHasAllInfoMixin,
+)
 from weight_points_plus.utils.points_calculators import calculate_food_points
 from ..utils import FoodItemListView
 
@@ -38,7 +42,7 @@ class UserFoodListView(FoodItemListView):
 user_food_list_view = UserFoodListView.as_view()
 
 
-class FoodDetailView(UserCanViewMixin, DetailView):
+class FoodDetailView(UserHasAllInfoMixin, UserCanViewMixin, DetailView):
     model = FoodItem
 
 
@@ -74,21 +78,21 @@ class FoodInputView:
             return self.form_invalid(form)
 
 
-class FoodCreateView(FoodInputView, CreateView):
+class FoodCreateView(UserHasAllInfoMixin, FoodInputView, CreateView):
     pass
 
 
 food_create_view = FoodCreateView.as_view()
 
 
-class FoodUpdateView(FoodInputView, UserIsOwnerMixin, UpdateView):
+class FoodUpdateView(UserHasAllInfoMixin, FoodInputView, UserIsOwnerMixin, UpdateView):
     pass
 
 
 food_update_view = FoodUpdateView.as_view()
 
 
-class FoodDeleteView(DeleteView):
+class FoodDeleteView(UserHasAllInfoMixin, DeleteView):
     model = FoodItem
     success_url = reverse_lazy("food:list")
 

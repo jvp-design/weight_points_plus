@@ -13,15 +13,13 @@ class Day(models.Model):
 
     total_points = models.IntegerField()
     points_used = models.IntegerField(default=0)
+    points_remaining = models.IntegerField()
     weekly_points_used = models.IntegerField(default=0)
     day_of_week = models.IntegerField(choices=WeekdayChoices.choices)
     date = models.DateField()
     week = models.ForeignKey("week.Week", on_delete=models.CASCADE)
     user = models.ForeignKey("users.User", on_delete=models.CASCADE)
-
-    @property
-    def points_remaining(self) -> int:
-        return self.total_points - self.points_used
+    activity_points = models.IntegerField(default=0)
 
     class Meta:
         unique_together = ("user", "date")

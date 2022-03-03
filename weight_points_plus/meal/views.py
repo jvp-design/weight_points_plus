@@ -15,6 +15,7 @@ from weight_points_plus.utils.misc import (
     is_weight_serving,
     is_volume_serving,
 )
+from weight_points_plus.utils.mixins import UserHasAllInfoMixin
 from weight_points_plus.utils.points_calculators import calculate_food_points
 
 
@@ -79,7 +80,7 @@ class BaseMealFoodEditView:
         return form
 
 
-class MealFoodAddView(BaseMealFoodEditView, CreateView):
+class MealFoodAddView(UserHasAllInfoMixin, BaseMealFoodEditView, CreateView):
     def get_queryset(self):
         return FoodItem.objects.filter(
             Q(user_created=False) | Q(user=self.request.user)
@@ -132,10 +133,7 @@ class MealFoodAddView(BaseMealFoodEditView, CreateView):
 meal_food_add_view = MealFoodAddView.as_view()
 
 
-class MealFoodUpdateView(BaseMealFoodEditView, UpdateView):
-    model = FoodItemInstance
-    fields = ["serving_unit", "serving_size"]
-
+class MealFoodUpdateView(UserHasAllInfoMixin, BaseMealFoodEditView, UpdateView):
     def get_food(self):
         food_item = get_object_or_404(self.get_queryset(), pk=self.kwargs.get("pk"))
         return food_item.food
@@ -178,7 +176,7 @@ class MealFoodUpdateView(BaseMealFoodEditView, UpdateView):
 meal_food_update_view = MealFoodUpdateView.as_view()
 
 
-class MealFoodDeleteView(DeleteView):
+class MealFoodDeleteView(UserHasAllInfoMixin, DeleteView):
     model = FoodItemInstance
 
     def get(self, request, meal_pk=None, *args, **kwargs):

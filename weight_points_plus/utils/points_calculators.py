@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Union
 
 from pydantic import BaseModel
 
@@ -157,7 +157,9 @@ def calculate_daily_points(user: User) -> int:
     return daily_points
 
 
-def points_formula(food: FoodItem | NutritionItem, multiplier: float = 1.0) -> int:
+def points_formula(
+    food: Union[FoodItem, NutritionItem], multiplier: float = 1.0
+) -> int:
     return max(
         round(
             (

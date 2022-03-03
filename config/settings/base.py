@@ -87,6 +87,7 @@ LOCAL_APPS = [
     "weight_points_plus.day",
     "weight_points_plus.meal",
     "weight_points_plus.foods_recipes",
+    "weight_points_plus.activity",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

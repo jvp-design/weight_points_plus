@@ -1,12 +1,23 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
+from django.http import HttpResponseRedirect
+from django.urls import include, path, reverse
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
+
+class HomeView(TemplateView):
+    template_name = "pages/home.html"
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(reverse("day:today"))
+        return super().get(request, *args, **kwargs)
+
+
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path("", HomeView.as_view(), name="home"),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
@@ -21,6 +32,9 @@ urlpatterns = [
         "food/", include("weight_points_plus.foods_recipes.food.urls", namespace="food")
     ),
     path("meal/", include("weight_points_plus.meal.urls", namespace="meal")),
+    path(
+        "activity/", include("weight_points_plus.activity.urls", namespace="activity")
+    ),
     path("__reload__/", include("django_browser_reload.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

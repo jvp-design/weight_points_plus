@@ -1,0 +1,15 @@
+<div>
+  <h1>Activities</h1>
+    Add activity to day
+  <form method="get" action="{% url 'day:activity-list' day.date %}">
+    <input type="text" name="activity">
+    <input type="submit" value="Search">
+  </form>
+  {% for item in activities %}
+  <div>{{ item.activity.name }}: {{ item.level }}, {{ item.duration }} minutes -> {{ item.points }}
+    <a href="{% url 'day:activity-update' day.date item.id %}">Edit</a>
+    <a href="{% url 'day:activity-delete' day.date item.id %}">Remove</a>
+</div>
+  {% endfor %}
+
+</div>

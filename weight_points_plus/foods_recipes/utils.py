@@ -4,6 +4,7 @@ import django_filters
 from django_filters.views import FilterView
 
 from weight_points_plus.foods_recipes.models import FoodItem
+from weight_points_plus.utils.mixins import UserHasAllInfoMixin
 
 
 class FoodItemFilter(django_filters.FilterSet):
@@ -14,7 +15,7 @@ class FoodItemFilter(django_filters.FilterSet):
         fields = ["name"]
 
 
-class FoodItemListView(FilterView):
+class FoodItemListView(UserHasAllInfoMixin, FilterView):
     model = FoodItem
     paginate_by = 20
     filterset_class = FoodItemFilter

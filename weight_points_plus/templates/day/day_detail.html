@@ -3,18 +3,22 @@
 {% block title %}{{ day.date }}{% endblock title %}
 
 {% block content %}
+  <div>
+  Week: {{ day.week.start_date }} -> weekly points remaining: {{ day.week.weekly_points_remaining }}
+  </div>
   <div class="flex">
     <span>{{ day.get_day_of_week_display }}: {{ day.date }}. Daily points used: {{ day.points_used }},
-        remaining: {{ day.points_remaining }}</span>
+        remaining: {{ day.points_remaining }}. Daily Activity Points: {{ day.activity_points }}</span>
     {% if not is_current_day %}
       <a href="{% url 'day:today' %}" class="ml-3">Go to Today</a>
     {% endif %}
   </div>
   <div>
-    <a href="{% url 'day:prev' day.date %}">Prev Day</a>
-    <a href="{% url 'day:next' day.date %}">Next Day</a>
+    {% if prev_day_is_available %}<a href="{% url 'day:prev' day.date %}">Prev Day</a>{% endif %}
+    {% if next_day_is_available %}<a href="{% url 'day:next' day.date %}">Next Day</a>{% endif %}
   </div>
   {% for meal in day.meal_set.all %}
     {% include 'snippets/meal.html' %}
   {% endfor %}
+  {% include "snippets/activity.html" %}
 {% endblock content %}
