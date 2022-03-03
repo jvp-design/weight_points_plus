@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ view.kwargs.date_val }}{% endblock title %}
+{% block title %}{{ day.date }}{% endblock title %}
 
 {% block content %}
-  {{ day.get_day_of_week_display }}: {{ day.date }}. Daily points used: {{ day.points_used }}, remaining: {{ day.points_remaining }}
+  <div class="flex">
+    <span>{{ day.get_day_of_week_display }}: {{ day.date }}. Daily points used: {{ day.points_used }},
+        remaining: {{ day.points_remaining }}</span>
+    {% if not is_current_day %}
+      <a href="{% url 'day:today' %}" class="ml-3">Go to Today</a>
+    {% endif %}
+  </div>
+  <div>
+    <a href="{% url 'day:prev' day.date %}">Prev Day</a>
+    <a href="{% url 'day:next' day.date %}">Next Day</a>
+  </div>
   {% for meal in day.meal_set.all %}
     {% include 'snippets/meal.html' %}
   {% endfor %}

@@ -56,12 +56,7 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self):
         if self.request.user.has_input_all_fields:
             now = timezone.now().date()
-            return reverse(
-                "day:detail",
-                kwargs={
-                    "date_val": f"{now.year}-{str(now.month).zfill(2)}-{str(now.day).zfill(2)}"
-                },
-            )
+            return reverse("day:detail", kwargs={"date": now})
         messages.add_message(
             self.request, messages.INFO, "Please fill in your preliminary information."
         )

@@ -17,6 +17,7 @@ class Meal(models.Model):
 
     class Meta:
         unique_together = ("name", "day", "user")
+        ordering = ["pk"]
 
     def __str__(self):
         return f"User: {self.user}, {self.day.date}/{self.name}"

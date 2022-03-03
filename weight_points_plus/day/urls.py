@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.urls import path, register_converter
 
-from weight_points_plus.day.views import day_detail_view
+from . import views
 
 
 app_name = "day"
@@ -20,4 +20,9 @@ class DateConverter:
 
 register_converter(DateConverter, "yyyy")
 
-urlpatterns = [path("<yyyy:date_val>/", view=day_detail_view, name="detail")]
+urlpatterns = [
+    path("today/", view=views.today_detail_view, name="today"),
+    path("next/<slug:date>/", view=views.next_day_detail_view, name="next"),
+    path("prev/<slug:date>/", view=views.prev_day_detail_view, name="prev"),
+    path("<slug:date>/", view=views.day_detail_view, name="detail"),
+]

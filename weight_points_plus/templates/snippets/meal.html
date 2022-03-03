@@ -8,6 +8,7 @@
     <div>
       {{ item.food.name }}, {{ item.serving_size }}{{ item.serving_unit.lower }} -> {{ item.points }}
       <a href="{% url 'meal:update-food-item' meal.pk item.pk %}">Edit</a>
+      <a href="{% url 'meal:delete-food-item' meal.pk item.pk %}">Remove</a>
     </div>
   {% endfor %}
 </div>

@@ -21,4 +21,9 @@ urlpatterns = [
         view=views.meal_food_update_view,
         name="update-food-item",
     ),
+    path(
+        "<int:meal_pk>/delete/<int:pk>",
+        view=views.meal_food_delete_view,
+        name="delete-food-item",
+    ),
 ]

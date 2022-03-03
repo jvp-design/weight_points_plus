@@ -1,5 +1,7 @@
 from typing import Optional
 
+from pydantic import BaseModel
+
 from weight_points_plus.foods_recipes.models import (
     FoodItem,
 )
@@ -120,6 +122,13 @@ unit_dict = {
 }
 
 
+class NutritionItem(BaseModel):
+    fat: float
+    carbs: float
+    fiber: float
+    protein: float
+
+
 def calculate_daily_points(user: User) -> int:
     MIN_POINTS = 26
     MAX_POINTS = 71
@@ -148,7 +157,7 @@ def calculate_daily_points(user: User) -> int:
     return daily_points
 
 
-def points_formula(food: FoodItem, multiplier: float = 1.0) -> int:
+def points_formula(food: FoodItem | NutritionItem, multiplier: float = 1.0) -> int:
     return max(
         round(
             (
