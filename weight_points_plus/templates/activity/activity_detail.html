@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <div>{{ activity.name }}</div>
+  <div>
+  Recent activity uses
+  {% for act in recent_activities %}
+    {{ act.day.date }}
+  {% endfor %}
+  </div>
+{% endblock content %}
