@@ -1,7 +1,10 @@
+from typing import Any, Dict
+
 from allauth.account.forms import SignupForm
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 from django.contrib.auth import forms as admin_forms
 from django.contrib.auth import get_user_model
+from django import forms
 from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
@@ -40,3 +43,27 @@ class UserSocialSignupForm(SocialSignupForm):
     Default fields will be added automatically.
     See UserSignupForm otherwise.
     """
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            "name",
+            "weight",
+            "height",
+            "sex",
+            "weigh_in_day",
+            "birth_date",
+            "weekly_points",
+            "nursing",
+            "maintenance_mode",
+        ]
+
+    def clean_maintenance_mode(self):
+        if (
+            self.data.get("maintenance_mode")
+            and self.data.get("maintenance_mode") == "on"
+        ):
+            return True
+        return False

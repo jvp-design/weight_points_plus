@@ -14,6 +14,7 @@ from weight_points_plus.meal.models import Meal
 from weight_points_plus.utils.misc import (
     is_weight_serving,
     is_volume_serving,
+    is_each_serving,
 )
 from weight_points_plus.utils.mixins import UserHasAllInfoMixin
 from weight_points_plus.utils.points_calculators import calculate_food_points
@@ -26,7 +27,7 @@ def update_meal_points(meal: Meal) -> None:
 
 class MealFoodListView(FoodItemListView):
     paginate_by = 20
-    template_name = "meal/food_search.html"
+    # template_name = "foods_recipes/food_search.html"
 
     def get_queryset(self) -> QuerySet[FoodItem]:
         self.queryset = FoodItem.objects.filter(
@@ -42,9 +43,21 @@ class BaseMealFoodEditView:
     model = FoodItemInstance
     fields = ["serving_size", "serving_unit"]
 
+    def get_queryset(self):
+        return FoodItem.objects.filter(
+            Q(user_created=False) | Q(user=self.request.user)
+        )
+
+    def get_meal(self):
+        qs = Meal.objects.filter(user=self.request.user)
+        return get_object_or_404(qs, pk=self.kwargs.get("meal_pk"))
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["food"] = self.get_food()
+        context["hello"] = "world"
+        context["meal_name"] = self.get_meal().name
+        context["date"] = self.get_meal().day.date
         return context
 
     def get_form_class(self):
@@ -66,7 +79,7 @@ class BaseMealFoodEditView:
                             form.base_fields["serving_unit"].choices,
                         )
                     )
-                elif food.serving_unit == "each":
+                elif is_each_serving(food.serving_unit):
                     choices = list(
                         filter(
                             lambda x: x[0] == "EACH",
@@ -81,18 +94,12 @@ class BaseMealFoodEditView:
 
 
 class MealFoodAddView(UserHasAllInfoMixin, BaseMealFoodEditView, CreateView):
-    def get_queryset(self):
-        return FoodItem.objects.filter(
-            Q(user_created=False) | Q(user=self.request.user)
-        )
-
     def get_food(self):
         return get_object_or_404(self.get_queryset(), pk=self.request.GET.get("food"))
 
-    def post(self, request, meal_pk=None, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         form = self.get_form()
-        qs = Meal.objects.filter(user=request.user)
-        meal = get_object_or_404(qs, pk=meal_pk)
+        meal = self.get_meal()
         if form.is_valid():
             food = self.get_food()
             if len(meal.fooditeminstance_set.filter(food=food)) > 0:
@@ -140,8 +147,7 @@ class MealFoodUpdateView(UserHasAllInfoMixin, BaseMealFoodEditView, UpdateView):
 
     def post(self, request, meal_pk=None, *args, **kwargs):
         form = self.get_form()
-        qs = Meal.objects.filter(user=request.user)
-        meal = get_object_or_404(qs, pk=meal_pk)
+        meal = self.get_meal()
         obj = self.get_object()
         obj.meal.remove(meal)
         if form.is_valid():

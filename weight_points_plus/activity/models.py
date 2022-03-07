@@ -8,7 +8,7 @@ class Activity(models.Model):
     user = models.ForeignKey("users.User", on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ["name", "user"]
+        unique_together = ("name", "user")
         verbose_name_plural = "activities"
 
     def __str__(self):

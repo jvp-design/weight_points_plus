@@ -31,6 +31,10 @@ urlpatterns = [
     path(
         "food/", include("weight_points_plus.foods_recipes.food.urls", namespace="food")
     ),
+    path(
+        "recipe/",
+        include("weight_points_plus.foods_recipes.recipe.urls", namespace="recipe"),
+    ),
     path("meal/", include("weight_points_plus.meal.urls", namespace="meal")),
     path(
         "activity/", include("weight_points_plus.activity.urls", namespace="activity")

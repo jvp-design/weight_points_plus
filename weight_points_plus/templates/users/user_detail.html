@@ -4,31 +4,30 @@
 {% block title %}User: {{ object.username }}{% endblock %}
 
 {% block content %}
-<div class="container">
-
-  <div class="row">
-    <div class="col-sm-12">
-
-      <h2>{{ object.username }}</h2>
-      {% if object.name %}
-        <p>{{ object.name }}</p>
-      {% endif %}
+  <div class="max-w-xl mx-auto">
+    <ul role="list" class="divide-y divide-gray-300 bg-gray-100 rounded-md">
+      {% for field in user_fields %}
+        <li>
+          <div class="px-4 py-4 sm:px-6">
+            <div class="flex items-center justify-between">
+              <span>
+              <p class="text-md font-medium text-gray-800 sm:inline">{{ field.lookup }}</p>
+                {% if field.display == 'Email' %}
+                  <a href="{% url 'account_email' %}" class="text-primary-darken hover:bg-primary ml-1">Update</a>
+                {% endif %}
+                </span>
+              <div class="ml-2 flex-shrink-0 flex">
+                <p class="px-2 inline-flex text-xs leading-5 rounded-full text-gray-500">{{ field.display }}</p>
+              </div>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="mt-6">
+      <a href="{% url 'users:update' %}" class="btn-primary my-2">Update User</a>
+      <a href="{% url 'account_change_password' %}" class="btn-secondary my-2"> Change Password </a>
     </div>
   </div>
 
-{% if object == request.user %}
-<!-- Action buttons -->
-<div class="row">
-
-  <div class="col-sm-12">
-    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
-    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
-    <!-- Your Stuff: Custom user template urls -->
-  </div>
-
-</div>
-<!-- End Action buttons -->
-{% endif %}
-
-</div>
 {% endblock content %}

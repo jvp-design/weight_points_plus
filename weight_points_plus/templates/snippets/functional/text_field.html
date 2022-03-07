@@ -1,0 +1,37 @@
+<div class="{{ class }}">
+  <div class="flex justify-between">
+    <label for="{{ id }}" class="block text-sm font-medium text-gray-700">
+      {{ label }}
+    </label>
+    {% if required %}
+      <span class="text-sm text-gray-500" id="{{ id }}-required">Required</span>
+    {% endif %}
+  </div>
+  <div class="mt-1">
+    <input
+      type="text"
+      id="{{ id }}"
+      name="{{ name }}"
+      {% if required %}
+      required
+      {% endif %}
+      class="shadow-sm focus:ring-teal-500 focus:border-teal-500 block w-full sm:text-sm border-gray-300 rounded-md"
+      {% if placeholder is not None %}
+      placeholder="{{ placeholder }}"
+      {% endif %}
+      aria-describedby="{{ id }}-field"
+      {% if format %}
+      value="{{ value|date:format }}"
+      {% else %}
+      value="{{ value }}"
+      {% endif %}
+    >
+  </div>
+  {% if errors %}
+    {% for error in errors %}
+      <p class="mt-2 text-sm text-red-600" id="{{ id }}-error">{{ error}}</p>
+    {% endfor %}
+  {% elif hint %}
+    <p class="mt-2 text-sm text-gray-500" id="{{ id }}-field">{{ hint }}</p>
+  {% endif %}
+</div>

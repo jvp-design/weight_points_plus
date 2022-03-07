@@ -4,14 +4,33 @@
 {% block title %}{{ user.username }}{% endblock %}
 
 {% block content %}
-  <h1>{{ user.username }}</h1>
-  <form class="form-horizontal" method="post" action="{% url 'users:update' %}">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <div class="control-group">
-      <div class="controls">
-        <button type="submit" class="btn btn-primary">Update</button>
+  <div class="space-y-6">
+    <div class="bg-gray-100 shadow px-4 py-5 sm:rounded-lg sm:p-6">
+      <div class="md:grid md:grid-cols-3 md:gap-6">
+        <div class="md:col-span-1">
+          <h3 class="text-lg font-medium leading-6 text-gray-900">User Info - {{ user.username }}</h3>
+          <p class="mt-1 text-sm text-gray-500">This information is used to calculate your daily point total.</p>
+        </div>
+        <div class="mt-5 md:mt-0 md:col-span-2">
+          <form class="space-y-6" action="{% url 'users:update' %}" method="POST">
+            {% csrf_token %}
+            <div class="text-red-600">
+              {{ form.non_field_errors }}
+            </div>
+            {% include "snippets/functional/text_field.html" with class="w-3/4" id=form.name.id_for_label name=form.name.html_name label=form.name.label errors=form.name.errors value=form.name.value required=form.name.field.required %}
+            {% include "snippets/functional/text_field.html" with class="w-3/4" id=form.weight.id_for_label name=form.weight.html_name label=form.weight.label errors=form.weight.errors value=form.weight.value required=form.weight.field.required %}
+            {% include "snippets/functional/text_field.html" with class="w-3/4" id=form.height.id_for_label name=form.height.html_name label=form.height.label errors=form.height.errors value=form.height.value required=form.height.field.required %}
+            {% include "snippets/functional/select_field.html" with class="w-3/4" id=form.sex.id_for_label name=form.sex.html_name label=form.sex.label errors=form.sex.errors selected=form.sex.value options=form.fields.sex.choices required=form.sex.field.required %}
+            {% include "snippets/functional/select_field.html" with class="w-3/4" id=form.weigh_in_day.id_for_label name=form.weigh_in_day.html_name label=form.weigh_in_day.label errors=form.weigh_in_day.errors selected=form.weigh_in_day.value options=form.fields.weigh_in_day.choices required=form.weigh_in_day.field.required %}
+            {% include "snippets/functional/text_field.html" with class="w-3/4" id=form.birth_date.id_for_label name=form.birth_date.html_name label=form.birth_date.label errors=form.birth_date.errors value=form.birth_date.value required=form.birth_date.field.required format="Y-m-d" hint="Format: yyyy-mm-dd" %}
+            {% include "snippets/functional/text_field.html" with class="w-3/4" id=form.weekly_points.id_for_label name=form.weekly_points.html_name label=form.weekly_points.label errors=form.weekly_points.errors value=form.weekly_points.value required=form.weekly_points.field.required %}
+            {% include "snippets/functional/select_field.html" with class="w-3/4" id=form.nursing.id_for_label name=form.nursing.html_name label=form.nursing.label errors=form.nursing.errors selected=form.nursing.value options=form.fields.nursing.choices hint="If sex is Male then this will not have an effect." %}
+            {% include "snippets/functional/checkbox_field.html" with class="w-3/4" id=form.maintenance_mode.id_for_label name=form.maintenance_mode.html_name label=form.maintenance_mode.label errors=form.maintenance_mode.errors checked=form.maintenance_mode.value hint="Selecting this will add 6 points to your daily total." %}
+{#            {{ form.as_p }}#}
+            <input type="submit" class="btn-primary w-3/4 cursor-pointer" value="Submit" >
+          </form>
+        </div>
       </div>
     </div>
-  </form>
+  </div>
 {% endblock %}

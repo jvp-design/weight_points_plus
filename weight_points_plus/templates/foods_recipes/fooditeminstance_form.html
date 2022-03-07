@@ -1,16 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {{ food.name }}
-  <form method="POST">
-  {% csrf_token %}
-    <input type="hidden" value="{{ food }}" name="food">
-  {{ form.as_p }}
+  <div>
     {% if object %}
-    <input type="submit" value="Edit Food">
-  {% else %}
-    <input type="submit" value="Add Food">
+      Edit for
+    {% else %}
+      Add to
+    {% endif %}
 
-  {% endif %}
+    {% if 'meal' in request.resolver_match.route %}
+      {{ meal_name }} for {{ date }}
+    {% else %}
+      recipe {{ recipe_name }}
+    {% endif %}
+  </div>
+
+  <div>
+  {% include "snippets/food_detail_snippet.html" with fooditem=food %}
+  </div>
+
+  <form method="POST">
+    {% csrf_token %}
+    <input type="hidden" value="{{ food }}" name="food">
+    {{ form.as_p }}
+    {% if object %}
+      <input type="submit" value="Edit Food">
+    {% else %}
+      <input type="submit" value="Add Food">
+    {% endif %}
+    {% if 'recipe' in request.resolver_match.route %}
+      <input type="text" name="next-food-search">
+      <input type="submit" value="Add Another Item" name="recipe-add-another">
+    {% endif %}
   </form>
 {% endblock content %}

@@ -48,7 +48,7 @@ class User(AbstractUser):
     nursing = models.IntegerField(
         choices=NursingChoices.choices, default=NursingChoices.NONE, null=True
     )
-    maintenance_mode = models.BooleanField(default=False, null=True)
+    maintenance_mode = models.BooleanField(default=False)
     has_been_updated = models.BooleanField(default=False)
 
     @property

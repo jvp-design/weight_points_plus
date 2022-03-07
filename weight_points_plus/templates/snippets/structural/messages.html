@@ -1,0 +1,19 @@
+{% block messages %}
+  {% if messages %}
+    <div class="fixed w-full">
+      <div class="w-1/2 mx-auto">
+        {% for message in messages %}
+          {% if 'success' in message.tags %}
+            {% include 'snippets/messages/message-success.html' with message=message id=forloop.counter0 %}
+          {% elif 'info' in message.tags %}
+            {% include 'snippets/messages/message-info.html' with message=message id=forloop.counter0 %}
+          {% elif 'warning' in message.tags %}
+            {% include 'snippets/messages/message-warning.html' with message=message id=forloop.counter0 %}
+          {% elif 'error' in message.tags %}
+            {% include 'snippets/messages/message-error.html' with message=message id=forloop.counter0 %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endblock messages %}

@@ -10,10 +10,10 @@ class FoodItem(models.Model):
         RECIPE = "recipe"
 
     name = models.CharField(max_length=256)
-    fat = models.FloatField(validators=[MinValueValidator(0.0)])
-    carbs = models.FloatField(validators=[MinValueValidator(0.0)])
-    fiber = models.FloatField(validators=[MinValueValidator(0.0)])
-    protein = models.FloatField(validators=[MinValueValidator(0.0)])
+    fat = models.FloatField(validators=[MinValueValidator(0.0)], default=0)
+    carbs = models.FloatField(validators=[MinValueValidator(0.0)], default=0)
+    fiber = models.FloatField(validators=[MinValueValidator(0.0)], default=0)
+    protein = models.FloatField(validators=[MinValueValidator(0.0)], default=0)
     serving_size = models.FloatField(validators=[MinValueValidator(0.0)])
     serving_unit = models.CharField(max_length=6, choices=SERVING_SIZE_CHOICES)
     conversion_unit_weight = models.CharField(
@@ -33,7 +33,7 @@ class FoodItem(models.Model):
     )
     notes = models.TextField(null=True, blank=True)
     restaurant = models.CharField(max_length=256, null=True, blank=True)
-    points_per_serving = models.IntegerField(blank=True)
+    points_per_serving = models.IntegerField(default=0, blank=True)
     user_created = models.BooleanField(default=True)
     user = models.ForeignKey("users.User", on_delete=models.CASCADE, null=True)
     directions = models.TextField(max_length=2048, null=True, blank=True)
@@ -42,7 +42,10 @@ class FoodItem(models.Model):
         validators=[MinValueValidator(0.0)], null=True, blank=True
     )
     food_item_type = models.CharField(max_length=8, choices=FoodItemType.choices)
-    recipe_items = models.ManyToManyField("FoodItemInstance")
+    recipe_items = models.ManyToManyField("FoodItemInstance", blank=True)
+
+    class Meta:
+        unique_together = ("user", "name")
 
     def __str__(self):
         return f"{self.food_item_type.title()}, {self.name}"
@@ -51,7 +54,7 @@ class FoodItem(models.Model):
 class FoodItemInstance(models.Model):
     serving_size = models.FloatField(validators=[MinValueValidator(0.0)])
     serving_unit = models.CharField(max_length=6, choices=SERVING_SIZE_CHOICES)
-    points = models.IntegerField()
+    points = models.IntegerField(null=True)
     # fat = models.FloatField()
     # carbs = models.FloatField()
     # fiber = models.FloatField()
