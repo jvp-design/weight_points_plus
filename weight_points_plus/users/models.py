@@ -1,4 +1,5 @@
 from datetime import date
+import pytz
 
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth.models import AbstractUser
@@ -33,7 +34,6 @@ class User(AbstractUser):
         SUPPLEMENTAL = 1
         EXCLUSIVE = 2
 
-    #: First and last name do not cover name patterns around the globe
     name = CharField(_("Name of User"), blank=True, max_length=255)
     first_name = None  # type: ignore
     last_name = None  # type: ignore
@@ -50,6 +50,11 @@ class User(AbstractUser):
     )
     maintenance_mode = models.BooleanField(default=False)
     has_been_updated = models.BooleanField(default=False)
+    latest_date = models.DateField(null=True)
+
+    TIMEZONES = tuple(zip(pytz.all_timezones, pytz.all_timezones))
+
+    timezone = models.CharField(max_length=32, choices=TIMEZONES, default="UTC")
 
     @property
     def age(self) -> int:

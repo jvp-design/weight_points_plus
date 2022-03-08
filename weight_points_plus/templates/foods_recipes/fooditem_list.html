@@ -1,75 +1,130 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% for food in fooditem_list %}
-    <div class="flex">
-      {% if 'recipe' in request.resolver_match.route and view.kwargs.recipe_pk is not None %}
-        <span class="pr-2">{{ food }}</span>
-        <a href="{% url 'recipe:add-food' view.kwargs.recipe_pk %}?food={{ food.pk }}" class="pl-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
-          </svg>
-        </a>
-      {% elif 'meal' in request.resolver_match.route %}
-        <span class="pr-2">{{ food }}</span>
-        <a href="{% url 'meal:add-food-item' view.kwargs.meal_pk %}?food={{ food.pk }}" class="pl-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
-          </svg>
-        </a>
-      {% else %}
-        {% if food.food_item_type == 'food' %}
-          <a href="{% url 'food:detail' food.pk %}">{{ food }}</a>
-          {% if food.user == request.user %}->
-            <a href="{% url 'food:update' food.pk %}">Edit</a>
-            <a href="{% url 'food:delete' food.pk %}">Delete</a>
-          {% endif %}
-        {% else %}
-          <a href="{% url 'recipe:detail' food.pk %}">{{ food }}</a>
-          {% if food.user == request.user %}->
-            <a href="{% url 'recipe:update' food.pk %}">Edit</a>
-            <a href="{% url 'recipe:delete' food.pk %}">Delete</a>
-          {% endif %}
-        {% endif %}
-      {% endif %}
+  <div class="rounded-lg bg-gray-100 overflow-hidden shadow w-full md:w-4/5 lg:w-3/5 mx-auto">
+    <h2 class="sr-only" id="food-list-card">Food List</h2>
+    <div class="bg-gray-100 p-6 relative">
+      <div class="sm:flex sm:items-start sm:justify-between">
+        <div class="sm:flex sm:space-x-5">
+          <div class="mt-4 pb-2 sm:mb-0 text-center sm:mt-0 sm:pt-1 sm:text-left">
+            <p class="text-xl font-bold text-gray-900 sm:text-2xl">Search Results</p>
+            {% if request.GET.name %}
+              <p class="text-sm font-medium text-gray-600">Searching for "{{ request.GET.name }}"</p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="sm:flex sm:space-x-5">
+          <div class="mt-4 text-center sm:mt-0 sm:text-right">
+            <form method="get" action="{% url 'meal:items-search' view.kwargs.meal_pk %}" class="flex flex-col sm:flex-row sm:items-end">
+              {% include "snippets/functional/text_field.html" with class="my-1 sm:my-0" name="name" placeholder="Search for foods" %}
+              <input type="submit" class="btn-primary w-full sm:w-1/2 sm:ml-2 my-1 sm:my-0 cursor-pointer" value="Search Again" />
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="relative py-4">
+        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+          <div class="w-full border-t border-gray-300"></div>
+        </div>
+      </div>
+      <ul role="list" class="divide-y divide-gray-200">
+        {% for food in fooditem_list %}
+          <li class="py-4">
+            <div class="ml-3 flex justify-between">
+              {% if 'recipe' in request.resolver_match.route and view.kwargs.recipe_pk is not None %}
+                <span class="pr-2">{{ food }}</span>
+                <a href="{% url 'recipe:add-food' view.kwargs.recipe_pk %}?food={{ food.pk }}" class="pl-2 text-primary hover:bg-primary-darken">
+                  Add
+                  <svg class="h-5 w-5 text-gray-400 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              {% elif 'meal' in request.resolver_match.route %}
+                <span class="pr-2">{{ food }}</span>
+                <a href="{% url 'meal:add-food-item' view.kwargs.meal_pk %}?food={{ food.pk }}" class="pl-2 text-primary hover:bg-primary-darken">
+                  Add
+                  <svg class="h-5 w-5 text-gray-400 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              {% else %}
+                {% if food.food_item_type == 'food' %}
+                  <a href="{% url 'food:detail' food.pk %}">{{ food }}</a>
+                  {% if food.user == request.user %}->
+                    <a href="{% url 'food:update' food.pk %}">Edit</a>
+                    <a href="{% url 'food:delete' food.pk %}">Delete</a>
+                  {% endif %}
+                {% else %}
+                  <a href="{% url 'recipe:detail' food.pk %}">{{ food }}</a>
+                  {% if food.user == request.user %}->
+                    <a href="{% url 'recipe:update' food.pk %}">Edit</a>
+                    <a href="{% url 'recipe:delete' food.pk %}">Delete</a>
+                  {% endif %}
+                {% endif %}
+              {% endif %}
+              {#              <p class="text-sm font-medium text-gray-900">Calvin Hawkins</p>#}
+              {#              <p class="text-sm text-gray-500">calvin.hawkins@example.com</p>#}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
     </div>
-  {% endfor %}
 
-
-  <div class="pagination">
-    <span class="step-links">
-      {% if page_obj.has_previous %}
-        <a href="?page=1{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}">&laquo; first</a>
-        <a href="?page={{ page_obj.previous_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}">previous</a>
-      {% endif %}
-
-      <span class="current">
-        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-      </span>
-
-      {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}">next</a>
-        <a href="?page={{ page_obj.paginator.num_pages }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}">last &raquo;</a>
-      {% endif %}
-    </span>
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <nav class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6" aria-label="Pagination">
+      <div class="hidden sm:block">
+        <p class="text-sm text-gray-700">
+          Showing
+          <span class="font-medium">1</span>
+          to
+          <span class="font-medium">10</span>
+          of
+          <span class="font-medium">20</span>
+          results
+        </p>
+      </div>
+      <div class="flex-1 flex justify-between sm:justify-end">
+        <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> Previous </a>
+        <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> Next </a>
+      </div>
+    </nav>
   </div>
 
-  <div>
-    {% if 'recipe' in request.resolver_match.route and view.kwargs.recipe_pk is not None %}
-      <form method="get" action="{% url "recipe:food-list" view.kwargs.recipe_pk %}">
-        <input type="text" name="name">
-        <input type="submit" value="Search again">
-      </form>
-    {% elif 'meal' in request.resolver_match.route %}
-      <form method="get" action="{% url "meal:items-search" view.kwargs.meal_pk %}">
-        <input type="text" name="name">
-        <input type="submit" value="Search again">
-      </form>
-    {% else %}
-      <form method="get" action="{% url "food:list" %}">
-        <input type="text" name="name">
-        <input type="submit" value="Search again">
-      </form>
-    {% endif %}
-  </div>
+  {#  <div class="pagination">#}
+  {#    <span class="step-links">#}
+  {#      {% if page_obj.has_previous %}#}
+  {#        <a href="?page=1{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}">&laquo; first</a>#}
+  {#        <a href="?page={{ page_obj.previous_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}">previous</a>#}
+  {#      {% endif %}#}
+  {##}
+  {#      <span class="current">#}
+  {#        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}#}
+  {#      </span>#}
+  {##}
+  {#      {% if page_obj.has_next %}#}
+  {#        <a href="?page={{ page_obj.next_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}">next</a>#}
+  {#        <a href="?page={{ page_obj.paginator.num_pages }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}">last &raquo;</a>#}
+  {#      {% endif %}#}
+  {#    </span>#}
+  {#  </div>#}
+  {##}
+  {#  <div>#}
+  {#    {% if 'recipe' in request.resolver_match.route and view.kwargs.recipe_pk is not None %}#}
+  {#      <form method="get" action="{% url "recipe:food-list" view.kwargs.recipe_pk %}">#}
+  {#        <input type="text" name="name">#}
+  {#        <input type="submit" value="Search again">#}
+  {#      </form>#}
+  {#    {% elif 'meal' in request.resolver_match.route %}#}
+  {#      <form method="get" action="{% url "meal:items-search" view.kwargs.meal_pk %}">#}
+  {#        <input type="text" name="name">#}
+  {#        <input type="submit" value="Search again">#}
+  {#      </form>#}
+  {#    {% else %}#}
+  {#      <form method="get" action="{% url "food:list" %}">#}
+  {#        <input type="text" name="name">#}
+  {#        <input type="submit" value="Search again">#}
+  {#      </form>#}
+  {#    {% endif %}#}
+  {#  </div>#}
 {% endblock content %}

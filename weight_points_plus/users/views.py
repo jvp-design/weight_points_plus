@@ -43,6 +43,7 @@ class CurrentUserDetailView(LoginRequiredMixin, DetailView):
             dict(lookup="get_sex_display", display="Sex"),
             dict(lookup="weekly_points", display="Weekly Points"),
             dict(lookup="get_weigh_in_day_display", display="Weigh-In Day"),
+            dict(lookup="timezone", display="Time Zone"),
         ]
         if self.request.user.sex == "Female":
             user_fields.append(dict(lookup="get_nursing_display", display="Nursing"))
@@ -68,6 +69,7 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         "weigh_in_day",
         "birth_date",
         "weekly_points",
+        "timezone",
         "nursing",
         "maintenance_mode",
     ]

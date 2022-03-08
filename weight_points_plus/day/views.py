@@ -1,6 +1,6 @@
-import datetime
-from datetime import timedelta
+from datetime import timedelta, datetime
 from typing import Any, Dict
+from pytz import timezone
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -10,10 +10,10 @@ from django.db.models import Q, QuerySet
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
-from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
+from django.utils import timezone as dj_timezone
 
 from weight_points_plus.activity.models import ActivityInstance, Activity
 from weight_points_plus.activity.utils import calculate_activity_points
@@ -58,7 +58,9 @@ class GetADayView(UserHasAllInfoMixin, DetailView):
             day = kwargs.get("object")
         else:
             day = self.get_object()
-        context["is_current_day"] = day.date == timezone.now().date()
+        context["is_current_day"] = (
+            day.date == datetime.now(tz=timezone(self.request.user.timezone)).date()
+        )
         context["next_day_is_available"] = True
         context["prev_day_is_available"] = True
         if (
@@ -98,6 +100,21 @@ class DayDetailView(GetADayView):
             self.day_is_available = False
             return self.get_queryset().order_by("date").last()
 
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["activity_info"] = []
+        for item in self.object.activityinstance_set.all():
+            context["activity_info"].append(
+                dict(
+                    pk=item.pk,
+                    name=item.activity.name,
+                    duration=item.duration,
+                    level=item.level,
+                    points=calculate_activity_points(item, self.object),
+                )
+            )
+        return context
+
     def render_to_response(
         self, context: Dict[str, Any], **response_kwargs: Any
     ) -> HttpResponse:
@@ -119,11 +136,17 @@ day_detail_view = DayDetailView.as_view()
 
 class TodayDetailView(GetADayView):
     def get_object(self) -> Day:
+        now = datetime.now(tz=timezone(self.request.user.timezone)).date()
+        if (
+            not self.request.user.latest_date
+            or (self.request.user.latest_date - now).days < 7
+        ):
+            backfill_weeks(self.request.user)
         try:
-            return self.get_queryset().get(date=timezone.now().date())
+            return self.get_queryset().get(date=now)
         except Day.DoesNotExist:
             backfill_weeks(self.request.user)
-            return self.get_queryset().get(date=timezone.now().date())
+            return self.get_queryset().get(date=now)
 
     def render_to_response(
         self, context: Dict[str, Any], **response_kwargs: Any
@@ -144,9 +167,7 @@ class NextDayDetailView(GetADayView):
         if date is None:
             raise Http404("A date must be included.")
 
-        new_date = datetime.datetime.strptime(date, "%Y-%m-%d").date() + timedelta(
-            days=1
-        )
+        new_date = datetime.strptime(date, "%Y-%m-%d").date() + timedelta(days=1)
         try:
             return self.get_queryset().get(date=new_date)
         except Day.DoesNotExist:
@@ -178,9 +199,7 @@ class PrevDayDetailView(GetADayView):
         if date is None:
             raise Http404("A date must be included.")
 
-        new_date = datetime.datetime.strptime(date, "%Y-%m-%d").date() - timedelta(
-            days=1
-        )
+        new_date = datetime.strptime(date, "%Y-%m-%d").date() - timedelta(days=1)
         try:
             return self.get_queryset().get(date=new_date)
         except Day.DoesNotExist:

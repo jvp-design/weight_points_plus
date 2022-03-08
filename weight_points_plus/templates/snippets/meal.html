@@ -1,14 +1,49 @@
-<div>
-  {{ meal.name }} - {{ meal.points }}
-  <form method="get" action="{% url 'meal:items-search' meal.pk %}">
-    <input type="text" name="name">
-    <button type="submit">Search</button>
-  </form>
-  {% for item in meal.fooditeminstance_set.all %}
-    <div>
-      {{ item.food.name }}, {{ item.serving_size }}{{ item.serving_unit.lower }} -> {{ item.points }}
-      <a href="{% url 'meal:update-food-item' meal.pk item.pk %}">Edit</a>
-      <a href="{% url 'meal:delete-food-item' meal.pk item.pk %}">Remove</a>
+<div class="w-full sm:w-3/4 mx-auto py-4 px-2 sm:px-0 border-t border-gray-300 sm:border-none">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-2">
+    <h3 class="text-md sm:text-lg text-gray-900">{{ meal.name.title }} ({{ meal.points }} Points)</h3>
+    <form method="get" action="{% url 'meal:items-search' meal.pk %}" class="flex items-end">
+      {% include "snippets/functional/text_field.html" with name="name" placeholder="Search for foods" %}
+      <input type="submit" class="btn-primary w-1/2 ml-2 cursor-pointer" value="Find Foods" />
+    </form>
+  </div>
+  <div class="flex flex-col">
+    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Food</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Points</th>
+              <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">Edit or Remove</span>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if meal.fooditeminstance_set.all %}
+              {% for item in meal.fooditeminstance_set.all %}
+                <!-- Odd row -->
+                <tr class="{% if forloop.counter0|divisibleby:2 %}bg-white{% else %}bg-gray-50{% endif %}">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ item.food.name }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.serving_size}} {{ item.get_serving_unit_display }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.points }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <a href="{% url 'meal:update-food-item' meal.pk item.pk %}" class="text-primary hover:bg-primary-darken mx-2">Edit</a>
+                    <a href="{% url 'meal:delete-food-item' meal.pk item.pk %}" class="text-primary hover:bg-primary-darken mx-2">Remove</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% else %}
+              <tr>
+                <td colspan="4" class="py-8 w-full text-center">Please <a href="{% url 'meal:items-search' meal.pk %}" class="text-primary hover:bg-primary-darken">add some foods!</a></td>
+              </tr>
+            {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  {% endfor %}
+  </div>
 </div>

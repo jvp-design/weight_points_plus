@@ -43,11 +43,6 @@ class BaseMealFoodEditView:
     model = FoodItemInstance
     fields = ["serving_size", "serving_unit"]
 
-    def get_queryset(self):
-        return FoodItem.objects.filter(
-            Q(user_created=False) | Q(user=self.request.user)
-        )
-
     def get_meal(self):
         qs = Meal.objects.filter(user=self.request.user)
         return get_object_or_404(qs, pk=self.kwargs.get("meal_pk"))
@@ -56,7 +51,7 @@ class BaseMealFoodEditView:
         context = super().get_context_data(**kwargs)
         context["food"] = self.get_food()
         context["hello"] = "world"
-        context["meal_name"] = self.get_meal().name
+        context["meal"] = self.get_meal()
         context["date"] = self.get_meal().day.date
         return context
 
@@ -94,6 +89,11 @@ class BaseMealFoodEditView:
 
 
 class MealFoodAddView(UserHasAllInfoMixin, BaseMealFoodEditView, CreateView):
+    def get_queryset(self):
+        return FoodItem.objects.filter(
+            Q(user_created=False) | Q(user=self.request.user)
+        )
+
     def get_food(self):
         return get_object_or_404(self.get_queryset(), pk=self.request.GET.get("food"))
 
@@ -141,11 +141,14 @@ meal_food_add_view = MealFoodAddView.as_view()
 
 
 class MealFoodUpdateView(UserHasAllInfoMixin, BaseMealFoodEditView, UpdateView):
+    def get_queryset(self):
+        return FoodItemInstance.objects.filter(meal=self.get_meal())
+
     def get_food(self):
         food_item = get_object_or_404(self.get_queryset(), pk=self.kwargs.get("pk"))
         return food_item.food
 
-    def post(self, request, meal_pk=None, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         form = self.get_form()
         meal = self.get_meal()
         obj = self.get_object()

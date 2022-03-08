@@ -16,6 +16,7 @@ def create_days(start_date: date, user: User, week: Week, num_days: int) -> date
         Day(
             total_points=daily_points,
             points_used=0,
+            points_remaining=daily_points,
             day_of_week=dt.weekday(),
             date=dt,
             week=week,
@@ -51,11 +52,13 @@ def backfill_weeks(user: User) -> None:
         latest_date = latest_day.date
     count = 0
     today = date.today()
-    if latest_date < today:
+    if latest_date <= today:
         num_days = (user.weigh_in_day - latest_date.weekday() - 1) % 7
         if num_days == 0:
             num_days = 7
         latest_date = create_week(latest_date + timedelta(days=1), user, num_days)
-        while latest_date < today and count < 52:
+        while latest_date < (today + timedelta(days=7)) and count < 52:
             latest_date = create_week(latest_date + timedelta(days=1), user)
             count += 1
+    user.latest_date = latest_date
+    user.save()

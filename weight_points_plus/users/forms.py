@@ -56,14 +56,7 @@ class UserUpdateForm(forms.ModelForm):
             "weigh_in_day",
             "birth_date",
             "weekly_points",
+            "timezone",
             "nursing",
             "maintenance_mode",
         ]
-
-    def clean_maintenance_mode(self):
-        if (
-            self.data.get("maintenance_mode")
-            and self.data.get("maintenance_mode") == "on"
-        ):
-            return True
-        return False

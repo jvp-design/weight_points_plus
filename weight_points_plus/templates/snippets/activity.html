@@ -1,15 +1,53 @@
-<div>
-  <h1>Activities</h1>
-    Add activity to day
-  <form method="get" action="{% url 'day:activity-list' day.date %}">
-    <input type="text" name="activity">
-    <input type="submit" value="Search">
-  </form>
-  {% for item in activities %}
-  <div>{{ item.activity.name }}: {{ item.level }}, {{ item.duration }} minutes -> {{ item.points }}
-    <a href="{% url 'day:activity-update' day.date item.id %}">Edit</a>
-    <a href="{% url 'day:activity-delete' day.date item.id %}">Remove</a>
-</div>
-  {% endfor %}
+<div class="w-full sm:w-3/4 mx-auto py-4 px-2 sm:px-0 border-t border-gray-300 sm:border-none">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-2">
+    <h3 class="text-md sm:text-lg text-gray-900">Activities ({{ day.activity_points }} Points)</h3>
+    <form method="get" action="{% url 'day:activity-list' day.date %}" class="flex items-end">
+      {% include "snippets/functional/text_field.html" with name="name" placeholder="Search for activities" %}
+      <input type="submit" class="btn-primary w-1/2 ml-2 cursor-pointer" value="Find Activities" />
+    </form>
+  </div>
+  <div class="flex flex-col">
+    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Activity</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Intensity</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Points</th>
+              <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">Edit or Remove</span>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if activity_info %}
+              {% for item in activity_info %}
+                <!-- Odd row -->
+                <tr class="{% if forloop.counter0|divisibleby:2 %}bg-white{% else %}bg-gray-50{% endif %}">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ item.name }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.duration}} minutes</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.level }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.points }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <a href="{% url 'activity:update' item.pk %}" class="text-primary hover:bg-primary-darken mx-2">Edit</a>
+                    <a href="{% url 'activity:delete' item.pk %}" class="text-primary hover:bg-primary-darken mx-2">Remove</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% else %}
+              <tr>
+              blah
+{#                <td colspan="4" class="py-8 w-full text-center">Please <a href="{% url 'meal:items-search' meal.pk %}" class="text-primary hover:bg-primary-darken">add some foods!</a></td>#}
+              </tr>
+            {% endif %}
 
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

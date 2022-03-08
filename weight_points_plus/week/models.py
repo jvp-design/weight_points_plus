@@ -1,4 +1,7 @@
+from datetime import timedelta
+
 from django.db import models
+from django.utils import timezone
 
 
 class Week(models.Model):
@@ -10,6 +13,11 @@ class Week(models.Model):
     weight_recorded = models.BooleanField(default=False)
     activity_points = models.IntegerField(default=0)
     user = models.ForeignKey("users.User", on_delete=models.CASCADE)
+
+    @property
+    def days_remaining(self) -> int:
+        end_date = self.start_date + timedelta(days=7)
+        return (end_date - timezone.now().date()).days
 
     class Meta:
         unique_together = ("user", "start_date")

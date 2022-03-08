@@ -26,6 +26,7 @@ class UserAdmin(auth_admin.UserAdmin):
                     "weigh_in_day",
                     "birth_date",
                     "weekly_points",
+                    "timezone",
                     "nursing",
                     "maintenance_mode",
                 )
