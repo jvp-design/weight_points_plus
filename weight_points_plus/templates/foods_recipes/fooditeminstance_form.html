@@ -1,36 +1,86 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div>
-    {% if object %}
-      Edit for
-    {% else %}
-      Add to
-    {% endif %}
+  <!-- This example requires Tailwind CSS v2.0+ -->
+  {#          {% include "snippets/food_detail_snippet.html" with fooditem=food %}#}
+  <div class="bg-white shadow overflow-hidden sm:rounded-lg max-w-4xl mx-auto">
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">
+        {% if object %}
+          Edit for
+        {% else %}
+          Add to
+        {% endif %}
 
-    {% if 'meal' in request.resolver_match.route %}
-      {{ meal_name }} for {{ date }}
-    {% else %}
-      recipe {{ recipe_name }}
-    {% endif %}
+        {% if 'meal' in request.resolver_match.route %}
+          {{ meal.name }} for {{ date }}
+        {% else %}
+          recipe {{ recipe_name }}
+        {% endif %}
+
+      </h3>
+      <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ food.name }}</p>
+    </div>
+    <div class="border-t border-gray-200 px-4 py-5 sm:p-0 flex justify-between">
+      <div class="flex-2">blah</div>
+      <dl class="sm:divide-y sm:divide-gray-200 border-l border-gray-200 flex-3">
+        {% for field in food_item_fields %}
+          <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">{{ field.display}}</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              {% if field.display == 'Food/Recipe' %}
+                {{ field.lookup.title }}
+              {% elif field.display == 'Serving Unit' %}
+                {{ field.lookup.lower }}
+              {% else %}
+                {{ field.lookup }}
+              {% endif %}
+            </dd>
+          </div>
+        {% endfor %}
+      </dl>
+    </div>
   </div>
 
-  <div>
-  {% include "snippets/food_detail_snippet.html" with fooditem=food %}
-  </div>
+  {#  <div class="rounded-lg bg-gray-100 overflow-hidden shadow">#}
+  {#    <h2 class="sr-only" id="add-edit-food-card">Add or Edit Food</h2>#}
+  {#    <div class="bg-gray-100 p2 sm:p-6">#}
+  {#      <div class="sm:mt-4 pb-2 sm:mb-0 sm:pt-1 sm:text-left">#}
+  {#        <p class="text-xl font-bold-text-gray-900 sm:text-2xl">#}
+  {#          {% if object %}#}
+  {#            Edit for#}
+  {#          {% else %}#}
+  {#            Add to#}
+  {#          {% endif %}#}
+  {##}
+  {#          {% if 'meal' in request.resolver_match.route %}#}
+  {#            {{ meal.name }} for {{ date }}#}
+  {#          {% else %}#}
+  {#            recipe {{ recipe_name }}#}
+  {#          {% endif %}#}
+  {#        </p>#}
+  {#      </div>#}
+  {#    </div>#}
+  {#    <div class="flex sm:justify-between">#}
+  {#      <form method="POST" class="p-8">#}
+  {#        {% csrf_token %}#}
+  {#        <input type="hidden" value="{{ food }}" name="food">#}
+  {#        {{ form.as_p }}#}
+  {#        {% if object %}#}
+  {#          <input type="submit" value="Edit Food">#}
+  {#        {% else %}#}
+  {#          <input type="submit" value="Add Food">#}
+  {#        {% endif %}#}
+  {#        {% if 'recipe' in request.resolver_match.route %}#}
+  {#          <input type="text" name="next-food-search">#}
+  {#          <input type="submit" value="Add Another Item" name="recipe-add-another">#}
+  {#        {% endif %}#}
+  {#      </form>#}
+  {#      <div class="p-8">#}
+  {#        {% include "snippets/food_detail_snippet.html" with fooditem=food %}#}
+  {#      </div>#}
+  {#    </div>#}
+  {#  </div>#}
 
-  <form method="POST">
-    {% csrf_token %}
-    <input type="hidden" value="{{ food }}" name="food">
-    {{ form.as_p }}
-    {% if object %}
-      <input type="submit" value="Edit Food">
-    {% else %}
-      <input type="submit" value="Add Food">
-    {% endif %}
-    {% if 'recipe' in request.resolver_match.route %}
-      <input type="text" name="next-food-search">
-      <input type="submit" value="Add Another Item" name="recipe-add-another">
-    {% endif %}
-  </form>
+
 {% endblock content %}

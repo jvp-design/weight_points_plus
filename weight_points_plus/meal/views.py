@@ -50,9 +50,33 @@ class BaseMealFoodEditView:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["food"] = self.get_food()
-        context["hello"] = "world"
         context["meal"] = self.get_meal()
         context["date"] = self.get_meal().day.date
+        items = [
+            dict(lookup="name", display="Name"),
+            dict(lookup="food_item_type", display="Food/Recipe"),
+            dict(lookup="fat", display="Fat"),
+            dict(lookup="carbs", display="Carbs"),
+            dict(lookup="fiber", display="Fiber"),
+            dict(lookup="protein", display="Protein"),
+            dict(lookup="serving_size", display="Serving Size"),
+            dict(lookup="serving_unit", display="Serving Unit"),
+            dict(lookup="conversion_unit_weight", display="Weight Conversion Unit"),
+            dict(lookup="conversion_unit_volume", display="Volume Conversion Unit"),
+            dict(
+                lookup="conversion_weight_to_volume",
+                display="Weight-to-Volume Conversion Factor",
+            ),
+            dict(lookup="notes", display="Notes"),
+            dict(lookup="points_per_serving", display="Points Per Serving"),
+        ]
+        context["food_item_fields"] = []
+        for item in items:
+            lookup = getattr(context["food"], item["lookup"])
+            if lookup is not None:
+                context["food_item_fields"].append(
+                    dict(lookup=lookup, display=item["display"])
+                )
         return context
 
     def get_form_class(self):

@@ -56,6 +56,10 @@ module.exports = {
 			transitionDuration: {
 				0: '0ms',
 				2000: '2000ms'
+			},
+			flex: {
+				'2': '2 2 0%',
+				'3': '3 3 0%'
 			}
 		}
 	},
