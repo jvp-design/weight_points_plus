@@ -48,7 +48,7 @@ class FoodItem(models.Model):
         unique_together = ("user", "name")
 
     def __str__(self):
-        return f"{self.food_item_type.title()}, {self.name}"
+        return f"({self.food_item_type.title()}) {self.name}"
 
 
 class FoodItemInstance(models.Model):

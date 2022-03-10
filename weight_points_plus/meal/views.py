@@ -90,14 +90,14 @@ class BaseMealFoodEditView:
                             lambda x: x[0] == "Weight",
                             form.base_fields["serving_unit"].choices,
                         )
-                    )
+                    )[0][1]
                 elif is_volume_serving(food.serving_unit):
                     choices = list(
                         filter(
                             lambda x: x[0] == "Volume",
                             form.base_fields["serving_unit"].choices,
                         )
-                    )
+                    )[0][1]
                 elif is_each_serving(food.serving_unit):
                     choices = list(
                         filter(
@@ -106,8 +106,18 @@ class BaseMealFoodEditView:
                         )
                     )
                 else:
-                    choices = form.base_fields["serving_unit"].choices
-                form.base_fields["serving_unit"].choices = choices
+                    choices = []
+                    for choice in form.base_fields["serving_unit"].choices:
+                        if choice[0] != "":
+                            choices.extend([x[1] for x in choice[1]])
+            else:
+                choices = []
+                for choice in form.base_fields["serving_unit"].choices:
+                    if choice[0] in ["Weight", "Volume"]:
+                        choices.extend([x for x in choice[1]])
+                    else:
+                        choices.append(choice)
+            form.base_fields["serving_unit"].choices = choices
             form.base_fields["serving_unit"].initial = food.serving_unit
         return form
 

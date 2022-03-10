@@ -22,7 +22,7 @@
       aria-describedby="{{ id }}-field"
       {% if format %}
       value="{{ value|date:format }}"
-      {% else %}
+      {% elif value is not None %}
       value="{{ value }}"
       {% endif %}
     >

@@ -28,6 +28,11 @@
         </div>
       </div>
       <ul role="list" class="divide-y divide-gray-200">
+      {% if not fooditem_list %}
+        <span class="text-gray-700">
+        Your search for "{{ request.GET.name }}" returned no results. Please search again.
+        </span>
+      {% else %}
         {% for food in fooditem_list %}
           <li class="py-4">
             <div class="ml-3 flex justify-between">
@@ -67,6 +72,7 @@
             </div>
           </li>
         {% endfor %}
+      {% endif %}
       </ul>
     </div>
 

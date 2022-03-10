@@ -15,7 +15,7 @@
             <tr>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Food</th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Points</th>
+              <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Points</th>
               <th scope="col" class="relative px-6 py-3">
                 <span class="sr-only">Edit or Remove</span>
               </th>
@@ -28,7 +28,7 @@
                 <tr class="{% if forloop.counter0|divisibleby:2 %}bg-white{% else %}bg-gray-50{% endif %}">
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ item.food.name }}</td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.serving_size}} {{ item.get_serving_unit_display }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.points }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">{{ item.points }}</td>
                   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <a href="{% url 'meal:update-food-item' meal.pk item.pk %}" class="text-primary hover:bg-primary-darken mx-2">Edit</a>
                     <a href="{% url 'meal:delete-food-item' meal.pk item.pk %}" class="text-primary hover:bg-primary-darken mx-2">Remove</a>
