@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <!-- This example requires Tailwind CSS v2.0+ -->
-  {#          {% include "snippets/food_detail_snippet.html" with fooditem=food %}#}
   <div class="bg-white shadow overflow-hidden sm:rounded-lg max-w-4xl mx-auto">
     <div class="px-4 py-5 sm:px-6">
       <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -21,9 +19,11 @@
       </h3>
       <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ food.name }}</p>
     </div>
-    <div class="border-t border-gray-200 px-4 py-5 sm:p-0 flex justify-between">
-      <div class="flex-2">blah</div>
-      <dl class="sm:divide-y sm:divide-gray-200 border-l border-gray-200 flex-3">
+    <div class="border-t border-gray-200 px-4 py-5 sm:p-0 flex flex-col sm:flex-row sm:flex-2 sm:justify-between">
+      <form class="flex-2 px-2 sm:px-6 sm:pt-4 space-y-4 sm:space-y-2">
+        {% include "snippets/functional/text_field.html" with id=form.serving_size.id_for_label name=form.serving_size.html_name label=form.serving_size.label errors=form.serving_size.errors value=form.serving_size.value required=form.serving_size.field.required %}
+        {% include "snippets/functional/select_field.html" with  id=form.serving_unit.id_for_label name=form.serving_unit.html_name label=form.serving_unit.label errors=form.serving_unit.errors selected=form.serving_unit.value options=form.fields.serving_unit.choices required=form.serving_unit.field.required %}      </form>
+      <dl class="mt-8 sm:mt-0 border-t sm:divide-y sm:divide-gray-200 sm:border-l border-gray-200 sm:flex-3">
         {% for field in food_item_fields %}
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt class="text-sm font-medium text-gray-500">{{ field.display}}</dt>
