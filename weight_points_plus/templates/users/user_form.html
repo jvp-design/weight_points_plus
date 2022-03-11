@@ -17,7 +17,6 @@
             <div class="text-red-600">
               {{ form.non_field_errors }}
             </div>
-            {{ form.timezone.value }}
             {% include "snippets/functional/text_field.html" with class="sm:w-3/4" id=form.name.id_for_label name=form.name.html_name label=form.name.label errors=form.name.errors value=form.name.value required=form.name.field.required %}
             {% include "snippets/functional/text_field.html" with class="sm:w-3/4" id=form.weight.id_for_label name=form.weight.html_name label=form.weight.label errors=form.weight.errors value=form.weight.value required=form.weight.field.required %}
             {% include "snippets/functional/text_field.html" with class="sm:w-3/4" id=form.height.id_for_label name=form.height.html_name label=form.height.label errors=form.height.errors value=form.height.value required=form.height.field.required %}

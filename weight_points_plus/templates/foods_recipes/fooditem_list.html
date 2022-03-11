@@ -22,63 +22,84 @@
           </div>
         </div>
       </div>
+      <div class="sm:flex sm:justify-between text-sm text-gray-700 pt-2 sm:pt-4">
+      <span>
+        {% if request.GET.user_created is None %}
+          Showing all foods.
+          <a href="?user_created=true{% if request.GET.name %}&name={{ request.GET.name }}{% endif %}" class="text-primary hover:bg-primary-darken px-1">Show only your foods</a>
+        {% elif request.GET.user_created %}
+          Showing only your foods.
+          <a href="?{% if request.GET.name %}name={{ request.GET.name }}{% endif %}" class="text-primary hover:bg-primary-darken px-1">Show all foods</a>
+        {% else %}
+          Showing only system foods.
+          <a href="?{% if request.GET.name %}name={{ request.GET.name }}{% endif %}" class="text-primary hover:bg-primary-darken px-1">Show all foods</a>
+        {% endif %}
+      </span>
+
+{#      Change this link to handle recipes too #}
+      <a href="{% url 'food:create' %}" class="text-primary hover:bg-primary-darken">Add a New Food</a>
+      </div>
       <div class="relative py-4">
         <div class="absolute inset-0 flex items-center" aria-hidden="true">
           <div class="w-full border-t border-gray-300"></div>
         </div>
       </div>
       <ul role="list" class="divide-y divide-gray-200">
-      {% if not fooditem_list %}
-        <span class="text-gray-700">
+        {% if not fooditem_list %}
+          <span class="text-gray-700">
         Your search for "{{ request.GET.name }}" returned no results. Please search again.
         </span>
-      {% else %}
-        {% for food in fooditem_list %}
-          <li class="py-4">
-            <div class="ml-3 flex justify-between">
-              {% if 'recipe' in request.resolver_match.route and view.kwargs.recipe_pk is not None %}
-                <span class="pr-2">{{ food }}</span>
-                <a href="{% url 'recipe:add-food' view.kwargs.recipe_pk %}?food={{ food.pk }}" class="pl-2 text-primary hover:bg-primary-darken">
-                  Add
-                  <svg class="h-5 w-5 text-gray-400 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                  </svg>
-                </a>
-              {% elif 'meal' in request.resolver_match.route %}
-                <span class="pr-2">{{ food }}</span>
-                <a href="{% url 'meal:add-food-item' view.kwargs.meal_pk %}?food={{ food.pk }}" class="pl-2 text-primary hover:bg-primary-darken">
-                  Add
-                  <svg class="h-5 w-5 text-gray-400 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                  </svg>
-                </a>
-              {% else %}
-                {% if food.food_item_type == 'food' %}
-                  <a href="{% url 'food:detail' food.pk %}">{{ food }}</a>
-                  {% if food.user == request.user %}->
-                    <a href="{% url 'food:update' food.pk %}">Edit</a>
-                    <a href="{% url 'food:delete' food.pk %}">Delete</a>
-                  {% endif %}
+        {% else %}
+          {% for food in fooditem_list %}
+            <li class="py-4">
+              <div class="ml-3 flex justify-between">
+                {% if 'recipe' in request.resolver_match.route and view.kwargs.recipe_pk is not None %}
+                  <span class="pr-2">{{ food }}</span>
+                  <a href="{% url 'recipe:add-food' view.kwargs.recipe_pk %}?food={{ food.pk }}" class="pl-2 text-primary hover:bg-primary-darken">
+                    Add
+                    <svg class="h-5 w-5 text-gray-400 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </a>
+                {% elif 'meal' in request.resolver_match.route %}
+                  <span class="pr-2">{{ food }}</span>
+                  <a href="{% url 'meal:add-food-item' view.kwargs.meal_pk %}?food={{ food.pk }}" class="pl-2 text-primary hover:bg-primary-darken">
+                    Add
+                    <svg class="h-5 w-5 text-gray-400 inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                  </a>
                 {% else %}
-                  <a href="{% url 'recipe:detail' food.pk %}">{{ food }}</a>
-                  {% if food.user == request.user %}->
-                    <a href="{% url 'recipe:update' food.pk %}">Edit</a>
-                    <a href="{% url 'recipe:delete' food.pk %}">Delete</a>
+                  {% if food.food_item_type == 'food' %}
+                    <a href="{% url 'food:detail' food.pk %}">{{ food }}</a>
+                    {% if food.user == request.user %}
+                      <span>
+                        <a href="{% url 'food:update' food.pk %}" class="text-primary hover:bg-primary-darken px-1">Edit</a>
+                        <a href="{% url 'food:delete' food.pk %}" class="text-primary hover:bg-primary-darken px-1">Delete</a>
+                      </span>
+                    {% endif %}
+                  {% else %}
+                    <a href="{% url 'recipe:detail' food.pk %}">{{ food }}</a>
+                    {% if food.user == request.user %}
+                      <span>
+                        <a href="{% url 'recipe:update' food.pk %}" class="text-primary hover:bg-primary-darken px-1">Edit</a>
+                        <a href="{% url 'recipe:delete' food.pk %}" class="text-primary hover:bg-primary-darken px-1">Delete</a>
+                      </span>
+                    {% endif %}
                   {% endif %}
                 {% endif %}
-              {% endif %}
-              {#              <p class="text-sm font-medium text-gray-900">Calvin Hawkins</p>#}
-              {#              <p class="text-sm text-gray-500">calvin.hawkins@example.com</p>#}
-            </div>
-          </li>
-        {% endfor %}
-      {% endif %}
+                {#              <p class="text-sm font-medium text-gray-900">Calvin Hawkins</p>#}
+                {#              <p class="text-sm text-gray-500">calvin.hawkins@example.com</p>#}
+              </div>
+            </li>
+          {% endfor %}
+        {% endif %}
       </ul>
     </div>
 
     <!-- This example requires Tailwind CSS v2.0+ -->
     <!-- This example requires Tailwind CSS v2.0+ -->
-    <nav class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6" aria-label="Pagination">
+    <nav class="bg-gray-100 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6" aria-label="Pagination">
       <div class="hidden sm:block">
         <p class="text-sm text-gray-700">
           Page
@@ -90,15 +111,15 @@
       </div>
       <div class="flex-1 flex justify-between sm:justify-end">
         {% if page_obj.has_previous %}
-          <a href="?page={{ page_obj.previous_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> Previous </a>
+          <a href="?page={{ page_obj.previous_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-50"> Previous </a>
         {% else %}
-          <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 pointer-events-none"> Previous </span>
+          <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-50 pointer-events-none"> Previous </span>
 
         {% endif %}
         {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> Next </a>
+          <a href="?page={{ page_obj.next_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-50"> Next </a>
         {% else %}
-          <span class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 pointer-events-none"> Next </span>
+          <span class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-50 pointer-events-none"> Next </span>
         {% endif %}
       </div>
     </nav>

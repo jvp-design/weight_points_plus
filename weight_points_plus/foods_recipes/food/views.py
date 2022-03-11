@@ -35,17 +35,6 @@ class AllFoodsListView(FoodItemListView):
 all_food_list_view = AllFoodsListView.as_view()
 
 
-class UserFoodListView(FoodItemListView):
-    def get_queryset(self) -> QuerySet[FoodItem]:
-        self.queryset = FoodItem.objects.filter(
-            Q(user=self.request.user) & Q(food_item_type="food")
-        )
-        return super().get_queryset()
-
-
-user_food_list_view = UserFoodListView.as_view()
-
-
 class FoodDetailView(UserHasAllInfoMixin, UserCanViewMixin, DetailView):
     model = FoodItem
 
@@ -59,6 +48,19 @@ class FoodInputMixin:
 
     def get_success_url(self):
         return reverse("food:list")
+
+    def get_form_class(self):
+        form = super().get_form_class()
+        choices = []
+        for choice in form.base_fields["serving_unit"].choices:
+            if choice[0] in ["Weight", "Volume"]:
+                choices.extend([x for x in choice[1]])
+            else:
+                choices.append(choice)
+        form.base_fields["serving_unit"].choices = choices
+        form.base_fields["conversion_unit_weight"].choices = choices
+        form.base_fields["conversion_unit_volume"].choices = choices
+        return form
 
 
 class FoodCreateView(UserHasAllInfoMixin, FoodInputMixin, CreateView):
@@ -76,6 +78,11 @@ food_create_view = FoodCreateView.as_view()
 
 
 class FoodUpdateView(UserHasAllInfoMixin, UserIsOwnerMixin, FoodInputMixin, UpdateView):
+    def get_queryset(self):
+        return FoodItem.objects.filter(
+            food_item_type="food", user_created=True, user=self.request.user
+        )
+
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()

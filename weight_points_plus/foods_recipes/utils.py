@@ -17,7 +17,7 @@ class FoodItemFilter(django_filters.FilterSet):
 
     class Meta:
         model = FoodItem
-        fields = ["name"]
+        fields = ["name", "user_created"]
 
 
 class FoodItemListView(UserHasAllInfoMixin, FilterView):
