@@ -40,6 +40,4 @@ class FoodForm(forms.ModelForm):
             "conversion_unit_volume",
             "conversion_weight_to_volume",
             "notes",
-            "user",
-            "food_item_type",
         ]

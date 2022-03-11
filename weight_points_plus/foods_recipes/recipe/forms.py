@@ -42,6 +42,4 @@ class RecipeForm(forms.ModelForm):
             "conversion_unit_weight",
             "conversion_unit_volume",
             "conversion_weight_to_volume",
-            "user",
-            "food_item_type",
         ]

@@ -31,11 +31,58 @@ class AllFoodsListView(FoodItemListView):
         )
         return super().get_queryset()
 
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["food_item_type"] = "food"
+        context["food_item_type_plural"] = "foods"
+        context["create_url_string"] = "food:create"
+        context["add_item_url"] = None
+        if self.kwargs.get("meal_pk") is not None:
+            context["add_item_url"] = reverse(
+                "meal:add-food-item", kwargs={"meal_pk": self.kwargs.get("meal_pk")}
+            )
+        context["detail_url_string"] = "food:detail"
+        context["update_url_string"] = "food:update"
+        context["delete_url_string"] = "food:delete"
+        return context
+
 
 all_food_list_view = AllFoodsListView.as_view()
 
 
-class FoodDetailView(UserHasAllInfoMixin, UserCanViewMixin, DetailView):
+class FoodDetailMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        items = [
+            dict(lookup="food_item_type", display="Food/Recipe"),
+            dict(lookup="fat", display="Fat"),
+            dict(lookup="carbs", display="Carbs"),
+            dict(lookup="fiber", display="Fiber"),
+            dict(lookup="protein", display="Protein"),
+            dict(lookup="serving_size", display="Serving Size"),
+            dict(lookup="serving_unit", display="Serving Unit"),
+            dict(lookup="conversion_unit_weight", display="Weight Conversion Unit"),
+            dict(lookup="conversion_unit_volume", display="Volume Conversion Unit"),
+            dict(
+                lookup="conversion_weight_to_volume",
+                display="Weight-to-Volume Conversion Factor",
+            ),
+            dict(lookup="notes", display="Notes"),
+            dict(lookup="points_per_serving", display="Points Per Serving"),
+        ]
+        context["food_item_fields"] = []
+        for item in items:
+            lookup = getattr(self.get_object(), item["lookup"])
+            if lookup is not None:
+                context["food_item_fields"].append(
+                    dict(lookup=lookup, display=item["display"])
+                )
+        return context
+
+
+class FoodDetailView(
+    UserHasAllInfoMixin, UserCanViewMixin, FoodDetailMixin, DetailView
+):
     model = FoodItem
 
 
@@ -69,6 +116,8 @@ class FoodCreateView(UserHasAllInfoMixin, FoodInputMixin, CreateView):
         if form.is_valid():
             self.object = form.save(commit=False)
             self.object.points_per_serving = calculate_food_points(self.object)
+            self.object.user = request.user
+            self.object.food_item_type = "food"
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -79,9 +128,7 @@ food_create_view = FoodCreateView.as_view()
 
 class FoodUpdateView(UserHasAllInfoMixin, UserIsOwnerMixin, FoodInputMixin, UpdateView):
     def get_queryset(self):
-        return FoodItem.objects.filter(
-            food_item_type="food", user_created=True, user=self.request.user
-        )
+        return FoodItem.objects.filter(food_item_type="food")
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -96,7 +143,9 @@ class FoodUpdateView(UserHasAllInfoMixin, UserIsOwnerMixin, FoodInputMixin, Upda
 food_update_view = FoodUpdateView.as_view()
 
 
-class FoodDeleteView(UserHasAllInfoMixin, UserIsOwnerMixin, DeleteView):
+class FoodDeleteView(
+    UserHasAllInfoMixin, UserIsOwnerMixin, FoodDetailMixin, DeleteView
+):
     model = FoodItem
     success_url = reverse_lazy("food:list")
 

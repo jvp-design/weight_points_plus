@@ -8,7 +8,6 @@ app_name = "recipe"
 
 urlpatterns = [
     path("", view=views.all_recipe_list_view, name="list"),
-    path("mine", view=views.user_recipe_list_view, name="mine"),
     path("create", view=views.recipe_create_view, name="create"),
     path("<int:pk>/update", view=views.recipe_update_view, name="update"),
     path("<int:pk>/delete", view=views.recipe_delete_view, name="delete"),

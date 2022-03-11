@@ -87,3 +87,9 @@
 
 
 {% endblock content %}
+
+{% block inline_javascript %}
+  <script>
+    {{ form.serving_size.id_for_label }}.focus()
+  </script>
+{% endblock inline_javascript %}

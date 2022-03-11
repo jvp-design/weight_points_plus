@@ -2,9 +2,15 @@
 
 {% block content %}
   <form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    {{ form }}
-    <button type="submit">Confirm</button>
-    <a href="{{ view.success_url }}">Cancel</a>
-  </form>
+  <div class="max-w-2xl mx-auto">
+  {% include 'snippets/food_detail_snippet.html' %}
+  {% if fooditem.user_created and fooditem.user == request.user %}
+<div class="sm:flex pt-2">
+  <a href="{% url 'food:detail' view.kwargs.pk %}" class="btn-secondary sm:mx-2 my-2 sm:my-0">Cancel</a>
+  <input type="submit" class="btn-primary sm:mx-2 my-2 sm:my-0" value="Confirm Delete" />
+</div>
+    </div>
+    </form>
+  {% endif %}
+
 {% endblock content %}

@@ -1,3 +1,5 @@
+from typing import Any, Dict
+
 from django.db.models import QuerySet, Q
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponseNotAllowed
@@ -34,6 +36,17 @@ class MealFoodListView(FoodItemListView):
             Q(user_created=False) | Q(user=self.request.user)
         )
         return super().get_queryset()
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["add_item_url"] = None
+        context["food_item_type"] = "item"
+        context["food_item_type_plural"] = "items"
+        if self.kwargs.get("meal_pk") is not None:
+            context["add_item_url"] = reverse(
+                "meal:add-food-item", kwargs={"meal_pk": self.kwargs.get("meal_pk")}
+            )
+        return context
 
 
 meal_food_list_view = MealFoodListView.as_view()

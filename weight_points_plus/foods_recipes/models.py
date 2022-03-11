@@ -35,13 +35,17 @@ class FoodItem(models.Model):
     restaurant = models.CharField(max_length=256, null=True, blank=True)
     points_per_serving = models.IntegerField(default=0, blank=True)
     user_created = models.BooleanField(default=True)
-    user = models.ForeignKey("users.User", on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(
+        "users.User", on_delete=models.CASCADE, null=True, blank=True
+    )
     directions = models.TextField(max_length=2048, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     servings_in_recipe = models.FloatField(
-        validators=[MinValueValidator(0.0)], null=True, blank=True
+        validators=[MinValueValidator(0.0)], null=True
     )
-    food_item_type = models.CharField(max_length=8, choices=FoodItemType.choices)
+    food_item_type = models.CharField(
+        max_length=8, choices=FoodItemType.choices, blank=True
+    )
     recipe_items = models.ManyToManyField("FoodItemInstance", blank=True)
 
     class Meta:

@@ -1,3 +1,5 @@
+from typing import Any, Dict
+
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.db.models import QuerySet, Q
@@ -65,19 +67,23 @@ class AllRecipesListView(FoodItemListView):
         )
         return super().get_queryset()
 
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["food_item_type"] = "recipe"
+        context["food_item_type_plural"] = "recipes"
+        context["create_url_string"] = "recipe:create"
+        context["add_item_url"] = None
+        if self.kwargs.get("recipe_pk") is not None:
+            context["add_item_url"] = reverse(
+                "recipe:add-food", kwargs={"recipe_pk": self.kwargs.get("recipe_pk")}
+            )
+        context["detail_url_string"] = "recipe:detail"
+        context["update_url_string"] = "recipe:update"
+        context["delete_url_string"] = "recipe:delete"
+        return context
+
 
 all_recipe_list_view = AllRecipesListView.as_view()
-
-
-class UserRecipeListView(FoodItemListView):
-    def get_queryset(self) -> QuerySet[FoodItem]:
-        self.queryset = FoodItem.objects.filter(
-            Q(user=self.request.user) & Q(food_item_type="recipe")
-        )
-        return super().get_queryset()
-
-
-user_recipe_list_view = UserRecipeListView.as_view()
 
 
 class RecipeDetailView(UserHasAllInfoMixin, UserCanViewMixin, DetailView):
@@ -98,9 +104,28 @@ class RecipeInputMixin:
     def get_success_url(self):
         return reverse("recipe:detail", kwargs={"pk": self.object.pk})
 
+    def get_form_class(self):
+        form = super().get_form_class()
+        choices = []
+        for choice in form.base_fields["serving_unit"].choices:
+            if choice[0] in ["Weight", "Volume"]:
+                choices.extend([x for x in choice[1]])
+            else:
+                choices.append(choice)
+        form.base_fields["serving_unit"].choices = choices
+        return form
+
 
 class RecipeCreateView(UserHasAllInfoMixin, RecipeInputMixin, CreateView):
-    pass
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            self.object = form.save(commit=False)
+            self.object.user = request.user
+            self.object.food_item_type = "recipe"
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 
 recipe_create_view = RecipeCreateView.as_view()
@@ -167,14 +192,14 @@ class BaseRecipeFoodEditView:
                             lambda x: x[0] == "Weight",
                             form.base_fields["serving_unit"].choices,
                         )
-                    )
+                    )[0][1]
                 elif is_volume_serving(food.serving_unit):
                     choices = list(
                         filter(
                             lambda x: x[0] == "Volume",
                             form.base_fields["serving_unit"].choices,
                         )
-                    )
+                    )[0][1]
                 elif is_each_serving(food.serving_unit):
                     choices = list(
                         filter(

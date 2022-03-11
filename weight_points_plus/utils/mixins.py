@@ -1,10 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
 
 
-class UserHasAllInfoMixin(LoginRequiredMixin):
+class UserHasAllInfoMixin(AccessMixin):
     def dispatch(self, request, *args, **kwargs):
-        # Check if the user is authenticated. This is a copy-paste from LoginRequiredMixin
-        if not request.user.has_input_all_fields:
+        if not request.user.is_authenticated or not request.user.has_input_all_fields:
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
 
