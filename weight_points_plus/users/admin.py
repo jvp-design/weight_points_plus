@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 from weight_points_plus.users.forms import UserAdminChangeForm, UserAdminCreationForm
+from weight_points_plus.users.models import Weight
 
 User = get_user_model()
 
@@ -20,7 +21,6 @@ class UserAdmin(auth_admin.UserAdmin):
             _("Weight Tracking Info"),
             {
                 "fields": (
-                    "weight",
                     "height",
                     "sex",
                     "weigh_in_day",
@@ -48,3 +48,11 @@ class UserAdmin(auth_admin.UserAdmin):
     )
     list_display = ["username", "name", "is_superuser"]
     search_fields = ["name"]
+
+
+@admin.register(Weight)
+class WeightAdmin(admin.ModelAdmin):
+    list_display = ["username", "date_recorded", "weight"]
+
+    def username(self, obj):
+        return obj.user.username

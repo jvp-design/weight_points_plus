@@ -50,7 +50,6 @@ class UserUpdateForm(forms.ModelForm):
         model = User
         fields = [
             "name",
-            "weight",
             "height",
             "sex",
             "weigh_in_day",

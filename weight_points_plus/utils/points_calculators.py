@@ -1,3 +1,4 @@
+from decimal import Decimal
 from typing import Optional, Union
 
 from pydantic import BaseModel
@@ -11,8 +12,7 @@ from weight_points_plus.utils.misc import (
     is_volume_serving,
     is_each_serving,
 )
-from weight_points_plus.users.models import User
-
+from weight_points_plus.users.models import User, Weight
 
 unit_dict = {
     "gm": {"kg": 0.001, "oz": 0.0353, "lb": 0.0022, "gm": 1.0},
@@ -129,11 +129,11 @@ class NutritionItem(BaseModel):
     protein: float
 
 
-def calculate_daily_points(user: User) -> int:
+def calculate_daily_points(user: User, weight: Decimal) -> int:
     MIN_POINTS = 26
     MAX_POINTS = 71
 
-    weight = float(user.weight) * 0.453592
+    weight = float(weight) * 0.453592
     height = user.height * 0.0254
 
     if user.sex == User.SexChoices.MALE:

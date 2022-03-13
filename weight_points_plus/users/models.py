@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime, date
 import pytz
 
 from dateutil.relativedelta import relativedelta
@@ -37,7 +37,6 @@ class User(AbstractUser):
     name = CharField(_("Name of User"), blank=True, max_length=255)
     first_name = None  # type: ignore
     last_name = None  # type: ignore
-    weight = models.FloatField(null=True)
     height = models.IntegerField(null=True)
     sex = models.CharField(choices=SexChoices.choices, max_length=6, null=True)
     weigh_in_day = models.IntegerField(
@@ -49,8 +48,8 @@ class User(AbstractUser):
         choices=NursingChoices.choices, default=NursingChoices.NONE, null=True
     )
     maintenance_mode = models.BooleanField(default=False)
-    has_been_updated = models.BooleanField(default=False)
     latest_date = models.DateField(null=True)
+    first_weight_recorded = models.BooleanField(default=False)
 
     TIMEZONES = tuple(zip(pytz.all_timezones, pytz.all_timezones))
 
@@ -64,7 +63,6 @@ class User(AbstractUser):
     def has_input_all_fields(self):
         return all(
             [
-                self.weight is not None,
                 self.height is not None,
                 self.sex is not None,
                 self.weigh_in_day is not None,
@@ -83,3 +81,10 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"username": self.username})
+
+
+class Weight(models.Model):
+    weight = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    date_recorded = models.DateTimeField(auto_now_add=True)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

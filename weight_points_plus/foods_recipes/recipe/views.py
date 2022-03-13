@@ -86,7 +86,43 @@ class AllRecipesListView(FoodItemListView):
 all_recipe_list_view = AllRecipesListView.as_view()
 
 
-class RecipeDetailView(UserHasAllInfoMixin, UserCanViewMixin, DetailView):
+class RecipeDetailMixin:
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+
+        items = [
+            dict(lookup="food_item_type", display="Food/Recipe"),
+            dict(lookup="fat", display="Fat"),
+            dict(lookup="carbs", display="Carbs"),
+            dict(lookup="fiber", display="Fiber"),
+            dict(lookup="protein", display="Protein"),
+            dict(lookup="serving_size", display="Serving Size"),
+            dict(lookup="serving_unit", display="Serving Unit"),
+            dict(lookup="conversion_unit_weight", display="Weight Conversion Unit"),
+            dict(lookup="conversion_unit_volume", display="Volume Conversion Unit"),
+            dict(
+                lookup="conversion_weight_to_volume",
+                display="Weight-to-Volume Conversion Factor",
+            ),
+            dict(lookup="notes", display="Notes"),
+            dict(lookup="directions", display="Directions"),
+            dict(lookup="url", display="Url"),
+            dict(lookup="servings_in_recipe", display="Servings In Recipe"),
+            dict(lookup="points_per_serving", display="Points Per Serving"),
+        ]
+        context["food_item_fields"] = []
+        for item in items:
+            lookup = getattr(self.get_object(), item["lookup"])
+            if lookup is not None:
+                context["food_item_fields"].append(
+                    dict(lookup=lookup, display=item["display"])
+                )
+        return context
+
+
+class RecipeDetailView(
+    UserHasAllInfoMixin, UserCanViewMixin, RecipeDetailMixin, DetailView
+):
     model = FoodItem
     template_name = "foods_recipes/recipe_detail.html"
 
@@ -140,9 +176,18 @@ class RecipeUpdateView(
 recipe_update_view = RecipeUpdateView.as_view()
 
 
-class RecipeDeleteView(UserHasAllInfoMixin, UserIsOwnerMixin, DeleteView):
+class RecipeDeleteView(
+    UserHasAllInfoMixin, UserIsOwnerMixin, RecipeDetailMixin, DeleteView
+):
     model = FoodItem
     success_url = reverse_lazy("recipe:list")
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["cancel_url"] = reverse(
+            "recipe:detail", kwargs={"pk": self.kwargs.get("pk")}
+        )
+        return context
 
 
 recipe_delete_view = RecipeDeleteView.as_view()
@@ -158,6 +203,17 @@ class RecipeFoodListView(FoodItemListView):
         )
         return super().get_queryset()
 
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["food_item_type"] = "food"
+        context["food_item_type_plural"] = "foods"
+        context["add_item_url"] = None
+        if self.kwargs.get("recipe_pk") is not None:
+            context["add_item_url"] = reverse(
+                "recipe:add-food", kwargs={"recipe_pk": self.kwargs.get("recipe_pk")}
+            )
+        return context
+
 
 recipe_food_list_view = RecipeFoodListView.as_view()
 
@@ -165,11 +221,6 @@ recipe_food_list_view = RecipeFoodListView.as_view()
 class BaseRecipeFoodEditView:
     model = FoodItemInstance
     fields = ["serving_size", "serving_unit"]
-
-    def get_queryset(self):
-        return FoodItem.objects.filter(
-            Q(user_created=False) | Q(user=self.request.user)
-        )
 
     def get_recipe(self):
         qs = FoodItem.objects.filter(user=self.request.user, food_item_type="recipe")
@@ -179,6 +230,31 @@ class BaseRecipeFoodEditView:
         context = super().get_context_data(**kwargs)
         context["food"] = self.get_food()
         context["recipe_name"] = self.get_recipe().name
+        items = [
+            dict(lookup="name", display="Name"),
+            dict(lookup="food_item_type", display="Food/Recipe"),
+            dict(lookup="fat", display="Fat"),
+            dict(lookup="carbs", display="Carbs"),
+            dict(lookup="fiber", display="Fiber"),
+            dict(lookup="protein", display="Protein"),
+            dict(lookup="serving_size", display="Serving Size"),
+            dict(lookup="serving_unit", display="Serving Unit"),
+            dict(lookup="conversion_unit_weight", display="Weight Conversion Unit"),
+            dict(lookup="conversion_unit_volume", display="Volume Conversion Unit"),
+            dict(
+                lookup="conversion_weight_to_volume",
+                display="Weight-to-Volume Conversion Factor",
+            ),
+            dict(lookup="notes", display="Notes"),
+            dict(lookup="points_per_serving", display="Points Per Serving"),
+        ]
+        context["food_item_fields"] = []
+        for item in items:
+            lookup = getattr(context["food"], item["lookup"])
+            if lookup is not None:
+                context["food_item_fields"].append(
+                    dict(lookup=lookup, display=item["display"])
+                )
         return context
 
     def get_form_class(self):
@@ -226,7 +302,15 @@ class BaseRecipeFoodEditView:
 
 class RecipeFoodAddView(UserHasAllInfoMixin, BaseRecipeFoodEditView, CreateView):
     def get_food(self):
-        return get_object_or_404(self.get_queryset(), pk=self.request.GET.get("food"))
+        qs = FoodItem.objects.filter(
+            Q(user_created=False) | (Q(user_created=True) & Q(user=self.request.user))
+        )
+        return get_object_or_404(qs, pk=self.request.GET.get("food"))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["submit_button_text"] = "Add Food"
+        return context
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
@@ -270,9 +354,17 @@ recipe_food_add_view = RecipeFoodAddView.as_view()
 
 
 class RecipeFoodUpdateView(UserHasAllInfoMixin, BaseRecipeFoodEditView, UpdateView):
+    def get_queryset(self):
+        return self.get_recipe().recipe_items.all()
+
     def get_food(self):
         food_item = get_object_or_404(self.get_queryset(), pk=self.kwargs.get("pk"))
         return food_item.food
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["submit_button_text"] = "Update Food"
+        return context
 
     def post(self, request, *args, **kwargs):
         obj = self.get_object()

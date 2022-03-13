@@ -36,9 +36,6 @@ urlpatterns = [
         include("weight_points_plus.foods_recipes.recipe.urls", namespace="recipe"),
     ),
     path("meal/", include("weight_points_plus.meal.urls", namespace="meal")),
-    path(
-        "activity/", include("weight_points_plus.activity.urls", namespace="activity")
-    ),
     path("__reload__/", include("django_browser_reload.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -85,6 +85,9 @@ class FoodDetailView(
 ):
     model = FoodItem
 
+    def get_permission_denied_url(self):
+        return reverse("food:list")
+
 
 food_detail_view = FoodDetailView.as_view()
 
@@ -148,6 +151,13 @@ class FoodDeleteView(
 ):
     model = FoodItem
     success_url = reverse_lazy("food:list")
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["cancel_url"] = reverse(
+            "food:detail", kwargs={"pk": self.kwargs.get("pk")}
+        )
+        return context
 
 
 food_delete_view = FoodDeleteView.as_view()

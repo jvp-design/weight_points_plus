@@ -25,9 +25,6 @@ urlpatterns = [
     path("<slug:date>/next/", view=views.next_day_detail_view, name="next"),
     path("<slug:date>/prev/", view=views.prev_day_detail_view, name="prev"),
     path(
-        "<slug:date>/activity/", view=views.day_activity_list_view, name="activity-list"
-    ),
-    path(
         "<slug:date>/activity/add/",
         view=views.day_activity_add_view,
         name="activity-add",

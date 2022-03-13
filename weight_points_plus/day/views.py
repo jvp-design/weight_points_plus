@@ -3,23 +3,20 @@ from typing import Any, Dict
 from pytz import timezone
 
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import models
-from django.db.models import Q, QuerySet
+from django.db.models import Q
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
-from django.utils import timezone as dj_timezone
 
-from weight_points_plus.activity.models import ActivityInstance, Activity
-from weight_points_plus.activity.utils import calculate_activity_points
-from weight_points_plus.activity.views import ActivityListView
-from weight_points_plus.day.models import Day
-from weight_points_plus.utils.mixins import UserHasAllInfoMixin
+# from weight_points_plus.activity.models import ActivityInstance, Activity
+from weight_points_plus.day.utils import calculate_activity_points
+from weight_points_plus.day.models import Day, Activity
+from weight_points_plus.users.models import Weight
+from weight_points_plus.utils.mixins import UserHasAllInfoMixin, UserIsOwnerMixin
 from weight_points_plus.utils.time_tracking import backfill_weeks
 from weight_points_plus.week.utils import update_weekly_excess_points
 
@@ -38,7 +35,7 @@ def update_daily_points(day: Day) -> None:
 
 def update_daily_activity_points(day: Day) -> None:
     points = 0
-    for item in day.activityinstance_set.all():
+    for item in day.activity_set.all():
         points += calculate_activity_points(item, day)
     day.activity_points = points
     day.save()
@@ -58,9 +55,15 @@ class GetADayView(UserHasAllInfoMixin, DetailView):
             day = kwargs.get("object")
         else:
             day = self.get_object()
-        context["is_current_day"] = (
-            day.date == datetime.now(tz=timezone(self.request.user.timezone)).date()
-        )
+        today = datetime.now(tz=timezone(self.request.user.timezone)).date()
+        try:
+            context["record_weight_trigger"] = (
+                not self.get_queryset().get(date=today).week.weight_recorded
+            )
+        except Day.DoesNotExist:
+            context["record_weight_trigger"] = False
+
+        context["is_current_day"] = day.date == today
         context["next_day_is_available"] = True
         context["prev_day_is_available"] = True
         if (
@@ -82,12 +85,22 @@ class GetADayView(UserHasAllInfoMixin, DetailView):
         ):
             context["prev_day_is_available"] = False
         activities = []
-        for item in day.activityinstance_set.all():
+        for item in day.activity_set.all():
             activities.append(
                 {**item.__dict__, "points": calculate_activity_points(item, day)}
             )
         context["activities"] = activities
         return context
+
+    def get(self, request, *args, **kwargs):
+        if len(Weight.objects.filter(user=request.user)) == 0:
+            messages.add_message(
+                request,
+                messages.INFO,
+                "You need to record your weight before you can continue.",
+            )
+            return HttpResponseRedirect(reverse("users:record-weight"))
+        return super().get(request, *args, **kwargs)
 
 
 class DayDetailView(GetADayView):
@@ -103,17 +116,23 @@ class DayDetailView(GetADayView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context["activity_info"] = []
-        for item in self.object.activityinstance_set.all():
+        for item in self.object.activity_set.all():
             context["activity_info"].append(
                 dict(
                     pk=item.pk,
-                    name=item.activity.name,
+                    name=item.name,
                     duration=item.duration,
                     level=item.level,
                     points=calculate_activity_points(item, self.object),
                 )
             )
         return context
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
 
     def render_to_response(
         self, context: Dict[str, Any], **response_kwargs: Any
@@ -139,7 +158,7 @@ class TodayDetailView(GetADayView):
         now = datetime.now(tz=timezone(self.request.user.timezone)).date()
         if (
             not self.request.user.latest_date
-            or (self.request.user.latest_date - now).days < 7
+            or (self.request.user.latest_date - now).days <= 0
         ):
             backfill_weeks(self.request.user)
         try:
@@ -223,74 +242,25 @@ class PrevDayDetailView(GetADayView):
 prev_day_detail_view = PrevDayDetailView.as_view()
 
 
-class DayActivityListView(ActivityListView):
-    def get_queryset(self) -> QuerySet[Activity]:
-        self.queryset = Activity.objects.filter(
-            Q(user_created=False) | Q(user=self.request.user)
-        )
-        return super().get_queryset()
-
-
-day_activity_list_view = DayActivityListView.as_view()
-
-
-class BaseActivityEditView(UserHasAllInfoMixin):
-    model = ActivityInstance
-    fields = ["level", "duration"]
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["activity"] = self.get_activity()
-        return context
-
-
-class DayActivityAddView(BaseActivityEditView, CreateView):
-    model = ActivityInstance
-    fields = ["level", "duration"]
-
-    def get_queryset(self):
-        return Activity.objects.filter(
-            Q(user_created=False) | Q(user=self.request.user)
-        )
-
-    def get_activity(self):
-        return get_object_or_404(
-            self.get_queryset(), pk=self.request.GET.get("activity")
-        )
+class DayActivityAddView(UserHasAllInfoMixin, CreateView):
+    model = Activity
+    fields = ["name", "level", "duration"]
 
     def post(self, request, date=None, *args, **kwargs):
         form = self.get_form()
         qs = Day.objects.filter(user=request.user)
         day = get_object_or_404(qs, date=date)
         if form.is_valid():
-            if (
-                len(
-                    day.activityinstance_set.filter(
-                        activity=self.get_activity(), level=request.POST.get("level")
-                    )
-                )
-                > 0
-            ):
-                messages.add_message(
-                    request,
-                    messages.ERROR,
-                    "That activity with level is already added. Please update it instead of adding it again.",
-                )
-                return HttpResponseRedirect(
-                    reverse("day:detail", kwargs={"date": date})
-                )
-            try:
-                item = ActivityInstance.objects.get(
-                    activity=self.get_activity(),
-                    level=request.POST.get("level"),
-                    duration=request.POST.get("duration"),
-                )
-            except ActivityInstance.DoesNotExist:
-                item = form.save(commit=False)
-                item.activity = self.get_activity()
-                item.save()
-            item.day.add(day)
+            self.object = form.save(commit=False)
+            self.object.user = request.user
+            self.object.day = day
+            self.object.save()
             update_daily_activity_points(day)
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                f'Activity "{self.object.name}" has been added.',
+            )
             return HttpResponseRedirect(
                 reverse("day:detail", kwargs={"date": day.date})
             )
@@ -301,37 +271,29 @@ class DayActivityAddView(BaseActivityEditView, CreateView):
 day_activity_add_view = DayActivityAddView.as_view()
 
 
-class DayActivityUpdateView(BaseActivityEditView, UpdateView):
-    def get_activity(self):
-        activity_instance = get_object_or_404(
-            self.get_queryset(), pk=self.kwargs.get("pk")
-        )
-        return activity_instance.activity
+class DayActivityUpdateView(UserHasAllInfoMixin, UserIsOwnerMixin, UpdateView):
+    model = Activity
+    fields = ["level", "duration"]
 
-    def post(self, request, date=None, *args, **kwargs):
+    def get_queryset(self) -> models.query.QuerySet[Activity]:
+        return Activity.objects.filter(day__date=self.kwargs.get("date"))
+
+    def get_permission_denied_url(self):
+        return reverse("day:detail", kwargs={"date": self.kwargs.get("date")})
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
         form = self.get_form()
-        qs = Day.objects.filter(user=request.user)
-        day = get_object_or_404(qs, pk=date)
-        obj = self.get_object()
-        obj.day.remove(day)
         if form.is_valid():
-            activity = obj.activity
-            try:
-                item = ActivityInstance.objects.get(
-                    activity=activity,
-                    level=request.POST.get("level"),
-                    duration=request.POST.get("duration"),
-                )
-            except ActivityInstance.DoesNotExist:
-                item = form.save(commit=False)
-                item.activity = activity
-                item.save()
-            item.day.add(day)
-            if len(obj.day.all()) == 0:
-                obj.delete()
-            update_daily_activity_points(day)
+            form.save()
+            update_daily_activity_points(self.object.day)
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                f'Activity "{self.object.name}" has been updated.',
+            )
             return HttpResponseRedirect(
-                reverse("day:detail", kwargs={"date": day.date})
+                reverse("day:detail", kwargs={"date": self.object.day.date})
             )
         else:
             return self.form_invalid(form)
@@ -340,17 +302,26 @@ class DayActivityUpdateView(BaseActivityEditView, UpdateView):
 day_activity_update_view = DayActivityUpdateView.as_view()
 
 
-class DayActivityDeleteView(UserHasAllInfoMixin, DeleteView):
-    model = ActivityInstance
+class DayActivityDeleteView(UserHasAllInfoMixin, UserIsOwnerMixin, DeleteView):
+    model = Activity
+
+    def get_queryset(self) -> models.query.QuerySet[Activity]:
+        return Activity.objects.filter(day__date=self.kwargs.get("date"))
+
+    def get_permission_denied_url(self):
+        return reverse("day:detail", kwargs={"date": self.kwargs.get("date")})
 
     def get(self, request, date=None, *args, **kwargs):
-        qs = Day.objects.filter(user=request.user)
-        day = get_object_or_404(qs, date=date)
-        obj = self.get_object()
-        obj.day.remove(day)
-        if len(obj.day.all()) == 0:
-            obj.delete()
+        self.object = self.get_object()
+        day = self.object.day
+        name = self.object.name
+        self.object.delete()
         update_daily_activity_points(day)
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            f'Activity "{name}" has been deleted.',
+        )
         return HttpResponseRedirect(reverse("day:detail", kwargs={"date": day.date}))
 
     @method_decorator(csrf_exempt)

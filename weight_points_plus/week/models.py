@@ -1,7 +1,7 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
+from pytz import timezone
 
 from django.db import models
-from django.utils import timezone
 
 
 class Week(models.Model):
@@ -16,8 +16,10 @@ class Week(models.Model):
 
     @property
     def days_remaining(self) -> int:
-        end_date = self.start_date + timedelta(days=7)
-        return (end_date - timezone.now().date()).days
+        return (
+            self.day_set.last().date
+            - datetime.now(tz=timezone(self.user.timezone)).date()
+        ).days
 
     class Meta:
         unique_together = ("user", "start_date")

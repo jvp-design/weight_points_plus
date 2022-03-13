@@ -1,8 +1,9 @@
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
+from pytz import timezone
 
 from weight_points_plus.day.models import Day
 from weight_points_plus.meal.models import Meal
-from weight_points_plus.users.models import User
+from weight_points_plus.users.models import User, Weight
 from weight_points_plus.utils.points_calculators import calculate_daily_points
 from weight_points_plus.week.models import Week
 
@@ -10,7 +11,7 @@ from weight_points_plus.week.models import Week
 def create_days(start_date: date, user: User, week: Week, num_days: int) -> date:
     if num_days == 0:
         return start_date
-    daily_points = calculate_daily_points(user)
+    daily_points = calculate_daily_points(user, user.weight_set.last().weight)
     dates = [start_date + timedelta(days=i) for i in range(num_days)]
     days = [
         Day(
@@ -35,23 +36,29 @@ def create_days(start_date: date, user: User, week: Week, num_days: int) -> date
 
 
 def create_week(start_date: date, user: User, num_days: int = 7) -> date:
-    week = Week.objects.create(
+    week = Week(
         start_date=start_date,
         weekly_total_points=user.weekly_points,
-        weight=user.weight,
         user=user,
     )
+    if not user.first_weight_recorded:
+        week.weight = user.weight_set.last().weight
+        week.weight_recorded = True
+        user.first_weight_recorded = True
+        user.save()
+    week.save()
     return create_days(start_date, user, week, num_days)
 
 
 def backfill_weeks(user: User) -> None:
     latest_day = Day.objects.filter(user=user).order_by("-date").first()
+    today = datetime.now(tz=timezone(user.timezone)).date()
     if not latest_day:
-        latest_date = date.today() - timedelta(days=7)
+        latest_date = today - timedelta(days=1)
     else:
         latest_date = latest_day.date
     count = 0
-    today = date.today()
+
     if latest_date <= today:
         num_days = (user.weigh_in_day - latest_date.weekday() - 1) % 7
         if num_days == 0:

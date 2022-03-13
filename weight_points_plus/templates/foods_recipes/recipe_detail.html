@@ -1,34 +1,89 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div>name -> {{ fooditem.name }}</div>
-  <div>food_item_type -> {{ fooditem.food_item_type }}</div>
-  <div>fat -> {{ fooditem.fat }}</div>
-  <div>carbs -> {{ fooditem.carbs }}</div>
-  <div>fiber -> {{ fooditem.fiber }}</div>
-  <div>protein -> {{ fooditem.protein }}</div>
-  <div>serving_size -> {{ fooditem.serving_size }}</div>
-  <div>serving_unit -> {{ fooditem.serving_unit }}</div>
-  <div>conversion_unit_weight -> {{ fooditem.conversion_unit_weight }}</div>
-  <div>conversion_unit_volume -> {{ fooditem.conversion_unit_volume }}</div>
-  <div>conversion_weight_to_volume -> {{ fooditem.conversion_weight_to_volume }}</div>
-  <div>notes -> {{ fooditem.notes }}</div>
-  <div>points_per_serving -> {{ fooditem.points_per_serving }}</div>
-
-  <a href="{% url "recipe:update" fooditem.pk %}">Edit recipe details</a>
-
-  <hr />
-
-  {% for item in fooditem.recipe_items.all %}
-    <div>{{ item }}
-      <a href="{% url "recipe:update-food-item" fooditem.pk item.pk %}">Edit</a>
-      <a href="{% url "recipe:delete-food-item" fooditem.pk item.pk %}">Remove</a>
+  <div class="max-w-4xl mx-auto">
+  <div class="bg-gray-100 shadow overflow-hidden sm:rounded-lg">
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">
+        Recipe: {{ fooditem.name }}
+      </h3>
     </div>
-  {% endfor %}
+    <div class="border-t border-gray-200 px-4 py-5 sm:p-0 flex flex-col sm:flex-row sm:flex-2 sm:justify-between">
+      <div class="flex-2 px-2 sm:px-6 sm:pt-4 space-y-4 sm:space-y-6 h-full">
+        <h4 class="text-gray-700">Foods in recipe</h4>
+        <ul role="list" class="divide-y divide-gray-200 max-h-[350px] overflow-y-auto">
+          {% for item in fooditem.recipe_items.all %}
+            <li class="py-4 flex justify-between">
+              <div class="ml-3 flex-2">
+                <p class="text-sm font-medium text-gray-900">{{ item.food.name }}</p>
+                <p class="text-sm text-gray-500">{{ item.serving_size }}{{ item.serving_unit|lower }}</p>
+              </div>
+              <div class="flex-1">
+                <a href="{% url "recipe:update-food-item" fooditem.pk item.pk %}" class="text-primary hover:bg-primary-darken mx-1 text-sm">Edit</a>
+                <a href="{% url "recipe:delete-food-item" fooditem.pk item.pk %}" class="text-primary hover:bg-primary-darken mx-1 text-sm">Remove</a>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+        <form action="{% url 'recipe:food-list' fooditem.pk %}" method="get" class="space-y-2">
+          {% include 'snippets/functional/text_field.html' with id="recipe-food-list-form-name" name="name" label="Add Food to Recipe" %}
+          <input type="submit" class="btn-primary" value="Search">
+        </form>
+      </div>
+      <dl class="mt-8 sm:mt-0 border-t sm:divide-y sm:divide-gray-200 sm:border-l border-gray-200 sm:flex-3">
+        {% for field in food_item_fields %}
+          <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <dt class="text-sm font-medium text-gray-500">{{ field.display}}</dt>
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              {% if field.display == 'Food/Recipe' %}
+                {{ field.lookup.title }}
+              {% elif field.display == 'Serving Unit' or field.display == 'Weight Conversion Unit' or field.display == 'Volume Conversion Unit' %}
+                {{ field.lookup.lower }}
+              {% else %}
+                {{ field.lookup }}
+              {% endif %}
+            </dd>
+          </div>
+        {% endfor %}
+      </dl>
+    </div>
 
-  <h1>Add food to recipe</h1>
-  <form method="GET" action="{% url "recipe:food-list" fooditem.pk %}">
-    <input type="text" name="name">
-    <input type="submit" value="Search">
-  </form>
+  </div>
+    {% if fooditem.user_created and fooditem.user == request.user %}
+<div class="sm:flex pt-2">
+  <a href="{% url 'recipe:update' view.kwargs.pk %}" class="btn-primary sm:mx-2 my-2 sm:my-0">Edit</a>
+  <a href="{% url 'recipe:delete' view.kwargs.pk %}" class="btn-secondary sm:mx-2 my-2 sm:my-0">Delete</a>
+</div>
+  {% endif %}
+  </div>
+{#  <div>name -> {{ fooditem.name }}</div>#}
+  {#  <div>food_item_type -> {{ fooditem.food_item_type }}</div>#}
+  {#  <div>fat -> {{ fooditem.fat }}</div>#}
+  {#  <div>carbs -> {{ fooditem.carbs }}</div>#}
+  {#  <div>fiber -> {{ fooditem.fiber }}</div>#}
+  {#  <div>protein -> {{ fooditem.protein }}</div>#}
+  {#  <div>serving_size -> {{ fooditem.serving_size }}</div>#}
+  {#  <div>serving_unit -> {{ fooditem.serving_unit }}</div>#}
+  {#  <div>conversion_unit_weight -> {{ fooditem.conversion_unit_weight }}</div>#}
+  {#  <div>conversion_unit_volume -> {{ fooditem.conversion_unit_volume }}</div>#}
+  {#  <div>conversion_weight_to_volume -> {{ fooditem.conversion_weight_to_volume }}</div>#}
+  {#  <div>notes -> {{ fooditem.notes }}</div>#}
+  {#  <div>points_per_serving -> {{ fooditem.points_per_serving }}</div>#}
+  {##}
+  {#  <a href="{% url "recipe:update" fooditem.pk %}">Edit recipe details</a>#}
+  {##}
+  {#  <hr />#}
+  {##}
+  {#  {% for item in fooditem.recipe_items.all %}#}
+  {#    <div>{{ item }}#}
+  {#      <a href="{% url "recipe:update-food-item" fooditem.pk item.pk %}">Edit</a>#}
+  {#      <a href="{% url "recipe:delete-food-item" fooditem.pk item.pk %}">Remove</a>#}
+  {#    </div>#}
+  {#  {% endfor %}#}
+  {##}
+  {#  <h1>Add food to recipe</h1>#}
+  {#  <form method="GET" action="{% url "recipe:food-list" fooditem.pk %}">#}
+  {#    <input type="text" name="name">#}
+  {#    <input type="submit" value="Search">#}
+  {#  </form>#}
 {% endblock content %}

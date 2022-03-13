@@ -1,16 +1,25 @@
+from datetime import datetime
 from typing import Any, Dict, Optional
+from pytz import timezone
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import QuerySet
+from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import DetailView, RedirectView, UpdateView
+from django.views.generic import DetailView, RedirectView, UpdateView, CreateView
 
 from .forms import UserUpdateForm
+from ..day.models import Day
+from ..day.views import update_daily_points
+from ..utils.mixins import UserHasAllInfoMixin
+from weight_points_plus.users.models import Weight
+from ..utils.points_calculators import calculate_daily_points
+from ..week.models import Week
+from ..week.utils import update_weekly_excess_points
 
 User = get_user_model()
 
@@ -38,7 +47,7 @@ class CurrentUserDetailView(LoginRequiredMixin, DetailView):
             dict(lookup="email", display="Email"),
             dict(lookup="age", display="Age"),
             dict(lookup="birth_date", display="Birth Date"),
-            dict(lookup="weight", display="Weight (lbs.)"),
+            dict(lookup="weight"),
             dict(lookup="height", display="Height (in.)"),
             dict(lookup="get_sex_display", display="Sex"),
             dict(lookup="weekly_points", display="Weekly Points"),
@@ -48,10 +57,28 @@ class CurrentUserDetailView(LoginRequiredMixin, DetailView):
         if self.request.user.sex == "Female":
             user_fields.append(dict(lookup="get_nursing_display", display="Nursing"))
         user_fields.append(dict(lookup="maintenance_mode", display="Maintenance Mode"))
-        context["user_fields"] = [
-            dict(lookup=getattr(self.request.user, x["lookup"]), display=x["display"])
-            for x in user_fields
-        ]
+        context["user_fields"] = []
+        for field in user_fields:
+            if field["lookup"] == "weight":
+                weight_set = self.request.user.weight_set.all()
+                if not weight_set:
+                    context["user_fields"].append(
+                        dict(lookup="Not Yet Recorded", display="Weight (lbs.)")
+                    )
+                else:
+                    context["user_fields"].append(
+                        dict(
+                            lookup=weight_set.last().weight,
+                            display="Weight (lbs.)",
+                        )
+                    )
+            else:
+                context["user_fields"].append(
+                    dict(
+                        lookup=getattr(self.request.user, field["lookup"]),
+                        display=field["display"],
+                    )
+                )
         return context
 
 
@@ -63,7 +90,6 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
     fields = [
         "name",
-        "weight",
         "height",
         "sex",
         "weigh_in_day",
@@ -94,8 +120,7 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
     def get_redirect_url(self):
         if self.request.user.has_input_all_fields:
-            now = timezone.now().date()
-            return reverse("day:detail", kwargs={"date": now})
+            return reverse("day:today")
         messages.add_message(
             self.request, messages.INFO, "Please fill in your preliminary information."
         )
@@ -103,3 +128,38 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 
 user_redirect_view = UserRedirectView.as_view()
+
+
+class WeightRecordView(UserHasAllInfoMixin, CreateView):
+    model = Weight
+    fields = ["weight"]
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            self.object = form.save(commit=False)
+            self.object.user = request.user
+            self.object.date_recorded = datetime.now(
+                tz=timezone(self.request.user.timezone)
+            )
+            self.object.save()
+            if request.user.first_weight_recorded:
+                day = Day.objects.get(
+                    user=request.user, date=self.object.date_recorded.date()
+                )
+                if not day.week.weight_recorded:
+                    points = calculate_daily_points(request.user, self.object.weight)
+                    week = Week.objects.get(id=day.week.pk)
+                    week.weight = self.object.weight
+                    week.weight_recorded = True
+                    for day in Day.objects.filter(user=request.user, week=week):
+                        day.total_points = points
+                        update_daily_points(day)
+                    update_weekly_excess_points(week)
+
+            return HttpResponseRedirect(reverse("day:today"))
+        else:
+            return self.form_invalid(form)
+
+
+weight_record_view = WeightRecordView.as_view()

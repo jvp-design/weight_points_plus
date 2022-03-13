@@ -18,14 +18,14 @@
             <form method="get" class="flex flex-col sm:flex-row sm:items-end">
               {% include "snippets/functional/text_field.html" with class="my-1 sm:my-0" name="name" placeholder="Search" %}
               <input type="submit" class="btn-primary w-full sm:w-1/2 sm:ml-2 my-1 sm:my-0 cursor-pointer"
-                     value="Search Again"/>
+                     value="Submit"/>
             </form>
           </div>
         </div>
       </div>
       <div class="sm:flex sm:justify-between text-sm text-gray-700 pt-2 sm:pt-4">
       <span>
-      {% if fooditem_list %}
+      {% if fooditem_list or request.GET.name %}
         {% if request.GET.user_created is None %}
           Showing all {{ food_item_type_plural }}.
           <a href="?user_created=true{% if request.GET.name %}&name={{ request.GET.name }}{% endif %}"

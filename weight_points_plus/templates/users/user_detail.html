@@ -14,6 +14,8 @@
               <p class="text-md font-medium text-gray-800 sm:inline">{{ field.lookup }}</p>
                 {% if field.display == 'Email' %}
                   <a href="{% url 'account_email' %}" class="text-primary-darken hover:bg-primary ml-1">Update</a>
+                {% elif 'Weight' in field.display %}
+                  <a href="{% url "users:record-weight" %}" class="text-primary-darken hover:bg-primary ml-1">Update</a>
                 {% endif %}
                 </span>
               <div class="ml-2 flex-shrink-0 flex">
