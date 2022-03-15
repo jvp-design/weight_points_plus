@@ -65,3 +65,7 @@ if settings.DEBUG:
         import debug_toolbar
 
         urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
+else:
+    urlpatterns += [
+        path("admin/", include("admin_honeypot.urls", namespace="admin_honeypot"))
+    ]

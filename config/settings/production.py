@@ -94,6 +94,7 @@ EMAIL_SUBJECT_PREFIX = env(
 # ------------------------------------------------------------------------------
 # Django Admin URL regex.
 ADMIN_URL = env("DJANGO_ADMIN_URL")
+INSTALLED_APPS += ["admin_honeypot"]
 
 # Anymail
 # ------------------------------------------------------------------------------
