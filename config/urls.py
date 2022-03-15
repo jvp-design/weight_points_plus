@@ -36,7 +36,6 @@ urlpatterns = [
         include("weight_points_plus.foods_recipes.recipe.urls", namespace="recipe"),
     ),
     path("meal/", include("weight_points_plus.meal.urls", namespace="meal")),
-    path("__reload__/", include("django_browser_reload.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
@@ -44,6 +43,7 @@ if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
     urlpatterns += [
+        path("__reload__/", include("django_browser_reload.urls")),
         path(
             "400/",
             default_views.bad_request,
