@@ -4,13 +4,7 @@ import sys
 from pathlib import Path
 
 if __name__ == "__main__":
-    RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
-    if RENDER_EXTERNAL_HOSTNAME:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")
-    else:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
-
-    print("DJANGO_SETTINGS_MODULE", os.environ.get("DJANGO_SETTINGS_MODULE"))
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
 
     try:
         from django.core.management import execute_from_command_line
