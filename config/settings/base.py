@@ -286,3 +286,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+# Tailwind
+INSTALLED_APPS += ["tailwind", "theme"]  # noqa F405
+
+TAILWIND_APP_NAME = "theme"

@@ -65,7 +65,5 @@ if platform.system() == "Windows":
     NPM_BIN_PATH = r"C:/Program Files/nodejs/npm.cmd"
 else:
     NPM_BIN_PATH = "/usr/local/bin/npm"
-INSTALLED_APPS += ["tailwind", "theme", "django_browser_reload"]  # noqa F405
+INSTALLED_APPS += ["django_browser_reload"]  # noqa F405
 MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]  # noqa F405
-
-TAILWIND_APP_NAME = "theme"
