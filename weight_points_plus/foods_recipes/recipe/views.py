@@ -63,7 +63,7 @@ class AllRecipesListView(FoodItemListView):
     def get_queryset(self) -> QuerySet[FoodItem]:
         self.queryset = FoodItem.objects.filter(
             Q(food_item_type="recipe")
-            & (Q(user_created=False) | Q(user=self.request.user))
+            & (Q(user__isnull=True) | Q(user=self.request.user))
         )
         return super().get_queryset()
 
@@ -126,6 +126,9 @@ class RecipeDetailView(
     model = FoodItem
     template_name = "foods_recipes/recipe_detail.html"
 
+    def get_permission_denied_url(self):
+        return reverse("recipe:list")
+
 
 recipe_detail_view = RecipeDetailView.as_view()
 
@@ -170,7 +173,8 @@ recipe_create_view = RecipeCreateView.as_view()
 class RecipeUpdateView(
     UserHasAllInfoMixin, UserIsOwnerMixin, RecipeInputMixin, UpdateView
 ):
-    pass
+    def get_permission_denied_url(self):
+        return reverse("recipe:list")
 
 
 recipe_update_view = RecipeUpdateView.as_view()
@@ -181,6 +185,9 @@ class RecipeDeleteView(
 ):
     model = FoodItem
     success_url = reverse_lazy("recipe:list")
+
+    def get_permission_denied_url(self):
+        return reverse("recipe:list")
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -199,7 +206,7 @@ class RecipeFoodListView(FoodItemListView):
 
     def get_queryset(self) -> QuerySet[FoodItem]:
         self.queryset = FoodItem.objects.filter(
-            Q(user_created=False) | Q(user=self.request.user)
+            Q(user__isnull=True) | Q(user=self.request.user)
         )
         return super().get_queryset()
 
@@ -302,9 +309,7 @@ class BaseRecipeFoodEditView:
 
 class RecipeFoodAddView(UserHasAllInfoMixin, BaseRecipeFoodEditView, CreateView):
     def get_food(self):
-        qs = FoodItem.objects.filter(
-            Q(user_created=False) | (Q(user_created=True) & Q(user=self.request.user))
-        )
+        qs = FoodItem.objects.filter(Q(user__isnull=True) | Q(user=self.request.user))
         return get_object_or_404(qs, pk=self.request.GET.get("food"))
 
     def get_context_data(self, **kwargs):

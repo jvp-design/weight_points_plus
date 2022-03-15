@@ -92,9 +92,6 @@ def grab_and_parse_foods(
                 food_item.points_per_serving = points
                 if user_created:
                     food_item.user = random.choice(users)
-                    food_item.user_created = True
-                else:
-                    food_item.user_created = False
                 foods.append(food_item)
     return foods, excluded_foods
 

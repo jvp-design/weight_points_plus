@@ -49,7 +49,7 @@
     </div>
 
   </div>
-    {% if fooditem.user_created and fooditem.user == request.user %}
+    {% if fooditem.user == request.user %}
 <div class="sm:flex pt-2">
   <a href="{% url 'recipe:update' view.kwargs.pk %}" class="btn-primary sm:mx-2 my-2 sm:my-0">Edit</a>
   <a href="{% url 'recipe:delete' view.kwargs.pk %}" class="btn-secondary sm:mx-2 my-2 sm:my-0">Delete</a>

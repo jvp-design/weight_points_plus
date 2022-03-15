@@ -33,7 +33,7 @@ class MealFoodListView(FoodItemListView):
 
     def get_queryset(self) -> QuerySet[FoodItem]:
         self.queryset = FoodItem.objects.filter(
-            Q(user_created=False) | Q(user=self.request.user)
+            Q(user__isnull=True) | Q(user=self.request.user)
         )
         return super().get_queryset()
 
@@ -137,9 +137,7 @@ class BaseMealFoodEditView:
 
 class MealFoodAddView(UserHasAllInfoMixin, BaseMealFoodEditView, CreateView):
     def get_queryset(self):
-        return FoodItem.objects.filter(
-            Q(user_created=False) | Q(user=self.request.user)
-        )
+        return FoodItem.objects.filter(Q(user__isnull=True) | Q(user=self.request.user))
 
     def get_food(self):
         return get_object_or_404(self.get_queryset(), pk=self.request.GET.get("food"))

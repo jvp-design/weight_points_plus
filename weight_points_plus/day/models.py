@@ -39,7 +39,7 @@ class Activity(models.Model):
     duration = models.FloatField()
 
     user = models.ForeignKey("users.User", on_delete=models.CASCADE)
-    user_created = models.BooleanField(default=True)
+    # user_created = models.BooleanField(default=True)
     day = models.ForeignKey(Day, on_delete=models.CASCADE)
 
     class Meta:

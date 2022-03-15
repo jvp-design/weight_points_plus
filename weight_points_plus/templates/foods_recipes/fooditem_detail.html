@@ -3,7 +3,7 @@
 {% block content %}
   <div class="max-w-2xl mx-auto">
   {% include 'snippets/food_detail_snippet.html' with title=fooditem.name %}
-  {% if fooditem.user_created and fooditem.user == request.user %}
+  {% if fooditem.user == request.user %}
 <div class="sm:flex pt-2">
   <a href="{% url 'food:update' view.kwargs.pk %}" class="btn-primary sm:mx-2 my-2 sm:my-0">Edit</a>
   <a href="{% url 'food:delete' view.kwargs.pk %}" class="btn-secondary sm:mx-2 my-2 sm:my-0">Delete</a>

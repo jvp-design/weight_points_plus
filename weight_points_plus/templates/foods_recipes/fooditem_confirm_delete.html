@@ -4,7 +4,7 @@
   <form method="post">{% csrf_token %}
   <div class="max-w-2xl mx-auto">
   {% include 'snippets/food_detail_snippet.html' %}
-  {% if fooditem.user_created and fooditem.user == request.user %}
+  {% if fooditem.user == request.user %}
 <div class="sm:flex pt-2">
   <a href="{{ cancel_url }}" class="btn-secondary sm:mx-2 my-2 sm:my-0">Cancel</a>
   <input type="submit" class="btn-primary sm:mx-2 my-2 sm:my-0 cursor-pointer" value="Confirm Delete" />

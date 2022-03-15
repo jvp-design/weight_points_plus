@@ -14,10 +14,16 @@ from weight_points_plus.utils.mixins import UserHasAllInfoMixin
 
 class FoodItemFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_expr="icontains")
+    user = django_filters.BooleanFilter(method="filter_user")
+
+    def filter_user(self, queryset, name, value):
+        if value:
+            return queryset.filter(user=self.request.user).exclude(user__isnull=True)
+        return queryset.filter(user__isnull=True)
 
     class Meta:
         model = FoodItem
-        fields = ["name", "user_created"]
+        fields = ["name", "user"]
 
 
 class FoodItemListView(UserHasAllInfoMixin, FilterView):

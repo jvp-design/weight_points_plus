@@ -26,11 +26,11 @@
       <div class="sm:flex sm:justify-between text-sm text-gray-700 pt-2 sm:pt-4">
       <span>
       {% if fooditem_list or request.GET.name %}
-        {% if request.GET.user_created is None %}
+        {% if request.GET.user is None or request.GET.user == '' %}
           Showing all {{ food_item_type_plural }}.
-          <a href="?user_created=true{% if request.GET.name %}&name={{ request.GET.name }}{% endif %}"
+          <a href="?user=true{% if request.GET.name %}&name={{ request.GET.name }}{% endif %}"
              class="text-primary hover:bg-primary-darken px-1">Show only your {{ food_item_type_plural }}</a>
-        {% elif request.GET.user_created %}
+        {% elif request.GET.user == true %}
           Showing only your {{ food_item_type_plural }}.
           <a href="?{% if request.GET.name %}name={{ request.GET.name }}{% endif %}"
              class="text-primary hover:bg-primary-darken px-1">Show all {{ food_item_type_plural }}</a>

@@ -34,7 +34,7 @@ class FoodItem(models.Model):
     notes = models.TextField(null=True, blank=True)
     restaurant = models.CharField(max_length=256, null=True, blank=True)
     points_per_serving = models.IntegerField(default=0, blank=True)
-    user_created = models.BooleanField(default=True)
+    # user_created = models.BooleanField(default=True)
     user = models.ForeignKey(
         "users.User", on_delete=models.CASCADE, null=True, blank=True
     )

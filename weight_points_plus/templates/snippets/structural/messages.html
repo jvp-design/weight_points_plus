@@ -1,7 +1,7 @@
 {% block messages %}
   {% if messages %}
-    <div class="fixed w-full">
-      <div class="w-1/2 mx-auto">
+    <div aria-live="assertive" class="fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start">
+      <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
         {% for message in messages %}
           {% if 'success' in message.tags %}
             {% include 'snippets/messages/message-success.html' with message=message id=forloop.counter0 %}

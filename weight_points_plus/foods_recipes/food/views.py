@@ -27,7 +27,7 @@ class AllFoodsListView(FoodItemListView):
     def get_queryset(self) -> QuerySet[FoodItem]:
         self.queryset = FoodItem.objects.filter(
             Q(food_item_type="food")
-            & (Q(user_created=False) | Q(user=self.request.user))
+            & (Q(user__isnull=True) | Q(user=self.request.user))
         )
         return super().get_queryset()
 
@@ -130,6 +130,9 @@ food_create_view = FoodCreateView.as_view()
 
 
 class FoodUpdateView(UserHasAllInfoMixin, UserIsOwnerMixin, FoodInputMixin, UpdateView):
+    def get_permission_denied_url(self):
+        return reverse("food:list")
+
     def get_queryset(self):
         return FoodItem.objects.filter(food_item_type="food")
 
@@ -151,6 +154,9 @@ class FoodDeleteView(
 ):
     model = FoodItem
     success_url = reverse_lazy("food:list")
+
+    def get_permission_denied_url(self):
+        return reverse("food:list")
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
