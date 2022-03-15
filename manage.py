@@ -6,6 +6,9 @@ from pathlib import Path
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
     RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+    print("RENDER_EXTERNAL_HOSTNAME", RENDER_EXTERNAL_HOSTNAME)
+    for k, v in os.environ.items():
+        print(k, v)
     if RENDER_EXTERNAL_HOSTNAME:
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")
 
