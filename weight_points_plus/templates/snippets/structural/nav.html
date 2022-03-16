@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<header class="relative" x-data="{isOpen: false}" >
+<header class="relative" x-data="{isOpen: false}">
   <div class="pt-6">
     <nav class="relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6" aria-label="Global">
       <div class="flex items-center flex-1">
@@ -64,7 +64,7 @@
           <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="">
         </div>
         <div class="-mr-2">
-          <button type="button" @click="isOpen = !isOpen" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-600">
+          <button type="button" @click="isOpen = !isOpen" @click.outside="isOpen = false" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-600">
             <span class="sr-only">Close menu</span>
             <!-- Heroicon name: outline/x -->
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -74,6 +74,7 @@
         </div>
       </div>
       <div class="pt-5 pb-6">
+        {% if not user.is_authenticated %}
         <div class="px-2 space-y-1">
           <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Product</a>
 
@@ -83,7 +84,6 @@
 
           <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Company</a>
         </div>
-        {% if not user.is_authenticated %}
           <div class="mt-6 px-5">
             <p class="text-center text-base font-medium text-gray-500"><a href="{% url 'account_signup' %}" class="text-gray-900 hover:underline">{% translate 'Register' %}</a></p>
           </div>
@@ -91,7 +91,16 @@
             <p class="text-center text-base font-medium text-gray-500">Existing customer? <a href="{% url 'account_login' %}" class="text-gray-900 hover:underline">{% translate 'Sign In' %}</a></p>
           </div>
         {% else %}
+        <div class="px-2 space-y-1">
+          <a href="{% url 'day:today' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">{% translate 'Food Tracker' %}</a>
+
+          <a href="{% url "food:list" %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">{% translate 'Foods' %}</a>
+
+          <a href="{% url "recipe:list" %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">{% translate 'Recipes' %}</a>
+
+        </div>
           <div class="mt-6 px-5">
+            <p class="text-center text-base font-medium text-gray-500"><a href="{% url 'users:me' %}" class="text-gray-900 hover:underline">{% translate 'User' %}</a></p>
             <p class="text-center text-base font-medium text-gray-500"><a href="{% url 'account_logout' %}" class="text-gray-900 hover:underline">{% translate 'Log Out' %}</a></p>
           </div>
         {% endif %}
