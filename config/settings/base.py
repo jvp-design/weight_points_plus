@@ -236,6 +236,7 @@ ADMIN_URL = "admin/"
 ADMINS = [("""Jeffrey Pohlmeyer""", "jeff@jvp.design")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
+INSTALLED_APPS += ["admin_honeypot"]
 
 # LOGGING
 # ------------------------------------------------------------------------------
