@@ -1,6 +1,6 @@
 import csv
-import random
 from pathlib import Path
+from typing import List, Tuple
 
 from django.contrib.auth import get_user_model
 
@@ -11,8 +11,8 @@ User = get_user_model()
 
 
 def grab_and_parse_foods(
-    filename: Path, food_names: list[str], user: User
-) -> tuple[list[FoodItem], list[str]]:
+    filename: Path, food_names: List[str], user: User
+) -> Tuple[List[FoodItem], List[str]]:
     foods = []
     excluded_foods = []
     with open(filename, "r", encoding="utf-8") as f:
@@ -98,7 +98,7 @@ def grab_and_parse_foods(
 
 def seed_foods(
     path: Path, restaurant_foods: bool = False, delete_foods: bool = False
-) -> tuple[int, list[str]]:
+) -> Tuple[int, List[str]]:
     if delete_foods:
         qs = FoodItem.objects.filter(food_item_type="food")
         if not restaurant_foods:
