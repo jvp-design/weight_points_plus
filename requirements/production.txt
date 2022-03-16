@@ -12,6 +12,7 @@ hiredis==2.0.0  # https://github.com/redis/hiredis-py
 # ------------------------------------------------------------------------------
 django-anymail==8.5  # https://github.com/anymail/django-anymail
 django-admin-honeypot==1.1.0   # https://github.com/dmpayton/django-admin-honeypot
+django-tailwind==2.2.2
 
 dj-database-url==0.5.0  # https://github.com/kennethreitz/dj-database-url
 
