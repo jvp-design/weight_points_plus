@@ -11,7 +11,7 @@ User = get_user_model()
 
 
 def grab_and_parse_foods(
-    filename: Path, food_names: list[str], users: list[User]
+    filename: Path, food_names: list[str], user: User
 ) -> tuple[list[FoodItem], list[str]]:
     foods = []
     excluded_foods = []
@@ -91,7 +91,7 @@ def grab_and_parse_foods(
                     continue
                 food_item.points_per_serving = points
                 if user_created:
-                    food_item.user = random.choice(users)
+                    food_item.user = user
                 foods.append(food_item)
     return foods, excluded_foods
 
@@ -104,10 +104,10 @@ def seed_foods(
         if not restaurant_foods:
             qs = qs.filter(restaurant__isnull=True)
         qs.delete()
-    users = User.objects.all()
+    user = User.objects.filter(email="jeffvp@pm.me").first()
     # food_names = FoodItem.objects.all().values_list("name")
     food_names = []
-    foods, excluded_foods = grab_and_parse_foods(path, food_names, users)
+    foods, excluded_foods = grab_and_parse_foods(path, food_names, user)
 
     if len(foods) > 0:
         FoodItem.objects.bulk_create(foods)
