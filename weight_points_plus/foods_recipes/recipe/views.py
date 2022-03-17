@@ -38,7 +38,9 @@ from weight_points_plus.utils.points_calculators import (
 def calculate_recipe_points(recipe):
     nutrition_item = NutritionItem(fat=0, carbs=0, fiber=0, protein=0)
     for item in recipe.recipe_items.all():
-        factor = get_multiplicative_factor(item, item.serving_size, item.serving_unit)
+        factor = get_multiplicative_factor(
+            item.food, item.serving_size, item.serving_unit
+        )
         nutrition_item.fat += item.food.fat * factor
         nutrition_item.carbs += item.food.carbs * factor
         nutrition_item.fiber += item.food.fiber * factor

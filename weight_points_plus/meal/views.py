@@ -141,7 +141,7 @@ class MealFoodAddView(UserHasAllInfoMixin, BaseMealFoodEditView, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['submit_button_text'] = 'Add Food'
+        context["submit_button_text"] = "Add Food"
         return context
 
     def get_food(self):
@@ -196,7 +196,7 @@ class MealFoodUpdateView(UserHasAllInfoMixin, BaseMealFoodEditView, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['submit_button_text'] = 'Update Food'
+        context["submit_button_text"] = "Update Food"
         return context
 
     def get_food(self):
