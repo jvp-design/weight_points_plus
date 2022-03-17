@@ -139,6 +139,11 @@ class MealFoodAddView(UserHasAllInfoMixin, BaseMealFoodEditView, CreateView):
     def get_queryset(self):
         return FoodItem.objects.filter(Q(user__isnull=True) | Q(user=self.request.user))
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['submit_button_text'] = 'Add Food'
+        return context
+
     def get_food(self):
         return get_object_or_404(self.get_queryset(), pk=self.request.GET.get("food"))
 
@@ -188,6 +193,11 @@ meal_food_add_view = MealFoodAddView.as_view()
 class MealFoodUpdateView(UserHasAllInfoMixin, BaseMealFoodEditView, UpdateView):
     def get_queryset(self):
         return FoodItemInstance.objects.filter(meal=self.get_meal())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['submit_button_text'] = 'Update Food'
+        return context
 
     def get_food(self):
         food_item = get_object_or_404(self.get_queryset(), pk=self.kwargs.get("pk"))
