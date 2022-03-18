@@ -21,7 +21,7 @@
               {{ form.non_field_errors }}
             </div>
             {% if not object %}
-            {% include "snippets/functional/text_field.html" with class="md:w-3/4" id=form.name.id_for_label name=form.name.html_name label=form.name.label errors=form.name.errors value=form.name.value required=form.name.field.required %}
+              {% include "snippets/functional/text_field.html" with class="md:w-3/4" id=form.name.id_for_label name=form.name.html_name label=form.name.label errors=form.name.errors value=form.name.value required=form.name.field.required %}
             {% endif %}
             {% include "snippets/functional/textarea_field.html" with class="md:w-3/4" id=form.notes.id_for_label name=form.notes.html_name label=form.notes.label errors=form.notes.errors value=form.notes.value required=form.notes.field.required %}
             {% include "snippets/functional/textarea_field.html" with class="md:w-3/4" id=form.directions.id_for_label name=form.directions.html_name label=form.directions.label errors=form.directions.errors value=form.directions.value required=form.directions.field.required %}

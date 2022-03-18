@@ -33,14 +33,17 @@
       <dl class="mt-8 sm:mt-0 border-t sm:divide-y sm:divide-gray-200 sm:border-l border-gray-200 sm:flex-3">
         {% for field in food_item_fields %}
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">{{ field.display}}</dt>
+            <dt class="text-sm font-medium text-gray-500">
+              {{ field.display}}
+              {% if field.display == 'Fat' or field.display == 'Carbs' or field.display == 'Fiber' or field.display == 'Protein' %}
+              <p class="text-xs text-gray-400">(Quantity per serving)</p>
+              {% endif %}
+            </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {% if field.display == 'Food/Recipe' %}
-                {{ field.lookup.title }}
-              {% elif field.display == 'Serving Unit' or field.display == 'Weight Conversion Unit' or field.display == 'Volume Conversion Unit' %}
+              {% if field.display == 'Serving Unit' or field.display == 'Weight Conversion Unit' or field.display == 'Volume Conversion Unit' %}
                 {{ field.lookup.lower }}
               {% else %}
-                {{ field.lookup }}
+                {{ field.lookup|floatformat:2 }}
               {% endif %}
             </dd>
           </div>

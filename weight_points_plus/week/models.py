@@ -14,13 +14,6 @@ class Week(models.Model):
     activity_points = models.IntegerField(default=0)
     user = models.ForeignKey("users.User", on_delete=models.CASCADE)
 
-    @property
-    def days_remaining(self) -> int:
-        return (
-            self.day_set.last().date
-            - datetime.now(tz=timezone(self.user.timezone)).date()
-        ).days
-
     class Meta:
         unique_together = ("user", "start_date")
 

@@ -1,15 +1,9 @@
 from typing import Any, Dict
 
-import django_filters
-from django.core.exceptions import ValidationError
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import QuerySet, Q
-from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.utils.translation import gettext_lazy as _
-from django_filters.views import FilterView
 
 from .forms import FoodForm
 from ..models import FoodItem
@@ -19,8 +13,7 @@ from weight_points_plus.utils.mixins import (
     UserHasAllInfoMixin,
 )
 from weight_points_plus.utils.points_calculators import calculate_food_points
-from ..utils import FoodItemListView, check_conversion_status
-from ...utils.misc import is_each_serving
+from ..utils import FoodItemListView
 
 
 class AllFoodsListView(FoodItemListView):
@@ -39,7 +32,8 @@ class AllFoodsListView(FoodItemListView):
         context["add_item_url"] = None
         if self.kwargs.get("meal_pk") is not None:
             context["add_item_url"] = reverse(
-                "meal:add-food-item", kwargs={"meal_pk": self.kwargs.get("meal_pk")}
+                "meal:add-food-item",
+                kwargs={"meal_pk": self.kwargs.get("meal_pk")},
             )
         context["detail_url_string"] = "food:detail"
         context["update_url_string"] = "food:update"
@@ -54,15 +48,20 @@ class FoodDetailMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         items = [
-            dict(lookup="food_item_type", display="Food/Recipe"),
             dict(lookup="fat", display="Fat"),
             dict(lookup="carbs", display="Carbs"),
             dict(lookup="fiber", display="Fiber"),
             dict(lookup="protein", display="Protein"),
             dict(lookup="serving_size", display="Serving Size"),
             dict(lookup="serving_unit", display="Serving Unit"),
-            dict(lookup="conversion_unit_weight", display="Weight Conversion Unit"),
-            dict(lookup="conversion_unit_volume", display="Volume Conversion Unit"),
+            dict(
+                lookup="conversion_unit_weight",
+                display="Weight Conversion Unit",
+            ),
+            dict(
+                lookup="conversion_unit_volume",
+                display="Volume Conversion Unit",
+            ),
             dict(
                 lookup="conversion_weight_to_volume",
                 display="Weight-to-Volume Conversion Factor",
@@ -103,13 +102,17 @@ class FoodInputMixin:
         form = super().get_form_class()
         choices = []
         for choice in form.base_fields["serving_unit"].choices:
-            if choice[0] in ["Weight", "Volume"]:
+            if choice[0] == "Weight":
                 choices.extend([x for x in choice[1]])
+                form.base_fields["conversion_unit_weight"].choices = [x for x in choice[1]]
+            elif choice[0] == "Volume":
+                choices.extend([x for x in choice[1]])
+                form.base_fields["conversion_unit_volume"].choices = [x for x in choice[1]]
             else:
                 choices.append(choice)
+                form.base_fields["conversion_unit_weight"].choices.append(choice)
+                form.base_fields["conversion_unit_volume"].choices.append(choice)
         form.base_fields["serving_unit"].choices = choices
-        form.base_fields["conversion_unit_weight"].choices = choices
-        form.base_fields["conversion_unit_volume"].choices = choices
         return form
 
 
@@ -129,7 +132,9 @@ class FoodCreateView(UserHasAllInfoMixin, FoodInputMixin, CreateView):
 food_create_view = FoodCreateView.as_view()
 
 
-class FoodUpdateView(UserHasAllInfoMixin, UserIsOwnerMixin, FoodInputMixin, UpdateView):
+class FoodUpdateView(
+    UserHasAllInfoMixin, UserIsOwnerMixin, FoodInputMixin, UpdateView
+):
     def get_permission_denied_url(self):
         return reverse("food:list")
 
@@ -138,9 +143,11 @@ class FoodUpdateView(UserHasAllInfoMixin, UserIsOwnerMixin, FoodInputMixin, Upda
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
+        name = self.object.name
         form = self.get_form()
         if form.is_valid():
             self.object.points_per_serving = calculate_food_points(self.object)
+            self.object.name = name
             return self.form_valid(form)
         else:
             return self.form_invalid(form)

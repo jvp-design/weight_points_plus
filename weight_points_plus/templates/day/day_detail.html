@@ -49,8 +49,8 @@
             <p class="text-sm font-medium text-gray-600">Weekly Points Remaining</p>
             <p class="text-xl font-bold text-gray-900 sm:text-2xl">{{ day.week.weekly_points_remaining}}</p>
             <p class="text-sm font-medium text-gray-600">
-              {{ day.week.days_remaining }}
-              {% if day.week.days_remaining == 1 %}
+              {{ day.days_left }}
+              {% if day.days_left == 1 %}
                 day
               {% else %}
                 days

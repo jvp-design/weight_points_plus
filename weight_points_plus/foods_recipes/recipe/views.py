@@ -46,10 +46,6 @@ def calculate_recipe_points(recipe):
         nutrition_item.fiber += item.food.fiber * factor
         nutrition_item.protein += item.food.protein * factor
 
-    recipe.fat = nutrition_item.fat
-    recipe.carbs = nutrition_item.carbs
-    recipe.fiber = nutrition_item.fiber
-    recipe.protein = nutrition_item.protein
     servings_in_recipe = 1
     if recipe.servings_in_recipe is not None:
         servings_in_recipe = recipe.servings_in_recipe
@@ -57,6 +53,10 @@ def calculate_recipe_points(recipe):
     nutrition_item.carbs /= servings_in_recipe
     nutrition_item.fiber /= servings_in_recipe
     nutrition_item.protein /= servings_in_recipe
+    recipe.fat = nutrition_item.fat
+    recipe.carbs = nutrition_item.carbs
+    recipe.fiber = nutrition_item.fiber
+    recipe.protein = nutrition_item.protein
     recipe.points_per_serving = points_formula(nutrition_item)
     recipe.save()
 
@@ -93,7 +93,6 @@ class RecipeDetailMixin:
         context = super().get_context_data(**kwargs)
 
         items = [
-            dict(lookup="food_item_type", display="Food/Recipe"),
             dict(lookup="fat", display="Fat"),
             dict(lookup="carbs", display="Carbs"),
             dict(lookup="fiber", display="Fiber"),
@@ -178,6 +177,20 @@ class RecipeUpdateView(
     def get_permission_denied_url(self):
         return reverse("recipe:list")
 
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        name = self.object.name
+        form = self.get_form()
+        if form.is_valid():
+            form.save()
+            self.object.name = name
+            calculate_recipe_points(self.object)
+            return HttpResponseRedirect(
+                reverse("recipe:detail", kwargs={"pk": kwargs.get('pk')})
+            )
+        else:
+            return self.form_invalid(form)
+
 
 recipe_update_view = RecipeUpdateView.as_view()
 
@@ -240,7 +253,6 @@ class BaseRecipeFoodEditView:
         context["food"] = self.get_food()
         context["recipe_name"] = self.get_recipe().name
         items = [
-            dict(lookup="name", display="Name"),
             dict(lookup="food_item_type", display="Food/Recipe"),
             dict(lookup="fat", display="Fat"),
             dict(lookup="carbs", display="Carbs"),

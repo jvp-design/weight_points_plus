@@ -20,6 +20,7 @@ class Day(models.Model):
     week = models.ForeignKey("week.Week", on_delete=models.CASCADE)
     user = models.ForeignKey("users.User", on_delete=models.CASCADE)
     activity_points = models.IntegerField(default=0)
+    days_left = models.IntegerField(default=0)
 
     class Meta:
         unique_together = ("user", "date")

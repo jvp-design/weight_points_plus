@@ -9,7 +9,7 @@ class FoodItem(models.Model):
         FOOD = "food"
         RECIPE = "recipe"
 
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=256, blank=True)
     fat = models.FloatField(validators=[MinValueValidator(0.0)], default=0)
     carbs = models.FloatField(validators=[MinValueValidator(0.0)], default=0)
     fiber = models.FloatField(validators=[MinValueValidator(0.0)], default=0)

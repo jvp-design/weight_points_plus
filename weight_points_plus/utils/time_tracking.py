@@ -11,9 +11,12 @@ from weight_points_plus.week.models import Week
 def create_days(start_date: date, user: User, week: Week, num_days: int) -> date:
     if num_days == 0:
         return start_date
+    days_left = num_days
     daily_points = calculate_daily_points(user, user.weight_set.last().weight)
     dates = [start_date + timedelta(days=i) for i in range(num_days)]
-    days = [
+    days = []
+    for dt in dates:
+        days.append(
         Day(
             total_points=daily_points,
             points_used=0,
@@ -22,9 +25,10 @@ def create_days(start_date: date, user: User, week: Week, num_days: int) -> date
             date=dt,
             week=week,
             user=user,
-        )
-        for dt in dates
-    ]
+            days_left=days_left
+        ))
+        days_left -= 1
+
     created_days = Day.objects.bulk_create(days)
     meals = []
     for day in created_days:
