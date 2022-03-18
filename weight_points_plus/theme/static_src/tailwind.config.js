@@ -51,7 +51,18 @@ module.exports = {
 			},
 			colors: {
 				teal: colors.teal,
-				cyan: colors.cyan
+				cyan: colors.cyan,
+				primary: 'hsl(191, 26%, 12%)',
+				'primary-darken': 'hsl(191, 26%, 8%)',
+				'primary-lighten': 'hsl(191, 26%, 24%)',
+				accent: 'hsl(29, 94%, 50%)',
+				'accent-darken': 'hsl(29, 94%, 40%)',
+				'accent-lighten': 'hsl(29, 94%, 60%)',
+				contrast: 'hsl(70, 19%, 87%)',
+				'contrast-light': 'hsl(70, 19%, 95%)',
+				blah: "#1d252e",
+				blahblah: "#e9e8e8",
+				blahblahblah: "#9dd5c0"
 			},
 			transitionDuration: {
 				0: '0ms',

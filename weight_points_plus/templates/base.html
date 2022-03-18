@@ -1,7 +1,7 @@
 {% load static i18n %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 {% load tailwind_tags %}
-<html lang="{{ LANGUAGE_CODE }}" class="h-full bg-gray-50">
+<html lang="{{ LANGUAGE_CODE }}" class="h-full">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -15,7 +15,6 @@
 
   <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
 
-  {% block css %}
     <!-- Your stuff: Third-party CSS libraries go here -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +22,7 @@
     {#    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">#}
     {% tailwind_css %}
     <!-- This file stores project-specific CSS -->
-    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
+  {% block css %}
   {% endblock %}
   <!-- Le javascript
   ================================================== -->
@@ -39,7 +38,7 @@
 
 </head>
 
-<body class="bg-gray-700">
+<body class="bg-primary">
 <div class="min-h-screen flex flex-col justify-start">
   {% include "snippets/structural/nav.html" %}
   <main>
@@ -57,7 +56,7 @@
     {#        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>#}
     {#        <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">#}
     {#          <div class="hidden sm:block absolute top-0 right-0 pt-4 pr-4">#}
-    {#            <button type="button" class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">#}
+    {#            <button type="button" class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent">#}
     {#              <span class="sr-only">Close</span>#}
     {#              <!-- Heroicon name: outline/x -->#}
     {#              <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">#}
@@ -82,7 +81,7 @@
     {#          <div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">#}
     {#            <button#}
     {#              type="button"#}
-    {#              class="block w-full py-3 px-4 rounded-md shadow bg-primary text-white font-medium hover:bg-primary-darken focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 focus:ring-offset-gray-900"#}
+    {#              class="block w-full py-3 px-4 rounded-md shadow bg-primary text-contrast font-medium hover:text-accent-darken focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 focus:ring-offset-gray-900"#}
     {#            >#}
     {#              Close#}
     {#            </button>#}

@@ -1,0 +1,37 @@
+.tooltip {
+  position:relative; /* making the .tooltip span a container for the tooltip text */
+  /*border-bottom:1px dashed #000; !* little indicater to indicate it's hoverable *!*/
+}
+
+.tooltip:before {
+  content: attr(data-text); /* here's the magic */
+  position: absolute;
+  z-index: 99;
+
+  top:100%;
+
+  /* basic styles */
+  /*min-width:10rem;*/
+  /*max-width:15rem;*/
+  padding:0.625rem;
+  border-radius:0.625rem;
+  text-align:center;
+
+  display:none; /* hide by default */
+  opacity:0;
+}
+
+.tooltip:hover:before {
+  display:block;
+  opacity:1;
+}
+
+/*.tooltip.left:before {*/
+/*  !* reset defaults *!*/
+/*  left:initial;*/
+/*  margin:initial;*/
+
+/*  !* set new values *!*/
+/*  right:100%;*/
+/*  margin-right:15px;*/
+/*}*/

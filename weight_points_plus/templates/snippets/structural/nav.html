@@ -1,4 +1,8 @@
-{% load i18n %}
+{% load i18n static %}
+
+{% block css %}
+    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
+{% endblock css %}
 
 <header class="relative" x-data="{isOpen: false}">
   <div class="pt-6">
@@ -10,7 +14,7 @@
             <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="">
           </a>
           <div class="-mr-2 flex items-center md:hidden">
-            <button type="button" @click="isOpen = !isOpen" class="bg-gray-700 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-800 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white" aria-expanded="false">
+            <button type="button" @click="isOpen = !isOpen" class="bg-primary rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-800 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white" aria-expanded="false">
               <span class="sr-only">Open main menu</span>
               <!-- Heroicon name: outline/menu -->
               <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -22,27 +26,27 @@
         <div class="hidden space-x-8 md:flex md:ml-10">
           {% if not user.is_authenticated %}
 
-            <a href="#" class="text-base font-medium text-white hover:text-gray-300">Product</a>
+            <a href="#" class="text-base font-medium text-contrast hover:text-accent">Product</a>
 
-            <a href="#" class="text-base font-medium text-white hover:text-gray-300">Features</a>
+            <a href="#" class="text-base font-medium text-contrast hover:text-accent">Features</a>
 
-            <a href="#" class="text-base font-medium text-white hover:text-gray-300">Marketplace</a>
+            <a href="#" class="text-base font-medium text-contrast hover:text-accent">Marketplace</a>
 
-            <a href="#" class="text-base font-medium text-white hover:text-gray-300">Company</a>
+            <a href="#" class="text-base font-medium text-contrast hover:text-accent">Company</a>
           {% endif %}
         </div>
       </div>
       <div class="hidden md:flex md:items-center md:space-x-6">
         {% if not user.is_authenticated %}
-          <a href="{% url 'account_login' %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'Sign In' %}</a>
-          <a href="{% url 'account_signup' %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'Register' %}</a>
+          <a href="{% url 'account_login' %}" class="text-base font-medium text-contrast hover:text-accent">{% translate 'Sign In' %}</a>
+          <a href="{% url 'account_signup' %}" class="text-base font-medium text-contrast hover:text-accent">{% translate 'Register' %}</a>
         {% else %}
-          <a href="{% url 'day:today' %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'Food Tracker' %}</a>
-          <a href="{% url "food:list" %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'Foods' %}</a>
-          <a href="{% url "recipe:list" %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'Recipes' %}</a>
-          <span class="text-white">|</span>
-          <a href="{% url 'users:me' %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'User' %}</a>
-          <a href="{% url 'account_logout' %}" class="text-base font-medium text-white hover:text-gray-300">{% translate 'Log Out' %}</a>
+          <a href="{% url 'day:today' %}" class="text-base font-medium text-contrast hover:text-accent">{% translate 'Food Tracker' %}</a>
+          <a href="{% url "food:list" %}" class="text-base font-medium text-contrast hover:text-accent">{% translate 'Foods' %}</a>
+          <a href="{% url "recipe:list" %}" class="text-base font-medium text-contrast hover:text-accent">{% translate 'Recipes' %}</a>
+          <span class="text-contrast">|</span>
+          <a href="{% url 'users:me' %}" class="text-base font-medium text-contrast hover:text-accent">{% translate 'User' %}</a>
+          <a href="{% url 'account_logout' %}" class="text-base font-medium text-contrast hover:text-accent">{% translate 'Log Out' %}</a>
         {% endif %}
       </div>
     </nav>
@@ -64,7 +68,7 @@
           <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="">
         </div>
         <div class="-mr-2">
-          <button type="button" @click="isOpen = !isOpen" @click.outside="isOpen = false" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-600">
+          <button type="button" @click="isOpen = !isOpen" @click.outside="isOpen = false" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-contrast focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent">
             <span class="sr-only">Close menu</span>
             <!-- Heroicon name: outline/x -->
             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -76,13 +80,13 @@
       <div class="pt-5 pb-6">
         {% if not user.is_authenticated %}
         <div class="px-2 space-y-1">
-          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Product</a>
+          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-contrast-light">Product</a>
 
-          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Features</a>
+          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-contrast-light">Features</a>
 
-          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Marketplace</a>
+          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-contrast-light">Marketplace</a>
 
-          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Company</a>
+          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-contrast-light">Company</a>
         </div>
           <div class="mt-6 px-5">
             <p class="text-center text-base font-medium text-gray-500"><a href="{% url 'account_signup' %}" class="text-gray-900 hover:underline">{% translate 'Register' %}</a></p>
@@ -92,11 +96,11 @@
           </div>
         {% else %}
         <div class="px-2 space-y-1">
-          <a href="{% url 'day:today' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">{% translate 'Food Tracker' %}</a>
+          <a href="{% url 'day:today' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-contrast-light">{% translate 'Food Tracker' %}</a>
 
-          <a href="{% url "food:list" %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">{% translate 'Foods' %}</a>
+          <a href="{% url "food:list" %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-contrast-light">{% translate 'Foods' %}</a>
 
-          <a href="{% url "recipe:list" %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">{% translate 'Recipes' %}</a>
+          <a href="{% url "recipe:list" %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-contrast-light">{% translate 'Recipes' %}</a>
 
         </div>
           <div class="mt-6 px-5">

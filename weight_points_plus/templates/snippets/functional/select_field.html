@@ -1,6 +1,6 @@
 <div class="{{ class }}">
   <label for="{{ id }}" class="block text-sm font-medium text-gray-700">{{ label }}</label>
-  <select id="{{ id }}" name="{{ name }}" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm rounded-md">
+  <select id="{{ id }}" name="{{ name }}" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm rounded-md bg-contrast-light">
     {% for option in options %}
       {% if required and option.0 != '' or not required %}
       <option {% if selected == option.0 %}selected{% endif %} value="{{ option.0 }}">{{ option.1 }}</option>

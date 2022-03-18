@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="max-w-4xl mx-auto">
-  <div class="bg-gray-100 shadow overflow-hidden sm:rounded-lg">
+  <div class="bg-contrast shadow overflow-hidden sm:rounded-lg">
     <div class="px-4 py-5 sm:px-6">
       <h3 class="text-lg leading-6 font-medium text-gray-900">
         Recipe: {{ fooditem.name }}
@@ -19,8 +19,8 @@
                 <p class="text-sm text-gray-500">{{ item.serving_size }}{{ item.serving_unit|lower }}</p>
               </div>
               <div class="flex-1">
-                <a href="{% url "recipe:update-food-item" fooditem.pk item.pk %}" class="text-primary hover:bg-primary-darken mx-1 text-sm">Edit</a>
-                <a href="{% url "recipe:delete-food-item" fooditem.pk item.pk %}" class="text-primary hover:bg-primary-darken mx-1 text-sm">Remove</a>
+                <a href="{% url "recipe:update-food-item" fooditem.pk item.pk %}" class="text-accent hover:text-accent-darken mx-1 text-sm">Edit</a>
+                <a href="{% url "recipe:delete-food-item" fooditem.pk item.pk %}" class="text-accent hover:text-accent-darken mx-1 text-sm">Remove</a>
               </div>
             </li>
           {% endfor %}

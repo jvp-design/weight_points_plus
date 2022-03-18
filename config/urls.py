@@ -23,6 +23,11 @@ urlpatterns = [
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
+    path(
+        "disclaimer/",
+        TemplateView.as_view(template_name="pages/disclaimer.html"),
+        name="disclaimer",
+    ),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
@@ -38,7 +43,7 @@ urlpatterns = [
         include("weight_points_plus.foods_recipes.recipe.urls", namespace="recipe"),
     ),
     path("meal/", include("weight_points_plus.meal.urls", namespace="meal")),
-    path("ajax/calculate-points/", ajax_calculate_points, name="ajax-calculate-points")
+    path("ajax/calculate-points/", ajax_calculate_points, name="ajax-calculate-points"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
