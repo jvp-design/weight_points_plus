@@ -18,7 +18,7 @@ from weight_points_plus.day.models import Day, Activity
 from weight_points_plus.users.models import Weight
 from weight_points_plus.utils.mixins import UserHasAllInfoMixin, UserIsOwnerMixin
 from weight_points_plus.utils.time_tracking import backfill_weeks
-from weight_points_plus.week.utils import update_weekly_excess_points
+from weight_points_plus.week.utils import update_weekly_excess_points, update_weekly_activity_points
 
 
 def update_daily_points(day: Day) -> None:
@@ -39,6 +39,7 @@ def update_daily_activity_points(day: Day) -> None:
         points += calculate_activity_points(item, day)
     day.activity_points = points
     day.save()
+    update_weekly_activity_points(day.week)
 
 
 class GetADayView(UserHasAllInfoMixin, DetailView):
