@@ -60,6 +60,7 @@ module.exports = {
 				'accent-lighten': 'hsl(29, 94%, 60%)',
 				contrast: 'hsl(70, 19%, 87%)',
 				'contrast-light': 'hsl(70, 19%, 95%)',
+				'contrast-dark': 'hsl(70, 19%, 80%)',
 			},
 			transitionDuration: {
 				0: '0ms',

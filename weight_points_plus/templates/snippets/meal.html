@@ -25,7 +25,7 @@
             {% if meal.fooditeminstance_set.all %}
               {% for item in meal.fooditeminstance_set.all %}
                 <!-- Odd row -->
-                <tr class="odd:bg-contrast-light even:bg-white">
+                <tr class="odd:bg-contrast-dark even:bg-contrast-light">
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ item.food.name }}</td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.serving_size}} {{ item.get_serving_unit_display }}</td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">{{ item.points }}</td>
