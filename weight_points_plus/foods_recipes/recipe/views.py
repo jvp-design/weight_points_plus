@@ -21,6 +21,7 @@ from weight_points_plus.utils.misc import (
     is_each_serving,
     is_weight_serving,
     is_volume_serving,
+    servings,
 )
 from weight_points_plus.utils.mixins import (
     UserHasAllInfoMixin,
@@ -186,7 +187,7 @@ class RecipeUpdateView(
             self.object.name = name
             calculate_recipe_points(self.object)
             return HttpResponseRedirect(
-                reverse("recipe:detail", kwargs={"pk": kwargs.get('pk')})
+                reverse("recipe:detail", kwargs={"pk": kwargs.get("pk")})
             )
         else:
             return self.form_invalid(form)
@@ -280,48 +281,41 @@ class BaseRecipeFoodEditView:
 
     def get_form_class(self):
         form = super().get_form_class()
-        if self.request.method == "GET":
-            food = self.get_food()
-            if food.conversion_weight_to_volume is None:
-                if is_weight_serving(food.serving_unit):
-                    choices = list(
-                        filter(
-                            lambda x: x[0] == "Weight",
-                            form.base_fields["serving_unit"].choices,
-                        )
-                    )[0][1]
-                elif is_volume_serving(food.serving_unit):
-                    choices = list(
-                        filter(
-                            lambda x: x[0] == "Volume",
-                            form.base_fields["serving_unit"].choices,
-                        )
-                    )[0][1]
-                elif is_each_serving(food.serving_unit):
-                    choices = list(
-                        filter(
-                            lambda x: x[0] == "EACH",
-                            form.base_fields["serving_unit"].choices,
-                        )
+        food = self.get_food()
+        if food.conversion_weight_to_volume is None:
+            if is_weight_serving(food.serving_unit):
+                choices = list(
+                    filter(
+                        lambda x: x in servings.get("weight"),
+                        form.base_fields["serving_unit"].choices,
                     )
-                else:
-                    choices = []
-                    for choice in form.base_fields["serving_unit"].choices:
-                        if choice[0] != "":
-                            choices.extend([x[1] for x in choice[1]])
+                )
+            elif is_volume_serving(food.serving_unit):
+                choices = list(
+                    filter(
+                        lambda x: x in servings.get("volume"),
+                        form.base_fields["serving_unit"].choices,
+                    )
+                )
+            elif is_each_serving(food.serving_unit):
+                choices = list(
+                    filter(
+                        lambda x: x in servings.get("each"),
+                        form.base_fields["serving_unit"].choices,
+                    )
+                )
             else:
-                choices = []
-                for choice in form.base_fields["serving_unit"].choices:
-                    if choice[0] in ["Weight", "Volume"]:
-                        choices.extend([x for x in choice[1]])
-                    else:
-                        choices.append(choice)
-            form.base_fields["serving_unit"].choices = choices
-            form.base_fields["serving_unit"].initial = food.serving_unit
+                choices = form.base_fields["serving_unit"].choices
+        else:
+            choices = form.base_fields["serving_unit"].choices
+        form.base_fields["serving_unit"].choices = choices
+        form.base_fields["serving_unit"].initial = food.serving_unit
         return form
 
 
 class RecipeFoodAddView(UserHasAllInfoMixin, BaseRecipeFoodEditView, CreateView):
+    object = None
+
     def get_food(self):
         qs = FoodItem.objects.filter(Q(user__isnull=True) | Q(user=self.request.user))
         return get_object_or_404(qs, pk=self.request.GET.get("food"))

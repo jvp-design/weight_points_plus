@@ -6,6 +6,8 @@ from django.urls import include, path, reverse
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
+from weight_points_plus.utils.points_calculators import ajax_calculate_points
+
 
 class HomeView(TemplateView):
     template_name = "pages/home.html"
@@ -36,6 +38,7 @@ urlpatterns = [
         include("weight_points_plus.foods_recipes.recipe.urls", namespace="recipe"),
     ),
     path("meal/", include("weight_points_plus.meal.urls", namespace="meal")),
+    path("ajax/calculate-points/", ajax_calculate_points, name="ajax-calculate-points")
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

@@ -1,6 +1,8 @@
 from decimal import Decimal
 from typing import Optional, Union
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from pydantic import BaseModel
 
 from weight_points_plus.foods_recipes.models import (
@@ -250,10 +252,12 @@ def convert_weight_and_volume(
         conversion_unit_key = "conversion_unit_volume"
         other_unit_key = "conversion_unit_weight"
     conversion_unit = getattr(food, conversion_unit_key)
-    passed_multiplier = unit_dict[conversion_unit][serving_unit] * serving_size
+    passed_multiplier = (
+        unit_dict[conversion_unit.lower()][serving_unit.lower()] * serving_size
+    )
 
     other_unit = getattr(food, other_unit_key)
-    other_multiplier = unit_dict[other_unit][food.serving_unit]
+    other_multiplier = unit_dict[other_unit.lower()][food.serving_unit.lower()]
 
     if is_weight_serving(serving_unit):
         operation = (
@@ -292,7 +296,9 @@ def get_multiplicative_factor(
         # convert from each to weight and then convert to
         # the food's base weight value
         if is_each_serving(food.conversion_unit_volume):
-            multiplier = unit_dict[food.conversion_unit_weight][food.serving_unit]
+            multiplier = unit_dict[food.conversion_unit_weight.lower()][
+                food.serving_unit.lower()
+            ]
             return (
                 multiplier
                 * food.conversion_weight_to_volume
@@ -301,7 +307,9 @@ def get_multiplicative_factor(
             )
         # Vice-versa for volume
         if is_each_serving(food.conversion_unit_weight):
-            multiplier = unit_dict[food.conversion_unit_volume][food.serving_unit]
+            multiplier = unit_dict[food.conversion_unit_volume.lower()][
+                food.serving_unit.lower()
+            ]
             return (
                 multiplier
                 / food.conversion_weight_to_volume
@@ -333,7 +341,9 @@ def get_multiplicative_factor(
                 raise ValueError(
                     "If the volume conversion unit is 'each' you cannot pass in volume as a serving unit"
                 )
-            multiplier = unit_dict[serving_unit][food.conversion_unit_weight]
+            multiplier = unit_dict[serving_unit.lower()][
+                food.conversion_unit_weight.lower()
+            ]
             return (
                 multiplier
                 / food.conversion_weight_to_volume
@@ -345,7 +355,9 @@ def get_multiplicative_factor(
                 raise ValueError(
                     "If the weight conversion unit is 'each' you cannot pass in weight as a serving unit"
                 )
-            multiplier = unit_dict[serving_unit][food.conversion_unit_volume]
+            multiplier = unit_dict[serving_unit.lower()][
+                food.conversion_unit_volume.lower()
+            ]
             return (
                 multiplier
                 * food.conversion_weight_to_volume
@@ -365,7 +377,7 @@ def get_multiplicative_factor(
     if is_weight_serving(serving_unit) and is_weight_serving(food.serving_unit):
         return (
             serving_size
-            * unit_dict[serving_unit][food.serving_unit]
+            * unit_dict[serving_unit.lower()][food.serving_unit.lower()]
             / food.serving_size
         )
 
@@ -374,7 +386,7 @@ def get_multiplicative_factor(
     if is_volume_serving(serving_unit) and is_volume_serving(food.serving_unit):
         return (
             serving_size
-            * unit_dict[serving_unit][food.serving_unit]
+            * unit_dict[serving_unit.lower()][food.serving_unit.lower()]
             / food.serving_size
         )
 
@@ -409,3 +421,33 @@ def calculate_food_points(
 
     multiplicative_factor = get_multiplicative_factor(food, serving_size, serving_unit)
     return points_formula(food, multiplicative_factor)
+
+
+@csrf_exempt
+def ajax_calculate_points(request) -> JsonResponse:
+    if request.is_ajax and request.method == "POST":
+        data = request.POST
+        if data.get("food") is None:
+            return JsonResponse({"message": "Must include a food"}, status=400)
+        if data.get("servingSize") is None:
+            return JsonResponse({"message": "Must include a serving size"}, status=400)
+        if data.get("servingUnit") is None:
+            return JsonResponse({"message": "Must include a serving unit"}, status=400)
+        try:
+            pk = int(data.get("food"))
+        except ValueError:
+            return JsonResponse({"message": "Food value must be an int"}, status=400)
+        try:
+            serving_size = float(data.get("servingSize"))
+        except ValueError:
+            return JsonResponse({"message": "Serving size must be a float"}, status=400)
+        try:
+            food = FoodItem.objects.get(pk=pk)
+        except FoodItem.DoesNotExist:
+            return JsonResponse({"message": "Food not found"}, status=404)
+        try:
+            val = calculate_food_points(food, serving_size, data.get("servingUnit"))
+            return JsonResponse({"data": val}, status=200)
+        except ValueError as e:
+            return JsonResponse({"message": str(e)}, status=400)
+    return JsonResponse({"message": "Method not allowed"}, status=405)

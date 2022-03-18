@@ -1,7 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 
-from weight_points_plus.utils.misc import SERVING_SIZE_CHOICES
+from weight_points_plus.utils.misc import SERVING_SIZE_CHOICES, servings
 
 
 class FoodItem(models.Model):
@@ -18,13 +18,13 @@ class FoodItem(models.Model):
     serving_unit = models.CharField(max_length=6, choices=SERVING_SIZE_CHOICES)
     conversion_unit_weight = models.CharField(
         max_length=6,
-        choices=[*SERVING_SIZE_CHOICES[0][1], SERVING_SIZE_CHOICES[2]],
+        choices=[*servings.get("weight"), *servings.get("each")],
         null=True,
         blank=True,
     )
     conversion_unit_volume = models.CharField(
         max_length=6,
-        choices=[*SERVING_SIZE_CHOICES[1][1], SERVING_SIZE_CHOICES[2]],
+        choices=[*servings.get("volume"), *servings.get("each")],
         null=True,
         blank=True,
     )

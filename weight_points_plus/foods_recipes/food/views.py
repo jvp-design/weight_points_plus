@@ -14,6 +14,7 @@ from weight_points_plus.utils.mixins import (
 )
 from weight_points_plus.utils.points_calculators import calculate_food_points
 from ..utils import FoodItemListView
+from ...utils.misc import is_weight_serving, is_volume_serving
 
 
 class AllFoodsListView(FoodItemListView):
@@ -101,18 +102,22 @@ class FoodInputMixin:
     def get_form_class(self):
         form = super().get_form_class()
         choices = []
+        weight_choices = []
+        volume_choices = []
         for choice in form.base_fields["serving_unit"].choices:
-            if choice[0] == "Weight":
-                choices.extend([x for x in choice[1]])
-                form.base_fields["conversion_unit_weight"].choices = [x for x in choice[1]]
-            elif choice[0] == "Volume":
-                choices.extend([x for x in choice[1]])
-                form.base_fields["conversion_unit_volume"].choices = [x for x in choice[1]]
+            if is_weight_serving(choice[0]):
+                choices.append(choice)
+                weight_choices.append(choice)
+            elif is_volume_serving(choice[0]):
+                choices.append(choice)
+                volume_choices.append(choice)
             else:
                 choices.append(choice)
-                form.base_fields["conversion_unit_weight"].choices.append(choice)
-                form.base_fields["conversion_unit_volume"].choices.append(choice)
+                weight_choices.append(choice)
+                volume_choices.append(choice)
         form.base_fields["serving_unit"].choices = choices
+        form.base_fields["conversion_unit_weight"].choices = weight_choices
+        form.base_fields["conversion_unit_volume"].choices = volume_choices
         return form
 
 
@@ -132,9 +137,7 @@ class FoodCreateView(UserHasAllInfoMixin, FoodInputMixin, CreateView):
 food_create_view = FoodCreateView.as_view()
 
 
-class FoodUpdateView(
-    UserHasAllInfoMixin, UserIsOwnerMixin, FoodInputMixin, UpdateView
-):
+class FoodUpdateView(UserHasAllInfoMixin, UserIsOwnerMixin, FoodInputMixin, UpdateView):
     def get_permission_denied_url(self):
         return reverse("food:list")
 

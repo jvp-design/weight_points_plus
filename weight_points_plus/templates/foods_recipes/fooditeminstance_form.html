@@ -20,12 +20,12 @@
       <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ food.name }}</p>
     </div>
     <div class="border-t border-gray-200 px-4 py-5 sm:p-0 flex flex-col sm:flex-row sm:flex-2 sm:justify-between">
-      <form class="flex-2 px-2 sm:px-6 sm:pt-4 space-y-4 sm:space-y-6" method="post">
-        {% csrf_token %}
-        {% include "snippets/functional/text_field.html" with id=form.serving_size.id_for_label name=form.serving_size.html_name label=form.serving_size.label errors=form.serving_size.errors value=form.serving_size.value required=form.serving_size.field.required %}
-        {% include "snippets/functional/select_field.html" with id=form.serving_unit.id_for_label name=form.serving_unit.html_name label=form.serving_unit.label errors=form.serving_unit.errors selected=form.serving_unit.value options=form.fields.serving_unit.choices required=form.serving_unit.field.required %}
-        <input type="submit" class="btn-primary cursor-pointer" value="{{ submit_button_text }}">
-      </form>
+        <form class="flex-2 px-2 sm:px-6 sm:pt-4 space-y-4 sm:space-y-6" method="post">
+          {% csrf_token %}
+          {% include "snippets/functional/text_field.html" with id=form.serving_size.id_for_label name=form.serving_size.html_name label=form.serving_size.label errors=form.serving_size.errors value=form.serving_size.value required=form.serving_size.field.required %}
+          {% include "snippets/functional/serving_size_field.html" with id=form.serving_unit.id_for_label name=form.serving_unit.html_name label=form.serving_unit.label errors=form.serving_unit.errors selected=form.serving_unit.value options=form.fields.serving_unit.choices required=form.serving_unit.field.required %}
+          <input type="submit" id="submit-button" class="btn-primary cursor-pointer" value="{{ submit_button_text }}">
+        </form>
       <dl class="mt-8 sm:mt-0 border-t sm:divide-y sm:divide-gray-200 sm:border-l border-gray-200 sm:flex-3">
         {% for field in food_item_fields %}
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -45,51 +45,46 @@
     </div>
   </div>
 
-  {#  <div class="rounded-lg bg-gray-100 overflow-hidden shadow">#}
-  {#    <h2 class="sr-only" id="add-edit-food-card">Add or Edit Food</h2>#}
-  {#    <div class="bg-gray-100 p2 sm:p-6">#}
-  {#      <div class="sm:mt-4 pb-2 sm:mb-0 sm:pt-1 sm:text-left">#}
-  {#        <p class="text-xl font-bold-text-gray-900 sm:text-2xl">#}
-  {#          {% if object %}#}
-  {#            Edit for#}
-  {#          {% else %}#}
-  {#            Add to#}
-  {#          {% endif %}#}
-  {##}
-  {#          {% if 'meal' in request.resolver_match.route %}#}
-  {#            {{ meal.name }} for {{ date }}#}
-  {#          {% else %}#}
-  {#            recipe {{ recipe_name }}#}
-  {#          {% endif %}#}
-  {#        </p>#}
-  {#      </div>#}
-  {#    </div>#}
-  {#    <div class="flex sm:justify-between">#}
-  {#      <form method="POST" class="p-8">#}
-  {#        {% csrf_token %}#}
-  {#        <input type="hidden" value="{{ food }}" name="food">#}
-  {#        {{ form.as_p }}#}
-  {#        {% if object %}#}
-  {#          <input type="submit" value="Edit Food">#}
-  {#        {% else %}#}
-  {#          <input type="submit" value="Add Food">#}
-  {#        {% endif %}#}
-  {#        {% if 'recipe' in request.resolver_match.route %}#}
-  {#          <input type="text" name="next-food-search">#}
-  {#          <input type="submit" value="Add Another Item" name="recipe-add-another">#}
-  {#        {% endif %}#}
-  {#      </form>#}
-  {#      <div class="p-8">#}
-  {#        {% include "snippets/food_detail_snippet.html" with fooditem=food %}#}
-  {#      </div>#}
-  {#    </div>#}
-  {#  </div>#}
-
-
 {% endblock content %}
 
 {% block inline_javascript %}
   <script>
+  console.log('hello')
     {{ form.serving_size.id_for_label }}.focus()
+    function debounce(func, timeout = 1000){
+      let timer;
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+      };
+    }
+    async function fetchPoints(){
+      const food = {{ food.pk }}
+      const servingSize = {{ form.serving_size.id_for_label }}.value
+      const servingUnit = {{ form.serving_unit.id_for_label }}.value
+      const formData = new FormData();
+      formData.append('food', food)
+      formData.append('servingSize', servingSize)
+      formData.append('servingUnit', servingUnit)
+      if (!!servingSize) {
+        try {
+          const response = await fetch("/ajax/calculate-points/", {
+            method: 'POST',
+            body: formData,
+          })
+          const data = await response.json()
+          if (data.data === undefined) {
+            document.querySelector("#submit-button").value = `{{submit_button_text}}`
+          } else {
+            document.querySelector("#submit-button").value = `{{submit_button_text}} (${data.data} points)`
+          }
+        } catch(err) {
+          console.log('err',err)
+        }
+      }
+    }
+    const processChange = debounce(() => fetchPoints());
+    {{ form.serving_size.id_for_label }}.addEventListener('input', processChange)
+    {{ form.serving_unit.id_for_label }}.addEventListener('input', fetchPoints)
   </script>
 {% endblock inline_javascript %}
