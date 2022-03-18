@@ -11,7 +11,7 @@
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
           <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-contrast-light">
+            <thead class="bg-contrast-dark">
             <tr>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Food</th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
@@ -25,7 +25,7 @@
             {% if meal.fooditeminstance_set.all %}
               {% for item in meal.fooditeminstance_set.all %}
                 <!-- Odd row -->
-                <tr class="odd:bg-contrast-dark even:bg-contrast-light">
+                <tr class="even:bg-contrast odd:bg-contrast-light">
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ item.food.name }}</td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.serving_size}} {{ item.get_serving_unit_display }}</td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">{{ item.points }}</td>
