@@ -12,7 +12,6 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView, CreateView
 
-from .forms import UserUpdateForm
 from ..day.models import Day
 from ..day.views import update_daily_points
 from ..utils.mixins import UserHasAllInfoMixin
@@ -48,7 +47,7 @@ class CurrentUserDetailView(LoginRequiredMixin, DetailView):
             dict(lookup="age", display="Age"),
             dict(lookup="birth_date", display="Birth Date"),
             dict(lookup="weight"),
-            dict(lookup="height", display="Height (in.)"),
+            dict(lookup="height"),
             dict(lookup="get_sex_display", display="Sex"),
             dict(lookup="weekly_points", display="Weekly Points"),
             dict(lookup="get_weigh_in_day_display", display="Weigh-In Day"),
@@ -66,17 +65,22 @@ class CurrentUserDetailView(LoginRequiredMixin, DetailView):
                         dict(lookup="Not Yet Recorded", display="Weight (lbs.)")
                     )
                 else:
+                    last_weight = weight_set.last()
                     context["user_fields"].append(
                         dict(
-                            lookup=weight_set.last().weight,
-                            display="Weight (lbs.)",
+                            lookup=last_weight.weight,
+                            display=f"Weight ({last_weight.weight_units})",
                         )
                     )
             else:
+                if field["lookup"] == "height":
+                    display = f"Height ({self.request.user.height_units})"
+                else:
+                    display = field["display"]
                 context["user_fields"].append(
                     dict(
                         lookup=getattr(self.request.user, field["lookup"]),
-                        display=field["display"],
+                        display=display,
                     )
                 )
         return context
@@ -91,6 +95,7 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     fields = [
         "name",
         "height",
+        "height_units",
         "sex",
         "weigh_in_day",
         "birth_date",
@@ -132,7 +137,7 @@ user_redirect_view = UserRedirectView.as_view()
 
 class WeightRecordView(UserHasAllInfoMixin, CreateView):
     model = Weight
-    fields = ["weight"]
+    fields = ["weight", "weight_units"]
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
@@ -148,9 +153,12 @@ class WeightRecordView(UserHasAllInfoMixin, CreateView):
                     user=request.user, date=self.object.date_recorded.date()
                 )
                 if not day.week.weight_recorded:
-                    points = calculate_daily_points(request.user, self.object.weight)
+                    points = calculate_daily_points(
+                        request.user, self.object.weight, self.object.weight_units
+                    )
                     week = Week.objects.get(id=day.week.pk)
                     week.weight = self.object.weight
+                    week.weight_units = self.object.weight_units
                     week.weight_recorded = True
                     for day in Day.objects.filter(user=request.user, week=week):
                         day.total_points = points

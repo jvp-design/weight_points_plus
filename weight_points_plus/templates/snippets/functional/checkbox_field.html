@@ -1,4 +1,4 @@
-<div class="relative flex items-start">
+<div class="relative flex items-start {{ class }}">
     <div class="flex items-center h-5">
       <input
         id="{{ id }}"
@@ -10,9 +10,9 @@
       >
     </div>
     <div class="ml-3 text-sm">
-      <label for="{{ id }}" class="font-medium text-gray-700">{{ label }}</label>
+      <label for="{{ id }}" class="font-medium text-contrast">{{ label }}</label>
       {% if hint %}
-      <p id="{{ id }}-description" class="text-gray-500">{{ hint }}</p>
+      <p id="{{ id }}-description" class="text-contrast-dark">{{ hint }}</p>
       {% endif %}
     </div>
   </div>

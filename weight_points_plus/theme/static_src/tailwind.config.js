@@ -55,6 +55,7 @@ module.exports = {
 				primary: 'hsl(191, 26%, 12%)',
 				'primary-darken': 'hsl(191, 26%, 8%)',
 				'primary-lighten': 'hsl(191, 26%, 24%)',
+				'primary-semi-light': 'hsl(191, 26%, 18%)',
 				accent: 'hsl(29, 94%, 50%)',
 				'accent-darken': 'hsl(29, 94%, 40%)',
 				'accent-lighten': 'hsl(29, 94%, 60%)',

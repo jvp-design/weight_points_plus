@@ -15,6 +15,7 @@ from weight_points_plus.utils.mixins import UserHasAllInfoMixin
 class FoodItemFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_expr="icontains")
     user = django_filters.BooleanFilter(method="filter_user")
+    restaurant = django_filters.CharFilter(lookup_expr="icontains")
 
     def filter_user(self, queryset, name, value):
         if value:
@@ -23,7 +24,7 @@ class FoodItemFilter(django_filters.FilterSet):
 
     class Meta:
         model = FoodItem
-        fields = ["name", "user"]
+        fields = ["name", "user", "restaurant"]
 
 
 class FoodItemListView(UserHasAllInfoMixin, FilterView):
@@ -38,7 +39,6 @@ class FoodItemListView(UserHasAllInfoMixin, FilterView):
         for k, v in context["filter"].data.items():
             if k != "page":
                 context["query"][k] = v
-
         return context
 
 

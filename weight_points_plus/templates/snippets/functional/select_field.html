@@ -1,5 +1,5 @@
 <div class="{{ class }}">
-  <label for="{{ id }}" class="block text-sm font-medium text-gray-700">{{ label }}</label>
+  <label for="{{ id }}" class="block text-sm font-medium text-contrast">{{ label }}</label>
   <select id="{{ id }}" name="{{ name }}" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-accent focus:border-accent sm:text-sm rounded-md bg-contrast-light">
     {% for option in options %}
       {% if required and option.0 != '' or not required %}
@@ -7,11 +7,12 @@
       {% endif %}
     {% endfor %}
   </select>
+  {% if hint is not None %}
+    <p class="mt-2 text-sm text-contrast-dark" id="{{ id }}-field">{{ hint }}</p>
+{% endif %}
   {% if errors %}
     {% for error in errors %}
       <p class="mt-2 text-sm text-red-600" id="{{ id }}-error">{{ error}}</p>
     {% endfor %}
-  {% elif hint is not None %}
-    <p class="mt-2 text-sm text-gray-500" id="{{ id }}-field">{{ hint }}</p>
   {% endif %}
 </div>

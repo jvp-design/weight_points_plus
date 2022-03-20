@@ -1,22 +1,20 @@
-<div class="w-full sm:w-3/4 mx-auto py-4 px-2 sm:px-0 border-t border-gray-300 sm:border-none">
+<div class="w-full mx-auto py-4 px-2 sm:px-0 border-t border-gray-300 sm:border-none">
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-2">
-    <h3 class="text-md sm:text-lg text-gray-900">Activities ({{ day.activity_points }} Points)</h3>
+    <h3 class="text-md sm:text-lg text-contrast-dark">Activities ({{ day.activity_points }} Points)</h3>
     <a href="{% url 'day:activity-add' day.date %}" class="text-accent hover:text-accent-darken">Add an Activity</a>
   </div>
   <div class="flex flex-col">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-200">
+          <table class="min-w-full divide-y divide-gray-200 bg-contrast">
             <thead class="bg-contrast-dark">
             <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Activity</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Intensity</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Points</th>
-              <th scope="col" class="relative px-6 py-3">
-                <span class="sr-only">Edit or Remove</span>
-              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-primary-lighten uppercase tracking-wider">Activity</th>
+              <th scope="col" class="hidden px-6 py-3 text-left text-xs font-medium text-primary-lighten uppercase tracking-wider lg:table-cell">Duration</th>
+              <th scope="col" class="hidden px-6 py-3 text-left text-xs font-medium text-primary-lighten uppercase tracking-wider lg:table-cell">Intensity</th>
+              <th scope="col" class="hidden px-6 py-3 text-left text-xs font-medium text-primary-lighten uppercase tracking-wider md:table-cell">Points</th>
+              <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-primary-lighten uppercase tracking-wider">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -24,10 +22,20 @@
               {% for item in activity_info %}
                 <!-- Odd row -->
                 <tr class="even:bg-contrast odd:bg-contrast-light">
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ item.name }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.duration }} minutes</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.level }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.points }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-contrast-dark">
+                    {{ item.name }}
+                    <dl class="font-normal lg:hidden">
+                      <dt class="sr-only">Duration</dt>
+                      <dd class="mt-1 truncate text-primary-lighten">{{ item.duration }} minutes</dd>
+                      <dt class="sr-only">Level</dt>
+                      <dd class="mt-1 truncate text-primary-lighten">{{ item.level }}</dd>
+                      <dt class="sr-only md:hidden">Points</dt>
+                      <dd class="mt-1 truncate text-primary-lighten md:hidden">{{ item.points }} Points</dd>
+                    </dl>
+                  </td>
+                  <td class="hidden px-6 py-4 whitespace-nowrap text-sm text-primary-lighten lg:table-cell">{{ item.duration }} minutes</td>
+                  <td class="hidden px-6 py-4 whitespace-nowrap text-sm text-primary-lighten lg:table-cell">{{ item.level }}</td>
+                  <td class="hidden px-6 py-4 whitespace-nowrap text-sm text-primary-lighten md:table-cell">{{ item.points }}</td>
                   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <a href="{% url 'day:activity-update' day.date item.pk %}" class="text-accent hover:text-accent-darken mx-2">Edit</a>
                     <a href="{% url 'day:activity-delete' day.date item.pk %}" class="text-accent hover:text-accent-darken mx-2">Remove</a>

@@ -1,10 +1,10 @@
 <div class="{{ class }}">
   <div class="flex justify-between">
-    <label for="{{ id }}" class="block text-sm font-medium text-gray-700">
+    <label for="{{ id }}" class="block text-sm font-medium text-contrast">
       {{ label }}
     </label>
     {% if required %}
-      <span class="text-sm text-gray-500" id="{{ id }}-required">Required</span>
+      <span class="text-sm text-contrast-dark" id="{{ id }}-required">Required</span>
     {% endif %}
   </div>
   <div class="mt-1">
@@ -20,17 +20,17 @@
       placeholder="{{ placeholder }}"
       {% endif %}
       aria-describedby="{{ id }}-field"
-      {% if value.strip|safe is not None %}
+      {% if value.strip %}
       value="{{ value }}"
       {% endif %}
-    >
-    </textarea>
+    ></textarea>
   </div>
-      {% if errors %}
-        {% for error in errors %}
-          <p class="mt-2 text-sm text-red-600" id="{{ id }}-error">{{ error}}</p>
-        {% endfor %}
-      {% elif hint %}
-        <p class="mt-2 text-sm text-gray-500" id="{{ id }}-field">{{ hint }}</p>
-      {% endif %}
-      </div>
+  {% if hint %}
+    <p class="mt-2 text-sm text-gray-500" id="{{ id }}-field">{{ hint }}</p>
+{% endif %}
+  {% if errors %}
+    {% for error in errors %}
+      <p class="mt-2 text-sm text-red-600" id="{{ id }}-error">{{ error}}</p>
+    {% endfor %}
+  {% endif %}
+</div>

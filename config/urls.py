@@ -6,6 +6,7 @@ from django.urls import include, path, reverse
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
+from weight_points_plus.contact.views import contact_form_view
 from weight_points_plus.utils.points_calculators import ajax_calculate_points
 
 
@@ -25,7 +26,7 @@ urlpatterns = [
     ),
     path(
         "contact/",
-        TemplateView.as_view(template_name="pages/contact.html"),
+        view=contact_form_view,
         name="contact",
     ),
     path(

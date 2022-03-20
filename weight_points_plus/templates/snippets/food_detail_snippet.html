@@ -1,19 +1,18 @@
-<div class="bg-contrast shadow overflow-hidden rounded-lg">
-  <div class="px-4 py-5 sm:px-6">
-    <h3 class="text-lg leading-6 font-medium text-gray-900">
+<div class="space-y-6">
+  <div class="px-4 py-5 sm:p-6">
+    <h3 class="text-xl sm:text-3xl font-medium leading-6 text-accent mb-2 sm:mb-6">
       {% if request.resolver_match.url_name == 'delete' %}
         Are you sure you want to delete {{ fooditem.name }}?
-        {% else %}
-      {{ fooditem.name }}
+      {% else %}
+        {{ fooditem.name }}
       {% endif %}
     </h3>
-  </div>
-  <div class="border-t border-gray-200 px-4 sm:p-0">
+    <div class="px-4 sm:p-0">
       <dl class="sm:divide-y sm:divide-gray-200">
         {% for field in food_item_fields %}
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">{{ field.display}}</dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0">
+            <dt class="text-sm font-medium text-contrast">{{ field.display}}</dt>
+            <dd class="mt-1 text-sm text-contrast-dark sm:mt-0">
               {% if field.display == 'Food/Recipe' %}
                 {{ field.lookup.title }}
               {% elif field.display == 'Serving Unit' or field.display == 'Weight Conversion Unit' or field.display == 'Volume Conversion Unit' %}
@@ -25,5 +24,6 @@
           </div>
         {% endfor %}
       </dl>
+    </div>
   </div>
 </div>

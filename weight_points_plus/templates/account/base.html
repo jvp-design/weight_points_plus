@@ -2,15 +2,15 @@
 {% block title %}{% block head_title %}{% endblock head_title %}{% endblock title %}
 
 {% block content %}
-  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-    <div class="bg-contrast py-8 px-4 shadow sm:rounded-lg sm:px-10">
-      <h2 class="pb-6 text-center text-3xl font-extrabold text-accent ">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="py-5 px-4 sm:p-6">
+      <h2 class="text-xl sm:text-3xl font-medium leading-6 text-accent mb-2 sm:mb-6">
         {% block card_title %}{% endblock card_title %}
       </h2>
+    <div class="space-y-6">
       {% block card_body %}
       {% endblock card_body %}
     </div>
+    </div>
   </div>
-
-  {% block inner %}{% endblock inner %}
 {% endblock %}

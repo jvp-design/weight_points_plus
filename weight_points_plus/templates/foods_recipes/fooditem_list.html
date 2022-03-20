@@ -1,158 +1,201 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="rounded-lg bg-contrast overflow-hidden shadow max-w-4xl mx-auto">
+  <div class="overflow-hidden max-w-4xl mx-auto">
     <h2 class="sr-only" id="food-list-card">Food List</h2>
-    <div class="bg-contrast p-6 relative">
-      <div class="sm:flex sm:items-start sm:justify-between">
-        <div class="sm:flex sm:space-x-5">
-          <div class="mt-4 pb-2 sm:mb-0 text-center sm:mt-0 sm:pt-1 sm:text-left">
-            <p class="text-xl font-bold text-gray-900 sm:text-2xl">Search Results</p>
+    <div class="pt-6 relative rounded-lg">
+      <div class="sm:flex sm:items-center sm:justify-between">
+        <div class="sm:flex">
+          <div class="space-y-1">
+            <h2 class="text-xl sm:text-3xl font-bold text-accent text-center sm:text-left">Search Results</h2>
             {% if request.GET.name %}
-              <p class="text-sm font-medium text-gray-600">Searching for "{{ request.GET.name }}"</p>
+              <p class="text-sm font-medium text-contrast">Searching for name: "{{ request.GET.name }}"
+                <a href="?{% if request.GET.restaurant %}restaurant={{ request.GET.restaurant }}{% endif %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              </p>
             {% endif %}
+            {% if request.GET.restaurant %}
+              <p class="text-sm font-medium text-contrast">Searching for restaurant: "{{ request.GET.restaurant }}"
+                <a href="?{% if request.GET.name %}name={{ request.GET.name }}{% endif %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+              </p>
+            {% endif %}
+            <p class="text-contrast text-center sm:text-left">
+              {% if request.GET.user is None or request.GET.user == '' %}
+                Showing all {{ food_item_type_plural }}.
+                <a href="?user=true{% if request.GET.name %}&name={{ request.GET.name }}{% endif %}"
+                   class="text-accent hover:text-accent-darken px-1">Show only your {{ food_item_type_plural }}</a>
+              {% elif request.GET.user == 'true' %}
+                Showing only your {{ food_item_type_plural }}.
+                <a href="?{% if request.GET.name %}name={{ request.GET.name }}{% endif %}"
+                   class="text-accent hover:text-accent-darken px-1">Show all {{ food_item_type_plural }}</a>
+              {% else %}
+                Showing only system {{ food_item_type_plural }}.
+                <a href="?{% if request.GET.name %}name={{ request.GET.name }}{% endif %}"
+                   class="text-accent hover:text-accent-darken px-1">Show all {{ food_item_type_plural }}</a>
+              {% endif %}
+            </p>
+            {% if create_url_string is not None %}
+              <p class="text-center sm:text-left">
+                <a href="{% url create_url_string %}" class="text-accent hover:text-accent-darken">
+                  Add a New {{ food_item_type|title }}
+                </a>
+              </p>
+            {% endif %}
+
           </div>
         </div>
-        <div class="sm:flex sm:space-x-5">
+        <div class="flex flex-col sm:space-y-6">
           <div class="mt-4 text-center sm:mt-0 sm:text-right">
             <form method="get" class="flex flex-col sm:flex-row sm:items-end">
-              {% include "snippets/functional/text_field.html" with class="my-1 sm:my-0" name="name" placeholder="Search" %}
-              <input type="submit" class="btn-primary w-full sm:w-1/2 sm:ml-2 my-1 sm:my-0 cursor-pointer"
-                     value="Submit"/>
+              {% include "snippets/functional/text_field.html" with class="my-1 sm:my-0" name="name" placeholder="Search" label="Search by Name" %}
+              {% if request.GET.restaurant %}
+                <input type="hidden" name="restaurant" value="{{ request.GET.restaurant }}">
+              {% endif %}
+              <input type="submit" class="btn-primary w-full sm:w-1/2 sm:ml-2 my-1 sm:my-0 cursor-pointer" value="Submit"/>
             </form>
           </div>
-        </div>
-      </div>
-      <div class="flex items-center sm:items-start flex-col sm:flex-row sm:justify-between text-sm text-gray-700 pt-2 sm:pt-4 space-y-2 sm:space-y-0">
-        <div>
-          {% if fooditem_list or request.GET.name %}
-            {% if request.GET.user is None or request.GET.user == '' %}
-              Showing all {{ food_item_type_plural }}.
-              <a href="?user=true{% if request.GET.name %}&name={{ request.GET.name }}{% endif %}"
-                 class="text-accent hover:text-accent-darken px-1">Show only your {{ food_item_type_plural }}</a>
-            {% elif request.GET.user == true %}
-              Showing only your {{ food_item_type_plural }}.
-              <a href="?{% if request.GET.name %}name={{ request.GET.name }}{% endif %}"
-                 class="text-accent hover:text-accent-darken px-1">Show all {{ food_item_type_plural }}</a>
-            {% else %}
-              Showing only system {{ food_item_type_plural }}.
-              <a href="?{% if request.GET.name %}name={{ request.GET.name }}{% endif %}"
-                 class="text-accent hover:text-accent-darken px-1">Show all {{ food_item_type_plural }}</a>
-            {% endif %}
+          {% if 'recipe' not in request.resolver_match.namespaces %}
+            <div class="mt-4 text-center sm:mt-0 sm:text-right">
+              <form method="get" class="flex flex-col sm:flex-row sm:items-end">
+                {% include "snippets/functional/text_field.html" with class="my-1 sm:my-0" name="restaurant" placeholder="Search" label="Search by Restaurant" %}
+                {% if request.GET.name %}
+                  <input type="hidden" name="name" value="{{ request.GET.name }}">
+                {% endif %}
+                <input type="submit" class="btn-secondary w-full sm:w-1/2 sm:ml-2 my-1 sm:my-0 cursor-pointer" value="Submit"/>
+              </form>
+            </div>
           {% endif %}
         </div>
-        {% if create_url_string is not None %}
-          <div><a href="{% url create_url_string %}" class="text-accent hover:text-accent-darken">Add a
-            New {{ food_item_type|title }}</a></div>
-        {% endif %}
       </div>
-      <div class="relative py-4">
-        <div class="absolute inset-0 flex items-center" aria-hidden="true">
-          <div class="w-full border-t border-gray-300"></div>
-        </div>
+    </div>
+    <div class="relative py-4">
+      <div class="absolute inset-0 flex items-center" aria-hidden="true">
+        <div class="w-full"></div>
       </div>
-      <div class="-mx-4 mt-8 overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:-mx-6 md:mx-0 md:rounded-lg">
-        <table class="min-w-full divide-y divide-gray-300">
-          <thead class="bg-contrast-dark">
-          <tr>
+    </div>
+    <div class="overflow-hidden md:rounded-lg">
+      <table class="min-w-full divide-y divide-gray-300 bg-contrast">
+        <thead class="bg-contrast-dark">
+        <tr>
+          <th scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            {{ food_item_type|title }} {% if not add_item_url %} <span class="text-xxs">(Click to view)</span> {% endif %}</th>
+          {% if request.GET.restaurant %}
             <th scope="col"
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              {{ food_item_type|title }} {% if not add_item_url %} <span class="text-xxs">(Click to view)</span> {% endif %}</th>
-            <th scope="col"
-                class="hidden px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider lg:table-cell">Food/Recipe
+                class="hidden px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider lg:table-cell">Restaurant
             </th>
-            <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Actions
-            </th>
-          </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-200">
-          {% if fooditem_list %}
-            {% for item in fooditem_list %}
-              <tr class="even:bg-contrast odd:bg-contrast-light">
-                <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
-                  {% if add_item_url is not None %}
+          {% endif %}
+          <th scope="col"
+              class="hidden px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider lg:table-cell">Food/Recipe
+          </th>
+          <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions
+          </th>
+        </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+        {% if fooditem_list %}
+          {% for item in fooditem_list %}
+            <tr class="even:bg-contrast odd:bg-contrast-light">
+              <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-6">
+                {% if add_item_url is not None %}
+                  {{ item.name }}
+                  <dl class="font-normal lg:hidden">
+                    <dt class="sr-only">Food or Recipe</dt>
+                    <dd class="mt-1 truncate text-gray-700">{{ item.food_item_type|title }}</dd>
+                    {% if request.GET.restaurant %}
+                      <dt class="sr-only">Restaurant</dt>
+                      <dd class="mt-1 truncate text-gray-700">{{ item.restaurant }}</dd>
+                    {% endif %}
+                  </dl>
+                {% else %}
+                  <a href="{% url detail_url_string item.pk %}">
                     {{ item.name }}
                     <dl class="font-normal lg:hidden">
                       <dt class="sr-only">Food or Recipe</dt>
                       <dd class="mt-1 truncate text-gray-700">{{ item.food_item_type|title }}</dd>
+                      {% if request.GET.restaurant %}
+                        <dt class="sr-only">Restaurant</dt>
+                        <dd class="mt-1 truncate text-gray-700">{{ item.restaurant }}</dd>
+                      {% endif %}
                     </dl>
-                  {% else %}
-                    <a href="{% url detail_url_string item.pk %}">
-                      {{ item.name }}
-                      <dl class="font-normal lg:hidden">
-                        <dt class="sr-only">Food or Recipe</dt>
-                        <dd class="mt-1 truncate text-gray-700">{{ item.food_item_type|title }}</dd>
-                      </dl>
-                    </a>
-                  {% endif %}
-                </td>
-                <td class="hidden px-6 py-3 text-sm text-gray-500 lg:table-cell">{{ item.food_item_type|title }}</td>
-                <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                  {% if add_item_url is not None %}
-                    <a href="{{ add_item_url }}?food={{ item.pk }}" class="pl-2 text-accent hover:text-accent-darken">
-                      Add<span class="sr-only">, {{ item.name }}</span>
-                    </a>
-                  {% elif item.user == request.user %}
-                    <a href="{% url update_url_string item.pk %}"
-                       class="text-accent hover:text-accent-darken px-1">Edit<span class="sr-only">, {{ item.name }}</span></a>
-                    <a href="{% url delete_url_string item.pk %}"
-                       class="text-accent hover:text-accent-darken px-1">Delete<span class="sr-only">, {{ item.name }}</span></a>
-                  {% else %}
-                    <span class="text-gray-300 px-1 pointer-events-none">Edit<span class="sr-only">, {{ item.name }}</span></span>
-                    <span class="text-gray-300 px-1 pointer-events-none">Delete<span class="sr-only">, {{ item.name }}</span></span>
-                  {% endif %}
-                </td>
-              </tr>
-            {% endfor %}
-          {% else %}
-            <tr>
-              <td colspan="3" class="py-8 w-full text-center">
-                {% if not request.GET.name and create_url_string is not None %}
-                  Nothing here yet. Go ahead and
-                  <a href="{% url create_url_string %}" class="text-accent hover:text-accent-darken">Add a
-                    New {{ food_item_type|title }}</a>
+                  </a>
+                {% endif %}
+              </td>
+              {% if request.GET.restaurant %}
+                <td class="hidden px-6 py-3 text-sm text-gray-500 lg:table-cell">{{ item.restaurant }}</td>
+              {% endif %}
+              <td class="hidden px-6 py-3 text-sm text-gray-500 lg:table-cell">{{ item.food_item_type|title }}</td>
+              <td class="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                {% if add_item_url is not None %}
+                  <a href="{{ add_item_url }}?food={{ item.pk }}" class="pl-2 text-accent hover:text-accent-darken">
+                    Add<span class="sr-only">, {{ item.name }}</span>
+                  </a>
+                {% elif item.user == request.user %}
+                  <a href="{% url update_url_string item.pk %}"
+                     class="text-accent hover:text-accent-darken px-1">Edit<span class="sr-only">, {{ item.name }}</span></a>
+                  <a href="{% url delete_url_string item.pk %}"
+                     class="text-accent hover:text-accent-darken px-1">Delete<span class="sr-only">, {{ item.name }}</span></a>
                 {% else %}
-                  Your search for "{{ request.GET.name }}" returned no results. Please search again.
+                  <span class="text-gray-300 px-1 pointer-events-none">Edit<span class="sr-only">, {{ item.name }}</span></span>
+                  <span class="text-gray-300 px-1 pointer-events-none">Delete<span class="sr-only">, {{ item.name }}</span></span>
                 {% endif %}
               </td>
             </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="3" class="py-8 w-full text-center">
+              {% if not request.GET.name and create_url_string is not None %}
+                Nothing here yet. Go ahead and
+                <a href="{% url create_url_string %}" class="text-accent hover:text-accent-darken">Add a
+                  New {{ food_item_type|title }}</a>
+              {% else %}
+                Your search for "{{ request.GET.name }}" returned no results. Please search again.
+              {% endif %}
+            </td>
+          </tr>
+        {% endif %}
+        </tbody>
+      </table>
+      <nav class="bg-contrast-dark px-4 py-3 flex items-center justify-between sm:px-6"
+           aria-label="Pagination">
+        <div class="hidden sm:block">
+          <p class="text-sm text-primary">
+            Page
+            <span class="font-medium">{{ page_obj.number }}</span>
+            of
+            <span class="font-medium">{{ page_obj.paginator.num_pages }}</span>
+            ({{ paginator.count }} Results)
+          </p>
+        </div>
+        <div class="flex-1 flex justify-between sm:justify-end">
+          {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}"
+               class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-contrast-light hover:bg-contrast-dark">
+              Previous </a>
+          {% else %}
+            <span
+              class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-contrast-light hover:bg-contrast-dark pointer-events-none"> Previous </span>
+
           {% endif %}
-          </tbody>
-        </table>
-      </div>
+          {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}"
+               class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-contrast-light hover:bg-contrast-dark">
+              Next </a>
+          {% else %}
+            <span
+              class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-contrast-light hover:bg-contrast-dark pointer-events-none"> Next </span>
+          {% endif %}
+        </div>
+      </nav>
     </div>
-
-    <nav class="bg-contrast px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
-         aria-label="Pagination">
-      <div class="hidden sm:block">
-        <p class="text-sm text-gray-700">
-          Page
-          <span class="font-medium">{{ page_obj.number }}</span>
-          of
-          <span class="font-medium">{{ page_obj.paginator.num_pages }}</span>
-          ({{ paginator.count }} Results)
-        </p>
-      </div>
-      <div class="flex-1 flex justify-between sm:justify-end">
-        {% if page_obj.has_previous %}
-          <a href="?page={{ page_obj.previous_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}"
-             class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-contrast-light hover:bg-contrast-dark">
-            Previous </a>
-        {% else %}
-          <span
-            class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-contrast-light hover:bg-contrast-dark pointer-events-none"> Previous </span>
-
-        {% endif %}
-        {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}{% for k, v in query.items %}&{{ k }}={{ v }}{% endfor %}"
-             class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-contrast-light hover:bg-contrast-dark">
-            Next </a>
-        {% else %}
-          <span
-            class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-contrast-light hover:bg-contrast-dark pointer-events-none"> Next </span>
-        {% endif %}
-      </div>
-    </nav>
   </div>
 {% endblock content %}

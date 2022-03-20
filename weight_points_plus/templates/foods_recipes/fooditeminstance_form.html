@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="bg-contrast shadow overflow-hidden sm:rounded-lg max-w-4xl mx-auto">
-    <div class="px-4 py-5 sm:px-6">
-      <h3 class="text-lg leading-6 font-medium text-gray-900">
+  <div class="space-y-6 max-w-3xl mx-auto">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-xl sm:text-3xl font-medium leading-6 text-accent mb-2 sm:mb-6">
         {% if object %}
           Edit for
         {% else %}
@@ -17,20 +17,19 @@
         {% endif %}
 
       </h3>
-      <p class="mt-1 max-w-2xl text-sm text-gray-500">{{ food.name }}</p>
     </div>
-    <div class="border-t border-gray-200 px-4 py-5 sm:p-0 flex flex-col sm:flex-row sm:flex-2 sm:justify-between">
-        <form class="flex-2 px-2 sm:px-6 sm:pt-4 space-y-4 sm:space-y-6" method="post">
-          {% csrf_token %}
-          {% include "snippets/functional/text_field.html" with id=form.serving_size.id_for_label name=form.serving_size.html_name label=form.serving_size.label errors=form.serving_size.errors value=form.serving_size.value required=form.serving_size.field.required %}
-          {% include "snippets/functional/serving_size_field.html" with id=form.serving_unit.id_for_label name=form.serving_unit.html_name label=form.serving_unit.label errors=form.serving_unit.errors selected=form.serving_unit.value options=form.fields.serving_unit.choices required=form.serving_unit.field.required %}
-          <input type="submit" id="submit-button" class="btn-primary cursor-pointer" value="{{ submit_button_text }}">
-        </form>
-      <dl class="mt-8 sm:mt-0 border-t sm:divide-y sm:divide-gray-200 sm:border-l border-gray-200 sm:flex-3">
+    <div class="px-4 py-5 sm:p-0 flex flex-col sm:flex-row sm:flex-2 sm:justify-between">
+      <form class="flex-2 px-2 sm:px-6 sm:pt-4 space-y-4 sm:space-y-6" method="post">
+        {% csrf_token %}
+        {% include "snippets/functional/text_field.html" with id=form.serving_size.id_for_label name=form.serving_size.html_name label=form.serving_size.label errors=form.serving_size.errors value=form.serving_size.value required=form.serving_size.field.required %}
+        {% include "snippets/functional/select_field.html" with id=form.serving_unit.id_for_label name=form.serving_unit.html_name label=form.serving_unit.label errors=form.serving_unit.errors selected=form.serving_unit.value options=form.fields.serving_unit.choices required=form.serving_unit.field.required %}
+        <input type="submit" id="submit-button" class="btn-primary cursor-pointer" value="{{ submit_button_text }}">
+      </form>
+      <dl class="mt-8 sm:mt-0 border-t sm:divide-y sm:divide-contrast-light sm:border-l border-contrast-light sm:flex-3">
         {% for field in food_item_fields %}
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt class="text-sm font-medium text-gray-500">{{ field.display}}</dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <dt class="text-sm font-medium text-contrast">{{ field.display}}</dt>
+            <dd class="mt-1 text-sm text-contrast-dark sm:mt-0 sm:col-span-2">
               {% if field.display == 'Food/Recipe' %}
                 {{ field.lookup.title }}
               {% elif field.display == 'Serving Unit' or field.display == 'Weight Conversion Unit' or field.display == 'Volume Conversion Unit' %}
@@ -49,7 +48,7 @@
 
 {% block inline_javascript %}
   <script>
-  console.log('hello')
+    console.log('hello')
     {{ form.serving_size.id_for_label }}.focus()
     function debounce(func, timeout = 1000){
       let timer;

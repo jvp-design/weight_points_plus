@@ -1,6 +1,6 @@
-<div class="w-full sm:w-3/4 mx-auto my-4 sm:my-0 py-8 sm:py-4 px-2 sm:px-0 border-t border-gray-300 sm:border-none">
+<div class="w-full mx-auto my-4 sm:my-0 py-8 sm:py-4 px-2 sm:px-0 border-t border-gray-300 sm:border-none">
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-2">
-    <h3 class="text-md sm:text-lg text-gray-900">{{ meal.name.title }} ({{ meal.points }} Points)</h3>
+    <h3 class="text-md sm:text-lg text-contrast-dark">{{ meal.name.title }} ({{ meal.points }} Points)</h3>
     <form method="get" action="{% url 'meal:items-search' meal.pk %}" class="flex items-end">
       {% include "snippets/functional/text_field.html" with name="name" placeholder="Search for foods" %}
       <input type="submit" class="btn-primary w-1/2 ml-2 cursor-pointer" value="Find Foods" />
@@ -10,15 +10,13 @@
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-          <table class="min-w-full divide-y divide-gray-200">
+          <table class="min-w-full divide-y divide-gray-200 bg-contrast">
             <thead class="bg-contrast-dark">
             <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Food</th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
-              <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Points</th>
-              <th scope="col" class="relative px-6 py-3">
-                <span class="sr-only">Edit or Remove</span>
-              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-primary-lighten uppercase tracking-wider">Food</th>
+              <th scope="col" class="hidden px-6 py-3 text-left text-xs font-medium text-primary-lighten uppercase tracking-wider lg:table-cell">Quantity</th>
+              <th scope="col" class="hidden px-6 py-3 text-right text-xs font-medium text-primary-lighten uppercase tracking-wider md:table-cell">Points</th>
+              <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-primary-lighten uppercase tracking-wider">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -26,9 +24,17 @@
               {% for item in meal.fooditeminstance_set.all %}
                 <!-- Odd row -->
                 <tr class="even:bg-contrast odd:bg-contrast-light">
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ item.food.name }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ item.serving_size}} {{ item.get_serving_unit_display }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-right">{{ item.points }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-primary">
+                    {{ item.food.name }}
+                    <dl class="font-normal lg:hidden">
+                      <dt class="sr-only">Quantity</dt>
+                      <dd class="mt-1 truncate text-primary-lighten">{{ item.serving_size}} {{ item.get_serving_unit_display }}</dd>
+                      <dt class="sr-only md:hidden">Points</dt>
+                      <dd class="mt-1 truncate text-primary-lighten md:hidden">{{ item.points }} Points</dd>
+                    </dl>
+                  </td>
+                  <td class="hidden px-6 py-4 whitespace-nowrap text-sm text-primary-lighten lg:table-cell">{{ item.serving_size}} {{ item.get_serving_unit_display }}</td>
+                  <td class="hidden px-6 py-4 whitespace-nowrap text-sm text-primary-lighten text-right md:table-cell">{{ item.points }}</td>
                   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <a href="{% url 'meal:update-food-item' meal.pk item.pk %}" class="text-accent hover:text-accent-darken mx-2">Edit</a>
                     <a href="{% url 'meal:delete-food-item' meal.pk item.pk %}" class="text-accent hover:text-accent-darken mx-2">Remove</a>

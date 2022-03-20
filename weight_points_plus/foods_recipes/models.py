@@ -1,5 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 from weight_points_plus.utils.misc import SERVING_SIZE_CHOICES, servings
 
@@ -31,6 +33,12 @@ class FoodItem(models.Model):
     conversion_weight_to_volume = models.FloatField(
         validators=[MinValueValidator(0.0)], null=True, blank=True
     )
+    conversion_weight_value = models.FloatField(
+        validators=[MinValueValidator(0.0)], null=True, blank=True
+    )
+    conversion_volume_value = models.FloatField(
+        validators=[MinValueValidator(0.0)], null=True, blank=True
+    )
     notes = models.TextField(null=True, blank=True)
     restaurant = models.CharField(max_length=256, null=True, blank=True)
     points_per_serving = models.IntegerField(default=0, blank=True)
@@ -50,9 +58,21 @@ class FoodItem(models.Model):
 
     class Meta:
         unique_together = ("user", "name")
+        ordering = ["restaurant", "name"]
 
     def __str__(self):
         return f"({self.food_item_type.title()}) {self.name}"
+
+
+@receiver(pre_save, sender=FoodItem)
+def update_conversion_factor(sender, instance, *args, **kwargs):
+    if (
+        instance.conversion_weight_value is not None
+        and instance.conversion_volume_value is not None
+    ):
+        instance.conversion_weight_to_volume = (
+            instance.conversion_weight_value / instance.conversion_volume_value
+        )
 
 
 class FoodItemInstance(models.Model):

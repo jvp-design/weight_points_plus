@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import date
 import pytz
 
 from dateutil.relativedelta import relativedelta
@@ -25,6 +25,10 @@ class User(AbstractUser):
         SATURDAY = 5
         SUNDAY = 6
 
+    class HeightUnitChoices(models.TextChoices):
+        INCHES = "in"
+        CENTIMETERS = "cm"
+
     class SexChoices(models.TextChoices):
         MALE = "Male"
         FEMALE = "Female"
@@ -38,6 +42,12 @@ class User(AbstractUser):
     first_name = None  # type: ignore
     last_name = None  # type: ignore
     height = models.IntegerField(null=True)
+    height_units = models.CharField(
+        choices=HeightUnitChoices.choices,
+        max_length=2,
+        null=True,
+        default=HeightUnitChoices.INCHES,
+    )
     sex = models.CharField(choices=SexChoices.choices, max_length=6, null=True)
     weigh_in_day = models.IntegerField(
         choices=WeekdayChoices.choices, default=WeekdayChoices.MONDAY, null=True
@@ -83,8 +93,19 @@ class User(AbstractUser):
         return reverse("users:detail", kwargs={"username": self.username})
 
 
+class WeightUnitChoices(models.TextChoices):
+    POUNDS = "lbs"
+    KILOGRAMS = "kg"
+
+
 class Weight(models.Model):
     weight = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    weight_units = models.CharField(
+        choices=WeightUnitChoices.choices,
+        max_length=3,
+        null=True,
+        default=WeightUnitChoices.POUNDS,
+    )
     date_recorded = models.DateTimeField(auto_now_add=True)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)

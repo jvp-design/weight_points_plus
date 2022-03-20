@@ -5,73 +5,67 @@
 {% block content %}
   {% if record_weight_trigger %}
     <a href="{% url 'users:record-weight' %}">
-    <div class="rounded-md bg-yellow-50 p-4 mb-6">
-      <div class="flex">
-        <div class="flex-shrink-0">
-          <!-- Heroicon name: solid/exclamation -->
-          <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-          </svg>
-        </div>
-        <div class="ml-3">
-          <h3 class="text-lg font-medium text-yellow-800">Please record your weight.</h3>
-          <div class="mt-2 text-sm text-yellow-700">
-            <p>Your weight has not yet been recorded for the week beginning on {{ day.week.start_date }}. Please click here to record your weight now!</p>
+      <div class="rounded-md bg-yellow-50 p-4 mb-6">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <!-- Heroicon name: solid/exclamation -->
+            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-lg font-medium text-yellow-800">Please record your weight.</h3>
+            <div class="mt-2 text-sm text-yellow-700">
+              <p>Your weight has not yet been recorded for the week beginning on {{ day.week.start_date }}. Please click here to record your weight now!</p>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </a>
   {% endif %}
-  <div class="rounded-lg bg-contrast overflow-hidden shadow">
+  <div class="rounded-lg overflow-hidden max-w-5xl mx-auto bg-primary-semi-light px-4 sm:px-12">
     <h2 class="sr-only" id="main-food-tracker-card">Daily Food Tracker</h2>
-    <div class="bg-contrast p-2 sm:p-6">
-      <div class="sm:flex sm:items-center sm:justify-between">
-        <div class="sm:flex sm:space-x-5">
-          <div class="sm:mt-4 pb-2 sm:mb-0 text-center sm:pt-1 sm:text-left">
-            <p class="text-sm font-medium text-gray-600">Welcome back,</p>
-            <p class="text-xl font-bold text-gray-900 sm:text-2xl">{{ user.username}}</p>
-            <p class="text-sm font-medium text-gray-600">
-              {{ day.get_day_of_week_display }} {{ day.date }}
-              {% if not is_current_day %}
-                <a href="{% url 'day:today' %}" class="text-accent hover:text-accent-darken text-sm ml-2">Go to Today</a>
-              {% endif %}
-            </p>
+    <div class="py-2 sm:py-6">
+      <div class="sm:grid sm:grid-cols-3">
+        <div class="sm:mt-4 pb-2 sm:mb-0 text-center sm:pt-1 sm:text-left">
+          <p class="text-sm font-medium text-contrast">Welcome back,</p>
+          <p class="text-xl font-bold text-contrast-dark sm:text-2xl">{{ user.username}}</p>
+          <p class="text-sm font-medium text-contrast">
+            {{ day.get_day_of_week_display }} {{ day.date }}
+            {% if not is_current_day %}
+              <a href="{% url 'day:today' %}" class="text-accent hover:text-accent-darken text-sm ml-2">Go to Today</a>
+            {% endif %}
+          </p>
+        </div>
+        <div class="relative sm:hidden">
+          <div class="absolute inset-0 flex items-center" aria-hidden="true">
+            <div class="w-full border-t border-contrast"></div>
           </div>
+        </div>
+        <div class="sm:mt-4 text-center sm:pt-1 pt-2">
+          <p class="text-sm font-medium text-contrast">Daily Points Remaining</p>
+          <p class="text-xl font-bold text-contrast-dark sm:text-2xl">{{ day.points_remaining}}</p>
+          <p class="text-sm font-medium text-contrast">
+            {{ day.days_left }}
+            {% if day.days_left == 1 %}
+              day
+            {% else %}
+              days
+            {% endif %}
+            left in your week
+          </p>
         </div>
         <div class="relative sm:hidden">
           <div class="absolute inset-0 flex items-center" aria-hidden="true">
             <div class="w-full border-t border-gray-300"></div>
           </div>
         </div>
-        <div class="sm:flex sm:space-x-5 pt-2 sm:pt-0">
-          <div class="sm:mt-4 text-center sm:pt-1">
-            <p class="text-sm font-medium text-gray-600">Weekly Points Remaining</p>
-            <p class="text-xl font-bold text-gray-900 sm:text-2xl">{{ day.week.weekly_points_remaining}}</p>
-            <p class="text-sm font-medium text-gray-600">
-              {{ day.days_left }}
-              {% if day.days_left == 1 %}
-                day
-              {% else %}
-                days
-              {% endif %}
-              left in your week
-            </p>
-          </div>
-        </div>
-        <div class="relative sm:hidden">
-          <div class="absolute inset-0 flex items-center" aria-hidden="true">
-            <div class="w-full border-t border-gray-300"></div>
-          </div>
-        </div>
-        <div class="sm:flex sm:space-x-5 pt-2 sm:pt-0">
-          <div class="sm:mt-4 text-center sm:pt-1 sm:text-right">
-            <p class="text-sm font-medium text-gray-600">Weekly Activity Points</p>
-            <p class="text-xl font-bold text-gray-900 sm:text-2xl">{{ day.week.activity_points }}</p>
-          </div>
+        <div class="sm:mt-4 text-center sm:pt-1 sm:text-right">
+          <p class="text-sm font-medium text-contrast">Points Used Today</p>
+          <p class="text-xl font-bold text-contrast-dark sm:text-2xl">{{ day.points_used }}</p>
         </div>
       </div>
-      <div class="flex items-center justify-center sm:space-x-5">
+      <div class="flex items-center justify-between">
         {% if prev_day_is_available %}
           <a href="{% url 'day:prev' day.date %}" class="text-accent hover:text-accent-darken text-sm mx-1 sm:mx-0">Previous Day</a>
         {% else %}
@@ -84,21 +78,32 @@
         {% endif %}
       </div>
     </div>
-    <div class="border-y border-gray-300 bg-contrast-light grid grid-cols-1 divide-y divide-gray-300 sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
+    <div class="border border-contrast rounded-lg grid grid-cols-1 divide-y divide-gray-300 sm:grid-cols-2 md:grid-cols-4 md:divide-y-0 sm:divide-x">
       <div class="px-6 py-2 sm:py-5 text-sm font-medium text-center">
-        <span class="text-gray-900">{{ day.points_used }}</span>
-        <span class="text-gray-600">Points Used Today</span>
+        <p class="text-lg font-bold text-contrast-dark sm:text-xl">{{ day.days_left }}</p>
+        <p class="text-xs font-medium text-contrast">
+          {% if day.days_left == 1 %}
+            Day
+          {% else %}
+            Days
+          {% endif %}
+          left in your week
+        </p>
+      </div>
+      <div class="px-6 py-2 sm:py-5 text-sm font-medium text-center">
+        <p class="text-lg font-bold text-contrast-dark sm:text-xl">{{ day.week.weekly_points_used }}</p>
+        <p class="text-xs font-medium text-contrast">Weekly Points Used</p>
       </div>
 
       <div class="px-6 py-2 sm:py-5 text-sm font-medium text-center">
-        <span class="text-gray-900">{{ day.points_remaining }}</span>
-        <span class="text-gray-600">Points Left Today</span>
-      </div>
-
-      <div class="px-6 py-2 sm:py-5 text-sm font-medium text-center">
-        <span class="text-gray-900">{{ day.activity_points }}</span>
-        <span class="text-gray-600">Activity Points Today</span>
+        <p class="text-lg font-bold text-contrast-dark sm:text-xl">{{ day.activity_points }}</p>
+        <p class="text-xs font-medium text-contrast">Activity Points Today</p>
         <a href="{% url 'day:activity-add' view.kwargs.date %}" class="text-accent hover:text-accent-darken block">Add An Activity</a>
+      </div>
+
+      <div class="px-6 py-2 sm:py-5 text-sm font-medium text-center">
+        <p class="text-lg font-bold text-contrast-dark sm:text-xl">{{ day.week.activity_points }}</p>
+        <p class="text-xs font-medium text-contrast">Weekly Activity Points</p>
       </div>
     </div>
     <div class="py-2 sm:pt-6">

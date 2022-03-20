@@ -4,8 +4,10 @@
 
 {% block head_title %}{% translate "Sign Up Closed" %}{% endblock %}
 
-{% block inner %}
-<h1>{% translate "Sign Up Closed" %}</h1>
+{% block card_title %}
+  {% translate "Sign Up Closed" %}
+{% endblock card_title %}
 
-<p>{% translate "We are sorry, but the sign up is currently closed." %}</p>
-{% endblock %}
+{% block card_body %}
+  <p class="text-contrast">{% translate "We are sorry, but the sign up is currently closed." %}</p>
+{% endblock card_body %}

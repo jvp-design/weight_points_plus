@@ -5,30 +5,35 @@
 
 {% block content %}
   <div class="max-w-xl mx-auto">
-    <ul role="list" class="divide-y divide-gray-300 bg-contrast rounded-md">
-      {% for field in user_fields %}
-        <li>
-          <div class="px-4 py-4 sm:px-6">
-            <div class="flex items-center justify-between">
+    <div class="px-4 py-5 sm:p-6">
+      <h2 class="text-xl sm:text-3xl font-bold text-accent text-center sm:text-left mb-2 sm:mb-6">User Info</h2>
+      <ul role="list" class="divide-y divide-contrast rounded-md">
+        {% for field in user_fields %}
+          {% if field.lookup %}
+            <li>
+              <div class="py-4">
+                <div class="flex items-center justify-between">
               <span>
-              <p class="text-md font-medium text-gray-800 sm:inline">{{ field.lookup }}</p>
+              <p class="text-md font-medium text-contrast sm:inline">{{ field.lookup }}</p>
                 {% if field.display == 'Email' %}
                   <a href="{% url 'account_email' %}" class="text-accent-darken hover:bg-primary ml-1">Update</a>
                 {% elif 'Weight' in field.display %}
                   <a href="{% url "users:record-weight" %}" class="text-accent-darken hover:bg-primary ml-1">Update</a>
                 {% endif %}
                 </span>
-              <div class="ml-2 flex-shrink-0 flex">
-                <p class="px-2 inline-flex text-xs leading-5 rounded-full text-gray-500">{{ field.display }}</p>
+                  <div class="ml-2 flex-shrink-0 flex">
+                    <p class="px-2 inline-flex text-xs leading-5 rounded-full text-contrast-dark">{{ field.display }}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </li>
-      {% endfor %}
-    </ul>
-    <div class="mt-6">
-      <a href="{% url 'users:update' %}" class="btn-primary my-2">Update User</a>
-      <a href="{% url 'account_change_password' %}" class="btn-secondary my-2"> Change Password </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <div class="mt-6">
+        <a href="{% url 'users:update' %}" class="btn-primary my-2">Update User</a>
+        <a href="{% url 'account_change_password' %}" class="btn-secondary my-2"> Change Password </a>
+      </div>
     </div>
   </div>
 

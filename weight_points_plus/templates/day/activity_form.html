@@ -1,33 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="space-y-6 max-w-4xl mx-auto">
-    <div class="bg-contrast shadow px-4 py-5 sm:rounded-lg sm:p-6">
-      <div class="md:grid md:grid-cols-3 md:gap-6">
-        <div class="md:col-span-1">
-          <h3 class="text-lg font-medium leading-6 text-gray-900">
-            {% if object %}
-              Editing {{ object.name }}
-            {% else %}
-              Add New Activity
-            {% endif %}
-          </h3>
+  <div class="space-y-6 max-w-xl mx-auto">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-xl sm:text-3xl font-medium leading-6 text-accent mb-2 sm:mb-6">
+        {% if object %}
+          Editing {{ object.name }}
+        {% else %}
+          Add New Activity
+        {% endif %}
+      </h3>
+    <div class="mt-5 md:mt-0">
+      <form class="space-y-6" method="POST">
+        {% csrf_token %}
+        <div class="text-red-600">
+          {{ form.non_field_errors }}
         </div>
-        <div class="mt-5 md:mt-0 md:col-span-2">
-          <form class="space-y-6" method="POST">
-            {% csrf_token %}
-            <div class="text-red-600">
-              {{ form.non_field_errors }}
-            </div>
-            {% if not object %}
-            {% include "snippets/functional/text_field.html" with class="md:w-3/4" id=form.name.id_for_label name=form.name.html_name label=form.name.label errors=form.name.errors value=form.name.value required=form.name.field.required %}
-            {% endif %}
-            {% include "snippets/functional/select_field.html" with class="md:w-3/4" id=form.level.id_for_label name=form.level.html_name label=form.level.label errors=form.level.errors selected=form.level.value options=form.fields.level.choices required=form.level.field.required %}
-            {% include "snippets/functional/text_field.html" with class="md:w-3/4" id=form.duration.id_for_label name=form.duration.html_name label=form.duration.label errors=form.duration.errors value=form.duration.value required=form.duration.field.required hint="Minutes" %}
-            <input type="submit" class="btn-primary md:w-3/4 cursor-pointer" value="Submit" >
-          </form>
-        </div>
-      </div>
+        {% if not object %}
+          {% include "snippets/functional/text_field.html" with id=form.name.id_for_label name=form.name.html_name label=form.name.label errors=form.name.errors value=form.name.value required=form.name.field.required %}
+        {% endif %}
+        {% include "snippets/functional/select_field.html" with id=form.level.id_for_label name=form.level.html_name label=form.level.label errors=form.level.errors selected=form.level.value options=form.fields.level.choices required=form.level.field.required %}
+        {% include "snippets/functional/text_field.html" with id=form.duration.id_for_label name=form.duration.html_name label=form.duration.label errors=form.duration.errors value=form.duration.value required=form.duration.field.required hint="Minutes" %}
+        <input type="submit" class="btn-primary cursor-pointer" value="Submit" >
+      </form>
+    </div>
     </div>
   </div>
 {% endblock content %}

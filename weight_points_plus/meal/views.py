@@ -36,6 +36,9 @@ class MealFoodListView(FoodItemListView):
         self.queryset = FoodItem.objects.filter(
             Q(user__isnull=True) | Q(user=self.request.user)
         )
+        if not self.request.GET.get("restaurant"):
+            self.queryset = self.queryset.filter(restaurant__isnull=True)
+
         return super().get_queryset()
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
@@ -68,6 +71,7 @@ class BaseMealFoodEditView:
         context["date"] = self.get_meal().day.date
         items = [
             dict(lookup="name", display="Name"),
+            dict(lookup="restaurant", display="Restaurant"),
             dict(lookup="food_item_type", display="Food/Recipe"),
             dict(lookup="fat", display="Fat"),
             dict(lookup="carbs", display="Carbs"),
@@ -78,8 +82,12 @@ class BaseMealFoodEditView:
             dict(lookup="conversion_unit_weight", display="Weight Conversion Unit"),
             dict(lookup="conversion_unit_volume", display="Volume Conversion Unit"),
             dict(
-                lookup="conversion_weight_to_volume",
-                display="Weight-to-Volume Conversion Factor",
+                lookup="conversion_weight_value",
+                display="Weight Conversion Value",
+            ),
+            dict(
+                lookup="conversion_volume_value",
+                display="Volume Conversion Value",
             ),
             dict(lookup="notes", display="Notes"),
             dict(lookup="points_per_serving", display="Points Per Serving"),

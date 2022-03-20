@@ -23,6 +23,8 @@ class AllFoodsListView(FoodItemListView):
             Q(food_item_type="food")
             & (Q(user__isnull=True) | Q(user=self.request.user))
         )
+        if not self.request.GET.get("restaurant"):
+            self.queryset = self.queryset.filter(restaurant__isnull=True)
         return super().get_queryset()
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
@@ -49,6 +51,7 @@ class FoodDetailMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         items = [
+            dict(lookup="restaurant", display="Restaurant"),
             dict(lookup="fat", display="Fat"),
             dict(lookup="carbs", display="Carbs"),
             dict(lookup="fiber", display="Fiber"),
@@ -64,8 +67,12 @@ class FoodDetailMixin:
                 display="Volume Conversion Unit",
             ),
             dict(
-                lookup="conversion_weight_to_volume",
-                display="Weight-to-Volume Conversion Factor",
+                lookup="conversion_weight_value",
+                display="Weight Conversion Value",
+            ),
+            dict(
+                lookup="conversion_volume_value",
+                display="Volume Conversion Value",
             ),
             dict(lookup="notes", display="Notes"),
             dict(lookup="points_per_serving", display="Points Per Serving"),

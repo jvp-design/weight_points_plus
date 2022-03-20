@@ -9,7 +9,7 @@
 {% endblock card_title %}
 
 {% block card_body %}
-<p>{% translate 'Are you sure you want to sign out?' %}</p>
+<p class="text-contrast">{% translate 'Are you sure you want to sign out?' %}</p>
 
 <form method="post" action="{% url 'account_logout' %}">
   {% csrf_token %}
