@@ -104,32 +104,38 @@ class BaseMealFoodEditView:
     def get_form_class(self):
         form = super().get_form_class()
         food = self.get_food()
+        weight_choices = list(
+            filter(
+                lambda x: x in servings.get("weight"),
+                form.base_fields["serving_unit"].choices,
+            )
+        )
+        volume_choices = list(
+            filter(
+                lambda x: x in servings.get("volume"),
+                form.base_fields["serving_unit"].choices,
+            )
+        )
+        each_choices = list(
+            filter(
+                lambda x: x in servings.get("each"),
+                form.base_fields["serving_unit"].choices,
+            )
+        )
         if food.conversion_weight_to_volume is None:
             if is_weight_serving(food.serving_unit):
-                choices = list(
-                    filter(
-                        lambda x: x in servings.get("weight"),
-                        form.base_fields["serving_unit"].choices,
-                    )
-                )
+                choices = weight_choices
             elif is_volume_serving(food.serving_unit):
-                choices = list(
-                    filter(
-                        lambda x: x in servings.get("volume"),
-                        form.base_fields["serving_unit"].choices,
-                    )
-                )
-            elif is_each_serving(food.serving_unit):
-                choices = list(
-                    filter(
-                        lambda x: x in servings.get("each"),
-                        form.base_fields["serving_unit"].choices,
-                    )
-                )
+                choices = volume_choices
+            else:
+                choices = each_choices
+        else:
+            if is_each_serving(food.conversion_unit_volume):
+                choices = [*weight_choices, *each_choices]
+            elif is_each_serving(food.conversion_unit_weight):
+                choices = [*volume_choices, *each_choices]
             else:
                 choices = form.base_fields["serving_unit"].choices
-        else:
-            choices = form.base_fields["serving_unit"].choices
         form.base_fields["serving_unit"].choices = choices
         form.base_fields["serving_unit"].initial = food.serving_unit
         return form
