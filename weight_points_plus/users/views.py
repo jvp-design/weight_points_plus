@@ -12,6 +12,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView, CreateView
 
+from .forms import UserUpdateForm
 from ..day.models import Day
 from ..day.views import update_daily_points
 from ..utils.mixins import UserHasAllInfoMixin
@@ -92,27 +93,14 @@ current_user_detail_view = CurrentUserDetailView.as_view()
 class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     model = User
-    fields = [
-        "name",
-        "height",
-        "height_units",
-        "sex",
-        "weigh_in_day",
-        "birth_day",
-        "birth_month",
-        "birth_year",
-        "weekly_points",
-        "timezone",
-        "nursing",
-        "maintenance_mode",
-    ]
+    form_class = UserUpdateForm
     success_message = _("Information successfully updated")
 
     def get_success_url(self):
         assert (
             self.request.user.is_authenticated
         )  # for mypy to know that the user is authenticated
-        return reverse("users:redirect")
+        return reverse("users:me")
 
     def get_object(self):
         return self.request.user

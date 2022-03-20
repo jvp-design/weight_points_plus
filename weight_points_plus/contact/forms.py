@@ -3,6 +3,7 @@ from typing import Dict, Any
 from django import forms
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMultiAlternatives
+from django.utils.translation import gettext_lazy as _
 
 
 class ContactForm(forms.Form):
@@ -14,7 +15,7 @@ class ContactForm(forms.Form):
     def clean_bot(self):
         data = self.cleaned_data.get("bot", "")
         if data:
-            raise ValidationError("Robots stink")
+            raise ValidationError(_("Robots stink"))
         return data
 
     def send_email(self, user):

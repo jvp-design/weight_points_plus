@@ -13,6 +13,9 @@
       <div class="mt-5 md:mt-0">
         <form action="{% url 'users:update' %}" method="POST">
           {% csrf_token %}
+          {% for error in form.non_field_errors %}
+            {{ error.code }}
+          {% endfor %}
           <div class="text-red-600">
             {{ form.non_field_errors }}
           </div>
@@ -24,11 +27,16 @@
             {% include "snippets/functional/select_field.html" with class="sm:col-span-3" id=form.weigh_in_day.id_for_label name=form.weigh_in_day.html_name label=form.weigh_in_day.label errors=form.weigh_in_day.errors selected=form.weigh_in_day.value options=form.fields.weigh_in_day.choices required=form.weigh_in_day.field.required %}
             <div class="sm:col-span-3">
               <div class="flex space-x-3">
-                {% include "snippets/functional/select_field.html" with class="flex-1" id=form.birth_day.id_for_label name=form.birth_day.html_name label="Day" errors=form.birth_day.errors selected=form.birth_day.value options=form.fields.birth_day.choices required=form.birth_day.field.required %}
-                {% include "snippets/functional/select_field.html" with class="flex-2" id=form.birth_month.id_for_label name=form.birth_month.html_name label="Month" errors=form.birth_month.errors selected=form.birth_month.value options=form.fields.birth_month.choices required=form.birth_month.field.required %}
-                {% include "snippets/functional/select_field.html" with class="flex-1" id=form.birth_year.id_for_label name=form.birth_year.html_name label="Year" errors=form.birth_year.errors selected=form.birth_year.value options=form.fields.birth_year.choices required=form.birth_year.field.required %}
+                {% include "snippets/functional/select_field.html" with class="flex-1" id=form.birth_day.id_for_label name=form.birth_day.html_name label="Day" selected=form.birth_day.value options=form.fields.birth_day.choices required=form.birth_day.field.required %}
+                {% include "snippets/functional/select_field.html" with class="flex-2" id=form.birth_month.id_for_label name=form.birth_month.html_name label="Month" selected=form.birth_month.value options=form.fields.birth_month.choices required=form.birth_month.field.required %}
+                {% include "snippets/functional/select_field.html" with class="flex-1" id=form.birth_year.id_for_label name=form.birth_year.html_name label="Year" selected=form.birth_year.value options=form.fields.birth_year.choices required=form.birth_year.field.required %}
               </div>
               <p class="text-contrast mt-2 text-sm">Birth Date</p>
+              {% if form.birth_day.errors %}
+                {% for error in form.birth_day.errors %}
+                  <p class="mt-2 text-sm text-red-600" id="{{ id }}-error">{{ error}}</p>
+                {% endfor %}
+              {% endif %}
             </div>
             {% include "snippets/functional/text_field.html" with class="sm:col-span-3" id=form.weekly_points.id_for_label name=form.weekly_points.html_name label=form.weekly_points.label errors=form.weekly_points.errors value=form.weekly_points.value required=form.weekly_points.field.required hint="Default value is 49. You shouldn't need to change this." %}
             {% include "snippets/functional/select_field.html" with class="sm:col-span-3" id=form.timezone.id_for_label name=form.timezone.html_name label=form.timezone.label errors=form.timezone.errors selected=form.timezone.value value=form.timezone.value options=form.fields.timezone.choices required=form.timezone.field.required %}
