@@ -22,6 +22,7 @@ class UserAdmin(auth_admin.UserAdmin):
             {
                 "fields": (
                     "height",
+                    "height_units",
                     "sex",
                     "weigh_in_day",
                     "birth_date",
