@@ -1,3 +1,4 @@
+import datetime
 from typing import Any, Dict
 
 from allauth.account.forms import SignupForm
@@ -53,7 +54,9 @@ class UserUpdateForm(forms.ModelForm):
             "height",
             "sex",
             "weigh_in_day",
-            "birth_date",
+            "birth_day",
+            "birth_month",
+            "birth_year",
             "weekly_points",
             "timezone",
             "nursing",

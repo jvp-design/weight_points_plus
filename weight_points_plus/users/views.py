@@ -98,7 +98,9 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         "height_units",
         "sex",
         "weigh_in_day",
-        "birth_date",
+        "birth_day",
+        "birth_month",
+        "birth_year",
         "weekly_points",
         "timezone",
         "nursing",
@@ -114,6 +116,22 @@ class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def get_object(self):
         return self.request.user
+
+    # def post(self, request, *args, **kwargs):
+    #     form = self.get_form()
+    #     if form.is_valid():
+    #         self.object = form.save(commit=False)
+    #         self.object.birth_date = datetime(
+    #             self.object.birth_year, self.object.birth_month, self.object.birth_day
+    #         )
+    #         # if not self.object.username:
+    #         #     if self.request.user.username:
+    #         #         self.object.username = self.request.user.username
+    #         #     else:
+    #         #         self.object.username = None
+    #         return self.form_valid(form)
+    #     else:
+    #         return self.form_invalid(form)
 
 
 user_update_view = UserUpdateView.as_view()

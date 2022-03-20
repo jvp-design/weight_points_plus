@@ -1,12 +1,18 @@
-from datetime import date
+from datetime import date, datetime
 import pytz
 
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import CharField
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+
+
+BIRTH_DAY_CHOICES = [(i, i) for i in range(1, 32)]
+BIRTH_YEAR_CHOICES = [(i, i) for i in range(1900, date.today().year + 1)]
 
 
 class User(AbstractUser):
@@ -28,6 +34,20 @@ class User(AbstractUser):
     class HeightUnitChoices(models.TextChoices):
         INCHES = "in"
         CENTIMETERS = "cm"
+
+    class BirthMonthChoices(models.IntegerChoices):
+        JANUARY = 1
+        FEBRUARY = 2
+        MARCH = 3
+        APRIL = 4
+        MAY = 5
+        JUNE = 6
+        JULY = 7
+        AUGUST = 8
+        SEPTEMBER = 9
+        OCTOBER = 10
+        NOVEMBER = 11
+        DECEMBER = 12
 
     class SexChoices(models.TextChoices):
         MALE = "Male"
@@ -53,6 +73,9 @@ class User(AbstractUser):
         choices=WeekdayChoices.choices, default=WeekdayChoices.MONDAY, null=True
     )
     birth_date = models.DateField(null=True)
+    birth_month = models.IntegerField(choices=BirthMonthChoices.choices, null=True)
+    birth_day = models.IntegerField(choices=BIRTH_DAY_CHOICES, null=True)
+    birth_year = models.IntegerField(choices=BIRTH_YEAR_CHOICES, null=True)
     weekly_points = models.IntegerField(default=49, null=True)
     nursing = models.IntegerField(
         choices=NursingChoices.choices, default=NursingChoices.NONE, null=True
@@ -91,6 +114,13 @@ class User(AbstractUser):
 
         """
         return reverse("users:detail", kwargs={"username": self.username})
+
+
+@receiver(pre_save, sender=User)
+def set_birth_date(sender, instance, *args, **kwargs):
+    instance.birth_date = datetime(
+        instance.birth_year, instance.birth_month, instance.birth_day
+    )
 
 
 class WeightUnitChoices(models.TextChoices):
