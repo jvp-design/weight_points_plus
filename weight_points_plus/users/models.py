@@ -118,9 +118,16 @@ class User(AbstractUser):
 
 @receiver(pre_save, sender=User)
 def set_birth_date(sender, instance, *args, **kwargs):
-    instance.birth_date = datetime(
-        instance.birth_year, instance.birth_month, instance.birth_day
-    )
+    if all(
+        [
+            instance.birth_day is not None,
+            instance.birth_month is not None,
+            instance.birth_year is not None,
+        ]
+    ):
+        instance.birth_date = datetime(
+            instance.birth_year, instance.birth_month, instance.birth_day
+        )
 
 
 class WeightUnitChoices(models.TextChoices):
