@@ -46,4 +46,5 @@ class RecipeForm(forms.ModelForm):
             "conversion_unit_volume",
             "conversion_weight_value",
             "conversion_volume_value",
+            "public",
         ]

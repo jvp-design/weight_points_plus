@@ -67,6 +67,7 @@ class AllRecipesListView(FoodItemListView):
         self.queryset = FoodItem.objects.filter(
             Q(food_item_type="recipe")
             & (Q(user__isnull=True) | Q(user=self.request.user))
+            | Q(public=True)
         )
         return super().get_queryset()
 

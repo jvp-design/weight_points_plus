@@ -9,6 +9,10 @@ from weight_points_plus.foods_recipes.utils import check_conversion_status
 
 
 class FoodForm(forms.ModelForm):
+    def clean_public(self):
+        if self.cleaned_data.get("public"):
+            raise ValidationError(_("Foods cannot be made public"), code="invalid")
+
     def clean(self) -> Dict[str, Any]:
         cleaned_data = super().clean()
         error = check_conversion_status(cleaned_data)

@@ -34,7 +34,7 @@ class MealFoodListView(FoodItemListView):
 
     def get_queryset(self) -> QuerySet[FoodItem]:
         self.queryset = FoodItem.objects.filter(
-            Q(user__isnull=True) | Q(user=self.request.user)
+            Q(user__isnull=True) | Q(user=self.request.user) | Q(public=True)
         )
         if not self.request.GET.get("restaurant"):
             self.queryset = self.queryset.filter(restaurant__isnull=True)

@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
 
+{% block title %}
+  {% if object %}
+    Edit for
+  {% else %}
+    Add to
+  {% endif %}
+
+  {% if 'meal' in request.resolver_match.route %}
+    {{ meal.name }} for {{ date }}
+  {% else %}
+    recipe {{ recipe_name }}
+  {% endif %}
+{% endblock title %}
+
 {% block content %}
   <div class="space-y-6 max-w-3xl mx-auto">
     <div class="px-4 py-5 sm:p-6">

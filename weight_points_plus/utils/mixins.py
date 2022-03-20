@@ -50,7 +50,7 @@ class UserCanViewMixin(CustomAlertMixin):
         obj = self.get_object()
         if not request.user.is_authenticated:
             return self.handle_no_permission()
-        elif obj.user is not None and obj.user != request.user:
+        elif obj.user is not None and obj.user != request.user and not obj.public:
             self.permission_denied_message = "You are not authorized to view this item."
             return self.handle_no_permission()
         return super().dispatch(request, *args, **kwargs)
