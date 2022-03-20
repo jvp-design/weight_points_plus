@@ -25,7 +25,7 @@
         {% include "snippets/functional/select_field.html" with id=form.serving_unit.id_for_label name=form.serving_unit.html_name label=form.serving_unit.label errors=form.serving_unit.errors selected=form.serving_unit.value options=form.fields.serving_unit.choices required=form.serving_unit.field.required %}
         <input type="submit" id="submit-button" class="btn-primary cursor-pointer" value="{{ submit_button_text }}">
       </form>
-      <dl class="mt-8 sm:mt-0 border-t sm:divide-y sm:divide-contrast-light sm:border-l border-contrast-light sm:flex-3">
+      <dl class="mt-8 sm:mt-0 sm:divide-y sm:divide-contrast-light sm:border-l border-contrast-light sm:flex-3">
         {% for field in food_item_fields %}
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt class="text-sm font-medium text-contrast">{{ field.display}}</dt>

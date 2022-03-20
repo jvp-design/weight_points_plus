@@ -228,6 +228,8 @@ class RecipeFoodListView(FoodItemListView):
         self.queryset = FoodItem.objects.filter(
             Q(user__isnull=True) | Q(user=self.request.user)
         )
+        if not self.request.GET.get("restaurant"):
+            self.queryset = self.queryset.filter(restaurant__isnull=True)
         return super().get_queryset()
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:

@@ -61,17 +61,15 @@
               <input type="submit" class="btn-primary w-full sm:w-1/2 sm:ml-2 my-1 sm:my-0 cursor-pointer" value="Submit"/>
             </form>
           </div>
-          {% if 'recipe' not in request.resolver_match.namespaces %}
-            <div class="mt-4 text-center sm:mt-0 sm:text-right">
-              <form method="get" class="flex flex-col sm:flex-row sm:items-end">
-                {% include "snippets/functional/text_field.html" with class="my-1 sm:my-0" name="restaurant" placeholder="Search" label="Search by Restaurant" %}
-                {% if request.GET.name %}
-                  <input type="hidden" name="name" value="{{ request.GET.name }}">
-                {% endif %}
-                <input type="submit" class="btn-secondary w-full sm:w-1/2 sm:ml-2 my-1 sm:my-0 cursor-pointer" value="Submit"/>
-              </form>
-            </div>
-          {% endif %}
+          <div class="mt-4 text-center sm:mt-0 sm:text-right">
+            <form method="get" class="flex flex-col sm:flex-row sm:items-end">
+              {% include "snippets/functional/text_field.html" with class="my-1 sm:my-0" name="restaurant" placeholder="Search" label="Search by Restaurant" %}
+              {% if request.GET.name %}
+                <input type="hidden" name="name" value="{{ request.GET.name }}">
+              {% endif %}
+              <input type="submit" class="btn-secondary w-full sm:w-1/2 sm:ml-2 my-1 sm:my-0 cursor-pointer" value="Submit"/>
+            </form>
+          </div>
         </div>
       </div>
     </div>

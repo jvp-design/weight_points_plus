@@ -1,7 +1,7 @@
 {% load i18n static %}
 
 {% block css %}
-    <link href="{% static 'css/nav.css' %}" rel="stylesheet">
+  <link href="{% static 'css/nav.css' %}" rel="stylesheet">
 {% endblock css %}
 
 <header class="relative" x-data="{isOpen: false}">
@@ -9,10 +9,10 @@
     <nav class="relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6" aria-label="Global">
       <div class="flex items-center flex-1">
         <div class="flex items-center justify-end w-full md:w-auto">
-{#          <a href="/">#}
-{#            <span class="sr-only">Weight Points Plus</span>#}
-{#            <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="">#}
-{#          </a>#}
+          {#          <a href="/">#}
+          {#            <span class="sr-only">Weight Points Plus</span>#}
+          {#            <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="">#}
+          {#          </a>#}
           <div class="-mr-2 flex items-center md:hidden">
             <button type="button" @click="isOpen = !isOpen" class="bg-primary rounded-md p-2 inline-flex items-center justify-center text-contrast hover:bg-gray-800 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white" aria-expanded="false">
               <span class="sr-only">Open main menu</span>
@@ -24,9 +24,9 @@
           </div>
         </div>
         <div class="hidden space-x-8 md:flex md:ml-10">
-            <a href="{% url 'home' %}" class="text-base font-medium text-contrast hover:text-accent">{% translate 'Home' %}</a>
-            <a href="{% url 'about' %}" class="text-base font-medium text-contrast hover:text-accent">{% translate 'About' %}</a>
-            <a href="{% url 'contact' %}" class="text-base font-medium text-contrast hover:text-accent">{% translate 'Contact' %}</a>
+          <a href="{% url 'home' %}" class="text-base font-medium text-contrast hover:text-accent">{% translate 'Home' %}</a>
+          <a href="{% url 'about' %}" class="text-base font-medium text-contrast hover:text-accent">{% translate 'About' %}</a>
+          <a href="{% url 'contact' %}" class="text-base font-medium text-contrast hover:text-accent">{% translate 'Contact' %}</a>
         </div>
       </div>
       <div class="hidden md:flex md:items-center md:space-x-6">
@@ -57,9 +57,9 @@
   >
     <div class="rounded-lg shadow-md bg-contrast ring-1 ring-black ring-opacity-5 overflow-hidden">
       <div class="px-5 pt-4 flex items-center justify-end">
-{#        <div>#}
-{#          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="">#}
-{#        </div>#}
+        {#        <div>#}
+        {#          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="">#}
+        {#        </div>#}
         <div>
           <button type="button" @click="isOpen = !isOpen" @click.outside="isOpen = false" class="text-primary rounded-md p-2 inline-flex items-center justify-center bg-contrast hover:text-primary-lighten focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent">
             <span class="sr-only">Close menu</span>
@@ -70,31 +70,29 @@
           </button>
         </div>
       </div>
-      <div class="pt-5 pb-6">
-        {% if not user.is_authenticated %}
-        <div class="px-2 space-y-1">
+      <div class="pt-5 pb-6 space-y-2">
+        <div class="px-2 space-y-1 border-b border-contrast-dark">
           <a href="{% url 'home' %}" class="block px-3 py-2 rounded-md text-base font-medium text-primary hover:bg-primary-lighten">{% translate 'Home' %}</a>
           <a href="{% url 'about' %}" class="block px-3 py-2 rounded-md text-base font-medium text-primary hover:bg-primary-lighten">{% translate 'About' %}</a>
           <a href="{% url 'contact' %}" class="block px-3 py-2 rounded-md text-base font-medium text-primary hover:bg-primary-lighten">{% translate 'Contact' %}</a>
         </div>
-          <div class="mt-6 px-5">
-            <p class="text-center text-base font-medium text-gray-500"><a href="{% url 'account_signup' %}" class="text-primary hover:underline">{% translate 'Register' %}</a></p>
-          </div>
-          <div class="mt-6 px-5">
-            <p class="text-center text-base font-medium text-gray-500">Existing customer? <a href="{% url 'account_login' %}" class="text-primary hover:underline">{% translate 'Sign In' %}</a></p>
-          </div>
+        {% if not user.is_authenticated %}
+          <a href="{% url 'account_signup' %}" class="block px-3 py-2 rounded-md text-base font-medium text-primary hover:bg-contrast-light">{% translate 'Register' %}</a>
+
+          <a href="{% url "account_login" %}" class="block px-3 py-2 rounded-md text-base font-medium text-primary hover:bg-contrast-light">{% translate 'Login' %}</a>
         {% else %}
-        <div class="px-2 space-y-1">
-          <a href="{% url 'day:today' %}" class="block px-3 py-2 rounded-md text-base font-medium text-primary hover:bg-contrast-light">{% translate 'Food Tracker' %}</a>
+          <div class="px-2 space-y-1">
+            <a href="{% url 'day:today' %}" class="block px-3 py-2 rounded-md text-base font-medium text-primary hover:bg-contrast-light">{% translate 'Food Tracker' %}</a>
 
-          <a href="{% url "food:list" %}" class="block px-3 py-2 rounded-md text-base font-medium text-primary hover:bg-contrast-light">{% translate 'Foods' %}</a>
+            <a href="{% url "food:list" %}" class="block px-3 py-2 rounded-md text-base font-medium text-primary hover:bg-contrast-light">{% translate 'Foods' %}</a>
 
-          <a href="{% url "recipe:list" %}" class="block px-3 py-2 rounded-md text-base font-medium text-primary hover:bg-contrast-light">{% translate 'Recipes' %}</a>
+            <a href="{% url "recipe:list" %}" class="block px-3 py-2 rounded-md text-base font-medium text-primary hover:bg-contrast-light">{% translate 'Recipes' %}</a>
 
-        </div>
-          <div class="mt-6 px-5">
-            <p class="text-center text-base font-medium text-gray-500"><a href="{% url 'users:me' %}" class="text-primary hover:underline">{% translate 'User' %}</a></p>
-            <p class="text-center text-base font-medium text-gray-500"><a href="{% url 'account_logout' %}" class="text-primary hover:underline">{% translate 'Log Out' %}</a></p>
+          </div>
+          <div class="mt-6">
+            <a href="{% url "users:me" %}" class="block px-3 py-2 rounded-md text-center text-base font-medium text-primary hover:bg-contrast-light">{% translate 'User' %}</a>
+
+            <a href="{% url "account_logout" %}" class="block px-3 py-2 rounded-md text-center text-base font-medium text-primary hover:bg-contrast-light">{% translate 'Log Out' %}</a>
           </div>
         {% endif %}
       </div>
@@ -104,17 +102,17 @@
 
 
 {% block inline_javascript %}
-{#  <script>#}
-{#  document.querySelector("#menu-button").addEventListener('click', () => {#}
-{#    document.querySelector("#menu").classList.remove("hidden")#}
-{#  })#}
-{##}
-{#  document.querySelector("#close-button").addEventListener('click', () => {#}
-{#    document.querySelector("#menu").classList.add("hidden")#}
-{#  })#}
-{##}
-{#  console.log(document.querySelector("#menu"))#}
-{#  console.log(document.querySelector("#menu-button"))#}
-{#  console.log(document.querySelector("#close-button"))#}
-{#  </script>#}
+  {#  <script>#}
+  {#  document.querySelector("#menu-button").addEventListener('click', () => {#}
+  {#    document.querySelector("#menu").classList.remove("hidden")#}
+  {#  })#}
+  {##}
+  {#  document.querySelector("#close-button").addEventListener('click', () => {#}
+  {#    document.querySelector("#menu").classList.add("hidden")#}
+  {#  })#}
+  {##}
+  {#  console.log(document.querySelector("#menu"))#}
+  {#  console.log(document.querySelector("#menu-button"))#}
+  {#  console.log(document.querySelector("#close-button"))#}
+  {#  </script>#}
 {% endblock inline_javascript %}
