@@ -1,6 +1,6 @@
 import csv
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 from django.contrib.auth import get_user_model
 
@@ -48,6 +48,7 @@ def grab_and_parse_foods(
                     )
                 else:
                     food_dict = dict(
+                        restaurant=row_item[0],
                         name=row_item[1],
                         fat=row_item[3],
                         carbs=row_item[4],
@@ -97,7 +98,9 @@ def grab_and_parse_foods(
 
 
 def seed_foods(
-    path: Path, restaurant_foods: bool = False, delete_foods: bool = False
+    path: Path,
+    restaurant_foods: bool = False,
+    delete_foods: bool = False,
 ) -> Tuple[int, List[str]]:
     if delete_foods:
         qs = FoodItem.objects.filter(food_item_type="food")

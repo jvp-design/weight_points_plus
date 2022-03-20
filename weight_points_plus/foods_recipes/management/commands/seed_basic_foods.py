@@ -12,7 +12,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         base = Path(os.path.dirname(os.path.realpath(__file__)))
         new_basic_foods, new_excluded = seed_foods(
-            base / "../../../fixtures/food_seed.csv", delete_foods=True
+            base / "../../../fixtures/food_seed.csv", delete_foods=False
         )
         self.stdout.write(
             self.style.SUCCESS(f"Successfully added {new_basic_foods} basic foods")

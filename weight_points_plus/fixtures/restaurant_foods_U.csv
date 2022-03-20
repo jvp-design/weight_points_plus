@@ -1,0 +1,210 @@
+restaurant,name,serving,fat,carbs,fiber,protein,serving_size,serving_unit,notes
+Uno Pizzeria Grill,Diet Pepsi,,0.0,0.0,0.0,0.0,1.0,each,
+Uno Pizzeria Grill,Iced Tea,,0.0,0.0,0.0,0.0,1.0,each,
+Uno Pizzeria Grill,Raspberry Lime Rickey,,0.0,33.0,2.0,0.0,1.0,each,
+Uno Pizzeria Grill,Mist Twist,,0.0,37.0,0.0,0.0,1.0,each,
+Uno Pizzeria Grill,Pepsi,,0.0,38.0,0.0,0.0,1.0,each,
+Uno Pizzeria Grill,Mug Root Beer,,0.0,40.0,0.0,0.0,1.0,each,
+Uno Pizzeria Grill,Mountain Dew,,0.0,42.0,0.0,0.0,1.0,each,
+Uno Pizzeria Grill,Lemonade,,0.0,48.0,0.0,0.0,1.0,each,
+Uno Pizzeria Grill,Tropical Fruit Smoothie,,1.5,55.0,2.0,0.0,1.0,each,
+Uno Pizzeria Grill,Low Fat Honey Vinaigrette,,3.5,13.0,0.0,0.0,1.0,each,
+Uno Pizzeria Grill,Low Fat Vinaigrette,,4.5,5.0,0.0,0.0,1.0,each,
+Uno Pizzeria Grill,Avocado Ranch Dressing,,15.0,3.0,1.0,0.0,1.0,each,
+Uno Pizzeria Grill,Balsamic Vinaigrette,,16.0,3.0,0.0,0.0,1.0,each,
+Uno Pizzeria Grill,Ranch Dressing,,18.0,3.0,0.0,0.0,1.0,each,
+Uno Pizzeria Grill,Honey Mustard Dressing,,18.0,9.0,0.0,0.0,1.0,each,
+Uno Pizzeria Grill,Garden Starter Salad w/ dressing Gluten Sensitive,,0.0,6.0,2.0,1.0,1.0,each,
+Uno Pizzeria Grill,Kid'S Grapes,,0.0,14.0,1.0,1.0,1.0,each,
+Uno Pizzeria Grill,De-Lites Side Roasted Vegetables,,2.0,4.0,1.0,1.0,1.0,each,
+Uno Pizzeria Grill,De-Lites Side Steamed Broccoli,,3.0,2.0,1.0,1.0,1.0,each,
+Uno Pizzeria Grill,Uno Colada,,4.0,29.0,1.0,1.0,1.0,each,
+Uno Pizzeria Grill,Bleu Cheese Dressing,,23.0,1.0,0.0,1.0,1.0,each,
+Uno Pizzeria Grill,Carrots & Cucumbers,,0.0,13.0,4.0,2.0,1.0,each,
+Uno Pizzeria Grill,Pineapple Lemonade (Shareable),,0.0,159.0,6.0,2.0,1.0,each,
+Uno Pizzeria Grill,Berry Berry Palmer (Shareable),,0.5,157.0,7.0,2.0,1.0,each,
+Uno Pizzeria Grill,De-Lites Side Brown Rice,,3.0,16.0,1.0,2.0,1.0,each,
+Uno Pizzeria Grill,Roasted Seasonal Vegetables,,4.0,8.0,2.0,2.0,1.0,each,
+Uno Pizzeria Grill,Garden Starter Salad (Excludes Dressing),,5.0,10.0,2.0,2.0,1.0,each,
+Uno Pizzeria Grill,Sweet Potato Fries,,25.0,47.0,7.0,2.0,1.0,each,
+Uno Pizzeria Grill,Kid'S Buried Treasure,,3.0,50.0,2.0,3.0,1.0,each,
+Uno Pizzeria Grill,Steamed Broccoli,,6.0,5.0,3.0,3.0,1.0,each,
+Uno Pizzeria Grill,Mini All American,,13.0,43.0,3.0,3.0,1.0,each,
+Uno Pizzeria Grill,Mini Chocolate Brownie Sundae,,15.0,42.0,1.0,3.0,1.0,each,
+Uno Pizzeria Grill,Caesar Dressing,,20.0,1.0,0.0,3.0,1.0,each,
+Uno Pizzeria Grill,House Made Bread,,1.0,18.0,1.0,4.0,1.0,each,
+Uno Pizzeria Grill,Whole Grain Brown Rice,,6.0,32.0,2.0,4.0,1.0,each,
+Uno Pizzeria Grill,Tomato Soup,,7.0,24.0,3.0,4.0,1.0,each,
+Uno Pizzeria Grill,Berry & Goat Cheese Starter Salad w/ dressing,,10.0,18.0,2.0,4.0,1.0,each,
+Uno Pizzeria Grill,Caesar Starter Salad w/ dressing Gluten Sensitive,,15.0,5.0,2.0,4.0,1.0,each,
+Uno Pizzeria Grill,Oreo® Smoothie,,17.0,69.0,12.0,4.0,1.0,each,
+Uno Pizzeria Grill,Kid'S Sundae,,18.0,63.0,1.0,4.0,1.0,each,
+Uno Pizzeria Grill,Veggie Soup,,1.5,27.0,4.0,5.0,1.0,each,
+Uno Pizzeria Grill,Strawberry Smoothie,,3.5,51.0,2.0,5.0,1.0,each,
+Uno Pizzeria Grill,Chocolate Banana Smoothie,,3.5,70.0,1.0,5.0,1.0,each,
+Uno Pizzeria Grill,"Cheese Thin Crust Pizza, Individual Cauliflower Crust",1 slice,4.5,6.0,1.0,5.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Pesto Chicken Thin Crust Pizza, Individual Cauliflower Crust",1 slice,5.0,8.0,1.0,5.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Pesto Chicken Thin Crust Pizza, Individual",1 slice,5.0,15.0,1.0,5.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Wildberry Mango Smoothie,,6.0,54.0,1.0,5.0,1.0,each,
+Uno Pizzeria Grill,Red Bliss Mashed Potatoes,,14.0,36.0,3.0,5.0,1.0,each,
+Uno Pizzeria Grill,Caesar Starter Salad w/ dressing,,19.0,9.0,3.0,5.0,1.0,each,
+Uno Pizzeria Grill,Brownies,,23.0,77.0,3.0,5.0,1.0,each,
+Uno Pizzeria Grill,French Fries,,33.0,35.0,7.0,5.0,1.0,each,
+Uno Pizzeria Grill,Garlic Rosemary Fries,,51.0,54.0,5.0,5.0,1.0,each,
+Uno Pizzeria Grill,Tuscan Pesto Minestrone Soup,,3.0,24.0,4.0,6.0,1.0,each,
+Uno Pizzeria Grill,"Cheese Thin Crust Pizza, Individual",1 slice,4.5,13.0,1.0,6.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Veggie Extravaganza Thin Crust Pizza, Individual",1 slice,5.0,15.0,1.0,6.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Veggie Extravaganza Thin Crust Pizza, Individual Cauliflower Crust",1 slice,6.0,7.0,1.0,6.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Spicy Hawaiian Thin Crust Pizza, Individual Cauliflower Crust",1 slice,6.0,12.0,1.0,6.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Gluten Sensitive Cheese Pizza,1 slice,6.0,23.0,1.0,6.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Gluten Free Roll,,6.0,39.0,4.0,6.0,1.0,each,
+Uno Pizzeria Grill,Guacamole Chips & Dip,,14.0,56.0,10.0,6.0,1.0,each,
+Uno Pizzeria Grill,"Bbq Chicken Thin Crust Pizza, Individual Cauliflower Crust",1 slice,4.5,8.0,1.0,7.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Spicy Hawaiian Thin Crust Pizza, Individual",1 slice,6.0,19.0,1.0,7.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Gluten Sensitive Veggie Pizza,1 slice,6.0,24.0,1.0,7.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Jumbo Onion Rings,,7.0,68.0,4.0,7.0,1.0,each,
+Uno Pizzeria Grill,"Pepperoni Thin Crust Pizza, Individual Cauliflower Crust",1 slice,8.0,6.0,1.0,7.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Windy City Works Thin Crust Pizza, Individual Cauliflower Crust",1 slice,8.0,7.0,1.0,7.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Pepperoni Thin Crust Pizza, Individual",1 slice,8.0,13.0,1.0,7.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Farmer'S Market Deep Dish Pizza, Individual",1 slice,15.0,20.0,1.0,7.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Wedge Starter Salad w/ dressing,,19.0,10.0,3.0,7.0,1.0,each,
+Uno Pizzeria Grill,Chocolate Chip Cookies,,27.0,78.0,3.0,7.0,1.0,each,
+Uno Pizzeria Grill,All American,,28.0,90.0,5.0,7.0,1.0,each,
+Uno Pizzeria Grill,"Bbq Chicken Thin Crust Pizza, Individual",1 slice,4.5,15.0,0.0,8.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Cheese Thin Crust Pizza, Xl",1 slice,6.0,19.0,1.0,8.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Windy City Works Thin Crust Pizza, Individual",1 slice,7.0,14.0,1.0,8.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Pesto Chicken Thin Crust Pizza, Xl",1 slice,8.0,22.0,1.0,8.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Gluten Sensitive Pepperoni Pizza,1 slice,9.0,23.0,1.0,8.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Berry & Goat Cheese Salad w/ dressing (Lunch),,14.0,36.0,3.0,8.0,1.0,each,
+Uno Pizzeria Grill,"Prima Pepperoni Deep Dish Pizza, Individual",1 slice,15.0,18.0,1.0,8.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Berry & Goat Cheese Salad w/ dressing,,21.0,36.0,4.0,8.0,1.0,each,
+Uno Pizzeria Grill,"Steak & Cheese Thin Crust Pizza, Individual Cauliflower Crust",1 slice,7.0,7.0,1.0,9.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Steak & Cheese,1 slice,7.0,14.0,1.0,9.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Veggie Extravaganza Thin Crust Pizza, Xl",1 slice,7.0,21.0,1.0,9.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Spicy Hawaiian Thin Crust Pizza, Xl",1 slice,8.0,28.0,1.0,9.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Cheese & Tomato Deep Dish Pizza, Individual",1 slice,13.0,18.0,1.0,9.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Numero Uno Deep Dish Pizza, Individual",1 slice,19.0,20.0,1.0,9.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Ice Cream Sundae Gluten Sensitive,,38.0,126.0,0.0,9.0,1.0,each,
+Uno Pizzeria Grill,"Bbq Chicken Thin Crust Pizza, Xl",1 slice,6.0,22.0,1.0,10.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Italian Wedding Soup,,6.0,24.0,3.0,10.0,1.0,each,
+Uno Pizzeria Grill,"Pepperoni Thin Crust Pizza, Xl",1 slice,10.0,20.0,1.0,10.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Farmer'S Market Deep Dish Pizza, Reg",1 slice,22.0,31.0,2.0,10.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Broccoli & Cheddar Soup,,21.0,18.0,3.0,11.0,1.0,each,
+Uno Pizzeria Grill,New England Clam Chowder,,25.0,25.0,1.0,11.0,1.0,each,
+Uno Pizzeria Grill,Kid'S Grilled Cheese,,25.0,33.0,0.0,11.0,1.0,each,
+Uno Pizzeria Grill,"Windy City Works Thin Crust Pizza, Xl",1 slice,10.0,21.0,1.0,12.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Chocolate Brownie Sundae,,53.0,152.0,4.0,12.0,1.0,each,
+Uno Pizzeria Grill,Shrimp Skewer,,8.0,1.0,0.0,13.0,1.0,each,
+Uno Pizzeria Grill,"Steak & Cheese Thin Crust Pizza, Xl",1 slice,10.0,21.0,1.0,13.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Cheese & Tomato Deep Dish Pizza, Reg",1 slice,20.0,27.0,1.0,13.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Prima Pepperoni Deep Dish Pizza, Reg",1 slice,23.0,27.0,1.0,13.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Loaded Mashed,,26.0,37.0,3.0,13.0,1.0,each,
+Uno Pizzeria Grill,"Farmer'S Market Deep Dish Pizza, Lrg",1 slice,27.0,37.0,2.0,13.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Numero Uno Deep Dish Pizza, Reg",1 slice,28.0,29.0,2.0,13.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Chicken Noodle Soup,,6.0,12.0,1.0,15.0,1.0,each,
+Uno Pizzeria Grill,"Chicago Meat Market Deep Dish Pizza, Individual",1 slice,24.0,20.0,1.0,15.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Chicago Classic Deep Dish Pizza, Individual",1 slice,26.0,19.0,1.0,15.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Prima Pepperoni Deep Dish Pizza, Lrg",1 slice,27.0,33.0,1.0,15.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Kid'S Macaroni & Cheese,,13.0,64.0,3.0,16.0,1.0,each,
+Uno Pizzeria Grill,"Cheese & Tomato Deep Dish Pizza, Lrg",1 slice,24.0,33.0,1.0,16.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Numero Uno Deep Dish Pizza, Lrg",1 slice,34.0,35.0,2.0,16.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Caesar Salad w/ dressing (Lunch),,23.0,27.0,4.0,17.0,1.0,each,
+Uno Pizzeria Grill,Chili Gluten Sensitive,,11.0,44.0,14.0,19.0,1.0,each,
+Uno Pizzeria Grill,French Onion,,30.0,25.0,2.0,19.0,1.0,each,
+Uno Pizzeria Grill,Uno Deep Dish Sundae,,74.0,206.0,5.0,19.0,1.0,each,
+Uno Pizzeria Grill,Chili,,14.0,61.0,15.0,20.0,1.0,each,
+Uno Pizzeria Grill,Kid'S Cheeseburger,,18.0,20.0,1.0,20.0,1.0,each,
+Uno Pizzeria Grill,Awesome Chocolate Cake,,79.0,241.0,10.0,20.0,1.0,each,
+Uno Pizzeria Grill,Cubano Pizzanini Lunch,,11.0,36.0,1.0,21.0,1.0,each,
+Uno Pizzeria Grill,Kid'S Safari Nuggets,,14.0,21.0,1.0,21.0,1.0,each,
+Uno Pizzeria Grill,De-Lites Eggplant Parm Pizzanini,,16.0,46.0,4.0,21.0,1.0,each,
+Uno Pizzeria Grill,Eggplant Parm Pizzanini,,16.0,46.0,4.0,21.0,1.0,each,
+Uno Pizzeria Grill,Chicken Caesar Salad w/ dressing (Lunch),,20.0,29.0,4.0,21.0,1.0,each,
+Uno Pizzeria Grill,"Chicago Meat Market Deep Dish Pizza, Reg",1 slice,35.0,30.0,1.0,22.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Chicago Classic Deep Dish Pizza, Reg",1 slice,38.0,28.0,1.0,22.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Steak & Cheese Pizzanini W/Dijon Lunch,,21.0,35.0,1.0,23.0,1.0,each,
+Uno Pizzeria Grill,Ooey Gooey Dough Bites,,39.0,230.0,4.0,23.0,1.0,each,
+Uno Pizzeria Grill,Steak & Cheese Pizzanini W/Marinara Lunch,,15.0,36.0,2.0,24.0,1.0,each,
+Uno Pizzeria Grill,De-Lites Black Bean Veggie Burger,,15.0,63.0,11.0,24.0,1.0,each,
+Uno Pizzeria Grill,Black Bean Veggie Burger,,15.0,67.0,13.0,24.0,1.0,each,
+Uno Pizzeria Grill,Chicken Parm Pizzanini Lunch,,16.0,44.0,2.0,24.0,1.0,each,
+Uno Pizzeria Grill,Penne Marinara,,13.0,133.0,8.0,26.0,1.0,each,
+Uno Pizzeria Grill,Kid'S Spaghetti & Meatball,,22.0,73.0,5.0,26.0,1.0,each,
+Uno Pizzeria Grill,Beyond Burger,,32.0,42.0,4.0,26.0,1.0,each,
+Uno Pizzeria Grill,"Chicago Meat Market Deep Dish Pizza, Lrg",1 slice,42.0,35.0,2.0,26.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,"Chicago Classic Deep Dish Pizza, Lrg",1 slice,46.0,33.0,1.0,26.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Kid'S Grilled Chicken,,8.5,33.0,2.0,27.0,1.0,each,
+Uno Pizzeria Grill,Southwestern Black Bean Salad w/ dressing,,42.0,57.0,14.0,29.0,1.0,each,
+Uno Pizzeria Grill,Chicken Pesto,,30.0,52.0,3.0,30.0,1.0,each,
+Uno Pizzeria Grill,Meatballs Marinara,,37.0,24.0,4.0,30.0,1.0,each,
+Uno Pizzeria Grill,Cobb Salad w/dressing (Lunch),,36.0,30.0,6.0,31.0,1.0,each,
+Uno Pizzeria Grill,Herb Rubbed Chicken,,20.0,1.0,0.0,32.0,1.0,each,
+Uno Pizzeria Grill,Chicken Caesar Salad w/ dressingGluten Sensitive,,32.0,9.0,5.0,32.0,1.0,each,
+Uno Pizzeria Grill,Shrimp & Crab Dip,,84.0,66.0,2.0,32.0,1.0,each,
+Uno Pizzeria Grill,Chicken Caesar Salad w/ dressing,,41.0,17.0,5.0,33.0,1.0,each,
+Uno Pizzeria Grill,Penne Alfredo,,40.0,128.0,6.0,34.0,1.0,each,
+Uno Pizzeria Grill,Spinach Artichoke Deep Dip,,114.0,132.0,7.0,34.0,1.0,each,
+Uno Pizzeria Grill,Southwestern Chicken Salad w/ dressing,,38.0,33.0,7.0,35.0,1.0,each,
+Uno Pizzeria Grill,Kid'S Cheese Pizza,,22.0,68.0,7.0,38.0,1.0,each,
+Uno Pizzeria Grill,Chicken Pops,,44.0,61.0,0.0,39.0,1.0,each,
+Uno Pizzeria Grill,Lemon Basil Salmon,,38.0,0.0,0.0,40.0,1.0,each,
+Uno Pizzeria Grill,Honey Crisp Chicken Salad w/ dressing  (Lunch),,55.0,57.0,4.0,40.0,1.0,each,
+Uno Pizzeria Grill,Cubano Pizzanini,,23.0,71.0,2.0,41.0,1.0,each,
+Uno Pizzeria Grill,Caprese Pasta,,34.0,124.0,6.0,41.0,1.0,each,
+Uno Pizzeria Grill,Kid'S Cheeseburger (2),,37.0,40.0,2.0,41.0,1.0,each,
+Uno Pizzeria Grill,Spaghetti Bolognese,,48.0,126.0,7.0,41.0,1.0,each,
+Uno Pizzeria Grill,Kid'S Pepperoni Pizza,,29.0,68.0,7.0,42.0,1.0,each,
+Uno Pizzeria Grill,Honey Grilled Chicken Salad w/ dressing,,45.0,36.0,5.0,42.0,1.0,each,
+Uno Pizzeria Grill,Steak & Cheese Spring Rolls W/Marinara,,55.0,82.0,2.0,42.0,1.0,each,
+Uno Pizzeria Grill,Steak & Cheese Spring Rolls W/Dijon,,73.0,79.0,1.0,42.0,1.0,each,
+Uno Pizzeria Grill,Shrimp Scampi,,54.0,128.0,6.0,44.0,1.0,each,
+Uno Pizzeria Grill,Grilled Chicken With Lemon & Basil,,61.0,123.0,7.0,45.0,1.0,each,
+Uno Pizzeria Grill,Uno Burger Gluten Sensitive,,74.0,46.0,6.0,45.0,1.0,each,
+Uno Pizzeria Grill,Baked Stuffed Spinoccoli,,15.0,6.0,1.0,46.0,1.0,each,
+Uno Pizzeria Grill,Buffalo Chicken Quesadillas,,30.0,81.0,4.0,46.0,1.0,each,
+Uno Pizzeria Grill,Mozzarella Sticks,,57.0,107.0,4.0,46.0,1.0,each,
+Uno Pizzeria Grill,Uno Burger,,72.0,35.0,2.0,46.0,1.0,each,
+Uno Pizzeria Grill,Steak & Cheese Pizzanini W/Marinara,,30.0,72.0,3.0,47.0,1.0,each,
+Uno Pizzeria Grill,Chicken Parm Pizzanini,,31.0,88.0,4.0,47.0,1.0,each,
+Uno Pizzeria Grill,Steak & Cheese Pizzanini W/Dijon,,42.0,70.0,3.0,47.0,1.0,each,
+Uno Pizzeria Grill,Baked Haddock,,33.0,12.0,1.0,48.0,1.0,each,
+Uno Pizzeria Grill,Individual Chicago Thin Cheese,1 slice,21.0,119.0,5.0,51.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Cheesy Garlic Bread,,33.0,126.0,6.0,52.0,1.0,each,
+Uno Pizzeria Grill,10 Oz. Sirloin,,37.0,0.0,0.0,52.0,1.0,each,
+Uno Pizzeria Grill,Cheddar Burger Gluten Sensitive,,83.0,46.0,6.0,52.0,1.0,each,
+Uno Pizzeria Grill,Cheddar Burger,,81.0,35.0,2.0,53.0,1.0,each,
+Uno Pizzeria Grill,Aged Cheddar & Mushroom Burger,,81.0,37.0,2.0,53.0,1.0,each,
+Uno Pizzeria Grill,Honey Crisp Chicken Salad w/ dressing,,90.0,67.0,5.0,53.0,1.0,each,
+Uno Pizzeria Grill,Pizza Skins,,131.0,146.0,7.0,53.0,1.0,each,
+Uno Pizzeria Grill,Spaghetti & Meatballs,,47.0,151.0,11.0,54.0,1.0,each,
+Uno Pizzeria Grill,Classic Cobb Salad w/ dressing,,64.0,22.0,10.0,54.0,1.0,each,
+Uno Pizzeria Grill,Turkey Bacon Guacamole,,42.0,57.0,6.0,55.0,1.0,each,
+Uno Pizzeria Grill,Individual Pepperoni Deep Dish,1 slice,92.0,110.0,5.0,55.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Chicken Scampi,,62.0,131.0,6.0,57.0,1.0,each,
+Uno Pizzeria Grill,Individual Cheese & Tomato Deep Dish,1 slice,80.0,110.0,5.0,58.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Ziti With Chicken & Ricotta,,27.0,145.0,10.0,59.0,1.0,each,
+Uno Pizzeria Grill,Fireball Chicken Sandwich,,51.0,80.0,3.0,59.0,1.0,each,
+Uno Pizzeria Grill,Double Grilled Cheese Burger,,111.0,68.0,0.0,61.0,1.0,each,
+Uno Pizzeria Grill,Sirloin Steak Tips,,20.0,4.0,1.0,62.0,1.0,each,
+Uno Pizzeria Grill,Grilled Shrimp & Sirloin,,45.0,1.0,0.0,66.0,1.0,each,
+Uno Pizzeria Grill,Individual Chicago Thin Pepperoni,1 slice,49.0,120.0,5.0,66.0,1.0,each,each serving size refers to slice
+Uno Pizzeria Grill,Mucho Nachos,,71.0,199.0,22.0,66.0,1.0,each,
+Uno Pizzeria Grill,Rattlesnake Pasta,,70.0,126.0,6.0,67.0,1.0,each,
+Uno Pizzeria Grill,Romano Crusted Chicken Parmesan,,42.0,128.0,8.0,68.0,1.0,each,
+Uno Pizzeria Grill,Chicken & Broccoli Alfredo,,73.0,132.0,7.0,68.0,1.0,each,
+Uno Pizzeria Grill,Honey Bbq Wings,,86.0,25.0,2.0,69.0,1.0,each,
+Uno Pizzeria Grill,Red Chili Glazed Wings,,87.0,37.0,2.0,69.0,1.0,each,
+Uno Pizzeria Grill,Fireball Bbq Wings,,87.0,21.0,2.0,70.0,1.0,each,
+Uno Pizzeria Grill,Bacon Cheddar Burger Gluten Sensitive,,101.0,46.0,6.0,70.0,1.0,each,
+Uno Pizzeria Grill,Deep Dish Mac & Cheese,,103.0,140.0,6.0,70.0,1.0,each,
+Uno Pizzeria Grill,Buffalo Wings,,89.0,6.0,2.0,71.0,1.0,each,
+Uno Pizzeria Grill,Chicago Fire Wings,,90.0,8.0,3.0,71.0,1.0,each,
+Uno Pizzeria Grill,Bacon Cheddar Burger,,99.0,35.0,2.0,71.0,1.0,each,
+Uno Pizzeria Grill,Chicken Tender Platter (Includes French Fries),,106.0,88.0,7.0,72.0,1.0,each,
+Uno Pizzeria Grill,Honey Bbq Boneless Bites,,94.0,86.0,2.0,73.0,1.0,each,
+Uno Pizzeria Grill,Red Chili Glazed Bites,,95.0,98.0,2.0,73.0,1.0,each,
+Uno Pizzeria Grill,Fireball Bbq Bites,,95.0,82.0,2.0,74.0,1.0,each,
+Uno Pizzeria Grill,Buffalo Boneless Bites,,97.0,67.0,2.0,75.0,1.0,each,
+Uno Pizzeria Grill,Chicago Fire Bites,,98.0,69.0,3.0,75.0,1.0,each,
+Uno Pizzeria Grill,Chicken Spinoccoli,,62.0,105.0,7.0,77.0,1.0,each,
+Uno Pizzeria Grill,Buffalo Chicken Mac & Cheese,,133.0,160.0,6.0,96.0,1.0,each,
