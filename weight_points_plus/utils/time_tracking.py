@@ -12,21 +12,24 @@ def create_days(start_date: date, user: User, week: Week, num_days: int) -> date
     if num_days == 0:
         return start_date
     days_left = num_days
-    daily_points = calculate_daily_points(user, user.weight_set.last().weight)
+    daily_points = calculate_daily_points(
+        user, user.weight_set.last().weight, user.weight_set.last().weight_units
+    )
     dates = [start_date + timedelta(days=i) for i in range(num_days)]
     days = []
     for dt in dates:
         days.append(
-        Day(
-            total_points=daily_points,
-            points_used=0,
-            points_remaining=daily_points,
-            day_of_week=dt.weekday(),
-            date=dt,
-            week=week,
-            user=user,
-            days_left=days_left
-        ))
+            Day(
+                total_points=daily_points,
+                points_used=0,
+                points_remaining=daily_points,
+                day_of_week=dt.weekday(),
+                date=dt,
+                week=week,
+                user=user,
+                days_left=days_left,
+            )
+        )
         days_left -= 1
 
     created_days = Day.objects.bulk_create(days)
@@ -47,6 +50,7 @@ def create_week(start_date: date, user: User, num_days: int = 7) -> date:
     )
     if not user.first_weight_recorded:
         week.weight = user.weight_set.last().weight
+        week.weight_units = user.weight_set.last().weight_units
         week.weight_recorded = True
         user.first_weight_recorded = True
         user.save()

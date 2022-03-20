@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
 
-{% block content %}
-  <div class="max-w-2xl mx-auto">
-  {% include 'snippets/food_detail_snippet.html' with title=fooditem.name %}
-  {% if fooditem.user == request.user %}
-<div class="sm:flex pt-2">
-  <a href="{% url 'food:update' view.kwargs.pk %}" class="btn-primary sm:mx-2 my-2 sm:my-0">Edit</a>
-  <a href="{% url 'food:delete' view.kwargs.pk %}" class="btn-secondary sm:mx-2 my-2 sm:my-0">Delete</a>
-</div>
+{% block title %}
+  {% if request.resolver_match.url_name == 'delete' %}
+    Deleting {{ fooditem.name }}
+  {% else %}
+    {{ fooditem.name }}
   {% endif %}
+{% endblock title %}
 
+{% block content %}
+  <div class="max-w-xl mx-auto">
+    {% include 'snippets/food_detail_snippet.html' with title=fooditem.name %}
+    {% if fooditem.user == request.user %}
+      <div class="sm:flex pt-2">
+        <a href="{% url 'food:update' view.kwargs.pk %}" class="btn-primary sm:mx-2 my-2 sm:my-0">Edit</a>
+        <a href="{% url 'food:delete' view.kwargs.pk %}" class="btn-secondary sm:mx-2 my-2 sm:my-0">Delete</a>
+      </div>
+    {% endif %}
   </div>
 {% endblock content %}

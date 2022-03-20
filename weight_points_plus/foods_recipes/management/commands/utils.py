@@ -80,6 +80,10 @@ def grab_and_parse_foods(
                     food_dict["conversion_weight_to_volume"] = float(
                         food_dict["conversion_weight_to_volume"]
                     )
+                    food_dict["conversion_weight_value"] = food_dict[
+                        "conversion_weight_to_volume"
+                    ]
+                    food_dict["conversion_volume_value"] = 1
                 # try:
                 food_item = FoodItem(**food_dict)
                 # except ValidationError:

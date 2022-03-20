@@ -1,7 +1,6 @@
-from datetime import timedelta, datetime
-from pytz import timezone
-
 from django.db import models
+
+from weight_points_plus.users.models import WeightUnitChoices
 
 
 class Week(models.Model):
@@ -9,6 +8,12 @@ class Week(models.Model):
     weekly_points_used = models.IntegerField(default=0)
     weekly_points_remaining = models.IntegerField(default=49)
     weight = models.DecimalField(max_digits=5, decimal_places=2, null=True)
+    weight_units = models.CharField(
+        choices=WeightUnitChoices.choices,
+        max_length=3,
+        null=True,
+        default=WeightUnitChoices.POUNDS,
+    )
     start_date = models.DateField()
     weight_recorded = models.BooleanField(default=False)
     activity_points = models.IntegerField(default=0)

@@ -131,12 +131,17 @@ class NutritionItem(BaseModel):
     protein: float
 
 
-def calculate_daily_points(user: User, weight: Decimal) -> int:
+def calculate_daily_points(user: User, weight: Decimal, weight_units: str) -> int:
     MIN_POINTS = 26
     MAX_POINTS = 71
 
-    weight = float(weight) * 0.453592
-    height = user.height * 0.0254
+    weight = float(weight)
+    if weight_units == "lbs":
+        weight = weight * 0.453592
+
+    height = user.height / 100
+    if user.height_units == "in":
+        height = height * 2.54
 
     if user.sex == User.SexChoices.MALE:
         tee = 864 - (9.72 * user.age) + (1.12 * (14.2 * weight + 503 * height))

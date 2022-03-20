@@ -103,8 +103,12 @@ class RecipeDetailMixin:
             dict(lookup="conversion_unit_weight", display="Weight Conversion Unit"),
             dict(lookup="conversion_unit_volume", display="Volume Conversion Unit"),
             dict(
-                lookup="conversion_weight_to_volume",
-                display="Weight-to-Volume Conversion Factor",
+                lookup="conversion_weight_value",
+                display="Weight Conversion Value",
+            ),
+            dict(
+                lookup="conversion_volume_value",
+                display="Volume Conversion Value",
             ),
             dict(lookup="notes", display="Notes"),
             dict(lookup="directions", display="Directions"),
@@ -264,8 +268,12 @@ class BaseRecipeFoodEditView:
             dict(lookup="conversion_unit_weight", display="Weight Conversion Unit"),
             dict(lookup="conversion_unit_volume", display="Volume Conversion Unit"),
             dict(
-                lookup="conversion_weight_to_volume",
-                display="Weight-to-Volume Conversion Factor",
+                lookup="conversion_weight_value",
+                display="Weight Conversion Value",
+            ),
+            dict(
+                lookup="conversion_volume_value",
+                display="Volume Conversion Value",
             ),
             dict(lookup="notes", display="Notes"),
             dict(lookup="points_per_serving", display="Points Per Serving"),

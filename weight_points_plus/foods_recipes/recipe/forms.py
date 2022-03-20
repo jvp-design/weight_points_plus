@@ -19,10 +19,13 @@ class RecipeForm(forms.ModelForm):
                 _("You must include servings in recipe"), code="invalid"
             )
         if (
-            cleaned_data["conversion_weight_to_volume"] is None
+            cleaned_data["conversion_weight_value"] is None
+            or cleaned_data["conversion_volume_value"] is None
             or cleaned_data["conversion_unit_weight"] is None
             or cleaned_data["conversion_unit_volume"] is None
         ):
+            cleaned_data["conversion_weight_value"] = None
+            cleaned_data["conversion_volume_value"] = None
             cleaned_data["conversion_weight_to_volume"] = None
             cleaned_data["conversion_unit_weight"] = None
             cleaned_data["conversion_unit_volume"] = None
@@ -41,5 +44,6 @@ class RecipeForm(forms.ModelForm):
             "serving_unit",
             "conversion_unit_weight",
             "conversion_unit_volume",
-            "conversion_weight_to_volume",
+            "conversion_weight_value",
+            "conversion_volume_value",
         ]
