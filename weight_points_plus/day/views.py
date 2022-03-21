@@ -18,7 +18,10 @@ from weight_points_plus.day.models import Day, Activity
 from weight_points_plus.users.models import Weight
 from weight_points_plus.utils.mixins import UserHasAllInfoMixin, UserIsOwnerMixin
 from weight_points_plus.utils.time_tracking import backfill_weeks
-from weight_points_plus.week.utils import update_weekly_excess_points, update_weekly_activity_points
+from weight_points_plus.week.utils import (
+    update_weekly_excess_points,
+    update_weekly_activity_points,
+)
 
 
 def update_daily_points(day: Day) -> None:
@@ -27,10 +30,11 @@ def update_daily_points(day: Day) -> None:
     if points_remaining < 0:
         day.weekly_points_used = -points_remaining
         day.points_remaining = 0
-        update_weekly_excess_points(day.week)
     else:
         day.points_remaining = points_remaining
+        day.weekly_points_used = 0
     day.save()
+    update_weekly_excess_points(day.week)
 
 
 def update_daily_activity_points(day: Day) -> None:
