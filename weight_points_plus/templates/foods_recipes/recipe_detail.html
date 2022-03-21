@@ -22,20 +22,20 @@
                     <p class="text-sm text-contrast-dark">{{ item.serving_size }}{{ item.serving_unit|lower }}</p>
                   </div>
                   {% if fooditem.user == request.user %}
-                  <div class="flex-1">
-                    <a href="{% url "recipe:update-food-item" fooditem.pk item.pk %}" class="text-accent hover:text-accent-darken mx-1 text-sm">Edit</a>
-                    <a href="{% url "recipe:delete-food-item" fooditem.pk item.pk %}" class="text-accent hover:text-accent-darken mx-1 text-sm">Remove</a>
-                  </div>
-                {% endif %}
+                    <div class="flex-1">
+                      <a href="{% url "recipe:update-food-item" fooditem.pk item.pk %}" class="text-accent hover:text-accent-darken mx-1 text-sm">Edit</a>
+                      <a href="{% url "recipe:delete-food-item" fooditem.pk item.pk %}" class="text-accent hover:text-accent-darken mx-1 text-sm">Remove</a>
+                    </div>
+                  {% endif %}
                 </li>
               {% endfor %}
             </ul>
-          {% if fooditem.user == request.user %}
-            <form action="{% url 'recipe:food-list' fooditem.pk %}" method="get" class="space-y-2">
-              {% include 'snippets/functional/text_field.html' with id="recipe-food-list-form-name" name="name" label="Add Food to Recipe" %}
-              <input type="submit" class="btn-primary" value="Search">
-            </form>
-          {% endif %}
+            {% if fooditem.user == request.user %}
+              <form action="{% url 'recipe:food-list' fooditem.pk %}" method="get" class="space-y-2">
+                {% include 'snippets/functional/text_field.html' with id="recipe-food-list-form-name" name="name" label="Add Food to Recipe" %}
+                <input type="submit" class="btn-primary" value="Search">
+              </form>
+            {% endif %}
           </div>
           <dl class="mt-8 sm:mt-0 sm:divide-y sm:divide-gray-200 sm:border-l border-gray-200 sm:flex-3">
             {% for field in food_item_fields %}
@@ -50,6 +50,8 @@
                   <dd class="mt-1 text-sm text-contrast sm:mt-0 sm:col-span-2">
                     {% if field.display == 'Serving Unit' or field.display == 'Weight Conversion Unit' or field.display == 'Volume Conversion Unit' %}
                       {{ field.lookup.lower }}
+                    {% elif field.display == 'Directions' or field.display == 'Notes' %}
+                      {{ field.lookup }}
                     {% else %}
                       {{ field.lookup|floatformat:2 }}
                     {% endif %}

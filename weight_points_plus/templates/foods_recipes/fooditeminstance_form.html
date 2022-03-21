@@ -48,6 +48,8 @@
                 {{ field.lookup.title }}
               {% elif field.display == 'Serving Unit' or field.display == 'Weight Conversion Unit' or field.display == 'Volume Conversion Unit' %}
                 {{ field.lookup.lower }}
+                    {% elif field.display == 'Directions' or field.display == 'Notes' %}
+                      {{ field.lookup }}
               {% else %}
                 {{ field.lookup }}
               {% endif %}

@@ -20,10 +20,7 @@
       placeholder="{{ placeholder }}"
       {% endif %}
       aria-describedby="{{ id }}-field"
-      {% if value.strip %}
-      value="{{ value }}"
-      {% endif %}
-    ></textarea>
+    >{% if value.strip %}{{ value }}{% endif %}</textarea>
   </div>
   {% if hint %}
     <p class="mt-2 text-sm text-gray-500" id="{{ id }}-field">{{ hint }}</p>
