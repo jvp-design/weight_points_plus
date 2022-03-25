@@ -1,7 +1,6 @@
 from typing import Any, Dict
 
 from django.contrib import messages
-from django.core.exceptions import ValidationError
 from django.db.models import QuerySet, Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect
@@ -169,6 +168,11 @@ class RecipeCreateView(UserHasAllInfoMixin, RecipeInputMixin, CreateView):
             self.object = form.save(commit=False)
             self.object.user = request.user
             self.object.food_item_type = "recipe"
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                _(f"You have successfully created recipe {self.object.name}."),
+            )
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -191,6 +195,11 @@ class RecipeUpdateView(
             form.save()
             self.object.name = name
             calculate_recipe_points(self.object)
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                _(f"You have successfully updated {self.object.name}."),
+            )
             return HttpResponseRedirect(
                 reverse("recipe:detail", kwargs={"pk": kwargs.get("pk")})
             )
@@ -216,6 +225,22 @@ class RecipeDeleteView(
             "recipe:detail", kwargs={"pk": self.kwargs.get("pk")}
         )
         return context
+
+    def delete(self, request, *args, **kwargs):
+        """
+        Call the delete() method on the fetched object and then redirect to the
+        success URL.
+        """
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        name = self.object.name
+        self.object.delete()
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            _(f"You have successfully deleted {name}."),
+        )
+        return HttpResponseRedirect(success_url)
 
 
 recipe_delete_view = RecipeDeleteView.as_view()
@@ -369,6 +394,11 @@ class RecipeFoodAddView(UserHasAllInfoMixin, BaseRecipeFoodEditView, CreateView)
                 item.save()
             recipe.recipe_items.add(item)
             calculate_recipe_points(recipe)
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                _(f"You have successfully added {food.name} to your recipe."),
+            )
             if "recipe-add-another" in request.POST:
                 return HttpResponseRedirect(
                     f'{reverse("recipe:food-list", kwargs={"recipe_pk": recipe.pk})}?name={request.POST.get("next-food-search")}'
@@ -417,6 +447,11 @@ class RecipeFoodUpdateView(UserHasAllInfoMixin, BaseRecipeFoodEditView, UpdateVi
             if len(obj.fooditem_set.all()) == 0:
                 obj.delete()
             calculate_recipe_points(recipe)
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                _(f"You have successfully updated {food.name} in your recipe."),
+            )
             return HttpResponseRedirect(
                 reverse("recipe:detail", kwargs={"pk": recipe.pk})
             )
@@ -435,9 +470,15 @@ class RecipeFoodDeleteView(UserHasAllInfoMixin, DeleteView):
         recipe = get_object_or_404(qs, pk=recipe_pk)
         obj = self.get_object()
         recipe.recipe_items.remove(obj)
+        name = obj.food.name
         if len(obj.fooditem_set.all()) == 0:
             obj.delete()
         calculate_recipe_points(recipe)
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            _(f"You have successfully removed {name} from the recipe."),
+        )
         return HttpResponseRedirect(reverse("recipe:detail", kwargs={"pk": recipe.pk}))
 
     @method_decorator(csrf_exempt)

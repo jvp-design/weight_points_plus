@@ -41,13 +41,18 @@
                    class="text-accent hover:text-accent-darken px-1">Show all {{ food_item_type_plural }}</a>
               {% endif %}
             </p>
-            {% if create_url_string is not None %}
-              <p class="text-center sm:text-left">
+            <p class="text-center sm:text-left">
+              {% if create_url_string is not None %}
                 <a href="{% url create_url_string %}" class="text-accent hover:text-accent-darken">
                   Add a New {{ food_item_type|title }}
                 </a>
-              </p>
-            {% endif %}
+              {% else %}
+                <a href="{% url 'food:create' %}?next={{ request.get_full_path }}" class="text-accent hover:text-accent-darken">
+                  Add a New {{ food_item_type|title }}
+                </a>
+
+              {% endif %}
+            </p>
 
           </div>
         </div>

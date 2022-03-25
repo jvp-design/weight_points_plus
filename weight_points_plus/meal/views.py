@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView, UpdateView, DeleteView
+from django.utils.translation import gettext_lazy as _
 
 from weight_points_plus.day.views import update_daily_points
 from weight_points_plus.foods_recipes.models import FoodItem, FoodItemInstance
@@ -188,6 +189,11 @@ class MealFoodAddView(UserHasAllInfoMixin, BaseMealFoodEditView, CreateView):
             item.meal.add(meal)
             update_meal_points(meal)
             update_daily_points(meal.day)
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                _(f"You have successfully added {food.name} to {meal.name}."),
+            )
             return HttpResponseRedirect(
                 reverse("day:detail", kwargs={"date": meal.day.date})
             )
@@ -238,6 +244,11 @@ class MealFoodUpdateView(UserHasAllInfoMixin, BaseMealFoodEditView, UpdateView):
                 obj.delete()
             update_meal_points(meal)
             update_daily_points(meal.day)
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                _(f"You have successfully updated {food.name}."),
+            )
             return HttpResponseRedirect(
                 reverse("day:detail", kwargs={"date": meal.day.date})
             )
@@ -255,11 +266,18 @@ class MealFoodDeleteView(UserHasAllInfoMixin, DeleteView):
         qs = Meal.objects.filter(user=request.user)
         meal = get_object_or_404(qs, pk=meal_pk)
         obj = self.get_object()
+        name = obj.food.name
         obj.meal.remove(meal)
         if len(obj.meal.all()) == 0:
             obj.delete()
         update_meal_points(meal)
         update_daily_points(meal.day)
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            _(f"You have successfully removed {name} from {meal.name}."),
+        )
+
         return HttpResponseRedirect(
             reverse("day:detail", kwargs={"date": meal.day.date})
         )

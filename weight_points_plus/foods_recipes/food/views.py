@@ -1,6 +1,8 @@
 from typing import Any, Dict
 
+from django.contrib import messages
 from django.db.models import QuerySet, Q
+from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -125,8 +127,6 @@ class FoodInputMixin:
         form.base_fields["serving_unit"].choices = choices
         form.base_fields["conversion_unit_weight"].choices = weight_choices
         form.base_fields["conversion_unit_volume"].choices = volume_choices
-        if not self.object.user:
-            form.base_fields["public"].widget.attrs["checked"] = True
         return form
 
 
@@ -142,7 +142,15 @@ class FoodCreateView(UserHasAllInfoMixin, FoodInputMixin, CreateView):
             else:
                 self.object.user = request.user
             self.object.food_item_type = "food"
-            return self.form_valid(form)
+            self.object = form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                f"You have successfully added the food {self.object.name}",
+            )
+            if request.GET.get("next"):
+                return HttpResponseRedirect(request.GET.get("next"))
+            return HttpResponseRedirect(self.get_success_url())
         else:
             return self.form_invalid(form)
 
@@ -169,6 +177,11 @@ class FoodUpdateView(UserHasAllInfoMixin, UserIsOwnerMixin, FoodInputMixin, Upda
             else:
                 self.object.user = request.user
             self.object.name = name
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                f"You have successfully updated {self.object.name}",
+            )
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -192,6 +205,22 @@ class FoodDeleteView(
             "food:detail", kwargs={"pk": self.kwargs.get("pk")}
         )
         return context
+
+    def delete(self, request, *args, **kwargs):
+        """
+        Call the delete() method on the fetched object and then redirect to the
+        success URL.
+        """
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        name = self.object.name
+        self.object.delete()
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            f"You have successfully deleted {name}",
+        )
+        return HttpResponseRedirect(success_url)
 
 
 food_delete_view = FoodDeleteView.as_view()
