@@ -9,8 +9,9 @@
       <div class="lg:grid lg:grid-cols-2 lg:gap-8">
         <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
           <div class="lg:py-24">
+            <span class="px-3 py-0.5 text-contrast text-xs font-medium leading-5 tracking-wide bg-accent-darken rounded-full">Weight Points Plus</span>
             <h1
-              class="mt-4 text-4xl tracking-tight font-extrabold text-contrast sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl"
+              class="text-4xl tracking-tight font-extrabold text-contrast sm:text-6xl xl:text-6xl"
             >
               <span class="block">Lose weight</span>
               <span
@@ -23,28 +24,28 @@
               Don't give up all of the foods you love; just enjoy them in moderation. This food
               tracker uses a publicly available
               <a href="{% url 'disclaimer' %}"
-                class="text-accent relative pr-2 after:absolute after:text-contrast after:text-xxs after:-top-[20%] after:right-[7%] after:content-['*'] after:-pl-4"
+                 class="text-accent relative pr-2 after:absolute after:text-contrast after:text-xxs after:-top-[20%] after:right-[7%] after:content-['*'] after:-pl-4"
               >
-								PointsPlus
-							</a>
+                PointsPlus
+              </a>
               formula to track food intake to help you adopt a healthier lifestyle.
             </p>
             <div class="mt-2 sm:mt-4">
-                <div class="sm:flex sm:space-x-3 w-full">
-                  <a href="{% url 'account_signup' %}"
-                     type="submit"
-                     class="my-2 sm:my-0 btn-primary"
-                  >
-                    Start Losing Weight
-                  </a>
-                  <a
-                    href="{% url 'about' %}"
-                    type="submit"
-                    class="my-2 sm:my-0 btn-secondary"
-                  >
-                    Learn More
-                  </a>
-                </div>
+              <div class="sm:flex sm:space-x-3 w-full">
+                <a href="{% url 'account_signup' %}"
+                   type="submit"
+                   class="my-2 sm:my-0 btn-primary"
+                >
+                  Start Losing Weight
+                </a>
+                <a
+                  href="{% url 'about' %}"
+                  type="submit"
+                  class="my-2 sm:my-0 btn-secondary"
+                >
+                  Learn More
+                </a>
+              </div>
             </div>
           </div>
         </div>
