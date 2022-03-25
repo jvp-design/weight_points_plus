@@ -125,6 +125,8 @@ class FoodInputMixin:
         form.base_fields["serving_unit"].choices = choices
         form.base_fields["conversion_unit_weight"].choices = weight_choices
         form.base_fields["conversion_unit_volume"].choices = volume_choices
+        if not self.object.user:
+            form.base_fields["public"].widget.attrs["checked"] = True
         return form
 
 
@@ -134,7 +136,11 @@ class FoodCreateView(UserHasAllInfoMixin, FoodInputMixin, CreateView):
         if form.is_valid():
             self.object = form.save(commit=False)
             self.object.points_per_serving = calculate_food_points(self.object)
-            self.object.user = request.user
+            if self.object.public and request.user.is_superuser:
+                self.object.user = None
+                self.object.public = False
+            else:
+                self.object.user = request.user
             self.object.food_item_type = "food"
             return self.form_valid(form)
         else:
@@ -157,6 +163,11 @@ class FoodUpdateView(UserHasAllInfoMixin, UserIsOwnerMixin, FoodInputMixin, Upda
         form = self.get_form()
         if form.is_valid():
             self.object.points_per_serving = calculate_food_points(self.object)
+            if self.object.public and request.user.is_superuser:
+                self.object.user = None
+                self.object.public = False
+            else:
+                self.object.user = request.user
             self.object.name = name
             return self.form_valid(form)
         else:

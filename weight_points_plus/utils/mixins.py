@@ -37,7 +37,9 @@ class UserIsOwnerMixin(CustomAlertMixin):
         obj = self.get_object()
         if not request.user.is_authenticated:
             return self.handle_no_permission()
-        elif not obj.user or obj.user != request.user:
+        elif not request.user.is_superuser and (
+            not obj.user or obj.user != request.user
+        ):
             self.permission_denied_message = (
                 "You are not authorized to perform this action."
             )
