@@ -177,6 +177,11 @@ class MealFoodAddView(UserHasAllInfoMixin, BaseMealFoodEditView, CreateView):
                     serving_unit=request.POST.get("serving_unit"),
                     serving_size=request.POST.get("serving_size"),
                 )
+                if item.points is None:
+                    item.points = calculate_food_points(
+                        food, item.serving_size, item.serving_unit
+                    )
+                    item.save()
             except FoodItemInstance.DoesNotExist:
                 item = form.save(commit=False)
                 item.points = calculate_food_points(
