@@ -143,6 +143,7 @@ class Weight(models.Model):
         null=True,
         default=WeightUnitChoices.POUNDS,
     )
+    official_weight = models.BooleanField(default=False)
     date_recorded = models.DateTimeField(auto_now_add=True)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)

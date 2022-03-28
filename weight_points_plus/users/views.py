@@ -17,7 +17,7 @@ from ..day.models import Day
 from ..day.views import update_daily_points
 from ..utils.mixins import UserHasAllInfoMixin
 from weight_points_plus.users.models import Weight
-from ..utils.points_calculators import calculate_daily_points
+from ..utils.points_calculators import calculate_daily_points, unit_dict
 from ..week.models import Week
 from ..week.utils import update_weekly_excess_points
 
@@ -32,6 +32,15 @@ User = get_user_model()
 #
 #
 # user_detail_view = UserDetailView.as_view()
+
+
+def convert_weights(current, previous):
+    if current.weight_units == previous.weight_units:
+        return current - previous, current.weight_units
+    previous_in_current_units = (
+        previous.weight * unit_dict[previous.weight_units][current.weight_units]
+    )
+    return current - previous_in_current_units, current.weight_units
 
 
 class CurrentUserDetailView(LoginRequiredMixin, DetailView):
@@ -145,6 +154,13 @@ class WeightRecordView(UserHasAllInfoMixin, CreateView):
     model = Weight
     fields = ["weight", "weight_units"]
 
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["user_weights"] = Weight.objects.filter(
+            user=self.request.user
+        ).order_by("-date_recorded")[:20]
+        return context
+
     def post(self, request, *args, **kwargs):
         form = self.get_form()
         if form.is_valid():
@@ -166,10 +182,31 @@ class WeightRecordView(UserHasAllInfoMixin, CreateView):
                     week.weight = self.object.weight
                     week.weight_units = self.object.weight_units
                     week.weight_recorded = True
+                    self.object.official_weight = True
+                    self.object.save()
                     for day in Day.objects.filter(user=request.user, week=week):
                         day.total_points = points
                         update_daily_points(day)
                     update_weekly_excess_points(week)
+                    last_two_weights = Weight.objects.filter(
+                        user=request.user, official_weight=True
+                    ).order_by("-date_recorded")[:2]
+                    if len(last_two_weights) == 2:
+                        current = last_two_weights[0]
+                        previous = last_two_weights[1]
+                        difference, unit = convert_weights(current, previous)
+                        if difference < 0:
+                            messages.add_message(
+                                request,
+                                messages.SUCCESS,
+                                f"You have lost {-difference} {unit}! Congratulations and keep up the good work!",
+                            )
+                        elif difference > 0:
+                            messages.add_message(
+                                request,
+                                messages.INFO,
+                                f"You have gained {difference} {unit}. Don't worry, fluctuations up and down are normal.",
+                            )
 
             return HttpResponseRedirect(reverse("day:today"))
         else:
