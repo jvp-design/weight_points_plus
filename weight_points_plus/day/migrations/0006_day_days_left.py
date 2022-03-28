@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('day', '0005_remove_activity_user_created'),
+        ("day", "0005_remove_activity_user_created"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='day',
-            name='days_left',
+            model_name="day",
+            name="days_left",
             field=models.IntegerField(default=0),
         ),
     ]
