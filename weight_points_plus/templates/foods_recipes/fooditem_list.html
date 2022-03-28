@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
+{% block title %}
+{% if request.GET.name %}
+Searching for "{{ request.GET.name }}"
+  {% elif request.GET.restaurant %}
+  Foods from {{ request.GET.restaurant }}
+{% else %}
+  Food List
+  {% endif %}
+{% endblock title %}
+
 {% block content %}
   <div class="overflow-hidden max-w-4xl mx-auto">
     <h2 class="sr-only" id="food-list-card">Food List</h2>
