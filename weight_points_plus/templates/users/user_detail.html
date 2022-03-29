@@ -33,6 +33,10 @@
       <div class="mt-6">
         <a href="{% url 'users:update' %}" class="btn-primary my-2">Update User</a>
         <a href="{% url 'account_change_password' %}" class="btn-secondary my-2"> Change Password </a>
+        <div>
+          <h3 class="text-lg sm:text-3xl mt-6 mb-2 text-red-500">Danger Zone</h3>
+          <a href="{% url 'users:delete' %}" class="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-contrast font-medium bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 focus:ring-offset-red-500">Delete Account</a>
+        </div>
       </div>
     </div>
   </div>

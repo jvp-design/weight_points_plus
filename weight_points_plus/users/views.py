@@ -1,5 +1,11 @@
 from datetime import datetime
 from typing import Any, Dict, Optional
+
+from allauth.account.adapter import get_adapter
+from allauth.account.views import _ajax_response, LogoutFunctionalityMixin
+from django.shortcuts import redirect
+from django.views import View
+from django.views.generic.base import TemplateResponseMixin
 from pytz import timezone
 
 from django.contrib.auth import get_user_model
@@ -43,7 +49,7 @@ def convert_weights(current, previous):
     return round(current.weight - previous_in_current_units, 2), current.weight_units
 
 
-class CurrentUserDetailView(LoginRequiredMixin, DetailView):
+class CurrentUserDetailView(UserHasAllInfoMixin, DetailView):
     model = User
 
     def get_object(self, queryset: Optional[QuerySet] = ...) -> User:
@@ -214,3 +220,33 @@ class WeightRecordView(UserHasAllInfoMixin, CreateView):
 
 
 weight_record_view = WeightRecordView.as_view()
+
+
+class DeleteAccountView(TemplateResponseMixin, View):
+    template_name = "account/delete_account.html"
+
+    def get(self, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            response = redirect("/")
+            return _ajax_response(self.request, response)
+        response = self.render_to_response({})
+        return _ajax_response(self.request, response)
+
+    def post(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            user = self.request.user
+
+            # From logout method in LogoutFunctionalityMixin
+            adapter = get_adapter(self.request)
+            messages.add_message(
+                self.request,
+                messages.SUCCESS,
+                "Your account has been successfully deleted.",
+            )
+            adapter.logout(self.request)
+            user.delete()
+        response = redirect("/")
+        return _ajax_response(self.request, response)
+
+
+delete_account_view = DeleteAccountView.as_view()
