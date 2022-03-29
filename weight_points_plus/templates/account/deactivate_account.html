@@ -1,0 +1,18 @@
+
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% translate "Deactivate Account" %}{% endblock head_title %}
+
+{% block card_title %}
+{% translate "Deactivate Account" %}
+{% endblock card_title %}
+
+{% block card_body %}
+<p class="text-contrast">{% translate "Are you sure you want to deactivate your account?" %}</p>
+  <form method="post" action="{% url 'users:deactivate' %}">
+  {% csrf_token %}
+  <button class="btn-primary" type="submit">{% translate "Deactivate Account" %}</button>
+  </form>
+{% endblock card_body %}

@@ -1,5 +1,11 @@
 from datetime import datetime
 from typing import Any, Dict, Optional
+
+from allauth.account.adapter import get_adapter
+from allauth.account.views import _ajax_response, LogoutFunctionalityMixin
+from django.shortcuts import redirect
+from django.views import View
+from django.views.generic.base import TemplateResponseMixin
 from pytz import timezone
 
 from django.contrib.auth import get_user_model
@@ -214,3 +220,33 @@ class WeightRecordView(UserHasAllInfoMixin, CreateView):
 
 
 weight_record_view = WeightRecordView.as_view()
+
+
+class DeactivateAccountView(TemplateResponseMixin, View):
+    template_name = "account/deactivate_account.html"
+
+    def get(self, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            response = redirect("/")
+            return _ajax_response(self.request, response)
+        response = self.render_to_response({})
+        return _ajax_response(self.request, response)
+
+    def post(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            self.request.user.is_active = False
+
+            # From logout method in LogoutFunctionalityMixin
+            adapter = get_adapter(self.request)
+            messages.add_message(
+                self.request,
+                messages.SUCCESS,
+                "Your account has been successfully deactivated.",
+            )
+            self.request.user.save()
+            adapter.logout(self.request)
+        response = redirect("/")
+        return _ajax_response(self.request, response)
+
+
+deactivate_account_view = DeactivateAccountView.as_view()
