@@ -36,11 +36,11 @@ User = get_user_model()
 
 def convert_weights(current, previous):
     if current.weight_units == previous.weight_units:
-        return current - previous, current.weight_units
+        return current.weight - previous.weight, current.weight_units
     previous_in_current_units = (
         previous.weight * unit_dict[previous.weight_units][current.weight_units]
     )
-    return current - previous_in_current_units, current.weight_units
+    return current.weight - previous_in_current_units, current.weight_units
 
 
 class CurrentUserDetailView(LoginRequiredMixin, DetailView):
