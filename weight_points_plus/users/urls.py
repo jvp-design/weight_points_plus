@@ -8,6 +8,6 @@ urlpatterns = [
     path("~update/", view=views.user_update_view, name="update"),
     path("me/", view=views.current_user_detail_view, name="me"),
     path("record-weight/", view=views.weight_record_view, name="record-weight"),
-    path("deactivate/", view=views.deactivate_account_view, name="deactivate")
+    path("delete/", view=views.delete_account_view, name="delete")
     # path("<str:username>/", view=views.user_detail_view, name="detail"),
 ]

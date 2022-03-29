@@ -49,7 +49,7 @@ def convert_weights(current, previous):
     return round(current.weight - previous_in_current_units, 2), current.weight_units
 
 
-class CurrentUserDetailView(LoginRequiredMixin, DetailView):
+class CurrentUserDetailView(UserHasAllInfoMixin, DetailView):
     model = User
 
     def get_object(self, queryset: Optional[QuerySet] = ...) -> User:
@@ -222,8 +222,8 @@ class WeightRecordView(UserHasAllInfoMixin, CreateView):
 weight_record_view = WeightRecordView.as_view()
 
 
-class DeactivateAccountView(TemplateResponseMixin, View):
-    template_name = "account/deactivate_account.html"
+class DeleteAccountView(TemplateResponseMixin, View):
+    template_name = "account/delete_account.html"
 
     def get(self, *args, **kwargs):
         if not self.request.user.is_authenticated:
@@ -234,19 +234,19 @@ class DeactivateAccountView(TemplateResponseMixin, View):
 
     def post(self, *args, **kwargs):
         if self.request.user.is_authenticated:
-            self.request.user.is_active = False
+            user = self.request.user
 
             # From logout method in LogoutFunctionalityMixin
             adapter = get_adapter(self.request)
             messages.add_message(
                 self.request,
                 messages.SUCCESS,
-                "Your account has been successfully deactivated.",
+                "Your account has been successfully deleted.",
             )
-            self.request.user.save()
             adapter.logout(self.request)
+            user.delete()
         response = redirect("/")
         return _ajax_response(self.request, response)
 
 
-deactivate_account_view = DeactivateAccountView.as_view()
+delete_account_view = DeleteAccountView.as_view()
