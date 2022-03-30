@@ -12,6 +12,7 @@ const assets = [
     'https://fonts.googleapis.com/css2?family=Poppins&display=swap',
     'https://fonts.gstatic.com/s/poppins/v19/pxiEyp8kv8JHgFVrJJfecg.woff2',
     'https://unpkg.com/alpinejs@3.9.5/dist/cdn.min.js',
+    'https://plausible.io/js/plausible.js',
     '/fallback/'
 ];
 
