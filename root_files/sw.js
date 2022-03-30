@@ -1,7 +1,6 @@
-const staticCacheName = 'site-static-v1';
-const dynamicCacheName = 'site-dynamic-v2';
+const staticCacheName = 'site-static-v2';
 const assets = [
-    '/',
+    '/home.html',
     '/static/js/app.js',
     '/static/js/nav.js',
     '/static/js/toggle-visibility.js',
