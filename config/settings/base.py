@@ -291,3 +291,5 @@ ACCOUNT_USERNAME_REQUIRED = False
 INSTALLED_APPS += ["tailwind", "theme"]  # noqa F405
 
 TAILWIND_APP_NAME = "theme"
+
+WHITENOISE_ROOT = ROOT_DIR / "root_files"

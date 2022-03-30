@@ -34,6 +34,11 @@ urlpatterns = [
         TemplateView.as_view(template_name="pages/disclaimer.html"),
         name="disclaimer",
     ),
+    path(
+        "fallback/",
+        TemplateView.as_view(template_name="pages/fallback.html"),
+        name="fallback",
+    ),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management

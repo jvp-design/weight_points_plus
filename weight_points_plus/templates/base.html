@@ -14,14 +14,24 @@
   <meta name="author" content="Jeffrey Pohlmeyer">
 
   <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
+  <link rel="manifest" href="{% static 'manifest.json' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/icons/icon-72x72.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/icons/icon-96x96.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/icons/icon-128x128.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/icons/icon-144x144.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/icons/icon-152x152.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/icons/icon-192x192.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/icons/icon-384x384.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/icons/icon-512x512.png' %}">
+  <meta name="apple-mobile-web-app-status-bar" content="hsl(191, 26%, 12%)">
 
-    <!-- Your stuff: Third-party CSS libraries go here -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    {#    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">#}
-    {% tailwind_css %}
-    <!-- This file stores project-specific CSS -->
+  <!-- Your stuff: Third-party CSS libraries go here -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  {#    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">#}
+  {% tailwind_css %}
+  <!-- This file stores project-specific CSS -->
   {% block css %}
   {% endblock %}
   <!-- Le javascript
@@ -29,9 +39,9 @@
   {# Placed at the top of the document so pages load faster with defer #}
   {% block javascript %}
     <!-- Your stuff: Third-party javascript libraries go here -->
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="//unpkg.com/alpinejs@3.9.5/dist/cdn.min.js" defer></script>
     <!-- place project specific Javascript in this file -->
-    <script defer src="{% static 'js/project.js' %}"></script>
+    <script defer src="{% static 'js/app.js' %}"></script>
     <script defer src="{% static 'js/nav.js' %}"></script>
 
   {% endblock javascript %}
