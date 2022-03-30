@@ -10,18 +10,16 @@ from weight_points_plus.contact.views import contact_form_view
 from weight_points_plus.utils.points_calculators import ajax_calculate_points
 
 
-class LandingView(TemplateView):
-    template_name = "pages/home.html"
-
-    def get(self, request, *args, **kwargs):
+def landing(request):
+    if request.method == "GET" and request.user.is_authenticated:
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse("day:today"))
-        return HttpResponseRedirect(reverse("home"))
+    return HttpResponseRedirect(reverse("home"))
 
 
 urlpatterns = [
-    path("", LandingView.as_view(), name="landing"),
-    path("/home", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path("", landing, name="landing"),
+    path("home/", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),

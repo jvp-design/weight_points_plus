@@ -1,6 +1,6 @@
 const staticCacheName = 'site-static-v2';
 const assets = [
-    '/home.html',
+    '/home/',
     '/static/js/app.js',
     '/static/js/nav.js',
     '/static/js/toggle-visibility.js',
@@ -12,7 +12,7 @@ const assets = [
     'https://fonts.googleapis.com/css2?family=Poppins&display=swap',
     'https://fonts.gstatic.com/s/poppins/v19/pxiEyp8kv8JHgFVrJJfecg.woff2',
     'https://unpkg.com/alpinejs@3.9.5/dist/cdn.min.js',
-    // '/pages/fallback.html'
+    '/fallback/'
 ];
 
 
