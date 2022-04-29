@@ -43,8 +43,15 @@
     <!-- place project specific Javascript in this file -->
     <script defer src="{% static 'js/app.js' %}"></script>
     <script defer src="{% static 'js/nav.js' %}"></script>
-    <script defer data-domain="weightpoints.plus" src="https://plausible.io/js/plausible.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQVBNSKR60"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
+      gtag('config', 'G-ZQVBNSKR60');
+    </script>
   {% endblock javascript %}
 
 </head>
