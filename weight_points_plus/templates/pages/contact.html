@@ -88,7 +88,6 @@
 
 {% block inline_javascript %}
   <script>
-    console.log('request.user', '{{ request.user.is_authenticated }}')
     if ('{{request.user.is_authenticated}}') {
       {{ form.message.id_for_label }}.focus()
     } else{
