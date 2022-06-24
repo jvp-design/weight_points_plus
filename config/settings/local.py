@@ -64,6 +64,6 @@ INSTALLED_APPS += ["django_extensions"]  # noqa F405
 if platform.system() == "Windows":
     NPM_BIN_PATH = r"C:/Program Files/nodejs/npm.cmd"
 else:
-    NPM_BIN_PATH = "/usr/local/bin/npm"
+    NPM_BIN_PATH = "/usr/bin/npm"
 INSTALLED_APPS += ["django_browser_reload"]  # noqa F405
 MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]  # noqa F405

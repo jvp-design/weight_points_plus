@@ -23,6 +23,37 @@
   /*  @apply bg-primary-darken text-transparent bg-clip-text*/
   /*}*/
 
+	@font-face {
+		font-family: 'Poppins';
+		src: local('Poppins-Regular'), url('../../fonts/Poppins-Regular.otf');
+		font-weight: 400;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'Poppins';
+		src: local('Poppins-Medium'), url('../../fonts/Poppins-Medium.otf');
+		font-weight: 500;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'Poppins';
+		src: local('Poppins-SemiBold'), url('../../fonts/Poppins-SemiBold.otf');
+		font-weight: 600;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'Poppins';
+		src: local('Poppins-Bold'), url('../../fonts/Poppins-Bold.otf');
+		font-weight: 700;
+		font-display: swap;
+	}
+	@font-face {
+		font-family: 'Poppins';
+		src: local('Poppins-ExtraBold'), url('../../fonts/Poppins-ExtraBold.otf');
+		font-weight: 800;
+		font-display: swap;
+	}
+
   .btn-primary {
     @apply w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-contrast font-medium bg-accent hover:bg-accent-darken focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent focus:ring-offset-accent
   }
