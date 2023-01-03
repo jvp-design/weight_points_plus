@@ -28,7 +28,7 @@ django.setup()
 # -- Project information -----------------------------------------------------
 
 project = "Weight Points Plus"
-copyright = """2022, Jeffrey Pohlmeyer"""
+copyright = """2023, Jeffrey Pohlmeyer"""
 author = "Jeffrey Pohlmeyer"
 
 
