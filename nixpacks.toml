@@ -1,7 +1,7 @@
 providers = ["python"]
 
 [phases.install]
-cmds = ["pip3 install -r requirements/production.txt"]
+cmds = ["python3 -m pip install -r requirements/production.txt"]
 
 [phases.build]
 cmds = [
