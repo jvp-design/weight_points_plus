@@ -1,13 +1,13 @@
 providers = ["python"]
 
 [phases.install]
-cmds = ["pip install -r requirements/production.txt"]
+cmds = ["pip3 install -r requirements/production.txt"]
 
 [phases.build]
 cmds = [
-  "python manage.py collectstatic --no-input --settings=config.settings.production",
-  "python manage.py makemigrations admin_honeypot --settings=config.settings.production",
-  "python manage.py migrate --settings=config.settings.production"
+  "python3 manage.py collectstatic --no-input --settings=config.settings.production",
+  "python3 manage.py makemigrations admin_honeypot --settings=config.settings.production",
+  "python3 manage.py migrate --settings=config.settings.production"
 ]
 
 [start]
