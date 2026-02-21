@@ -17,10 +17,6 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 ALLOWED_HOSTS = env.list(
     "DJANGO_ALLOWED_HOSTS", default=["weightpoints.plus", "www.weightpoints.plus", "wpp.jvp.design", "www.wpp.jvp.design", "localhost"]
 )
-RENDER_EXTERNAL_HOSTNAME = env.str("RENDER_EXTERNAL_HOSTNAME")
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-    ALLOWED_HOSTS.append(env.str("RENDER_ALTERNATE_HOSTS"))
 
 # DATABASES
 # ------------------------------------------------------------------------------
