@@ -5,6 +5,8 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq-dev \
     gcc \
+    libc6-dev \
+    zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements/ requirements/
