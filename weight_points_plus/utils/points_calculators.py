@@ -288,7 +288,7 @@ def convert_weight_and_volume(
         other_unit_key = "conversion_unit_weight"
     conversion_unit = getattr(food, conversion_unit_key)
     passed_multiplier = (
-        unit_dict[conversion_unit.lower()][serving_unit.lower()] * serving_size
+        unit_dict[serving_unit.lower()][conversion_unit.lower()] * serving_size
     )
 
     other_unit = getattr(food, other_unit_key)
