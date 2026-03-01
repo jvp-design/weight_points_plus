@@ -9,13 +9,29 @@ services:
   postgres:
     image: postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - local_pg_data:/var/lib/postgresql/data:Z
     environment:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=weight_points_plus
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.local
+      - DATABASE_URL=postgres://user:password@postgres:5432/weight_points_plus
+      - EMAIL_HOST=mailhog
+    depends_on:
+      - postgres
+      - mailhog
 
   mailhog:
     image: mailhog/mailhog:v1.0.0
