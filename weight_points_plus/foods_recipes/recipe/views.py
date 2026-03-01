@@ -387,10 +387,12 @@ class RecipeFoodAddView(UserHasAllInfoMixin, BaseRecipeFoodEditView, CreateView)
                     food=food,
                     serving_unit=request.POST.get("serving_unit"),
                     serving_size=request.POST.get("serving_size"),
+                    food_version=food.version,
                 )
             except FoodItemInstance.DoesNotExist:
                 item = form.save(commit=False)
                 item.food = food
+                item.food_version = food.version
                 item.save()
             recipe.recipe_items.add(item)
             calculate_recipe_points(recipe)
@@ -437,11 +439,13 @@ class RecipeFoodUpdateView(UserHasAllInfoMixin, BaseRecipeFoodEditView, UpdateVi
                 item = FoodItemInstance.objects.get(
                     food=food,
                     serving_unit=request.POST.get("serving_unit"),
-                    serving_size=request.POST.get("servings_size"),
+                    serving_size=request.POST.get("serving_size"),
+                    food_version=food.version,
                 )
             except FoodItemInstance.DoesNotExist:
                 item = form.save(commit=False)
                 item.food = food
+                item.food_version = food.version
                 item.save()
             recipe.recipe_items.add(item)
             if len(obj.fooditem_set.all()) == 0:

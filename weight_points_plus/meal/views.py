@@ -176,6 +176,7 @@ class MealFoodAddView(UserHasAllInfoMixin, BaseMealFoodEditView, CreateView):
                     food=food,
                     serving_unit=request.POST.get("serving_unit"),
                     serving_size=request.POST.get("serving_size"),
+                    food_version=food.version,
                 )
                 if item.points is None:
                     item.points = calculate_food_points(
@@ -190,6 +191,7 @@ class MealFoodAddView(UserHasAllInfoMixin, BaseMealFoodEditView, CreateView):
                     item.serving_unit,
                 )
                 item.food = food
+                item.food_version = food.version
                 item.save()
             item.meal.add(meal)
             update_meal_points(meal)
@@ -234,6 +236,7 @@ class MealFoodUpdateView(UserHasAllInfoMixin, BaseMealFoodEditView, UpdateView):
                     food=food,
                     serving_unit=request.POST.get("serving_unit"),
                     serving_size=request.POST.get("serving_size"),
+                    food_version=obj.food_version,
                 )
             except FoodItemInstance.DoesNotExist:
                 item = form.save(commit=False)
@@ -243,6 +246,7 @@ class MealFoodUpdateView(UserHasAllInfoMixin, BaseMealFoodEditView, UpdateView):
                     item.serving_unit,
                 )
                 item.food = food
+                item.food_version = obj.food_version
                 item.save()
             item.meal.add(meal)
             if len(obj.meal.all()) == 0:

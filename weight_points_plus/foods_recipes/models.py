@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
-from django.db.models.signals import pre_save
+from django.db.models import F
+from django.db.models.signals import pre_save, m2m_changed
 from django.dispatch import receiver
 
 from weight_points_plus.utils.misc import SERVING_SIZE_CHOICES, servings
@@ -56,6 +57,7 @@ class FoodItem(models.Model):
         max_length=8, choices=FoodItemType.choices, blank=True
     )
     recipe_items = models.ManyToManyField("FoodItemInstance", blank=True)
+    version = models.PositiveIntegerField(default=1)
 
     class Meta:
         unique_together = ("user", "name")
@@ -63,6 +65,14 @@ class FoodItem(models.Model):
 
     def __str__(self):
         return f"({self.food_item_type.title()}) {self.name}"
+
+
+VERSIONED_FIELDS = (
+    "fat", "carbs", "fiber", "protein",
+    "serving_size", "serving_unit",
+    "conversion_unit_weight", "conversion_unit_volume",
+    "conversion_weight_value", "conversion_volume_value",
+)
 
 
 @receiver(pre_save, sender=FoodItem)
@@ -75,11 +85,26 @@ def update_conversion_factor(sender, instance, *args, **kwargs):
             instance.conversion_weight_value / instance.conversion_volume_value
         )
 
+    if instance.pk:
+        try:
+            db = FoodItem.objects.get(pk=instance.pk)
+            if any(getattr(instance, f) != getattr(db, f) for f in VERSIONED_FIELDS):
+                instance.version = db.version + 1
+        except FoodItem.DoesNotExist:
+            pass
+
+
+@receiver(m2m_changed, sender=FoodItem.recipe_items.through)
+def bump_recipe_version_on_items_change(sender, instance, action, **kwargs):
+    if action in ("post_add", "post_remove", "post_clear"):
+        FoodItem.objects.filter(pk=instance.pk).update(version=F("version") + 1)
+
 
 class FoodItemInstance(models.Model):
     serving_size = models.FloatField(validators=[MinValueValidator(0.0)])
     serving_unit = models.CharField(max_length=6, choices=SERVING_SIZE_CHOICES)
     points = models.IntegerField(null=True)
+    food_version = models.PositiveIntegerField(default=1)
     # fat = models.FloatField()
     # carbs = models.FloatField()
     # fiber = models.FloatField()
