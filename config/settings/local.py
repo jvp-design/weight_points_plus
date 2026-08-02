@@ -57,6 +57,15 @@ INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
 # https://django-extensions.readthedocs.io/en/latest/installation_instructions.html#configuration
 INSTALLED_APPS += ["django_extensions"]  # noqa F405
 
+# django-recaptcha
+# ------------------------------------------------------------------------------
+# Off locally so signing up doesn't require a round trip to Google. To exercise
+# it, add "localhost" to the domains on the reCAPTCHA site and run with
+# DJANGO_RECAPTCHA_ENABLED=True plus the real keys.
+RECAPTCHA_ENABLED = env.bool("DJANGO_RECAPTCHA_ENABLED", default=False)
+# Locally we fall back to Google's test keys on purpose; don't warn about it.
+SILENCED_SYSTEM_CHECKS = ["django_recaptcha.recaptcha_test_key_error"]
+
 # Your stuff...
 # ------------------------------------------------------------------------------
 # Tailwind

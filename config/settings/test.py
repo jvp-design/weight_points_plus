@@ -25,5 +25,11 @@ PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 
+# django-recaptcha
+# ------------------------------------------------------------------------------
+# Tests never call out to Google.
+RECAPTCHA_ENABLED = False
+SILENCED_SYSTEM_CHECKS = ["django_recaptcha.recaptcha_test_key_error"]
+
 # Your stuff...
 # ------------------------------------------------------------------------------

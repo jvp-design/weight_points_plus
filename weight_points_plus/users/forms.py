@@ -9,6 +9,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
+from weight_points_plus.utils.recaptcha import ReCaptchaFormMixin
+
 User = get_user_model()
 
 
@@ -31,12 +33,14 @@ class UserAdminCreationForm(admin_forms.UserCreationForm):
         }
 
 
-class UserSignupForm(SignupForm):
+class UserSignupForm(ReCaptchaFormMixin, SignupForm):
     """
     Form that will be rendered on a user sign up section/screen.
     Default fields will be added automatically.
     Check UserSocialSignupForm for accounts created from social.
     """
+
+    recaptcha_action = "signup"
 
 
 class UserSocialSignupForm(SocialSignupForm):

@@ -23,6 +23,9 @@
     {% endif %}
     {% include "snippets/functional/textarea_field.html" with id=form.message.id_for_label name=form.message.html_name label=form.message.label errors=form.message.errors required=form.message.field.required %}
     {% include "snippets/functional/text_field.html" with class="hidden" id=form.bot.id_for_label name=form.bot.html_name label=form.bot.label errors=form.bot.errors checked=form.bot.value %}
+    {% if form.captcha %}
+      {% include "snippets/functional/captcha_field.html" with field=form.captcha id=form.captcha.id_for_label errors=form.captcha.errors %}
+    {% endif %}
     <input type="submit" class="btn-primary cursor-pointer" value="Submit" >
   </form>
 

@@ -78,6 +78,7 @@ THIRD_PARTY_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "django_filters",
+    "django_recaptcha",
 ]
 
 LOCAL_APPS = [
@@ -285,6 +286,28 @@ SOCIALACCOUNT_FORMS = {"signup": "weight_points_plus.users.forms.UserSocialSignu
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_USERNAME_REQUIRED = False
+
+# django-recaptcha
+# ------------------------------------------------------------------------------
+# https://github.com/django-recaptcha/django-recaptcha
+# Signup and contact are protected by reCAPTCHA v3, which scores visitors in
+# the background rather than showing them a challenge.
+RECAPTCHA_ENABLED = env.bool("DJANGO_RECAPTCHA_ENABLED", default=True)
+# Keys come from https://www.google.com/recaptcha/admin -- they must be v3 keys
+# and the site must list every domain the forms are served from. The defaults
+# are Google's public test keys, which exist only so the project still boots
+# without them; django_recaptcha's system check fails while they are in use.
+RECAPTCHA_PUBLIC_KEY = env(
+    "DJANGO_RECAPTCHA_PUBLIC_KEY", default="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+)
+RECAPTCHA_PRIVATE_KEY = env(
+    "DJANGO_RECAPTCHA_PRIVATE_KEY", default="6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+)
+# v3 scores run from 0.0 (very likely a bot) to 1.0 (very likely a human).
+# Submissions scoring below this are rejected. Set high on purpose: the site
+# has few users besides its owner, so turning away a borderline human costs
+# far less than letting bots keep registering.
+RECAPTCHA_REQUIRED_SCORE = env.float("DJANGO_RECAPTCHA_REQUIRED_SCORE", default=0.8)
 
 # Your stuff...
 # ------------------------------------------------------------------------------

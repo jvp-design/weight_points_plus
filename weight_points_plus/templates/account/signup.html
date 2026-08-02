@@ -28,6 +28,10 @@
     {% include "snippets/functional/password_field.html" with id=form.password1.id_for_label name=form.password1.html_name label=form.password1.label password_number="1" required=True errors=form.password1.errors %}
     {% include "snippets/functional/password_field.html" with id=form.password2.id_for_label name=form.password2.html_name label=form.password2.label password_number="2" required=True errors=form.password2.errors %}
 
+    {% if form.captcha %}
+      {% include "snippets/functional/captcha_field.html" with field=form.captcha id=form.captcha.id_for_label errors=form.captcha.errors %}
+    {% endif %}
+
     {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}

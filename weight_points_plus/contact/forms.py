@@ -5,8 +5,12 @@ from django.core.exceptions import ValidationError
 from django.core.mail import EmailMultiAlternatives
 from django.utils.translation import gettext_lazy as _
 
+from weight_points_plus.utils.recaptcha import ReCaptchaFormMixin
 
-class ContactForm(forms.Form):
+
+class ContactForm(ReCaptchaFormMixin, forms.Form):
+    recaptcha_action = "contact"
+
     name = forms.CharField()
     email = forms.EmailField()
     message = forms.CharField(widget=forms.Textarea)
