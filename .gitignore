@@ -331,3 +331,6 @@ weight_points_plus/media/
 
 
 .env
+
+# Local scratch space
+/tmp/

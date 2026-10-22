@@ -1,8 +1,8 @@
-from typing import Dict, Any
-
 from django import forms
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMultiAlternatives
+from django.utils.html import escape
 from django.utils.translation import gettext_lazy as _
 
 from weight_points_plus.utils.recaptcha import ReCaptchaFormMixin
@@ -26,31 +26,36 @@ class ContactForm(ReCaptchaFormMixin, forms.Form):
         email = self.cleaned_data.get("email")
         if user.is_authenticated:
             email = user.email
+        name = self.cleaned_data.get("name")
+        message = self.cleaned_data.get("message")
         text_msg = f"""
 Hello,
-You have a new contact form submission on WeightPoints.plus. The message is from {self.cleaned_data.get('name')} with email address {email}.
+You have a new contact form submission on WeightPoints.plus. The message is from {name} with email address {email}.
 
 The message is:
-{self.cleaned_data.get('message')}
+{message}
         """
         html_msg = f"""
         <html>
         <body>
         <p>Hello,</p>
         <p>
-        You have a new contact form submission on WeightPoints.plus. The message is from {self.cleaned_data.get('name')} with email address {email}.
+        You have a new contact form submission on WeightPoints.plus. The message is from {escape(name)} with email address {escape(email)}.
         </p>
         <br />
         <p>The message is</p>
-        <p>{self.cleaned_data.get('message')}</p>
+        <p>{escape(message)}</p>
         </body>
         </html>
         """
+        # The visitor's address goes in Reply-To rather than From: sending "from"
+        # a domain we don't control fails SPF/DKIM/DMARC and SES rejects it.
         msg = EmailMultiAlternatives(
-            "New Contact Message from WeightPoints.plus",
-            text_msg,
-            self.cleaned_data.get("email"),
-            ["info@jvp.design"],
+            subject="New Contact Message from WeightPoints.plus",
+            body=text_msg,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=settings.CONTACT_FORM_RECIPIENTS,
+            reply_to=[email],
         )
         msg.attach_alternative(html_msg, "text/html")
         msg.send()

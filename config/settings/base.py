@@ -229,6 +229,12 @@ EMAIL_BACKEND = env(
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
 
+# Where contact form submissions are delivered. While the SES account is still
+# in the sandbox these addresses must be verified identities as well.
+CONTACT_FORM_RECIPIENTS = env.list(
+    "CONTACT_FORM_RECIPIENTS", default=["info@weightpointsplus.com"]
+)
+
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL.
